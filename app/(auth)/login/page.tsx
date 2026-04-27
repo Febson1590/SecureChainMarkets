@@ -5,16 +5,13 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input }  from "@/components/ui/input";
-import { Label }  from "@/components/ui/label";
-import { Card }   from "@/components/ui/card";
 import { initiateLogin, completeLogin } from "@/lib/actions/auth";
 import { sendOtp } from "@/lib/actions/otp";
 import { OtpType } from "@prisma/client";
 import {
   Eye, EyeOff, Lock, Mail, Loader2, AlertCircle,
   ShieldCheck, RefreshCw, ArrowLeft,
+  TrendingUp, Zap, Headphones,
 } from "lucide-react";
 import { toast } from "sonner";
 import { friendlyError } from "@/lib/utils";
@@ -25,13 +22,18 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
+const features = [
+  { icon: ShieldCheck, title: "Bank-Level Security",  desc: "Your funds and data are protected with 256-bit SSL encryption." },
+  { icon: TrendingUp,  title: "Advanced Trading",     desc: "Access real-time markets, advanced charts, and powerful trading tools." },
+  { icon: Zap,         title: "Instant Transactions", desc: "Deposit, trade, and withdraw with fast and secure processing." },
+  { icon: Headphones,  title: "24/7 Expert Support",  desc: "Our dedicated support team is here to help you anytime." },
+];
+
 export default function LoginPage() {
-  // ── Step state ──────────────────────────────────────────────────────────
   const [step, setStep] = useState<"credentials" | "otp">("credentials");
   const [lockedEmail,    setLockedEmail]    = useState("");
   const [lockedPassword, setLockedPassword] = useState("");
 
-  // ── Credentials step ────────────────────────────────────────────────────
   const [showPassword, setShowPassword] = useState(false);
   const [loading,      setLoading]      = useState(false);
   const [error,        setError]        = useState("");
@@ -50,51 +52,42 @@ export default function LoginPage() {
         setError(friendlyError(result.error));
         return;
       }
-      // pending: true → move to OTP step
       setLockedEmail(data.email);
       setLockedPassword(data.password);
       setStep("otp");
     } catch {
-      // Admin redirect fires here — Next.js handles the navigation
+      // Admin redirect — handled by Next.js
     }
   };
 
-  // ── OTP step ─────────────────────────────────────────────────────────────
+  /* ── OTP step ─────────────────────────────────────────────────────────── */
   const [digits,        setDigits]        = useState<string[]>(Array(6).fill(""));
   const [otpLoading,    setOtpLoading]    = useState(false);
   const [otpError,      setOtpError]      = useState("");
   const [resending,     setResending]     = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
-
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  // Focus first OTP slot when step changes to otp
   useEffect(() => {
-    if (step === "otp") {
-      setTimeout(() => inputRefs.current[0]?.focus(), 80);
-    }
+    if (step === "otp") setTimeout(() => inputRefs.current[0]?.focus(), 80);
   }, [step]);
 
-  // Resend cooldown countdown
   useEffect(() => {
     if (resendCooldown <= 0) return;
     const t = setTimeout(() => setResendCooldown(c => c - 1), 1000);
     return () => clearTimeout(t);
   }, [resendCooldown]);
 
-  /** Always returns a length-6 string array, sanitised to digits-only, never longer. */
   function normaliseDigits(next: (string | undefined)[]): string[] {
     const out: string[] = [];
     for (let i = 0; i < 6; i++) {
       const v = (next[i] ?? "").replace(/\D/g, "");
-      out[i] = v.slice(-1); // single char per slot
+      out[i] = v.slice(-1);
     }
     return out;
   }
-
   function handleDigitChange(index: number, value: string) {
     const cleaned = value.replace(/\D/g, "");
-    // Multi-char input (paste, autofill, fast typing): write only the first 6 digits starting at index.
     if (cleaned.length > 1) {
       const arr = [...digits];
       const maxWrite = Math.min(cleaned.length, 6 - index);
@@ -106,73 +99,42 @@ export default function LoginPage() {
       setOtpError("");
       return;
     }
-    // Single-char input. Ignore if all 6 slots already filled and we'd be appending.
     if (cleaned && digits.every(d => d) && !digits[index]) return;
-    const arr = [...digits];
-    arr[index] = cleaned;
+    const arr = [...digits]; arr[index] = cleaned;
     setDigits(normaliseDigits(arr));
     setOtpError("");
     if (cleaned && index < 5) inputRefs.current[index + 1]?.focus();
   }
-
   function handleDigitKeyDown(index: number, e: React.KeyboardEvent<HTMLInputElement>) {
-    // Block extra digit input once all 6 slots are filled.
-    if (/^[0-9]$/.test(e.key) && digits.every(d => d) && digits[index]) {
-      e.preventDefault();
-      return;
-    }
-    // Block any non-digit / non-control key.
-    if (
-      e.key.length === 1 &&
-      !/^[0-9]$/.test(e.key) &&
-      !e.metaKey && !e.ctrlKey && !e.altKey
-    ) {
-      e.preventDefault();
-      return;
-    }
+    if (/^[0-9]$/.test(e.key) && digits.every(d => d) && digits[index]) { e.preventDefault(); return; }
+    if (e.key.length === 1 && !/^[0-9]$/.test(e.key) && !e.metaKey && !e.ctrlKey && !e.altKey) { e.preventDefault(); return; }
     if (e.key === "Backspace") {
-      if (digits[index]) {
-        const arr = [...digits]; arr[index] = ""; setDigits(normaliseDigits(arr));
-      } else if (index > 0) {
-        inputRefs.current[index - 1]?.focus();
-      }
+      if (digits[index]) { const arr = [...digits]; arr[index] = ""; setDigits(normaliseDigits(arr)); }
+      else if (index > 0) inputRefs.current[index - 1]?.focus();
     }
     if (e.key === "ArrowLeft"  && index > 0) inputRefs.current[index - 1]?.focus();
     if (e.key === "ArrowRight" && index < 5) inputRefs.current[index + 1]?.focus();
   }
-
   async function handleOtpSubmit(e: React.FormEvent) {
     e.preventDefault();
     const code = digits.join("");
     if (code.length < 6) { setOtpError("Enter all 6 digits."); return; }
-
-    setOtpLoading(true);
-    setOtpError("");
-
+    setOtpLoading(true); setOtpError("");
     try {
-      const result = await completeLogin({
-        email:    lockedEmail,
-        password: lockedPassword,
-        otp:      code,
-      });
+      const result = await completeLogin({ email: lockedEmail, password: lockedPassword, otp: code });
       if (result && 'error' in result) {
         setOtpError(friendlyError(result.error));
         setDigits(Array(6).fill(""));
         setTimeout(() => inputRefs.current[0]?.focus(), 50);
       }
-    } catch {
-      // redirect fires here — do nothing
-    } finally {
-      setOtpLoading(false);
-    }
+    } catch { /* redirect */ } finally { setOtpLoading(false); }
   }
-
   async function handleResend() {
     if (resendCooldown > 0 || !lockedEmail) return;
     setResending(true);
     const result = await sendOtp(lockedEmail, OtpType.LOGIN);
     setResending(false);
-    if ('error' in result) { toast.error(friendlyError(result.error)); }
+    if ('error' in result) toast.error(friendlyError(result.error));
     else {
       toast.success("New code sent! Check your inbox.");
       setResendCooldown(60);
@@ -181,227 +143,385 @@ export default function LoginPage() {
     }
   }
 
-  // ── RENDER ───────────────────────────────────────────────────────────────
-  return (
-    <div className="w-full max-w-md">
+  function comingSoon(provider: string) {
+    toast.info(`${provider} sign-in is coming soon.`);
+  }
 
-      {/* ── STEP 1: Credentials ──────────────────────────────────────────── */}
-      {step === "credentials" && (
-        <>
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-white mb-1">Welcome Back</h1>
-            <p className="text-sm text-slate-500">Sign in to your SecureChainMarkets account</p>
+  return (
+    <div className="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
+      <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+
+        {/* ════════════════════ LEFT: Welcome + features + illustration ═════════════════ */}
+        <div className="order-2 lg:order-1">
+          <h1 className="text-[36px] sm:text-[44px] font-bold tracking-tight leading-[1.1] text-[#0A1A3A]">
+            Welcome Back!
+            <br />
+            <span className="text-[#2B6BFF]">Trade with Confidence.</span>
+          </h1>
+          <p className="mt-5 text-[14px] sm:text-[15px] text-slate-600 leading-[1.65] max-w-[460px]">
+            Access your account to continue trading
+            and managing your investments securely.
+          </p>
+
+          {/* Feature list */}
+          <div className="mt-8 space-y-4 max-w-[460px]">
+            {features.map((f) => (
+              <div key={f.title} className="flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-200/80">
+                <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0">
+                  <f.icon className="h-5 w-5 text-[#2B6BFF]" strokeWidth={2} />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[14px] font-semibold text-[#0A1A3A] leading-tight">{f.title}</div>
+                  <p className="text-[12.5px] text-slate-600 mt-1 leading-[1.55]">{f.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <Card className="bg-white/[0.03] border border-white/[0.08] shadow-[0_20px_60px_-24px_rgba(0,0,0,0.7),0_1px_0_rgba(255,255,255,0.04)_inset] rounded-2xl p-8">
-            {error && (
-              <div className="mb-5 flex items-center gap-2.5 text-sm text-rose-300 bg-rose-500/10 border border-rose-500/25 rounded-lg px-4 py-3">
-                <AlertCircle size={15} className="flex-shrink-0" />
-                {error}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-slate-500 uppercase tracking-widest">Email Address</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-                  <Input
-                    {...register("email")}
-                    type="email"
-                    placeholder="you@example.com"
-                    className="pl-11 bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500 h-12 rounded-lg shadow-sm transition-shadow focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/20 focus:shadow-[0_0_0_4px_rgba(43,107,255,0.12)]"
-                  />
-                </div>
-                {errors.email && <p className="text-xs text-rose-400">{errors.email.message}</p>}
-              </div>
-
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <Label className="text-xs font-medium text-slate-500 uppercase tracking-widest">Password</Label>
-                  <Link href="/contact" className="text-xs text-[#2B6BFF] hover:text-white">Forgot password?</Link>
-                </div>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-                  <Input
-                    {...register("password")}
-                    type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
-                    className="pl-11 pr-11 bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500 h-12 rounded-lg shadow-sm transition-shadow focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/20 focus:shadow-[0_0_0_4px_rgba(43,107,255,0.12)]"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
-                  >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-                {errors.password && <p className="text-xs text-rose-400">{errors.password.message}</p>}
-              </div>
-
-              <Button
-                type="submit"
-                disabled={loading}
-                style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}
-                className="w-full h-12 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(43,107,255,0.55)] hover:brightness-110 active:scale-[0.99] transition-all duration-200"
-              >
-                {loading ? (
-                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Checking…</>
-                ) : (
-                  "Sign In"
-                )}
-              </Button>
-            </form>
-
-            <div className="mt-6 pt-6 border-t border-white/[0.08] text-center">
-              <p className="text-sm text-slate-500">
-                Don&apos;t have an account?{" "}
-                <Link href="/register" className="text-[#2B6BFF] hover:text-white font-medium">
-                  Create account
-                </Link>
-              </p>
+          {/* Illustration — stylized shield on plinth with candlestick chart behind */}
+          <div className="mt-10 max-w-[460px]">
+            <div className="relative h-[220px] sm:h-[240px]">
+              <ShieldIllustration />
             </div>
+          </div>
 
-          </Card>
-        </>
-      )}
-
-      {/* ── STEP 2: OTP Verification ─────────────────────────────────────── */}
-      {step === "otp" && (
-        <>
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                style={{ background: "rgba(43,107,255,0.12)", border: "1px solid rgba(43,107,255,0.18)" }}>
-                <ShieldCheck className="h-7 w-7 text-[#2B6BFF]" />
-              </div>
-            </div>
-            <h1 className="text-2xl font-bold text-white mb-1">Verify Your Identity</h1>
-            <p className="text-sm text-slate-500">
-              We sent a 6-digit code to{" "}
-              <span className="text-[#2B6BFF] font-medium">{lockedEmail}</span>
+          {/* Company description card */}
+          <div className="mt-6 p-4 rounded-xl bg-white border border-slate-200/80 max-w-[460px] flex items-start gap-3">
+            <Lock className="h-4 w-4 text-[#2B6BFF] mt-1 flex-shrink-0" />
+            <p className="text-[12.5px] text-slate-600 leading-[1.6]">
+              SecureChainMarkets is a regulated digital asset
+              trading platform offering secure, transparent,
+              and innovative trading solutions worldwide.
             </p>
           </div>
+        </div>
 
-          <Card className="bg-white/[0.03] border border-white/[0.08] shadow-[0_20px_60px_-24px_rgba(0,0,0,0.7),0_1px_0_rgba(255,255,255,0.04)_inset] rounded-2xl p-8">
+        {/* ════════════════════ RIGHT: Form card ═════════════════ */}
+        <div className="order-1 lg:order-2 w-full">
+          <div
+            className="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9"
+            style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
+          >
+            {step === "credentials" && (
+              <>
+                <h2 className="text-[26px] sm:text-[28px] font-bold text-[#0A1A3A] tracking-tight">
+                  Login to Your Account
+                </h2>
+                <p className="mt-2 text-[13.5px] text-slate-500">
+                  Enter your credentials to access your account
+                </p>
 
-            {/* Email hint */}
-            <div className="flex items-center gap-3 rounded-xl p-3.5 mb-7"
-              style={{ background: "rgba(43,107,255,0.08)", border: "1px solid rgba(43,107,255,0.14)" }}>
-              <Mail className="h-4 w-4 text-[#2B6BFF] flex-shrink-0" />
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Check your inbox and spam folder. The code expires in{" "}
-                <span className="text-slate-300 font-medium">10 minutes</span>.
-              </p>
-            </div>
+                {error && (
+                  <div className="mt-6 flex items-center gap-2.5 text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-lg px-4 py-3">
+                    <AlertCircle size={15} className="flex-shrink-0" />
+                    {error}
+                  </div>
+                )}
 
-            <form onSubmit={handleOtpSubmit}>
-              {/* Digit inputs — always exactly 6 boxes regardless of state shape */}
-              <div className="flex gap-2 sm:gap-2.5 justify-center mb-5 max-w-full">
-                {Array.from({ length: 6 }).map((_, i) => {
-                  const d = digits[i] ?? "";
-                  return (
-                  <input
-                    key={i}
-                    ref={el => { inputRefs.current[i] = el; }}
-                    type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    autoComplete="one-time-code"
-                    maxLength={1}
-                    value={d}
-                    onChange={e => handleDigitChange(i, e.target.value)}
-                    onKeyDown={e => handleDigitKeyDown(i, e)}
-                    onPaste={e => {
-                      const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
-                      if (!pasted) return;
-                      e.preventDefault();
-                      handleDigitChange(0, pasted);
-                    }}
-                    disabled={otpLoading}
-                    className={`
-                      flex-1 min-w-0 max-w-[52px] h-14 text-center text-xl font-bold rounded-xl
-                      bg-white/[0.04] border text-white
-                      focus:outline-none focus:ring-0
-                      transition-all duration-150
-                      disabled:opacity-50 disabled:cursor-not-allowed
-                      ${otpError
-                        ? "border-red-500/50 bg-red-500/5"
-                        : d
-                          ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/8 shadow-[0_0_0_3px_rgba(43,107,255,0.12)]"
-                          : "border-white/[0.10] focus:border-[#2B6BFF]/50 focus:bg-white/[0.05]"}
-                    `}
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-7 space-y-5">
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <label className="text-[13px] font-semibold text-[#0A1A3A]">Email Address</label>
+                    <div className="relative">
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                      <input
+                        {...register("email")}
+                        type="email"
+                        placeholder="Enter your email address"
+                        className="w-full h-12 pl-11 pr-4 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] placeholder:text-slate-400 focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all"
+                      />
+                    </div>
+                    {errors.email && <p className="text-xs text-rose-500">{errors.email.message}</p>}
+                  </div>
+
+                  {/* Password */}
+                  <div className="space-y-2">
+                    <label className="text-[13px] font-semibold text-[#0A1A3A]">Password</label>
+                    <div className="relative">
+                      <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                      <input
+                        {...register("password")}
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter your password"
+                        className="w-full h-12 pl-11 pr-11 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] placeholder:text-slate-400 focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                      >
+                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </button>
+                    </div>
+                    {errors.password && <p className="text-xs text-rose-500">{errors.password.message}</p>}
+                  </div>
+
+                  {/* Forgot password — right aligned */}
+                  <div className="flex justify-end">
+                    <Link href="/contact" className="text-[13px] font-semibold text-[#2B6BFF] hover:text-[#1A4FCC]">
+                      Forgot Password?
+                    </Link>
+                  </div>
+
+                  {/* Login button */}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full h-12 rounded-lg text-[15px] font-semibold text-white transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
                     style={{
-                      caretColor: "#2B6BFF",
-                      color: "#ffffff",
-                      WebkitTextFillColor: "#ffffff",
-                      WebkitAppearance: "none",
-                      backgroundColor: d ? "rgba(43,107,255,0.10)" : "rgba(255,255,255,0.04)",
-                      borderColor: d ? "rgba(43,107,255,0.55)" : "rgba(255,255,255,0.10)",
+                      background: "#2B6BFF",
+                      boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
                     }}
-                    aria-label={`Digit ${i + 1}`}
-                  />
-                  );
-                })}
-              </div>
+                  >
+                    {loading ? (<><Loader2 className="h-4 w-4 animate-spin" /> Checking…</>) : ("Login")}
+                  </button>
+                </form>
 
-              {otpError && (
-                <div className="flex items-center gap-2 text-sm text-rose-300 bg-rose-500/10 border border-rose-500/25 rounded-lg px-4 py-3 mb-5">
-                  <AlertCircle size={14} className="flex-shrink-0" />
-                  {otpError}
+                {/* or continue with */}
+                <div className="mt-7 flex items-center gap-3">
+                  <div className="flex-1 h-px bg-slate-200" />
+                  <span className="text-[12.5px] text-slate-500">or continue with</span>
+                  <div className="flex-1 h-px bg-slate-200" />
                 </div>
-              )}
 
-              <Button
-                type="submit"
-                disabled={otpLoading || digits.join("").length < 6}
-                style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}
-                className="w-full h-12 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(43,107,255,0.55)] hover:brightness-110 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-              >
-                {otpLoading ? (
-                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Verifying…</>
-                ) : (
-                  "Confirm & Sign In"
-                )}
-              </Button>
-            </form>
+                {/* Social buttons */}
+                <div className="mt-5 space-y-3">
+                  <button
+                    type="button"
+                    onClick={() => comingSoon("Google")}
+                    className="w-full h-12 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors inline-flex items-center justify-center gap-3 text-[14px] font-semibold text-[#0A1A3A]"
+                  >
+                    <GoogleIcon />
+                    Continue with Google
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => comingSoon("Apple")}
+                    className="w-full h-12 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors inline-flex items-center justify-center gap-3 text-[14px] font-semibold text-[#0A1A3A]"
+                  >
+                    <AppleIcon />
+                    Continue with Apple
+                  </button>
+                </div>
 
-            {/* Resend */}
-            <div className="mt-5 pt-5 border-t border-white/[0.08] text-center">
-              <p className="text-sm text-slate-500 mb-2">Didn&apos;t receive the code?</p>
-              <button
-                type="button"
-                onClick={handleResend}
-                disabled={resending || resendCooldown > 0}
-                className="inline-flex items-center gap-2 text-sm font-medium text-[#2B6BFF]
-                  hover:text-white transition-colors disabled:text-slate-500 disabled:cursor-not-allowed"
-              >
-                {resending ? (
-                  <><Loader2 size={14} className="animate-spin" /> Sending…</>
-                ) : resendCooldown > 0 ? (
-                  <><RefreshCw size={14} /> Resend in {resendCooldown}s</>
-                ) : (
-                  <><RefreshCw size={14} /> Resend code</>
-                )}
-              </button>
+                {/* Secure Login info card */}
+                <div className="mt-6 p-4 rounded-xl bg-[#EAF2FF] border border-[#DCE6FA] flex items-start gap-3">
+                  <ShieldCheck className="h-5 w-5 text-[#2B6BFF] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-[13.5px] font-semibold text-[#0A1A3A]">Secure Login</div>
+                    <p className="text-[12.5px] text-slate-600 mt-1 leading-[1.55]">
+                      We use advanced encryption to ensure your account
+                      information is always protected.
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* ── OTP STEP ─────────────────────────────────────────────────── */}
+            {step === "otp" && (
+              <>
+                <div className="flex items-center justify-center mb-5">
+                  <div className="w-14 h-14 rounded-2xl bg-[#2B6BFF]/10 inline-flex items-center justify-center">
+                    <ShieldCheck className="h-7 w-7 text-[#2B6BFF]" />
+                  </div>
+                </div>
+                <h2 className="text-center text-[24px] font-bold text-[#0A1A3A] tracking-tight">Verify Your Identity</h2>
+                <p className="text-center mt-2 text-[13.5px] text-slate-500">
+                  We sent a 6-digit code to{" "}
+                  <span className="font-semibold text-[#2B6BFF]">{lockedEmail}</span>
+                </p>
+
+                <div className="mt-6 flex items-center gap-3 rounded-xl p-3.5 bg-[#EAF2FF] border border-[#DCE6FA]">
+                  <Mail className="h-4 w-4 text-[#2B6BFF] flex-shrink-0" />
+                  <p className="text-[12.5px] text-slate-600 leading-relaxed">
+                    Check your inbox and spam folder. The code expires in{" "}
+                    <span className="font-semibold text-[#0A1A3A]">10 minutes</span>.
+                  </p>
+                </div>
+
+                <form onSubmit={handleOtpSubmit} className="mt-6">
+                  <div className="flex gap-2 sm:gap-2.5 justify-center mb-5">
+                    {Array.from({ length: 6 }).map((_, i) => {
+                      const d = digits[i] ?? "";
+                      return (
+                        <input
+                          key={i}
+                          ref={el => { inputRefs.current[i] = el; }}
+                          type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          autoComplete="one-time-code"
+                          maxLength={1}
+                          value={d}
+                          onChange={e => handleDigitChange(i, e.target.value)}
+                          onKeyDown={e => handleDigitKeyDown(i, e)}
+                          onPaste={e => {
+                            const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+                            if (!pasted) return;
+                            e.preventDefault();
+                            handleDigitChange(0, pasted);
+                          }}
+                          disabled={otpLoading}
+                          className={`flex-1 min-w-0 max-w-[52px] h-14 text-center text-xl font-bold rounded-xl bg-white border text-[#0A1A3A] focus:outline-none focus:ring-2 focus:ring-[#2B6BFF]/20 transition-all duration-150 disabled:opacity-50
+                            ${otpError ? "border-rose-400 bg-rose-50" : d ? "border-[#2B6BFF] bg-[#EAF2FF]" : "border-slate-200 focus:border-[#2B6BFF]"}`}
+                          aria-label={`Digit ${i + 1}`}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  {otpError && (
+                    <div className="flex items-center gap-2 text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-lg px-4 py-3 mb-5">
+                      <AlertCircle size={14} className="flex-shrink-0" />
+                      {otpError}
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={otpLoading || digits.join("").length < 6}
+                    className="w-full h-12 rounded-lg text-[15px] font-semibold text-white transition-all hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+                    style={{
+                      background: "#2B6BFF",
+                      boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
+                    }}
+                  >
+                    {otpLoading ? (<><Loader2 className="h-4 w-4 animate-spin" /> Verifying…</>) : ("Confirm & Sign In")}
+                  </button>
+                </form>
+
+                <div className="mt-5 pt-5 border-t border-slate-200 text-center">
+                  <p className="text-[13px] text-slate-500 mb-2">Didn&apos;t receive the code?</p>
+                  <button
+                    type="button"
+                    onClick={handleResend}
+                    disabled={resending || resendCooldown > 0}
+                    className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2B6BFF] hover:text-[#1A4FCC] disabled:text-slate-400 disabled:cursor-not-allowed"
+                  >
+                    {resending ? (<><Loader2 size={14} className="animate-spin" /> Sending…</>)
+                      : resendCooldown > 0 ? (<><RefreshCw size={14} /> Resend in {resendCooldown}s</>)
+                      : (<><RefreshCw size={14} /> Resend code</>)}
+                  </button>
+                </div>
+
+                <div className="mt-4 text-center">
+                  <button
+                    type="button"
+                    onClick={() => { setStep("credentials"); setDigits(Array(6).fill("")); setOtpError(""); }}
+                    className="inline-flex items-center gap-1.5 text-[12px] text-slate-500 hover:text-slate-700"
+                  >
+                    <ArrowLeft size={12} />
+                    Use a different account
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Below-card security note */}
+          <div className="mt-6 text-center">
+            <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#0A1A3A]">
+              <Lock size={14} className="text-[#2B6BFF]" />
+              Your security is our priority
             </div>
-
-            {/* Back to credentials */}
-            <div className="mt-4 text-center">
-              <button
-                type="button"
-                onClick={() => { setStep("credentials"); setDigits(Array(6).fill("")); setOtpError(""); }}
-                className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors"
-              >
-                <ArrowLeft size={12} />
-                Use a different account
-              </button>
-            </div>
-
-          </Card>
-        </>
-      )}
+            <p className="text-[12px] text-slate-500 mt-1.5">
+              All connections are secured with 256-bit SSL encryption
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
+  );
+}
+
+/* ── Inline brand icons (Google, Apple) ───────────────────────────────── */
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
+      <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.55-.21-2.27H12v4.3h6.43c-.28 1.5-1.13 2.78-2.41 3.62v3h3.9c2.28-2.1 3.57-5.18 3.57-8.65z" />
+      <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.9-3c-1.08.72-2.46 1.16-4.05 1.16-3.12 0-5.76-2.1-6.7-4.93H1.27v3.1A12 12 0 0 0 12 24z" />
+      <path fill="#FBBC05" d="M5.3 14.32A7.2 7.2 0 0 1 4.92 12c0-.81.14-1.6.38-2.32V6.58H1.27A12 12 0 0 0 0 12c0 1.94.46 3.78 1.27 5.42l4.03-3.1z" />
+      <path fill="#EA4335" d="M12 4.75c1.76 0 3.34.6 4.59 1.8l3.44-3.44C17.95 1.18 15.24 0 12 0A12 12 0 0 0 1.27 6.58l4.03 3.1C6.24 6.85 8.88 4.75 12 4.75z" />
+    </svg>
+  );
+}
+function AppleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden fill="#0A1A3A">
+      <path d="M16.365 1.43c0 1.14-.43 2.23-1.16 3.04-.78.87-2.04 1.55-3.18 1.46-.14-1.13.42-2.3 1.13-3.05.79-.84 2.1-1.47 3.21-1.45zM20.1 17.18c-.55 1.27-.81 1.83-1.51 2.95-.99 1.56-2.39 3.5-4.13 3.51-1.55.02-1.95-.99-4.05-.97-2.1.01-2.55.99-4.1.96-1.74-.02-3.07-1.78-4.06-3.34C-.4 16.04-.69 10.97 1.46 8.27c1.53-1.92 3.94-3.04 6.2-3.04 2.3 0 3.74 1.27 5.65 1.27 1.85 0 2.97-1.27 5.62-1.27 2.01 0 4.13 1.1 5.65 3-4.97 2.71-4.16 9.78-4.48 8.95z" />
+    </svg>
+  );
+}
+
+/* ── Stylized shield-on-plinth illustration with candlestick backdrop ─ */
+function ShieldIllustration() {
+  return (
+    <svg viewBox="0 0 460 240" className="w-full h-full" aria-hidden>
+      <defs>
+        <linearGradient id="shield-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stopColor="#5C8BFF" />
+          <stop offset="100%" stopColor="#1A4FCC" />
+        </linearGradient>
+        <linearGradient id="plinth-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E2E8F0" />
+        </linearGradient>
+        <radialGradient id="floor-glow" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%"  stopColor="#2B6BFF" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Candlestick chart silhouette */}
+      <g opacity="0.5">
+        {[
+          [60,140,30,8,true],   [95,120,45,8,true],  [130,100,30,8,false],
+          [165,80, 50,8,true],  [200,60, 35,8,true], [235,75, 28,8,false],
+          [355,100,40,8,true],  [385,80, 32,8,true], [415,60, 25,8,true],
+        ].map(([x,y,h,w,up], i) => {
+          const ox = Number(x), oy = Number(y), oh = Number(h), ow = Number(w);
+          const green = Boolean(up);
+          return (
+            <g key={i}>
+              <line x1={ox} y1={oy - 12} x2={ox} y2={oy + oh + 12} stroke={green ? "#10B981" : "#EF4444"} strokeWidth="1.4" opacity="0.5" />
+              <rect x={ox - ow/2} y={oy} width={ow} height={oh} fill={green ? "#10B981" : "#EF4444"} opacity="0.7" rx="1.5" />
+            </g>
+          );
+        })}
+      </g>
+
+      {/* Floor glow */}
+      <ellipse cx="230" cy="210" rx="170" ry="14" fill="url(#floor-glow)" />
+
+      {/* Plinth */}
+      <ellipse cx="230" cy="208" rx="120" ry="16" fill="#0A1A3A" opacity="0.10" />
+      <rect x="130" y="170" width="200" height="42" rx="10" fill="url(#plinth-grad)" stroke="#CBD5E1" />
+      <ellipse cx="230" cy="170" rx="100" ry="10" fill="#FFFFFF" stroke="#CBD5E1" />
+
+      {/* Shield */}
+      <g transform="translate(230 95)">
+        <path
+          d="M0,-65 L55,-45 L55,15 C55,45 30,65 0,75 C-30,65 -55,45 -55,15 L-55,-45 Z"
+          fill="url(#shield-grad)"
+          stroke="#1A4FCC"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M0,-58 L48,-40 L48,12 C48,38 26,55 0,64 C-26,55 -48,38 -48,12 L-48,-40 Z"
+          fill="none"
+          stroke="#FFFFFF"
+          strokeOpacity="0.35"
+          strokeWidth="1"
+        />
+        {/* Lock body */}
+        <rect x="-16" y="-5" width="32" height="28" rx="4" fill="#FFFFFF" />
+        {/* Shackle */}
+        <path d="M-10,-5 L-10,-15 A10 10 0 0 1 10 -15 L10,-5" stroke="#FFFFFF" strokeWidth="3" fill="none" strokeLinecap="round" />
+        {/* Keyhole */}
+        <circle cx="0" cy="6" r="3" fill="#2B6BFF" />
+        <rect x="-1.5" y="6" width="3" height="8" fill="#2B6BFF" />
+      </g>
+    </svg>
   );
 }

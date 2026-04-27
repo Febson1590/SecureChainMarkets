@@ -1,69 +1,102 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Facebook, Twitter, Send, Linkedin, ShieldCheck } from "lucide-react";
 import { COMPANY } from "@/lib/company";
 
 const footerColumns = [
   {
-    title: "Markets",
-    links: [
-      { href: "/markets",         label: "All markets"    },
-      { href: "/markets#bitcoin", label: "Bitcoin"        },
-      { href: "/markets#ethereum",label: "Ethereum"       },
-      { href: "/markets#altcoins",label: "Top altcoins"   },
-      { href: "/markets#stablecoins", label: "Stablecoins" },
-    ],
-  },
-  {
-    title: "Platform",
-    links: [
-      { href: "/#capabilities", label: "Capabilities" },
-      { href: "/pricing",       label: "Pricing"      },
-      { href: "/security",      label: "Security"     },
-    ],
-  },
-  {
     title: "Company",
     links: [
-      { href: "/about",   label: "About"   },
-      { href: "/contact", label: "Contact" },
-      { href: "/help",    label: "Help Center" },
+      { href: "/about",   label: "About Company" },
+      { href: "/pricing", label: "Account Types" },
+      { href: "/contact", label: "Contact Us"    },
+      { href: "/terms",   label: "Terms & Conditions" },
+      { href: "/privacy", label: "Privacy Policy" },
     ],
   },
   {
-    title: "Legal",
+    title: "Markets",
     links: [
-      { href: "/terms",   label: "Terms of Service" },
-      { href: "/privacy", label: "Privacy Policy"   },
-      { href: "/risk",    label: "Trading Considerations" },
+      { href: "/markets",                label: "All Markets"      },
+      { href: "/markets#cryptocurrencies", label: "Cryptocurrencies" },
+      { href: "/markets#forex",          label: "Forex"            },
+      { href: "/markets#indices",        label: "Indices"          },
+      { href: "/markets#commodities",    label: "Commodities"      },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { href: "/help",     label: "Help Center"  },
+      { href: "/help#faq", label: "FAQs"         },
+      { href: "/contact",  label: "Live Support" },
+      { href: "/security", label: "Security"     },
+    ],
+  },
+  {
+    title: "Legal & Compliance",
+    links: [
+      { href: "/terms",   label: "License & Regulation" },
+      { href: "/risk",    label: "Risk Disclosure"      },
+      { href: "/privacy", label: "AML Policy"           },
+      { href: "/privacy", label: "KYC Policy"           },
     ],
   },
 ];
 
+const socials = [
+  { href: "https://facebook.com",  label: "Facebook", Icon: Facebook },
+  { href: "https://twitter.com",   label: "Twitter",  Icon: Twitter  },
+  { href: "https://t.me",          label: "Telegram", Icon: Send     },
+  { href: "https://linkedin.com",  label: "LinkedIn", Icon: Linkedin },
+];
+
 export function PublicFooter() {
   return (
-    <footer className="bg-white border-t border-slate-200 text-slate-600">
+    <footer className="bg-[#0A1A3A] text-slate-300">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] gap-10">
-          {/* Brand + description */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr] gap-10">
+          {/* Brand + description + socials */}
           <div>
-            <Image
-              src="/assets/logos/securechainmarkets-logo.png"
-              alt="SecureChainMarkets"
-              width={1774}
-              height={887}
-              className="h-16 w-auto mb-5 -ml-1"
-            />
-            <p className="text-[13px] leading-relaxed text-slate-500 max-w-xs">
-              SecureChainMarkets is a digital-asset trading platform built around
-              transparent pricing, account verification, and tools that help
-              modern investors trade and monitor their portfolio with clarity.
+            <Link
+              href="/"
+              aria-label="SecureChainMarkets — home"
+              className="inline-flex items-center h-14 px-5 rounded-full bg-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)] mb-5"
+            >
+              <Image
+                src="/assets/logos/securechainmarkets-logo.png"
+                alt="SecureChainMarkets"
+                width={1774}
+                height={887}
+                className="h-8 w-auto pointer-events-none select-none"
+              />
+            </Link>
+            <p className="text-[13px] leading-relaxed text-slate-400 max-w-xs mb-6">
+              SecureChainMarkets is a regulated digital
+              asset trading platform offering secure,
+              transparent, and innovative trading
+              solutions worldwide.
             </p>
+            <div className="flex items-center gap-2.5">
+              {socials.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.12] inline-flex items-center justify-center text-slate-300 hover:bg-[#2B6BFF] hover:border-[#2B6BFF] hover:text-white transition-colors"
+                >
+                  <Icon size={14} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Link columns */}
           {footerColumns.map((col) => (
             <div key={col.title}>
-              <h4 className="text-[12px] font-bold text-[#0A1A3A] uppercase tracking-wider mb-4">
+              <h4 className="text-[13.5px] font-semibold text-white mb-4">
                 {col.title}
               </h4>
               <ul className="space-y-2.5">
@@ -71,7 +104,7 @@ export function PublicFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-[13px] text-slate-600 hover:text-[#2B6BFF] transition-colors"
+                      className="text-[13px] text-slate-400 hover:text-[#5C8BFF] transition-colors"
                     >
                       {l.label}
                     </Link>
@@ -82,17 +115,15 @@ export function PublicFooter() {
           ))}
         </div>
 
-        {/* Risk + copyright */}
-        <div className="mt-14 pt-6 border-t border-slate-200 flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-          <p className="text-[11px] text-slate-500 leading-relaxed max-w-4xl">
-            <span className="font-semibold text-slate-700">Note:</span>{" "}
-            Markets can move quickly. Take a moment to review our{" "}
-            <Link href="/risk" className="text-[#2B6BFF] hover:text-[#1A4FCC] underline underline-offset-2">risk overview</Link>{" "}
-            before opening an account so you can trade with confidence.
-          </p>
-          <p className="text-[11px] text-slate-500 whitespace-nowrap">
+        {/* Bottom strip */}
+        <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <p className="text-[12px] text-slate-500">
             &copy; {COMPANY.launchYear} {COMPANY.brand}. All rights reserved.
           </p>
+          <div className="inline-flex items-center gap-2 text-[12px] text-slate-400">
+            <ShieldCheck size={14} className="text-[#5C8BFF]" />
+            Regulated and Authorized Platform
+          </div>
         </div>
       </div>
     </footer>

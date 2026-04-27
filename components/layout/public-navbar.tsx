@@ -8,11 +8,12 @@ import { Menu, X, Globe } from "lucide-react";
 import { LanguageMenuDialog } from "@/components/language-switcher";
 
 const navLinks = [
-  { href: "/markets",       label: "Markets"   },
-  { href: "/#capabilities", label: "Platform"  },
-  { href: "/#account-types",label: "Accounts"  },
-  { href: "/about",         label: "Company"   },
-  { href: "/help",          label: "Resources" },
+  { href: "/",                label: "Home"          },
+  { href: "/markets",         label: "Markets"       },
+  { href: "/#how-it-works",   label: "How It Works"  },
+  { href: "/about",           label: "About Company" },
+  { href: "/pricing",         label: "Account Types" },
+  { href: "/contact",         label: "Contact Us"    },
 ];
 
 export function PublicNavbar() {
@@ -39,15 +40,19 @@ export function PublicNavbar() {
     >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[80px]">
-          {/* ── Left: logo ───────────────────────────── */}
-          <Link href="/" className="flex items-center flex-shrink-0">
+          {/* ── Left: logo (bleeds vertically; row height stays at 80px) ─ */}
+          <Link
+            href="/"
+            aria-label="SecureChainMarkets — home"
+            className="relative flex-shrink-0 h-[80px] w-[210px] sm:w-[240px] lg:w-[280px]"
+          >
             <Image
               src="/assets/logos/securechainmarkets-logo.png"
               alt="SecureChainMarkets"
               width={1774}
               height={887}
               priority
-              className="h-14 lg:h-16 w-auto"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-[224px] sm:h-[256px] lg:h-[288px] w-auto max-w-none pointer-events-none select-none"
             />
           </Link>
 
@@ -84,19 +89,19 @@ export function PublicNavbar() {
             </button>
             <Link
               href="/login"
-              className="h-10 px-5 inline-flex items-center text-[14px] font-semibold text-[#0A1A3A] hover:text-[#2B6BFF] transition-colors"
+              className="h-10 px-5 inline-flex items-center text-[14px] font-semibold text-[#0A1A3A] border border-[#0A1A3A]/15 rounded-md hover:border-[#2B6BFF] hover:text-[#2B6BFF] transition-colors"
             >
-              Login
+              Log In
             </Link>
             <Link
               href="/register"
-              className="h-11 px-6 inline-flex items-center gap-1.5 text-[14px] font-semibold text-white rounded-lg transition-all hover:brightness-110 hover:-translate-y-[1px]"
+              className="h-10 px-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-white rounded-md transition-all hover:brightness-110"
               style={{
-                background: "linear-gradient(180deg, #3D7BFF 0%, #2B6BFF 50%, #1A4FCC 100%)",
-                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32), 0 1px 0 rgba(15,23,42,0.06)",
+                background: "#2B6BFF",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px rgba(43,107,255,0.30)",
               }}
             >
-              Open Account
+              Get Started
             </Link>
           </div>
 
@@ -149,11 +154,11 @@ export function PublicNavbar() {
                 onClick={() => setMobileOpen(false)}
                 className="w-full h-12 inline-flex items-center justify-center rounded-md text-[15px] font-semibold text-white"
                 style={{
-                  background: "linear-gradient(180deg, #3D7BFF 0%, #2B6BFF 50%, #1A4FCC 100%)",
+                  background: "#2B6BFF",
                   boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
                 }}
               >
-                Open Account
+                Get Started
               </Link>
             </div>
           </div>
