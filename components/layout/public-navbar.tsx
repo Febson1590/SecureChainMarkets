@@ -44,7 +44,7 @@ export function PublicNavbar() {
           <Link
             href="/"
             aria-label="SecureChainMarkets — home"
-            className="relative flex-shrink-0 h-[80px] w-[210px] sm:w-[240px] lg:w-[280px]"
+            className="inline-flex items-center flex-shrink-0"
           >
             <Image
               src="/assets/logos/securechainmarkets-logo.png"
@@ -52,7 +52,7 @@ export function PublicNavbar() {
               width={1774}
               height={887}
               priority
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-[224px] sm:h-[256px] lg:h-[288px] w-auto max-w-none pointer-events-none select-none"
+              className="h-9 sm:h-10 lg:h-11 w-auto pointer-events-none select-none"
             />
           </Link>
 
