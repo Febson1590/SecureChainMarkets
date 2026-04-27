@@ -97,20 +97,20 @@ function Stepper({ step }: { step: number }) {
               ${step > n
                 ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
                 : step === n
-                  ? "text-[#08111F] shadow-[0_8px_24px_-8px_rgba(212,168,87,0.55)] ring-4 ring-[#d4a857]/20"
+                  ? "text-[#08111F] shadow-[0_8px_24px_-8px_rgba(43,107,255,0.55)] ring-4 ring-[#2B6BFF]/20"
                   : "bg-white/[0.05] text-slate-500 border border-white/[0.10]"}
-            `} style={step === n ? { background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" } : undefined}>
+            `} style={step === n ? { background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" } : undefined}>
               {step > n ? <Check size={14} strokeWidth={3} /> : n}
             </div>
             <span className={`text-[10px] font-medium tracking-wider whitespace-nowrap hidden sm:block
-              ${step === n ? "text-[#d4a857]" : step > n ? "text-emerald-400" : "text-slate-500"}`}>
+              ${step === n ? "text-[#2B6BFF]" : step > n ? "text-emerald-400" : "text-slate-500"}`}>
               {label}
             </span>
           </div>
 
           {i < STEPS.length - 1 && (
             <div className={`flex-1 h-px mx-2 transition-all duration-500
-              ${step > n ? "bg-[#d4a857]/40" : "bg-white/[0.08]"}`} />
+              ${step > n ? "bg-[#2B6BFF]/40" : "bg-white/[0.08]"}`} />
           )}
         </div>
       ))}
@@ -124,10 +124,10 @@ function StepHeader({ step }: { step: number }) {
   const StepIcon = s.icon;
   return (
     <div className="flex items-center gap-3 rounded-xl p-4 mb-6"
-      style={{ background: "rgba(212,168,87,0.10)", border: "1px solid rgba(212,168,87,0.16)" }}>
+      style={{ background: "rgba(43,107,255,0.10)", border: "1px solid rgba(43,107,255,0.16)" }}>
       <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-        style={{ background: "rgba(212,168,87,0.10)", border: "1px solid rgba(212,168,87,0.14)" }}>
-        <StepIcon className="h-5 w-5 text-[#d4a857]" />
+        style={{ background: "rgba(43,107,255,0.10)", border: "1px solid rgba(43,107,255,0.14)" }}>
+        <StepIcon className="h-5 w-5 text-[#2B6BFF]" />
       </div>
       <div>
         <div className="text-sm font-semibold text-white">{s.heading}</div>
@@ -276,12 +276,12 @@ export default function RegisterPage() {
 
   /* ── Shared input class — sharper borders, clearer placeholders ─────── */
   const inputCls = `pl-11 bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500
-    focus:border-[#d4a857]/70 focus:bg-white/[0.05] focus:ring-0 h-11 transition-colors duration-200
+    focus:border-[#2B6BFF]/70 focus:bg-white/[0.05] focus:ring-0 h-11 transition-colors duration-200
     hover:border-white/[0.18] hover:bg-white/[0.05]`;
 
   /* ── Shared select class — mirrors inputCls ─────────────────────────── */
   const selectCls = `w-full h-11 pl-11 pr-9 bg-white/[0.04] border border-white/[0.10] text-white text-sm
-    rounded-md focus:outline-none focus:border-[#d4a857]/70 focus:bg-white/[0.05]
+    rounded-md focus:outline-none focus:border-[#2B6BFF]/70 focus:bg-white/[0.05]
     hover:border-white/[0.18] hover:bg-white/[0.05] transition-colors duration-200
     appearance-none cursor-pointer [&>option]:bg-[#0E1A30] [&>option]:text-white`;
 
@@ -404,11 +404,11 @@ export default function RegisterPage() {
 
             {/* Info card */}
             <div className="rounded-xl p-4"
-              style={{ background: "rgba(212,168,87,0.10)", border: "1px solid rgba(212,168,87,0.16)" }}>
+              style={{ background: "rgba(43,107,255,0.10)", border: "1px solid rgba(43,107,255,0.16)" }}>
               <div className="flex items-start gap-3">
-                <Globe className="h-4 w-4 text-[#d4a857] flex-shrink-0 mt-0.5" />
+                <Globe className="h-4 w-4 text-[#2B6BFF] flex-shrink-0 mt-0.5" />
                 <div>
-                  <div className="text-xs font-semibold text-[#d4a857] mb-1">Regional Trading Information</div>
+                  <div className="text-xs font-semibold text-[#2B6BFF] mb-1">Regional Trading Information</div>
                   <p className="text-xs text-slate-500 leading-relaxed">
                     Your location helps us apply region-specific compliance rules,
                     regulatory requirements, and optimal server routing for faster order execution.
@@ -495,16 +495,16 @@ export default function RegisterPage() {
                 disabled={verifyState !== "idle"}
                 className="w-full flex items-center gap-4 rounded-xl px-4 py-4 sm:py-[18px]
                   transition-all duration-200 cursor-pointer disabled:cursor-default
-                  hover:border-[#d4a857]/55 active:scale-[0.995]"
+                  hover:border-[#2B6BFF]/55 active:scale-[0.995]"
                 style={{
                   background: verifyState === "verified"
                     ? "rgba(16,185,129,0.10)"
-                    : "rgba(212,168,87,0.06)",
+                    : "rgba(43,107,255,0.06)",
                   border: verifyState === "verified"
                     ? "1px solid rgba(16,185,129,0.35)"
                     : errors.verify
                       ? "1px solid rgba(239,68,68,0.45)"
-                      : "1px solid rgba(212,168,87,0.18)",
+                      : "1px solid rgba(43,107,255,0.18)",
                 }}
               >
                 <div className={`
@@ -513,11 +513,11 @@ export default function RegisterPage() {
                   ${verifyState === "verified"
                     ? "bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.18)]"
                     : verifyState === "checking"
-                      ? "bg-[#d4a857]/30 border border-[#d4a857]/50"
+                      ? "bg-[#2B6BFF]/30 border border-[#2B6BFF]/50"
                       : "bg-white/[0.06] border border-white/[0.20]"}
                 `}>
                   {verifyState === "verified"  && <Check   size={14} className="text-white" strokeWidth={3} />}
-                  {verifyState === "checking"  && <Loader2 size={12} className="text-[#d4a857] animate-spin" />}
+                  {verifyState === "checking"  && <Loader2 size={12} className="text-[#2B6BFF] animate-spin" />}
                 </div>
 
                 <span className={`text-[14px] font-semibold transition-colors duration-200
@@ -528,7 +528,7 @@ export default function RegisterPage() {
                 </span>
 
                 {verifyState === "idle" && (
-                  <span className="ml-auto text-[10px] font-semibold text-[#d4a857] tracking-[0.18em] uppercase hidden sm:inline">Tap to verify</span>
+                  <span className="ml-auto text-[10px] font-semibold text-[#2B6BFF] tracking-[0.18em] uppercase hidden sm:inline">Tap to verify</span>
                 )}
               </button>
               {errors.verify && (
@@ -554,7 +554,7 @@ export default function RegisterPage() {
                   w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5
                   transition-all duration-200 cursor-pointer
                   ${termsOk
-                    ? "bg-[#d4a857] border border-[#d4a857]"
+                    ? "bg-[#2B6BFF] border border-[#2B6BFF]"
                     : errors.terms
                       ? "bg-red-500/10 border border-red-500/40"
                       : "bg-white/[0.05] border border-white/[0.10] group-hover:border-white/[0.18]"}
@@ -563,9 +563,9 @@ export default function RegisterPage() {
                 </div>
                 <span className="text-xs text-slate-300 leading-relaxed mt-0.5">
                   I agree to SecureChainMarkets&apos;s{" "}
-                  <Link href="/terms" target="_blank" className="text-[#d4a857] hover:text-white underline underline-offset-2" onClick={e => e.stopPropagation()}>Terms of Service</Link>
+                  <Link href="/terms" target="_blank" className="text-[#2B6BFF] hover:text-white underline underline-offset-2" onClick={e => e.stopPropagation()}>Terms of Service</Link>
                   {" "}and{" "}
-                  <Link href="/privacy" target="_blank" className="text-[#d4a857] hover:text-white underline underline-offset-2" onClick={e => e.stopPropagation()}>Privacy Policy</Link>.
+                  <Link href="/privacy" target="_blank" className="text-[#2B6BFF] hover:text-white underline underline-offset-2" onClick={e => e.stopPropagation()}>Privacy Policy</Link>.
                   {" "}I confirm I am at least 18 years old.
                 </span>
               </label>
@@ -599,8 +599,8 @@ export default function RegisterPage() {
             <Button
               type="button"
               onClick={next}
-              style={{ background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" }}
-              className="flex items-center gap-2 h-12 px-7 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(212,168,87,0.55)] hover:brightness-110 active:scale-[0.99] transition-all duration-200 ml-auto"
+              style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}
+              className="flex items-center gap-2 h-12 px-7 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(43,107,255,0.55)] hover:brightness-110 active:scale-[0.99] transition-all duration-200 ml-auto"
             >
               Continue
               <ChevronRight size={16} />
@@ -610,8 +610,8 @@ export default function RegisterPage() {
               type="button"
               onClick={handleSubmit}
               disabled={loading}
-              style={{ background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" }}
-              className="flex items-center gap-2 h-12 px-8 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(212,168,87,0.55)] hover:brightness-110 active:scale-[0.99] disabled:opacity-50 transition-all duration-200"
+              style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}
+              className="flex items-center gap-2 h-12 px-8 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(43,107,255,0.55)] hover:brightness-110 active:scale-[0.99] disabled:opacity-50 transition-all duration-200"
             >
               {loading ? (
                 <><Loader2 size={16} className="animate-spin" /> Creating Account…</>
@@ -629,7 +629,7 @@ export default function RegisterPage() {
           </p>
           <p className="text-sm text-slate-500 order-1 sm:order-2">
             Already have an account?{" "}
-            <Link href="/login" className="text-[#d4a857] hover:text-white font-medium transition-colors">
+            <Link href="/login" className="text-[#2B6BFF] hover:text-white font-medium transition-colors">
               Sign in
             </Link>
           </p>

@@ -197,8 +197,8 @@ function VerifyContent() {
       <div className="text-center mb-8">
         <div className="flex items-center justify-center mb-4">
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center"
-            style={{ background: "rgba(212,168,87,0.12)", border: "1px solid rgba(212,168,87,0.18)" }}>
-            <ShieldCheck className="h-7 w-7 text-[#d4a857]" />
+            style={{ background: "rgba(43,107,255,0.12)", border: "1px solid rgba(43,107,255,0.18)" }}>
+            <ShieldCheck className="h-7 w-7 text-[#2B6BFF]" />
           </div>
         </div>
         <h1 className="text-2xl font-bold text-white mb-1">
@@ -206,7 +206,7 @@ function VerifyContent() {
         </h1>
         <p className="text-sm text-slate-500">
           We sent a 6-digit code to{" "}
-          <span className="text-[#d4a857] font-medium">{email || "your email"}</span>
+          <span className="text-[#2B6BFF] font-medium">{email || "your email"}</span>
         </p>
       </div>
 
@@ -214,8 +214,8 @@ function VerifyContent() {
 
         {/* Email reminder */}
         <div className="flex items-center gap-3 rounded-xl p-3.5 mb-7"
-          style={{ background: "rgba(212,168,87,0.08)", border: "1px solid rgba(212,168,87,0.14)" }}>
-          <Mail className="h-4 w-4 text-[#d4a857] flex-shrink-0" />
+          style={{ background: "rgba(43,107,255,0.08)", border: "1px solid rgba(43,107,255,0.14)" }}>
+          <Mail className="h-4 w-4 text-[#2B6BFF] flex-shrink-0" />
           <p className="text-xs text-slate-500 leading-relaxed">
             Check your inbox and spam folder. The code expires in{" "}
             <span className="text-slate-300 font-medium">10 minutes</span>.
@@ -256,16 +256,16 @@ function VerifyContent() {
                   ${error
                     ? "border-red-500/50 bg-red-500/5"
                     : d
-                      ? "border-[#d4a857]/60 bg-[#d4a857]/8 shadow-[0_0_0_3px_rgba(212,168,87,0.12)]"
-                      : "border-white/[0.10] focus:border-[#d4a857]/50 focus:bg-white/[0.05]"}
+                      ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/8 shadow-[0_0_0_3px_rgba(43,107,255,0.12)]"
+                      : "border-white/[0.10] focus:border-[#2B6BFF]/50 focus:bg-white/[0.05]"}
                 `}
                 style={{
-                  caretColor: "#d4a857",
+                  caretColor: "#2B6BFF",
                   color: "#ffffff",
                   WebkitTextFillColor: "#ffffff",
                   WebkitAppearance: "none",
-                  backgroundColor: d ? "rgba(212,168,87,0.10)" : "rgba(255,255,255,0.04)",
-                  borderColor: d ? "rgba(212,168,87,0.55)" : "rgba(255,255,255,0.10)",
+                  backgroundColor: d ? "rgba(43,107,255,0.10)" : "rgba(255,255,255,0.04)",
+                  borderColor: d ? "rgba(43,107,255,0.55)" : "rgba(255,255,255,0.10)",
                 }}
                 aria-label={`Digit ${i + 1}`}
               />
@@ -285,8 +285,8 @@ function VerifyContent() {
           <Button
             type="submit"
             disabled={loading || digits.join("").length < 6}
-            style={{ background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" }}
-            className="w-full h-12 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(212,168,87,0.55)] hover:brightness-110 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}
+            className="w-full h-12 rounded-md font-semibold text-[#08111F] shadow-[0_8px_24px_-8px_rgba(43,107,255,0.55)] hover:brightness-110 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
             {loading ? (
               <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Verifying…</>
@@ -303,7 +303,7 @@ function VerifyContent() {
             type="button"
             onClick={handleResend}
             disabled={resending || resendCooldown > 0}
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#d4a857]
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#2B6BFF]
               hover:text-white transition-colors disabled:text-slate-500 disabled:cursor-not-allowed"
           >
             {resending ? (

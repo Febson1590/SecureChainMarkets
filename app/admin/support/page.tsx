@@ -40,7 +40,7 @@ export default function AdminSupportPage() {
 
   const PRIORITY_COLORS: Record<string, string> = {
     LOW: "text-slate-400 border-slate-500/20 bg-slate-500/10",
-    MEDIUM: "text-[#d4a857] border-[#d4a857]/20 bg-[#d4a857]/12",
+    MEDIUM: "text-[#2B6BFF] border-[#2B6BFF]/20 bg-[#2B6BFF]/12",
     HIGH: "text-orange-400 border-orange-500/20 bg-orange-500/10",
     URGENT: "text-red-400 border-red-500/20 bg-red-500/10",
   };
@@ -80,7 +80,7 @@ export default function AdminSupportPage() {
                 onClick={() => setExpanded(expanded === ticket.id ? null : ticket.id)}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-9 h-9 rounded-full bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center text-xs font-bold text-[#d4a857] flex-shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center text-xs font-bold text-[#2B6BFF] flex-shrink-0">
                     {ticket.user?.name?.slice(0, 2).toUpperCase() || "U"}
                   </div>
                   <div className="text-left">
@@ -113,7 +113,7 @@ export default function AdminSupportPage() {
                       ticket.messages?.map((msg: any) => (
                         <div key={msg.id} className={`flex ${msg.senderRole === "ADMIN" ? "justify-end" : "justify-start"}`}>
                           <div className={`max-w-[80%] rounded-xl px-4 py-2.5 ${msg.senderRole === "ADMIN"
-                            ? "bg-[#d4a857]/15 border border-[#d4a857]/20 text-white"
+                            ? "bg-[#2B6BFF]/15 border border-[#2B6BFF]/20 text-white"
                             : "bg-white/5 border border-white/5 text-slate-300"}`}>
                             <div className="text-xs font-medium mb-1 opacity-60">
                               {msg.senderRole === "ADMIN" ? "Support Agent" : ticket.user?.name}
@@ -137,7 +137,7 @@ export default function AdminSupportPage() {
                       />
                       <div className="flex gap-2">
                         <Button size="sm" disabled={!!sending} onClick={() => handleReply(ticket.id, false)}
-                          className="bg-[#d4a857] hover:bg-[#d4a857] text-white h-8 px-4 text-xs">
+                          className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white h-8 px-4 text-xs">
                           {sending === ticket.id ? <Loader2 size={11} className="animate-spin mr-1" /> : <Send size={11} className="mr-1" />}
                           Send Reply
                         </Button>

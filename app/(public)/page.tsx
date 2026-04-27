@@ -125,18 +125,18 @@ export default async function HomePage() {
 
       {/* ── Ticker Bar ────────────────────────────────────────────────── */}
       <div
-        className="ticker-wrap fixed top-[76px] left-0 right-0 z-40 h-9 flex items-center overflow-hidden"
+        className="ticker-wrap fixed top-[80px] left-0 right-0 z-40 h-9 flex items-center overflow-hidden"
         style={{
           background: "linear-gradient(180deg, rgba(2,11,24,0.97) 0%, rgba(3,13,27,0.94) 100%)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderBottom: "1px solid rgba(148,163,184,0.08)",
-          boxShadow: "0 1px 0 rgba(212,168,87,0.04)",
+          boxShadow: "0 1px 0 rgba(43,107,255,0.04)",
         }}
       >
         <div className="flex animate-ticker whitespace-nowrap select-none">
           {[...tickerItems, ...tickerItems].map((asset, i) => {
-            const color = CRYPTO_COLORS[asset.symbol] ?? "#d4a857";
+            const color = CRYPTO_COLORS[asset.symbol] ?? "#2B6BFF";
             const isUp  = asset.change >= 0;
             return (
               <span
@@ -164,7 +164,7 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════════════════════════════════
            HERO — Exchange Terminal (3 product panels on the right)
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="pt-36 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Ambient AI-generated backdrop (decorative, behind content) */}
         <div
           aria-hidden="true"
@@ -198,14 +198,14 @@ export default async function HomePage() {
               {/* NEW · Copy Top Traders pill */}
               <Link
                 href="/markets"
-                className="group inline-flex items-center gap-2 px-3 py-1.5 mb-4 rounded-full text-[11px] font-semibold text-[#e8c178] tabular-nums"
+                className="group inline-flex items-center gap-2 px-3 py-1.5 mb-4 rounded-full text-[11px] font-semibold text-[#5C8BFF] tabular-nums"
                 style={{
-                  background: "rgba(212,168,87,0.08)",
-                  border: "1px solid rgba(212,168,87,0.15)",
-                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 3px rgba(212,168,87,0.05)",
+                  background: "rgba(43,107,255,0.08)",
+                  border: "1px solid rgba(43,107,255,0.15)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 3px rgba(43,107,255,0.05)",
                 }}
               >
-                <span className="inline-flex items-center gap-1 px-1.5 py-[1px] rounded-full bg-[#d4a857]/12 text-white text-[9px] font-black tracking-wider">
+                <span className="inline-flex items-center gap-1 px-1.5 py-[1px] rounded-full bg-[#2B6BFF]/12 text-white text-[9px] font-black tracking-wider">
                   <Sparkles className="h-2.5 w-2.5" /> NEW
                 </span>
                 Copy Top Traders in One Click
@@ -274,7 +274,7 @@ export default async function HomePage() {
               >
                 <div
                   className="absolute inset-0 blur-3xl"
-                  style={{ background: "radial-gradient(ellipse, rgba(212,168,87,0.08) 0%, transparent 65%)" }}
+                  style={{ background: "radial-gradient(ellipse, rgba(43,107,255,0.08) 0%, transparent 65%)" }}
                 />
               </div>
 
@@ -323,11 +323,11 @@ export default async function HomePage() {
                 <div
                   className="w-10 h-10 rounded-md flex items-center justify-center flex-shrink-0"
                   style={{
-                    background: "rgba(212,168,87,0.07)",
-                    border: "1px solid rgba(212,168,87,0.15)",
+                    background: "rgba(43,107,255,0.07)",
+                    border: "1px solid rgba(43,107,255,0.15)",
                   }}
                 >
-                  <c.icon className="h-[18px] w-[18px] text-[#d4a857]" />
+                  <c.icon className="h-[18px] w-[18px] text-[#2B6BFF]" />
                 </div>
                 <div className="min-w-0">
                   <h3 className="text-[13px] font-semibold text-white mb-1">{c.title}</h3>
@@ -403,12 +403,12 @@ export default async function HomePage() {
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
                     style={{
-                      background: "rgba(212,168,87,0.10)",
-                      border: "1px solid rgba(212,168,87,0.10)",
+                      background: "rgba(43,107,255,0.10)",
+                      border: "1px solid rgba(43,107,255,0.10)",
                       boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
                     }}
                   >
-                    <f.icon className="h-[18px] w-[18px] text-[#d4a857]" />
+                    <f.icon className="h-[18px] w-[18px] text-[#2B6BFF]" />
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-[14px] font-semibold text-white mb-1 group-hover:text-white transition-colors">
@@ -446,15 +446,15 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 relative">
-            <div className="hidden lg:block absolute top-[54px] left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-[#d4a857]/25 to-transparent pointer-events-none" />
+            <div className="hidden lg:block absolute top-[54px] left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-[#2B6BFF]/25 to-transparent pointer-events-none" />
             {steps.map((s) => (
               <div key={s.n} className="vx-panel vx-panel-hover p-5">
                 <div className="flex items-center gap-3 mb-3">
                   <div
                     className="w-9 h-9 rounded-md flex items-center justify-center text-[12px] font-black gradient-text"
                     style={{
-                      background: "rgba(212,168,87,0.08)",
-                      border: "1px solid rgba(212,168,87,0.10)",
+                      background: "rgba(43,107,255,0.08)",
+                      border: "1px solid rgba(43,107,255,0.10)",
                     }}
                   >
                     {s.n}
@@ -494,8 +494,8 @@ export default async function HomePage() {
               <ul className="space-y-2 max-w-md">
                 {securityList.map((item) => (
                   <li key={item.text} className="flex items-center gap-3 text-[12.5px] text-slate-300">
-                    <div className="w-7 h-7 rounded-md bg-[#d4a857]/12 border border-[#d4a857]/22 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="h-3.5 w-3.5 text-[#d4a857]" />
+                    <div className="w-7 h-7 rounded-md bg-[#2B6BFF]/12 border border-[#2B6BFF]/22 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="h-3.5 w-3.5 text-[#2B6BFF]" />
                     </div>
                     {item.text}
                   </li>
@@ -506,8 +506,8 @@ export default async function HomePage() {
             <div className="grid grid-cols-2 gap-3">
               {trust.map((t) => (
                 <div key={t.title} className="vx-panel vx-panel-hover p-5">
-                  <div className="w-9 h-9 rounded-lg bg-[#d4a857]/12 border border-[#d4a857]/22 flex items-center justify-center mb-3">
-                    <t.icon className="h-4 w-4 text-[#d4a857]" />
+                  <div className="w-9 h-9 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/22 flex items-center justify-center mb-3">
+                    <t.icon className="h-4 w-4 text-[#2B6BFF]" />
                   </div>
                   <h4 className="text-[13px] font-semibold text-white mb-1">{t.title}</h4>
                   <p className="text-[12px] text-slate-500 leading-relaxed">{t.desc}</p>
@@ -551,13 +551,13 @@ export default async function HomePage() {
                 <svg viewBox="0 0 120 36" className="absolute right-3 top-3 w-[70px] h-[22px] opacity-60">
                   <defs>
                     <linearGradient id={`mk-${m.title}`} x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#d4a857" stopOpacity="0.5" />
-                      <stop offset="100%" stopColor="#d4a857" stopOpacity="0" />
+                      <stop offset="0%" stopColor="#2B6BFF" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
                     </linearGradient>
                   </defs>
                   <path
                     d="M2,28 L16,22 L30,26 L44,18 L58,20 L72,12 L86,16 L100,8 L118,10"
-                    stroke="#d4a857" strokeWidth="1.4" fill="none" strokeLinecap="round"
+                    stroke="#2B6BFF" strokeWidth="1.4" fill="none" strokeLinecap="round"
                   />
                   <path
                     d="M2,28 L16,22 L30,26 L44,18 L58,20 L72,12 L86,16 L100,8 L118,10 L118,36 L2,36 Z"
@@ -567,11 +567,11 @@ export default async function HomePage() {
                 <div
                   className="w-10 h-10 rounded-lg flex items-center justify-center mb-3"
                   style={{
-                    background: "rgba(212,168,87,0.10)",
-                    border: "1px solid rgba(212,168,87,0.10)",
+                    background: "rgba(43,107,255,0.10)",
+                    border: "1px solid rgba(43,107,255,0.10)",
                   }}
                 >
-                  <m.icon className="h-[18px] w-[18px] text-[#d4a857]" />
+                  <m.icon className="h-[18px] w-[18px] text-[#2B6BFF]" />
                 </div>
                 <h3 className="text-[14px] font-semibold text-white mb-1">{m.title}</h3>
                 <p className="text-[12px] text-slate-500 leading-relaxed">{m.desc}</p>
@@ -600,19 +600,19 @@ export default async function HomePage() {
           <div
             className="rounded-xl p-5 sm:p-6 flex items-start gap-4"
             style={{
-              background: "rgba(212,168,87,0.06)",
-              border: "1px solid rgba(212,168,87,0.10)",
+              background: "rgba(43,107,255,0.06)",
+              border: "1px solid rgba(43,107,255,0.10)",
             }}
           >
-            <div className="w-9 h-9 rounded-md flex items-center justify-center flex-shrink-0 bg-[#d4a857]/8 border border-[#d4a857]/25">
-              <ShieldCheck className="h-4 w-4 text-[#d4a857]" />
+            <div className="w-9 h-9 rounded-md flex items-center justify-center flex-shrink-0 bg-[#2B6BFF]/8 border border-[#2B6BFF]/25">
+              <ShieldCheck className="h-4 w-4 text-[#2B6BFF]" />
             </div>
             <div>
-              <div className="text-[12px] font-bold tracking-[0.18em] text-[#d4a857] uppercase mb-1.5">Trade Informed</div>
+              <div className="text-[12px] font-bold tracking-[0.18em] text-[#2B6BFF] uppercase mb-1.5">Trade Informed</div>
               <p className="text-[12.5px] text-slate-400 leading-relaxed">
                 Markets move quickly, and every investor&rsquo;s situation is different. We
                 publish a full{" "}
-                <Link href="/risk" className="text-[#d4a857] hover:text-white underline-offset-2 hover:underline">
+                <Link href="/risk" className="text-[#2B6BFF] hover:text-white underline-offset-2 hover:underline">
                   risk overview
                 </Link>{" "}
                 so you can review the details and trade with confidence.
@@ -630,7 +630,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
             className="w-[900px] h-[500px] rounded-full blur-[140px]"
-            style={{ background: "radial-gradient(ellipse, rgba(212,168,87,0.10) 0%, rgba(212,168,87,0.10) 35%, transparent 65%)" }}
+            style={{ background: "radial-gradient(ellipse, rgba(43,107,255,0.10) 0%, rgba(43,107,255,0.10) 35%, transparent 65%)" }}
           />
         </div>
 
@@ -640,7 +640,7 @@ export default async function HomePage() {
             style={{
               background: "rgba(4, 12, 24, 0.92)",
               boxShadow:
-                "0 0 0 1px rgba(212,168,87,0.08), 0 50px 120px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 0 60px rgba(212,168,87,0.025)",
+                "0 0 0 1px rgba(43,107,255,0.08), 0 50px 120px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 0 60px rgba(43,107,255,0.025)",
             }}
           >
             <div className="vx-eyebrow mb-4 inline-flex">Open an Account</div>
@@ -768,7 +768,7 @@ function TradeTerminalPreview({
               ))}
             </div>
             <div className="flex items-center gap-1.5 text-[10px] text-slate-500 uppercase tracking-widest">
-              <LayoutGrid size={11} className="text-[#d4a857]" /> Candlestick
+              <LayoutGrid size={11} className="text-[#2B6BFF]" /> Candlestick
             </div>
           </div>
 
@@ -777,8 +777,8 @@ function TradeTerminalPreview({
             <svg viewBox="0 0 500 300" preserveAspectRatio="none" className="w-full h-full">
               <defs>
                 <linearGradient id="vx-trade-fill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"   stopColor="#d4a857" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#d4a857" stopOpacity="0" />
+                  <stop offset="0%"   stopColor="#2B6BFF" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
                 </linearGradient>
                 <filter id="vx-chart-glow">
                   <feGaussianBlur stdDeviation="1" result="blur" />
@@ -812,14 +812,14 @@ function TradeTerminalPreview({
               })}
               <path
                 d="M0,260 C60,240 100,220 150,190 C200,155 230,130 280,110 C330,90 360,70 400,55 C440,40 470,30 500,22"
-                stroke="#d4a857" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.55"
+                stroke="#2B6BFF" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.55"
               />
               <path
                 d="M0,260 C60,240 100,220 150,190 C200,155 230,130 280,110 C330,90 360,70 400,55 C440,40 470,30 500,22 L500,300 L0,300 Z"
                 fill="url(#vx-trade-fill)"
               />
-              <circle cx="500" cy="22" r="3" fill="#d4a857" />
-              <circle cx="500" cy="22" r="7" fill="#d4a857" fillOpacity="0.2" />
+              <circle cx="500" cy="22" r="3" fill="#2B6BFF" />
+              <circle cx="500" cy="22" r="7" fill="#2B6BFF" fillOpacity="0.2" />
             </svg>
 
             {/* Bottom-left: 7d spark pill */}
@@ -841,7 +841,7 @@ function TradeTerminalPreview({
         <div className="border-b lg:border-b-0 lg:border-r border-white/[0.06]">
           <div className="px-3.5 h-10 flex items-center justify-between border-b border-white/[0.05]">
             <div className="vx-panel-title">
-              <LayoutGrid size={12} className="text-[#d4a857]" />
+              <LayoutGrid size={12} className="text-[#2B6BFF]" />
               Order Book
             </div>
             <div className="text-[10px] text-slate-600 uppercase tracking-widest">Spread ~ $23</div>
@@ -885,7 +885,7 @@ function TradeTerminalPreview({
       <div className="border-t border-white/[0.06]">
         <div className="px-4 h-10 flex items-center justify-between border-b border-white/[0.05]">
           <div className="vx-panel-title">
-            <Activity size={12} className="text-[#d4a857]" />
+            <Activity size={12} className="text-[#2B6BFF]" />
             Recent Trades
           </div>
           <div className="text-[10px] text-slate-600 uppercase tracking-widest">BTC / USD</div>

@@ -36,7 +36,7 @@ export function AdminHeader() {
 
       {/* Title — desktop */}
       <div className="hidden lg:flex items-center gap-2 text-xs text-slate-500">
-        <span className="font-semibold text-[#d4a857] uppercase tracking-widest">Admin Panel</span>
+        <span className="font-semibold text-[#2B6BFF] uppercase tracking-widest">Admin Panel</span>
       </div>
 
       <div className="flex-1" />

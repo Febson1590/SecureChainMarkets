@@ -21,7 +21,7 @@ export default async function OpenGraphImage() {
           justifyContent: "space-between",
           padding: "76px 88px",
           background:
-            "radial-gradient(ellipse 65% 50% at 25% 0%, rgba(212,168,87,0.22), transparent 60%), radial-gradient(ellipse 55% 50% at 90% 100%, rgba(26,115,232,0.20), transparent 65%), linear-gradient(180deg, #08111F 0%, #0A1530 55%, #08111F 100%)",
+            "radial-gradient(ellipse 65% 50% at 25% 0%, rgba(43,107,255,0.22), transparent 60%), radial-gradient(ellipse 55% 50% at 90% 100%, rgba(26,115,232,0.20), transparent 65%), linear-gradient(180deg, #08111F 0%, #0A1530 55%, #08111F 100%)",
           color: "white",
           fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
         }}
@@ -48,7 +48,7 @@ export default async function OpenGraphImage() {
                 fontSize: 48,
                 fontWeight: 800,
                 letterSpacing: -1,
-                color: "#D4A857",
+                color: "#2B6BFF",
                 lineHeight: 1,
               }}
             >
@@ -58,7 +58,7 @@ export default async function OpenGraphImage() {
           <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
             <div style={{ display: "flex", fontSize: 44, fontWeight: 800, letterSpacing: -0.5 }}>
               <span style={{ color: "white" }}>SecureChain</span>
-              <span style={{ color: "#D4A857" }}>Markets</span>
+              <span style={{ color: "#2B6BFF" }}>Markets</span>
             </div>
             <div
               style={{
@@ -92,7 +92,7 @@ export default async function OpenGraphImage() {
             style={{
               fontSize: 76,
               fontWeight: 700,
-              color: "#D4A857",
+              color: "#2B6BFF",
               letterSpacing: -1,
             }}
           >
@@ -125,7 +125,7 @@ export default async function OpenGraphImage() {
             fontWeight: 600,
           }}
         >
-          <span style={{ color: "#D4A857" }}>●</span>
+          <span style={{ color: "#2B6BFF" }}>●</span>
           <span>securechainmarkets.com</span>
         </div>
       </div>

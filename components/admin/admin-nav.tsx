@@ -50,7 +50,7 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
         <Logo size="sm" href="/admin" />
       </div>
       <div className="px-2 py-2 flex-shrink-0">
-        <div className="text-[10px] font-semibold text-[#d4a857] uppercase tracking-[0.22em] px-3 py-2">
+        <div className="text-[10px] font-semibold text-[#2B6BFF] uppercase tracking-[0.22em] px-3 py-2">
           Admin Control
         </div>
       </div>
@@ -65,14 +65,14 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
               className={cn(
                 "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                 active
-                  ? "bg-[#d4a857]/10 text-white"
+                  ? "bg-[#2B6BFF]/10 text-white"
                   : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
               )}
             >
               {active && (
-                <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#d4a857]" />
+                <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#2B6BFF]" />
               )}
-              <item.icon className={cn("h-[17px] w-[17px] flex-shrink-0 transition-colors", active ? "text-[#d4a857]" : "text-slate-500")} />
+              <item.icon className={cn("h-[17px] w-[17px] flex-shrink-0 transition-colors", active ? "text-[#2B6BFF]" : "text-slate-500")} />
               {item.label}
             </Link>
           );

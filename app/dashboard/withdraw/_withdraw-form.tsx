@@ -70,7 +70,7 @@ const STATUS_META: Record<UiStatus, {
   Icon:  typeof Clock;
 }> = {
   pending:    { label: "Pending",    color: "text-amber-300",   bg: "bg-amber-500/10",   border: "border-amber-500/25",   Icon: Clock       },
-  processing: { label: "Processing", color: "text-[#e8c178]",     bg: "bg-[#d4a857]/12",     border: "border-[#d4a857]/25",     Icon: Hourglass   },
+  processing: { label: "Processing", color: "text-[#5C8BFF]",     bg: "bg-[#2B6BFF]/12",     border: "border-[#2B6BFF]/25",     Icon: Hourglass   },
   completed:  { label: "Completed",  color: "text-emerald-300", bg: "bg-emerald-500/10", border: "border-emerald-500/25", Icon: CheckCircle2 },
   rejected:   { label: "Rejected",   color: "text-red-300",     bg: "bg-red-500/10",     border: "border-red-500/25",     Icon: XCircle     },
 };
@@ -294,7 +294,7 @@ export default function WithdrawForm({
                   className={`
                     flex-shrink-0 flex items-center gap-2 h-11 px-4 rounded-xl border transition-all
                     ${isActive
-                      ? "border-[#d4a857]/50 bg-[#d4a857]/[0.08] shadow-[0_0_0_1px_rgba(14,165,233,0.2)]"
+                      ? "border-[#2B6BFF]/50 bg-[#2B6BFF]/[0.08] shadow-[0_0_0_1px_rgba(14,165,233,0.2)]"
                       : "border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05]"}
                   `}
                 >
@@ -333,7 +333,7 @@ export default function WithdrawForm({
             type="button"
             onClick={setMaxAmount}
             disabled={usdBalance <= 0 || currentRate <= 0}
-            className="h-8 px-3 rounded-md text-[11px] font-bold uppercase tracking-wider bg-[#d4a857]/15 border border-[#d4a857]/30 text-[#e8c178] hover:bg-[#d4a857]/25 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="h-8 px-3 rounded-md text-[11px] font-bold uppercase tracking-wider bg-[#2B6BFF]/15 border border-[#2B6BFF]/30 text-[#5C8BFF] hover:bg-[#2B6BFF]/25 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Max
           </button>
@@ -397,7 +397,7 @@ export default function WithdrawForm({
               type="button"
               onClick={pasteAddress}
               aria-label="Paste address"
-              className="h-11 px-3 rounded-md bg-[#d4a857]/12 border border-[#d4a857]/25 flex items-center gap-1.5 text-[#d4a857] hover:bg-[#d4a857]/20 transition-colors text-[11px] font-semibold uppercase tracking-wider"
+              className="h-11 px-3 rounded-md bg-[#2B6BFF]/12 border border-[#2B6BFF]/25 flex items-center gap-1.5 text-[#2B6BFF] hover:bg-[#2B6BFF]/20 transition-colors text-[11px] font-semibold uppercase tracking-wider"
             >
               <Clipboard size={13} />
               Paste
@@ -415,9 +415,9 @@ export default function WithdrawForm({
               <SelectTrigger className="bg-white/[0.04] border-white/[0.08] text-white h-11">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-[#0E1A30] border-[#d4a857]/20 text-white">
+              <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
                 {availableNetworks.map((n) => (
-                  <SelectItem key={n} value={n} className="hover:bg-[#d4a857]/12 focus:bg-[#d4a857]/12">
+                  <SelectItem key={n} value={n} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">
                     {n}
                   </SelectItem>
                 ))}
@@ -444,7 +444,7 @@ export default function WithdrawForm({
         <Button
           onClick={handleReview}
           disabled={submitting || isRestricted}
-          className="w-full h-12 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold text-[14px]"
+          className="w-full h-12 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-[14px]"
         >
           {isRestricted ? (
             "Verification Required"
@@ -605,7 +605,7 @@ function ConfirmModal({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-sm rounded-2xl border border-[#d4a857]/20 shadow-2xl"
+        className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
         style={{ background: "rgba(7,15,30,0.98)" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -678,7 +678,7 @@ function ConfirmModal({
             Cancel
           </Button>
           <Button
-            className="flex-1 h-10 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold"
+            className="flex-1 h-10 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
             onClick={onConfirm}
             disabled={loading}
           >

@@ -8,7 +8,7 @@ export default function TermsPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Legal
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Terms of Service</h1>
@@ -76,7 +76,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-white mb-2">7. Fees</h2>
             <p>
               Current trading fees are listed on our{" "}
-              <a href="/pricing" className="text-[#d4a857] hover:text-[#e8c178]">Fees &amp; Pricing</a> page.
+              <a href="/pricing" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Fees &amp; Pricing</a> page.
               Fees may be updated from time to time, and continued use of the platform after a fee change
               constitutes acceptance of the updated fees.
             </p>
@@ -105,7 +105,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-white mb-2">10. Contact</h2>
             <p>
               Questions about these terms can be sent to{" "}
-              <a href="mailto:support@SecureChainMarkets.com" className="text-[#d4a857] hover:text-[#e8c178]">
+              <a href="mailto:support@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
                 support@SecureChainMarkets.com
               </a>.
             </p>

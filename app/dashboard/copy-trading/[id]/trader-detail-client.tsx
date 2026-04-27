@@ -239,7 +239,7 @@ export default function TraderDetailClient({
             </div>
           </div>
           <Link href="/dashboard" className="block mt-4">
-            <Button className="w-full h-11 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold text-[13px]">
+            <Button className="w-full h-11 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-[13px]">
               Go to Dashboard
             </Button>
           </Link>
@@ -248,7 +248,7 @@ export default function TraderDetailClient({
         <Button
           onClick={handleStartCopying}
           disabled={isRestricted}
-          className="w-full h-12 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold text-[14px] disabled:opacity-50"
+          className="w-full h-12 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-[14px] disabled:opacity-50"
         >
           {isRestricted ? "Verification Required" : "Start Copying"}
         </Button>
@@ -484,7 +484,7 @@ function CopyModal({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-sm rounded-2xl border border-[#d4a857]/20 shadow-2xl"
+        className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
         style={{ background: "rgba(7,15,30,0.98)" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -503,7 +503,7 @@ function CopyModal({
             </div>
             <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
               <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Min amount</div>
-              <div className="text-[13px] font-semibold text-[#d4a857] tabular-nums">{formatCurrency(trader.minCopyAmount)}</div>
+              <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{formatCurrency(trader.minCopyAmount)}</div>
             </div>
           </div>
 
@@ -520,7 +520,7 @@ function CopyModal({
                 min={trader.minCopyAmount}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg pl-7 pr-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#d4a857]/50"
+                className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg pl-7 pr-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#2B6BFF]/50"
               />
             </div>
             {val > 0 && !meetsMin && (
@@ -544,7 +544,7 @@ function CopyModal({
               <div className="text-[11.5px] text-slate-300 leading-relaxed">
                 You need at least <span className="font-semibold text-white">{formatCurrency(trader.minCopyAmount)}</span>{" "}
                 in your USD wallet to copy this trader.{" "}
-                <Link href="/dashboard/deposit" className="text-[#d4a857] hover:text-[#e8c178] font-semibold">
+                <Link href="/dashboard/deposit" className="text-[#2B6BFF] hover:text-[#5C8BFF] font-semibold">
                   Make a deposit
                 </Link>.
               </div>
@@ -562,7 +562,7 @@ function CopyModal({
             Cancel
           </Button>
           <Button
-            className="flex-1 h-10 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold"
+            className="flex-1 h-10 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
             onClick={needsDeposit ? onClose : submit}
             disabled={isPending || (!needsDeposit && (!canAfford || !meetsMin || exceedsMax))}
           >

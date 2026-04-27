@@ -18,7 +18,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 65% 50% at 25% 0%, rgba(212,168,87,0.12), transparent 60%), radial-gradient(ellipse 60% 55% at 85% 100%, rgba(26,115,232,0.18), transparent 65%), linear-gradient(180deg, #08111F 0%, #0A1530 55%, #08111F 100%)",
+              "radial-gradient(ellipse 65% 50% at 25% 0%, rgba(43,107,255,0.12), transparent 60%), radial-gradient(ellipse 60% 55% at 85% 100%, rgba(26,115,232,0.18), transparent 65%), linear-gradient(180deg, #08111F 0%, #0A1530 55%, #08111F 100%)",
           }}
         />
         <div
@@ -37,7 +37,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           className="absolute inset-x-0 top-1/2 h-px pointer-events-none"
           style={{
             background:
-              "linear-gradient(90deg, transparent, rgba(212,168,87,0.32) 50%, transparent)",
+              "linear-gradient(90deg, transparent, rgba(43,107,255,0.32) 50%, transparent)",
           }}
         />
 
@@ -56,7 +56,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <h2 className="text-[36px] xl:text-[44px] font-bold leading-[1.05] tracking-tight mb-6 text-white">
             Trade Smarter.
             <br />
-            Invest <span className="text-[#d4a857]">Confidently.</span>
+            Invest <span className="text-[#2B6BFF]">Confidently.</span>
           </h2>
           <p className="text-[15px] text-slate-400 leading-relaxed max-w-sm mb-10">
             A focused brokerage for major digital assets — clear pricing,
@@ -66,8 +66,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <ul className="space-y-5">
             {valueProps.map((v) => (
               <li key={v.title} className="flex items-start gap-4">
-                <span className="mt-0.5 w-9 h-9 rounded-md bg-[#d4a857]/12 border border-[#d4a857]/25 flex items-center justify-center flex-shrink-0">
-                  <v.icon size={16} className="text-[#d4a857]" />
+                <span className="mt-0.5 w-9 h-9 rounded-md bg-[#2B6BFF]/12 border border-[#2B6BFF]/25 flex items-center justify-center flex-shrink-0">
+                  <v.icon size={16} className="text-[#2B6BFF]" />
                 </span>
                 <div>
                   <div className="text-[14px] font-semibold text-white leading-snug">{v.title}</div>
@@ -105,7 +105,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           className="absolute inset-0 pointer-events-none lg:block hidden"
           style={{
             background:
-              "radial-gradient(ellipse 50% 60% at 100% 50%, rgba(212,168,87,0.06), transparent 70%)",
+              "radial-gradient(ellipse 50% 60% at 100% 50%, rgba(43,107,255,0.06), transparent 70%)",
           }}
         />
 
@@ -116,9 +116,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="relative px-6 pb-8 text-center">
           <p className="text-[11px] text-slate-500">
             By continuing you agree to our{" "}
-            <Link href="/terms" className="text-[#d4a857] hover:text-white underline-offset-2 hover:underline">Terms</Link>{" "}
+            <Link href="/terms" className="text-[#2B6BFF] hover:text-white underline-offset-2 hover:underline">Terms</Link>{" "}
             and{" "}
-            <Link href="/privacy" className="text-[#d4a857] hover:text-white underline-offset-2 hover:underline">Privacy Policy</Link>.
+            <Link href="/privacy" className="text-[#2B6BFF] hover:text-white underline-offset-2 hover:underline">Privacy Policy</Link>.
           </p>
         </div>
       </main>

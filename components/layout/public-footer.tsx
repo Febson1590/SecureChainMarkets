@@ -41,8 +41,8 @@ const footerColumns = [
 
 export function PublicFooter() {
   return (
-    <footer className="bg-[#08111F] border-t border-white/[0.06] text-slate-400">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+    <footer className="bg-white border-t border-slate-200 text-slate-600">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] gap-10">
           {/* Brand + description */}
           <div>
@@ -51,7 +51,7 @@ export function PublicFooter() {
               alt="SecureChainMarkets"
               width={1774}
               height={887}
-              className="h-11 w-auto mb-5"
+              className="h-16 w-auto mb-5 -ml-1"
             />
             <p className="text-[13px] leading-relaxed text-slate-500 max-w-xs">
               SecureChainMarkets is a digital-asset trading platform built around
@@ -63,7 +63,7 @@ export function PublicFooter() {
           {/* Link columns */}
           {footerColumns.map((col) => (
             <div key={col.title}>
-              <h4 className="text-[12px] font-bold text-white uppercase tracking-wider mb-4">
+              <h4 className="text-[12px] font-bold text-[#0A1A3A] uppercase tracking-wider mb-4">
                 {col.title}
               </h4>
               <ul className="space-y-2.5">
@@ -71,7 +71,7 @@ export function PublicFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-[13px] text-slate-400 hover:text-[#d4a857] transition-colors"
+                      className="text-[13px] text-slate-600 hover:text-[#2B6BFF] transition-colors"
                     >
                       {l.label}
                     </Link>
@@ -83,11 +83,11 @@ export function PublicFooter() {
         </div>
 
         {/* Risk + copyright */}
-        <div className="mt-14 pt-6 border-t border-white/[0.06] flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+        <div className="mt-14 pt-6 border-t border-slate-200 flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
           <p className="text-[11px] text-slate-500 leading-relaxed max-w-4xl">
-            <span className="font-semibold text-slate-400">Note:</span>{" "}
+            <span className="font-semibold text-slate-700">Note:</span>{" "}
             Markets can move quickly. Take a moment to review our{" "}
-            <Link href="/risk" className="text-slate-400 hover:text-[#d4a857] underline underline-offset-2">risk overview</Link>{" "}
+            <Link href="/risk" className="text-[#2B6BFF] hover:text-[#1A4FCC] underline underline-offset-2">risk overview</Link>{" "}
             before opening an account so you can trade with confidence.
           </p>
           <p className="text-[11px] text-slate-500 whitespace-nowrap">

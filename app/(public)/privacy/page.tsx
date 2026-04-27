@@ -8,7 +8,7 @@ export default function PrivacyPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Legal
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Privacy Policy</h1>
@@ -95,7 +95,7 @@ export default function PrivacyPage() {
             <h2 className="text-lg font-semibold text-white mb-2">9. Contact</h2>
             <p>
               Privacy questions can be sent to{" "}
-              <a href="mailto:privacy@SecureChainMarkets.com" className="text-[#d4a857] hover:text-[#e8c178]">
+              <a href="mailto:privacy@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
                 privacy@SecureChainMarkets.com
               </a>.
             </p>

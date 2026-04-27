@@ -79,7 +79,7 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
         >
           <Bell size={18} />
           {unreadCount > 0 && (
-            <span className="absolute top-1 right-1 w-4 h-4 rounded-full text-[10px] font-bold text-[#08111F] flex items-center justify-center" style={{ background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" }}>
+            <span className="absolute top-1 right-1 w-4 h-4 rounded-full text-[10px] font-bold text-[#08111F] flex items-center justify-center" style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}>
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
           )}
@@ -89,7 +89,7 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
         <DropdownMenu>
           <DropdownMenuTrigger render={<button className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-white/[0.04] transition-colors" />}>
             <Avatar className="h-8 w-8">
-              <AvatarFallback className="bg-[#d4a857]/15 text-[#d4a857] text-xs font-bold">
+              <AvatarFallback className="bg-[#2B6BFF]/15 text-[#2B6BFF] text-xs font-bold">
                 {initials}
               </AvatarFallback>
             </Avatar>
@@ -112,7 +112,7 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
             <DropdownMenuSeparator className="bg-white/5" />
             {user.role === "ADMIN" && (
               <>
-                <DropdownMenuItem render={<Link href="/admin" />} className="hover:bg-white/[0.04] cursor-pointer text-[#d4a857]">
+                <DropdownMenuItem render={<Link href="/admin" />} className="hover:bg-white/[0.04] cursor-pointer text-[#2B6BFF]">
                   Admin Panel
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-white/5" />

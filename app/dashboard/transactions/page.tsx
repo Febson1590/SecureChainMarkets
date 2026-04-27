@@ -17,7 +17,7 @@ const TX_ICONS: Record<string, any> = {
 const TX_COLORS: Record<string, string> = {
   DEPOSIT: "text-emerald-400 bg-emerald-500/10",
   WITHDRAWAL: "text-red-400 bg-red-500/10",
-  BUY: "text-[#d4a857] bg-[#d4a857]/12",
+  BUY: "text-[#2B6BFF] bg-[#2B6BFF]/12",
   SELL: "text-orange-400 bg-orange-500/10",
   BONUS: "text-yellow-400 bg-yellow-500/10",
   ADJUSTMENT: "text-slate-400 bg-slate-500/10",

@@ -50,7 +50,7 @@ export default function AboutPage() {
 
         {/* ── Header ─────────────────────────────────────────────────── */}
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             About SecureChainMarkets
           </Badge>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5">A focused crypto brokerage.</h1>
@@ -96,8 +96,8 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {operatingModel.map((m) => (
               <div key={m.title} className="glass-card glass-card-hover rounded-xl p-5">
-                <div className="w-10 h-10 rounded-lg bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center mb-3">
-                  <m.icon className="h-5 w-5 text-[#d4a857]" />
+                <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center mb-3">
+                  <m.icon className="h-5 w-5 text-[#2B6BFF]" />
                 </div>
                 <h3 className="text-sm font-semibold text-white mb-1">{m.title}</h3>
                 <p className="text-xs text-slate-500 leading-relaxed">{m.desc}</p>
@@ -107,51 +107,51 @@ export default function AboutPage() {
         </div>
 
         {/* ── Company information ──────────────────────────────────── */}
-        <div className="glass-card rounded-2xl p-7 mb-8 border border-[#d4a857]/15 bg-[#d4a857]/[0.03]">
+        <div className="glass-card rounded-2xl p-7 mb-8 border border-[#2B6BFF]/15 bg-[#2B6BFF]/[0.03]">
           <div className="mb-5">
             <div className="vx-eyebrow mb-2">Company Information</div>
             <h2 className="text-xl font-bold text-white">Entity &amp; operating details</h2>
           </div>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
             <div className="flex items-start gap-3">
-              <Building2 size={14} className="text-[#d4a857] mt-0.5 flex-shrink-0" />
+              <Building2 size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
               <div>
                 <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Legal name</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.legalName}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <MapPin size={14} className="text-[#d4a857] mt-0.5 flex-shrink-0" />
+              <MapPin size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
               <div>
                 <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Jurisdiction</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.jurisdiction}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <MapPin size={14} className="text-[#d4a857] mt-0.5 flex-shrink-0" />
+              <MapPin size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
               <div>
                 <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Registered address</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.address}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Building2 size={14} className="text-[#d4a857] mt-0.5 flex-shrink-0" />
+              <Building2 size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
               <div>
                 <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Registration</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.registration}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Mail size={14} className="text-[#d4a857] mt-0.5 flex-shrink-0" />
+              <Mail size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
               <div>
                 <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Support</dt>
                 <dd className="text-sm text-slate-200 mt-0.5 break-all">
-                  <a href={`mailto:${CONTACT.supportEmail}`} className="hover:text-[#d4a857]">{CONTACT.supportEmail}</a>
+                  <a href={`mailto:${CONTACT.supportEmail}`} className="hover:text-[#2B6BFF]">{CONTACT.supportEmail}</a>
                 </dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Clock size={14} className="text-[#d4a857] mt-0.5 flex-shrink-0" />
+              <Clock size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
               <div>
                 <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Business hours</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{CONTACT.businessHours}</dd>
@@ -167,11 +167,11 @@ export default function AboutPage() {
             SecureChainMarkets does not provide investment, tax, or legal advice. Published fees,
             processing times, and supported assets may change — changes are reflected directly
             in the dashboard and on the{" "}
-            <Link href="/pricing" className="text-[#d4a857] hover:text-[#e8c178]">Fees page</Link>.
+            <Link href="/pricing" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Fees page</Link>.
             Your responsibilities are detailed in our{" "}
-            <Link href="/terms" className="text-[#d4a857] hover:text-[#e8c178]">Terms of Service</Link>{" "}
+            <Link href="/terms" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Terms of Service</Link>{" "}
             and{" "}
-            <Link href="/privacy" className="text-[#d4a857] hover:text-[#e8c178]">Privacy Policy</Link>.
+            <Link href="/privacy" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Privacy Policy</Link>.
           </p>
         </div>
       </div>

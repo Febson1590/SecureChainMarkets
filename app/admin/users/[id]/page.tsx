@@ -14,7 +14,7 @@ import { adminUpdateWallet, updateUserStatus, adminSendNotification } from "@/li
 
 // ── Helpers ───────────────────────────────────────────────────
 const CARD = "glass-card rounded-2xl border border-white/[0.07] p-5";
-const INPUT = "w-full bg-white/[0.06] border border-white/[0.12] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#d4a857]/60";
+const INPUT = "w-full bg-white/[0.06] border border-white/[0.12] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
 const LABEL = "text-[11px] font-semibold text-slate-400 uppercase tracking-wider";
 
 const CURRENCIES = ["USD", "BTC", "ETH", "USDT"] as const;
@@ -30,7 +30,7 @@ const STATUS_CLR: Record<string, string> = {
 const TX_CLR: Record<string, string> = {
   DEPOSIT:    "bg-emerald-500/10 text-emerald-400",
   WITHDRAWAL: "bg-red-500/10 text-red-400",
-  ADJUSTMENT: "bg-[#d4a857]/12 text-[#d4a857]",
+  ADJUSTMENT: "bg-[#2B6BFF]/12 text-[#2B6BFF]",
   PROFIT:     "bg-purple-500/10 text-purple-400",
 };
 
@@ -160,7 +160,7 @@ export default function AdminUserDetailPage() {
   // ── Loading / Not found ───────────────────────────────────
   if (loading) return (
     <div className="flex items-center justify-center h-64">
-      <Loader2 size={24} className="animate-spin text-[#d4a857]" />
+      <Loader2 size={24} className="animate-spin text-[#2B6BFF]" />
     </div>
   );
   if (!user) return (
@@ -234,7 +234,7 @@ export default function AdminUserDetailPage() {
           {
             label: "Transactions",
             value: user.transactions?.length ?? 0,
-            color: "text-[#d4a857]",
+            color: "text-[#2B6BFF]",
           },
           {
             label: "KYC Status",
@@ -260,7 +260,7 @@ export default function AdminUserDetailPage() {
         {/* Account Status */}
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-5">
-            <ShieldCheck size={15} className="text-[#d4a857]" />
+            <ShieldCheck size={15} className="text-[#2B6BFF]" />
             <h2 className="text-sm font-bold text-white">Account Status</h2>
           </div>
           <div className="space-y-4">
@@ -287,7 +287,7 @@ export default function AdminUserDetailPage() {
             <Button
               onClick={handleStatus}
               disabled={statusBusy || newStatus === user.status}
-              className="w-full bg-[#d4a857] hover:bg-[#d4a857] text-white font-bold h-9 text-sm"
+              className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-bold h-9 text-sm"
             >
               {statusBusy
                 ? <Loader2 size={13} className="animate-spin mr-1.5" />
@@ -300,7 +300,7 @@ export default function AdminUserDetailPage() {
         {/* Send Notification */}
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-5">
-            <Bell size={15} className="text-[#d4a857]" />
+            <Bell size={15} className="text-[#2B6BFF]" />
             <h2 className="text-sm font-bold text-white">Send Notification</h2>
           </div>
           <div className="space-y-3">
@@ -332,7 +332,7 @@ export default function AdminUserDetailPage() {
             <Button
               onClick={handleNotif}
               disabled={nBusy}
-              className="w-full bg-[#d4a857] hover:bg-[#d4a857] text-white font-bold h-9 text-sm"
+              className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-bold h-9 text-sm"
             >
               {nBusy
                 ? <Loader2 size={13} className="animate-spin mr-1.5" />
@@ -346,7 +346,7 @@ export default function AdminUserDetailPage() {
       {/* ─── WALLET MANAGER ──────────────────────────────── */}
       <div className={CARD}>
         <div className="flex items-center gap-2 mb-5">
-          <Wallet size={15} className="text-[#d4a857]" />
+          <Wallet size={15} className="text-[#2B6BFF]" />
           <h2 className="text-sm font-bold text-white">Wallet Manager</h2>
         </div>
 
@@ -356,11 +356,11 @@ export default function AdminUserDetailPage() {
             <button
               key={c}
               onClick={() => setSelCurrency(c)}
-              className={`rounded-xl p-3.5 border text-left transition-all ${selCurrency === c ? "border-[#d4a857]/60 bg-[#d4a857]/12 shadow-[0_0_0_1px_rgba(14,165,233,0.2)]" : "border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06]"}`}
+              className={`rounded-xl p-3.5 border text-left transition-all ${selCurrency === c ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/12 shadow-[0_0_0_1px_rgba(14,165,233,0.2)]" : "border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06]"}`}
             >
               <div className="flex items-center justify-between mb-1.5">
-                <span className={`text-[10px] font-extrabold uppercase tracking-widest ${selCurrency === c ? "text-[#d4a857]" : "text-slate-500"}`}>{c}</span>
-                {selCurrency === c && <div className="w-1.5 h-1.5 rounded-full bg-[#d4a857]" />}
+                <span className={`text-[10px] font-extrabold uppercase tracking-widest ${selCurrency === c ? "text-[#2B6BFF]" : "text-slate-500"}`}>{c}</span>
+                {selCurrency === c && <div className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF]" />}
               </div>
               <div className="text-sm font-extrabold text-white leading-tight">{fmtBalance(c, wallets[c] ?? 0)}</div>
             </button>
@@ -370,7 +370,7 @@ export default function AdminUserDetailPage() {
         {/* Adjustment form */}
         <div className="border-t border-white/[0.06] pt-5">
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Adjust <span className="text-[#d4a857]">{selCurrency}</span> Balance
+            Adjust <span className="text-[#2B6BFF]">{selCurrency}</span> Balance
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
             <div>
@@ -426,7 +426,7 @@ export default function AdminUserDetailPage() {
               size="sm"
               disabled={wOp !== null}
               onClick={() => applyWallet("SET")}
-              className="h-9 px-5 text-sm font-bold bg-[#d4a857]/12 hover:bg-[#d4a857]/20 text-[#d4a857] border border-[#d4a857]/25"
+              className="h-9 px-5 text-sm font-bold bg-[#2B6BFF]/12 hover:bg-[#2B6BFF]/20 text-[#2B6BFF] border border-[#2B6BFF]/25"
             >
               {wOp === "SET"
                 ? <Loader2 size={13} className="animate-spin mr-1.5" />
@@ -443,14 +443,14 @@ export default function AdminUserDetailPage() {
         {/* Active Investment Plan */}
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
-            <TrendingUp size={15} className="text-[#d4a857]" />
+            <TrendingUp size={15} className="text-[#2B6BFF]" />
             <h2 className="text-sm font-bold text-white">Active Investment Plan</h2>
           </div>
           {investment ? (
             <div className="space-y-0 divide-y divide-white/[0.05]">
               {[
                 { label: "Plan",         value: investment.planName,                         cls: "text-white font-semibold" },
-                { label: "Invested",     value: `$${Number(investment.amount).toLocaleString("en-US", { minimumFractionDigits: 2 })}`, cls: "text-[#d4a857] font-bold" },
+                { label: "Invested",     value: `$${Number(investment.amount).toLocaleString("en-US", { minimumFractionDigits: 2 })}`, cls: "text-[#2B6BFF] font-bold" },
                 { label: "Total Earned", value: `$${Number(investment.totalEarned).toLocaleString("en-US", { minimumFractionDigits: 2 })}`, cls: "text-emerald-400 font-bold" },
                 { label: "Profit Range", value: `${Number(investment.minProfit)}% – ${Number(investment.maxProfit)}%`, cls: "text-slate-300" },
                 { label: "Interval",     value: `${investment.profitInterval}s – ${investment.maxInterval}s`, cls: "text-slate-400" },
@@ -478,10 +478,10 @@ export default function AdminUserDetailPage() {
         {/* Active Copy Traders */}
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
-            <Users size={15} className="text-[#d4a857]" />
+            <Users size={15} className="text-[#2B6BFF]" />
             <h2 className="text-sm font-bold text-white">Selected Copy Traders</h2>
             {activeCopies.length > 0 && (
-              <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#d4a857]/12 border border-[#d4a857]/20 text-[#d4a857]">
+              <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 text-[#2B6BFF]">
                 {activeCopies.length} active
               </span>
             )}
@@ -527,7 +527,7 @@ export default function AdminUserDetailPage() {
         {/* Recent Transactions */}
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
-            <Receipt size={15} className="text-[#d4a857]" />
+            <Receipt size={15} className="text-[#2B6BFF]" />
             <h2 className="text-sm font-bold text-white">Recent Transactions</h2>
           </div>
           {transactions.length > 0 ? (
@@ -561,14 +561,14 @@ export default function AdminUserDetailPage() {
         {/* Admin Action Log */}
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
-            <ClipboardList size={15} className="text-[#d4a857]" />
+            <ClipboardList size={15} className="text-[#2B6BFF]" />
             <h2 className="text-sm font-bold text-white">Admin Action Log</h2>
           </div>
           {adminLog.length > 0 ? (
             <div className="divide-y divide-white/[0.04]">
               {adminLog.map((a: any) => (
                 <div key={a.id} className="flex items-start gap-3 py-2.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4a857]/50 flex-shrink-0 mt-1.5" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF]/50 flex-shrink-0 mt-1.5" />
                   <div className="flex-1 min-w-0">
                     <div className="text-xs font-semibold text-white">{a.action.replace(/_/g, " ")}</div>
                     {a.description && (

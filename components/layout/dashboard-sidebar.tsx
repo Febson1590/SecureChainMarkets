@@ -75,18 +75,18 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
               className={cn(
                 "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group",
                 active
-                  ? "bg-[#d4a857]/10 text-white"
+                  ? "bg-[#2B6BFF]/10 text-white"
                   : "text-slate-400 hover:text-white hover:bg-white/[0.04]",
                 isCollapsed && "justify-center px-2"
               )}
             >
               {active && !isCollapsed && (
-                <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#d4a857]" />
+                <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#2B6BFF]" />
               )}
               <item.icon
                 className={cn(
                   "h-[17px] w-[17px] flex-shrink-0 transition-colors",
-                  active ? "text-[#d4a857]" : "text-slate-500 group-hover:text-white"
+                  active ? "text-[#2B6BFF]" : "text-slate-500 group-hover:text-white"
                 )}
               />
               {!isCollapsed && <span className="tracking-tight">{item.label}</span>}
@@ -115,7 +115,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
                   ? "absolute -top-1 -right-1 w-4 h-4 text-[10px]"
                   : "ml-auto w-5 h-5"
               )}
-              style={{ background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" }}
+              style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}
             >
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>

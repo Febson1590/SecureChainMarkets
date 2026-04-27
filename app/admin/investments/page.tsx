@@ -44,10 +44,10 @@ function fmt(n: number) {
 const STATUS_COLORS: Record<string, string> = {
   ACTIVE:    "bg-emerald-500/10 border-emerald-500/25 text-emerald-400",
   PAUSED:    "bg-yellow-500/10 border-yellow-500/25 text-yellow-400",
-  COMPLETED: "bg-[#d4a857]/12 border-[#d4a857]/25 text-[#d4a857]",
+  COMPLETED: "bg-[#2B6BFF]/12 border-[#2B6BFF]/25 text-[#2B6BFF]",
   CANCELLED: "bg-red-500/10 border-red-500/25 text-red-400",
 };
-const inputCls = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#d4a857]/60";
+const inputCls = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
 const labelCls = "text-xs font-medium text-slate-400 uppercase tracking-wider";
 
 /**
@@ -222,7 +222,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
       onClick={onClose}
     >
       <div
-        className="glass-card border border-[#d4a857]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
+        className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
         onClick={e => e.stopPropagation()}
       >
         <h3 className="text-base font-bold text-white mb-5">
@@ -293,7 +293,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
             />
           </div>
           <p className="text-[11px] text-slate-500 -mt-2 inline-flex items-center gap-1.5">
-            <Info size={11} className="text-[#d4a857]/70" />
+            <Info size={11} className="text-[#2B6BFF]/70" />
             Each tick fires after a random wait between min and max duration. Stored internally as seconds.
           </p>
 
@@ -351,10 +351,10 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
               type="checkbox"
               checked={form.isPopular}
               onChange={(e) => set("isPopular", e.target.checked)}
-              className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#d4a857] focus:ring-[#d4a857] focus:ring-offset-0"
+              className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#2B6BFF] focus:ring-[#2B6BFF] focus:ring-offset-0"
             />
             <span className="text-xs text-slate-300">
-              Mark as <strong className="text-[#d4a857]">Most Popular</strong>{" "}
+              Mark as <strong className="text-[#2B6BFF]">Most Popular</strong>{" "}
               <span className="text-slate-500">(only one plan can hold this badge)</span>
             </span>
           </label>
@@ -362,7 +362,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
 
         <div className="flex gap-2 mt-6">
           <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose}>Cancel</Button>
-          <Button className="flex-1 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold" onClick={submit} disabled={loading}>
+          <Button className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold" onClick={submit} disabled={loading}>
             {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : null}
             {plan ? "Save" : "Create"}
           </Button>
@@ -533,7 +533,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
       onClick={onClose}
     >
       <div
-        className="glass-card border border-[#d4a857]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
+        className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
         onClick={e => e.stopPropagation()}
       >
         <h3 className="text-base font-bold text-white mb-1">
@@ -646,7 +646,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
             />
           </div>
           <p className="text-[11px] text-slate-500 -mt-2 inline-flex items-center gap-1.5">
-            <Info size={11} className="text-[#d4a857]/70" />
+            <Info size={11} className="text-[#2B6BFF]/70" />
             Stored internally as seconds. Engine calculations are unchanged.
           </p>
 
@@ -684,7 +684,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
 
         <div className="flex gap-2 mt-6">
           <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose} disabled={loading}>Cancel</Button>
-          <Button className="flex-1 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold" onClick={submit} disabled={loading}>
+          <Button className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold" onClick={submit} disabled={loading}>
             {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : null}{isEdit ? "Save" : "Assign"}
           </Button>
         </div>
@@ -708,12 +708,12 @@ function AddFundsModal({ investment, onClose, onSuccess }: { investment: UserInv
   }
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-start sm:items-center overflow-y-auto p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
-      <div className="glass-card border border-[#d4a857]/20 rounded-2xl p-6 w-full max-w-sm shadow-2xl" onClick={e => e.stopPropagation()}>
+      <div className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-6 w-full max-w-sm shadow-2xl" onClick={e => e.stopPropagation()}>
         <h3 className="text-base font-bold text-white mb-1">Add Funds</h3>
         <p className="text-xs text-slate-500 mb-4">No wallet deduction — directly adds to investment balance.</p>
         <div className="mb-4 px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/10">
           <div className="text-sm text-white font-medium">{investment.user.name || "—"}</div>
-          <div className="text-xs text-slate-500">{investment.user.email} · <span className="text-[#d4a857]">{investment.planName}</span></div>
+          <div className="text-xs text-slate-500">{investment.user.email} · <span className="text-[#2B6BFF]">{investment.planName}</span></div>
           <div className="text-xs text-slate-400 mt-0.5">Current: <span className="text-white font-semibold">{fmt(investment.amount)}</span></div>
         </div>
         <div className="mb-5"><label className={labelCls}>Amount (USD)</label>
@@ -858,18 +858,18 @@ export default function AdminInvestmentsPage() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <TrendingUp size={20} className="text-[#d4a857]" /> Investments
+            <TrendingUp size={20} className="text-[#2B6BFF]" /> Investments
           </h1>
           <p className="text-sm text-slate-500 mt-0.5">Manage investment plans and user portfolios</p>
         </div>
         <div className="flex gap-2">
           {tab === "plans" && (
-            <Button onClick={() => setShowCreatePlan(true)} className="bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold text-sm h-9 px-4">
+            <Button onClick={() => setShowCreatePlan(true)} className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-sm h-9 px-4">
               <Plus size={14} className="mr-1.5" /> New Plan
             </Button>
           )}
           {tab === "users" && (
-            <Button onClick={() => setShowAssign(true)} className="bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold text-sm h-9 px-4">
+            <Button onClick={() => setShowAssign(true)} className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-sm h-9 px-4">
               <Plus size={14} className="mr-1.5" /> Assign Investment
             </Button>
           )}
@@ -880,7 +880,7 @@ export default function AdminInvestmentsPage() {
         {[
           { label: "Plans",         value: plans.length,                                                  color: "text-white" },
           { label: "Active Plans",  value: plans.filter(p => p.isActive).length,                          color: "text-emerald-400" },
-          { label: "Active Invs",   value: activeInv,                                                     color: "text-[#d4a857]" },
+          { label: "Active Invs",   value: activeInv,                                                     color: "text-[#2B6BFF]" },
           { label: "Total Earned",  value: fmt(investments.reduce((s, i) => s + i.totalEarned, 0)),       color: "text-emerald-400" },
         ].map(s => (
           <div key={s.label} className="glass-card rounded-xl p-4">
@@ -893,7 +893,7 @@ export default function AdminInvestmentsPage() {
       <div className="flex gap-1 border-b border-white/5">
         {(["plans", "users"] as const).map(t => (
           <button key={t} onClick={() => setTab(t)}
-            className={`px-4 py-2.5 text-sm font-medium transition-colors capitalize ${tab === t ? "text-[#d4a857] border-b-2 border-[#d4a857]" : "text-slate-500 hover:text-white"}`}>
+            className={`px-4 py-2.5 text-sm font-medium transition-colors capitalize ${tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-white"}`}>
             {t === "plans" ? `Plans (${plans.length})` : `Users (${investments.length})`}
           </button>
         ))}
@@ -928,7 +928,7 @@ export default function AdminInvestmentsPage() {
                         <div className="flex items-center gap-1.5">
                           <div className="text-sm font-bold text-white">{plan.name}</div>
                           {plan.isPopular && (
-                            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#d4a857]/15 text-[#e8c178] border border-[#d4a857]/30">
+                            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#2B6BFF]/15 text-[#5C8BFF] border border-[#2B6BFF]/30">
                               POPULAR
                             </span>
                           )}
@@ -952,7 +952,7 @@ export default function AdminInvestmentsPage() {
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1.5">
                           <Button size="sm" onClick={() => setEditPlan(plan)}
-                            className="h-7 px-2 text-xs bg-[#d4a857]/12 hover:bg-[#d4a857]/20 text-[#d4a857] border border-[#d4a857]/20">
+                            className="h-7 px-2 text-xs bg-[#2B6BFF]/12 hover:bg-[#2B6BFF]/20 text-[#2B6BFF] border border-[#2B6BFF]/20">
                             <Pencil size={11} className="mr-1" />Edit
                           </Button>
                           <Button size="sm" disabled={processing === plan.id} onClick={() => togglePlan(plan)}
@@ -1026,7 +1026,7 @@ export default function AdminInvestmentsPage() {
                           )}
                           {(inv.status === "ACTIVE" || inv.status === "PAUSED") && (
                             <Button size="sm" onClick={() => setEditInv(inv)}
-                              className="h-7 px-2 text-xs bg-[#d4a857]/12 hover:bg-[#d4a857]/20 text-[#d4a857] border border-[#d4a857]/20">
+                              className="h-7 px-2 text-xs bg-[#2B6BFF]/12 hover:bg-[#2B6BFF]/20 text-[#2B6BFF] border border-[#2B6BFF]/20">
                               <Pencil size={11} className="mr-1" />Edit
                             </Button>
                           )}
@@ -1046,7 +1046,7 @@ export default function AdminInvestmentsPage() {
                             <>
                               <Button size="sm" disabled={processing === inv.userId} onClick={() => handleEndTrade(inv)}
                                 title="Close the trade and release principal + profit to the user's available balance"
-                                className="h-7 px-2 text-xs bg-[#d4a857]/12 hover:bg-[#d4a857]/20 text-[#e8c178] border border-[#d4a857]/25">
+                                className="h-7 px-2 text-xs bg-[#2B6BFF]/12 hover:bg-[#2B6BFF]/20 text-[#5C8BFF] border border-[#2B6BFF]/25">
                                 <XCircle size={11} className="mr-1" />End Trade
                               </Button>
                               <Button size="sm" disabled={processing === inv.userId} onClick={() => handleCancelInv(inv.userId)}

@@ -127,7 +127,7 @@ function buildVerificationEmail(opts: {
                       margin:0 0 14px 0;
                       font-size:11px;
                       font-weight:700;
-                      color:#D4A857;
+                      color:#2B6BFF;
                       text-align:center;
                       letter-spacing:0.22em;
                       text-transform:uppercase;
@@ -186,8 +186,8 @@ function buildVerificationEmail(opts: {
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                       <tr>
                         <td style="
-                          background-color:rgba(212,168,87,0.07);
-                          border:1px solid rgba(212,168,87,0.22);
+                          background-color:rgba(43,107,255,0.07);
+                          border:1px solid rgba(43,107,255,0.22);
                           border-radius:10px;
                           padding:14px 18px;
                         ">
@@ -198,7 +198,7 @@ function buildVerificationEmail(opts: {
                             color:#CBD5E1;
                             text-align:center;
                           ">
-                            <span style="color:#D4A857;font-weight:700;">Security notice</span>
+                            <span style="color:#2B6BFF;font-weight:700;">Security notice</span>
                             &nbsp;·&nbsp; If you didn’t request this, you can safely ignore this email — your account remains secure.
                           </p>
                         </td>

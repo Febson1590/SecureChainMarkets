@@ -110,7 +110,7 @@ export default function PricingPage() {
 
         {/* ── Header ───────────────────────────────────────────────── */}
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Fees &amp; Pricing
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Transparent pricing.</h1>
@@ -125,8 +125,8 @@ export default function PricingPage() {
           {headlineFees.map((f) => (
             <div key={f.label} className="glass-card rounded-xl p-5">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-7 h-7 rounded-md bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center">
-                  <f.icon className="h-3.5 w-3.5 text-[#d4a857]" />
+                <div className="w-7 h-7 rounded-md bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center">
+                  <f.icon className="h-3.5 w-3.5 text-[#2B6BFF]" />
                 </div>
                 <div className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">
                   {f.label}
@@ -151,10 +151,10 @@ export default function PricingPage() {
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`glass-card rounded-xl p-6 relative ${tier.highlight ? "border border-[#d4a857]/30 ring-1 ring-[#d4a857]/20" : ""}`}
+                className={`glass-card rounded-xl p-6 relative ${tier.highlight ? "border border-[#2B6BFF]/30 ring-1 ring-[#2B6BFF]/20" : ""}`}
               >
                 {tier.highlight && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#d4a857] text-white border-0 text-xs px-3">
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#2B6BFF] text-white border-0 text-xs px-3">
                     Most common
                   </Badge>
                 )}
@@ -162,11 +162,11 @@ export default function PricingPage() {
                 <p className="text-xs text-slate-500 mb-4">{tier.volume}</p>
                 <div className="flex gap-4 mb-5">
                   <div>
-                    <div className="text-xl font-bold text-[#d4a857]">{tier.makerFee}</div>
+                    <div className="text-xl font-bold text-[#2B6BFF]">{tier.makerFee}</div>
                     <div className="text-[11px] text-slate-500 uppercase tracking-wide">Maker</div>
                   </div>
                   <div>
-                    <div className="text-xl font-bold text-[#d4a857]">{tier.takerFee}</div>
+                    <div className="text-xl font-bold text-[#2B6BFF]">{tier.takerFee}</div>
                     <div className="text-[11px] text-slate-500 uppercase tracking-wide">Taker</div>
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function PricingPage() {
         {/* ── Detailed notes ────────────────────────────────────────── */}
         <div className="glass-card rounded-2xl p-6 mb-6">
           <div className="flex items-center gap-2 mb-4">
-            <Info size={14} className="text-[#d4a857]" />
+            <Info size={14} className="text-[#2B6BFF]" />
             <h2 className="text-base font-bold text-white">The details</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

@@ -54,7 +54,7 @@ export default function ContactPage() {
 
         {/* ── Header ───────────────────────────────────────────────── */}
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Contact
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Support &amp; escalation channels</h1>
@@ -75,12 +75,12 @@ export default function ContactPage() {
                 className="block glass-card glass-card-hover rounded-xl p-5 group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center flex-shrink-0">
-                    <item.icon className="h-4 w-4 text-[#d4a857]" />
+                  <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
+                    <item.icon className="h-4 w-4 text-[#2B6BFF]" />
                   </div>
                   <div className="min-w-0">
                     <div className="text-[11px] text-slate-500 uppercase tracking-wider mb-0.5">{item.title}</div>
-                    <div className="text-sm font-semibold text-white group-hover:text-[#d4a857] transition-colors break-all">
+                    <div className="text-sm font-semibold text-white group-hover:text-[#2B6BFF] transition-colors break-all">
                       {item.value}
                     </div>
                     <div className="text-xs text-slate-500 mt-1 leading-relaxed">{item.sub}</div>
@@ -108,8 +108,8 @@ export default function ContactPage() {
           <div className="lg:col-span-3 space-y-4">
 
             {/* Intake guidance */}
-            <div className="glass-card rounded-xl p-5 border border-[#d4a857]/15 bg-[#d4a857]/[0.03] flex items-start gap-3">
-              <AlertOctagon size={16} className="text-[#d4a857] flex-shrink-0 mt-0.5" />
+            <div className="glass-card rounded-xl p-5 border border-[#2B6BFF]/15 bg-[#2B6BFF]/[0.03] flex items-start gap-3">
+              <AlertOctagon size={16} className="text-[#2B6BFF] flex-shrink-0 mt-0.5" />
               <div>
                 <div className="text-[13px] font-semibold text-white mb-1">
                   Before you send

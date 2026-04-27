@@ -24,7 +24,7 @@ const faqs = [
     a: (
       <>
         Our current fees are listed on the{" "}
-        <Link href="/pricing" className="text-[#d4a857] hover:text-[#e8c178]">Fees &amp; Pricing</Link>{" "}
+        <Link href="/pricing" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Fees &amp; Pricing</Link>{" "}
         page. There are no deposit, withdrawal, or account maintenance fees.
       </>
     ),
@@ -34,7 +34,7 @@ const faqs = [
     a: (
       <>
         Contact our support team via the{" "}
-        <Link href="/contact" className="text-[#d4a857] hover:text-[#e8c178]">Contact page</Link>{" "}
+        <Link href="/contact" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Contact page</Link>{" "}
         and we will help you securely reset your password.
       </>
     ),
@@ -44,7 +44,7 @@ const faqs = [
     a: (
       <>
         Verified users can submit a support ticket from inside the dashboard. You can also email{" "}
-        <a href="mailto:support@SecureChainMarkets.com" className="text-[#d4a857] hover:text-[#e8c178]">
+        <a href="mailto:support@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
           support@SecureChainMarkets.com
         </a>{" "}
         and we reply within one business day during published hours.
@@ -66,7 +66,7 @@ export default function HelpPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Help Center
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">How can we help?</h1>
@@ -79,8 +79,8 @@ export default function HelpPage() {
           {faqs.map((faq, i) => (
             <div key={i} className="glass-card rounded-xl p-5">
               <div className="flex items-start gap-3 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center flex-shrink-0">
-                  <HelpCircle className="h-3.5 w-3.5 text-[#d4a857]" />
+                <div className="w-7 h-7 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
+                  <HelpCircle className="h-3.5 w-3.5 text-[#2B6BFF]" />
                 </div>
                 <h3 className="text-sm font-semibold text-white leading-snug">{faq.q}</h3>
               </div>
@@ -89,7 +89,7 @@ export default function HelpPage() {
           ))}
         </div>
 
-        <div className="glass-card rounded-2xl p-6 border border-[#d4a857]/20 bg-[#d4a857]/5 text-center">
+        <div className="glass-card rounded-2xl p-6 border border-[#2B6BFF]/20 bg-[#2B6BFF]/5 text-center">
           <h2 className="text-lg font-bold text-white mb-1">Still need help?</h2>
           <p className="text-sm text-slate-400 mb-5">
             Our support team replies within one business day during published hours
@@ -97,7 +97,7 @@ export default function HelpPage() {
           </p>
           <Button
             render={<Link href="/contact" />}
-            className="bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold px-6 h-11"
+            className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold px-6 h-11"
           >
             Contact Support <ArrowRight className="ml-1 h-4 w-4" />
           </Button>

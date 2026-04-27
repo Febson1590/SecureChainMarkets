@@ -14,7 +14,7 @@ export default async function MarketsPage() {
     <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6 lg:px-8 hero-bg">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-center">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">Markets</Badge>
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">Markets</Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Market Overview</h1>
           <p className="text-slate-400">Market snapshot — latest prices and 24-hour performance for the digital assets listed on SecureChainMarkets.</p>
         </div>
@@ -26,7 +26,7 @@ export default async function MarketsPage() {
             return (
               <div key={asset.id} className="glass-card rounded-xl p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-[#d4a857]">{asset.symbol}</span>
+                  <span className="text-xs font-bold text-[#2B6BFF]">{asset.symbol}</span>
                   <span className={`text-xs font-medium ${isUp ? "text-emerald-400" : "text-red-400"}`}>
                     {formatPercent(asset.change)}
                   </span>
@@ -60,12 +60,12 @@ export default async function MarketsPage() {
                 {assets.map((asset) => {
                   const isUp = asset.change >= 0;
                   return (
-                    <tr key={asset.id} className="border-b border-white/5 hover:bg-[#d4a857]/2 transition-colors">
+                    <tr key={asset.id} className="border-b border-white/5 hover:bg-[#2B6BFF]/2 transition-colors">
                       <td className="px-6 py-4 text-sm text-slate-500">{asset.rank}</td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-xs font-bold text-[#d4a857]">{asset.symbol.slice(0, 2)}</span>
+                          <div className="w-9 h-9 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
+                            <span className="text-xs font-bold text-[#2B6BFF]">{asset.symbol.slice(0, 2)}</span>
                           </div>
                           <div>
                             <div className="text-sm font-semibold text-white">{asset.name}</div>

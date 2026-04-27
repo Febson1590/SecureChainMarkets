@@ -33,21 +33,21 @@ export function PublicNavbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-[#08111F]/85 backdrop-blur-md border-b border-white/[0.06]"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_1px_0_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.10)]"
+          : "bg-white/85 backdrop-blur-sm border-b border-slate-200/60"
       )}
     >
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[76px]">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-[80px]">
           {/* ── Left: logo ───────────────────────────── */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+          <Link href="/" className="flex items-center flex-shrink-0">
             <Image
               src="/assets/logos/securechainmarkets-logo.png"
               alt="SecureChainMarkets"
               width={1774}
               height={887}
               priority
-              className="h-10 lg:h-12 w-auto"
+              className="h-14 lg:h-16 w-auto"
             />
           </Link>
 
@@ -60,10 +60,10 @@ export function PublicNavbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-4 h-10 inline-flex items-center text-[13.5px] font-medium rounded-md transition-colors",
+                    "px-4 h-10 inline-flex items-center text-[14px] font-medium rounded-md transition-colors",
                     active
-                      ? "text-white"
-                      : "text-slate-300 hover:text-white"
+                      ? "text-[#0A1A3A]"
+                      : "text-slate-600 hover:text-[#0A1A3A]"
                   )}
                 >
                   {link.label}
@@ -73,25 +73,28 @@ export function PublicNavbar() {
           </nav>
 
           {/* ── Right: auth CTAs ─────────────────────── */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2">
             <button
               type="button"
               aria-label="Change language"
               onClick={() => setLangOpen(true)}
-              className="h-10 w-10 inline-flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/[0.05] rounded-md transition-colors"
+              className="h-10 w-10 inline-flex items-center justify-center text-slate-500 hover:text-[#0A1A3A] hover:bg-slate-100 rounded-md transition-colors"
             >
               <Globe size={16} />
             </button>
             <Link
               href="/login"
-              className="h-10 px-5 inline-flex items-center text-[13.5px] font-semibold text-white/90 hover:text-white transition-colors"
+              className="h-10 px-5 inline-flex items-center text-[14px] font-semibold text-[#0A1A3A] hover:text-[#2B6BFF] transition-colors"
             >
               Login
             </Link>
             <Link
               href="/register"
-              className="h-10 px-5 inline-flex items-center text-[13.5px] font-semibold text-[#08111F] rounded-md transition-all hover:brightness-110"
-              style={{ background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" }}
+              className="h-11 px-6 inline-flex items-center gap-1.5 text-[14px] font-semibold text-white rounded-lg transition-all hover:brightness-110 hover:-translate-y-[1px]"
+              style={{
+                background: "linear-gradient(180deg, #3D7BFF 0%, #2B6BFF 50%, #1A4FCC 100%)",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32), 0 1px 0 rgba(15,23,42,0.06)",
+              }}
             >
               Open Account
             </Link>
@@ -99,7 +102,7 @@ export function PublicNavbar() {
 
           {/* ── Mobile hamburger ─────────────────────── */}
           <button
-            className="lg:hidden h-10 w-10 inline-flex items-center justify-center text-white rounded-md transition-colors hover:bg-white/5"
+            className="lg:hidden h-10 w-10 inline-flex items-center justify-center text-[#0A1A3A] rounded-md transition-colors hover:bg-slate-100"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
@@ -109,28 +112,27 @@ export function PublicNavbar() {
         </div>
       </div>
 
-      {/* Global language dialog — shared by desktop globe + mobile drawer */}
       <LanguageMenuDialog open={langOpen} onOpenChange={setLangOpen} />
 
       {/* ── Mobile drawer ───────────────────────────── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#08111F] border-t border-white/[0.08]">
+        <div className="lg:hidden bg-white border-t border-slate-200">
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center px-4 h-12 rounded-md text-[15px] font-medium text-slate-300 hover:text-white hover:bg-white/5"
+                className="flex items-center px-4 h-12 rounded-md text-[15px] font-medium text-slate-700 hover:text-[#0A1A3A] hover:bg-slate-100"
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-3 mt-3 border-t border-white/[0.08] flex flex-col gap-2">
+            <div className="pt-3 mt-3 border-t border-slate-200 flex flex-col gap-2">
               <button
                 type="button"
                 onClick={() => { setMobileOpen(false); setLangOpen(true); }}
-                className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-md text-[15px] font-medium text-slate-300 hover:text-white border border-white/15 hover:border-white/25 transition-colors"
+                className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-md text-[15px] font-medium text-slate-700 hover:text-[#0A1A3A] border border-slate-300 hover:border-slate-400 transition-colors"
               >
                 <Globe size={16} />
                 Language
@@ -138,15 +140,18 @@ export function PublicNavbar() {
               <Link
                 href="/login"
                 onClick={() => setMobileOpen(false)}
-                className="w-full h-12 inline-flex items-center justify-center rounded-md text-[15px] font-semibold text-white border border-white/15"
+                className="w-full h-12 inline-flex items-center justify-center rounded-md text-[15px] font-semibold text-[#0A1A3A] border border-slate-300 hover:bg-slate-50"
               >
                 Login
               </Link>
               <Link
                 href="/register"
                 onClick={() => setMobileOpen(false)}
-                className="w-full h-12 inline-flex items-center justify-center rounded-md text-[15px] font-semibold text-[#08111F]"
-                style={{ background: "linear-gradient(180deg, #d4a857 0%, #b8902f 100%)" }}
+                className="w-full h-12 inline-flex items-center justify-center rounded-md text-[15px] font-semibold text-white"
+                style={{
+                  background: "linear-gradient(180deg, #3D7BFF 0%, #2B6BFF 50%, #1A4FCC 100%)",
+                  boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
+                }}
               >
                 Open Account
               </Link>

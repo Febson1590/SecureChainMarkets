@@ -9,15 +9,15 @@ export default function RiskPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Trade Informed
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Trading Considerations</h1>
           <p className="text-sm text-slate-500">A quick overview of how digital-asset markets behave so you can plan with confidence.</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-6 mb-6 border border-[#d4a857]/20 bg-[#d4a857]/[0.06] flex items-start gap-4">
-          <AlertTriangle className="h-5 w-5 text-[#d4a857] flex-shrink-0 mt-0.5" />
+        <div className="glass-card rounded-2xl p-6 mb-6 border border-[#2B6BFF]/20 bg-[#2B6BFF]/[0.06] flex items-start gap-4">
+          <AlertTriangle className="h-5 w-5 text-[#2B6BFF] flex-shrink-0 mt-0.5" />
           <p className="text-sm text-slate-300 leading-relaxed">
             Digital-asset markets are dynamic — prices move quickly and conditions change. Take a moment
             to understand the points below so you can size your positions in a way that fits your goals.

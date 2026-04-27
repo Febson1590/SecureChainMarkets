@@ -60,7 +60,7 @@ export default function AdminVerificationPage() {
 
       <div className="glass-card rounded-xl overflow-hidden">
         <div className="p-4 border-b border-white/5 flex items-center gap-3">
-          <ShieldCheck className="h-4 w-4 text-[#d4a857]" />
+          <ShieldCheck className="h-4 w-4 text-[#2B6BFF]" />
           <span className="text-sm font-semibold text-white">{pending.length} Pending Review</span>
           <span className="text-xs text-slate-500 ml-2">— {verifications.length} total submissions</span>
         </div>
@@ -75,7 +75,7 @@ export default function AdminVerificationPage() {
               <div key={v.id} className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center text-xs font-bold text-[#d4a857] flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center text-xs font-bold text-[#2B6BFF] flex-shrink-0">
                       {v.user?.name?.slice(0, 2).toUpperCase() || "U"}
                     </div>
                     <div>
@@ -92,7 +92,7 @@ export default function AdminVerificationPage() {
                   <div className="flex items-center gap-2">
                     {v.status === "PENDING" && (
                       <Button size="sm" variant="outline" onClick={() => setExpanded(expanded === v.id ? null : v.id)}
-                        className="border-[#d4a857]/20 text-[#d4a857] hover:bg-[#d4a857]/12 h-7 text-xs px-3">
+                        className="border-[#2B6BFF]/20 text-[#2B6BFF] hover:bg-[#2B6BFF]/12 h-7 text-xs px-3">
                         <FileText size={11} className="mr-1" /> Review
                       </Button>
                     )}
@@ -126,12 +126,12 @@ export default function AdminVerificationPage() {
                                   <img
                                     src={doc.url}
                                     alt={doc.label}
-                                    className="w-full h-32 object-cover rounded border border-white/10 hover:border-[#d4a857]/40 transition-colors"
+                                    className="w-full h-32 object-cover rounded border border-white/10 hover:border-[#2B6BFF]/40 transition-colors"
                                   />
                                 </a>
                               ) : (
                                 <a href={doc.url} target="_blank" rel="noopener noreferrer" className="block">
-                                  <div className="h-24 bg-white/5 rounded flex items-center justify-center text-xs text-[#d4a857] hover:bg-white/10 transition-colors">
+                                  <div className="h-24 bg-white/5 rounded flex items-center justify-center text-xs text-[#2B6BFF] hover:bg-white/10 transition-colors">
                                     View Document &rarr;
                                   </div>
                                 </a>

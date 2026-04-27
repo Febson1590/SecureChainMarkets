@@ -86,7 +86,7 @@ export default function SecurityPage() {
 
         {/* ── Header ────────────────────────────────────────────────── */}
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#d4a857]/12 text-[#d4a857] border-[#d4a857]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Security Center
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">How we protect accounts</h1>
@@ -139,7 +139,7 @@ export default function SecurityPage() {
               </p>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px]">
                 <span className="text-slate-500">Contact:</span>
-                <a href={`mailto:${CONTACT.securityEmail}`} className="text-[#d4a857] hover:text-[#e8c178] font-mono">
+                <a href={`mailto:${CONTACT.securityEmail}`} className="text-[#2B6BFF] hover:text-[#5C8BFF] font-mono">
                   {CONTACT.securityEmail}
                 </a>
                 <span className="text-slate-500">Response window: <span className="text-slate-300">{CONTACT.securityResponseWindow}</span></span>
@@ -164,14 +164,14 @@ function SecuritySection({
   return (
     <section className="mb-8">
       <div className="flex items-baseline gap-3 mb-4">
-        <span className="text-[10px] uppercase tracking-widest text-[#d4a857] font-semibold">{eyebrow}</span>
+        <span className="text-[10px] uppercase tracking-widest text-[#2B6BFF] font-semibold">{eyebrow}</span>
         <h2 className="text-xl font-bold text-white" dangerouslySetInnerHTML={{ __html: title }} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {items.map((it) => (
           <div key={it.title} className="glass-card glass-card-hover rounded-xl p-5">
-            <div className="w-10 h-10 rounded-lg bg-[#d4a857]/12 border border-[#d4a857]/20 flex items-center justify-center mb-3">
-              <it.icon className="h-4 w-4 text-[#d4a857]" />
+            <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center mb-3">
+              <it.icon className="h-4 w-4 text-[#2B6BFF]" />
             </div>
             <h3 className="text-[13.5px] font-semibold text-white mb-1.5">{it.title}</h3>
             <p className="text-[12px] text-slate-400 leading-relaxed">{it.desc}</p>

@@ -141,7 +141,7 @@ export default function CopyTradingClient({ traders, usdBalance, kycStatus }: Pr
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search traders"
-            className="w-full h-11 pl-9 pr-3 text-[13px] bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-[#d4a857]/40"
+            className="w-full h-11 pl-9 pr-3 text-[13px] bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/40"
           />
         </div>
 
@@ -165,7 +165,7 @@ export default function CopyTradingClient({ traders, usdBalance, kycStatus }: Pr
                   className="w-full text-left px-3.5 py-2.5 text-[12.5px] text-slate-300 hover:bg-white/[0.04] flex items-center justify-between first:rounded-t-xl last:rounded-b-xl"
                 >
                   {opt.label}
-                  {sort === opt.key && <Check size={12} className="text-[#d4a857]" />}
+                  {sort === opt.key && <Check size={12} className="text-[#2B6BFF]" />}
                 </button>
               ))}
             </div>
@@ -218,7 +218,7 @@ function TraderCard({ trader, disabled }: { trader: Trader; disabled: boolean })
   return (
     <Link
       href={href}
-      className="block rounded-2xl border border-white/[0.06] hover:border-[#d4a857]/25 transition-colors overflow-hidden"
+      className="block rounded-2xl border border-white/[0.06] hover:border-[#2B6BFF]/25 transition-colors overflow-hidden"
       style={{ background: "rgba(10,18,34,0.7)" }}
     >
       <div className="p-4 sm:p-5 flex items-center gap-4">
@@ -281,7 +281,7 @@ function TraderCard({ trader, disabled }: { trader: Trader; disabled: boolean })
         {/* CTA */}
         <Button
           disabled={disabled}
-          className="hidden sm:inline-flex h-9 px-4 bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold text-[12.5px] disabled:opacity-50 flex-shrink-0"
+          className="hidden sm:inline-flex h-9 px-4 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-[12.5px] disabled:opacity-50 flex-shrink-0"
           onClick={handleCtaClick}
         >
           {trader.alreadyCopying ? "View" : "Copy Trader"}
@@ -299,8 +299,8 @@ function EmptyState({ hasQuery }: { hasQuery: boolean }) {
   return (
     <div className="rounded-2xl border border-white/[0.06] p-10 text-center"
       style={{ background: "rgba(10,18,34,0.7)" }}>
-      <div className="w-12 h-12 rounded-2xl bg-[#d4a857]/[0.08] flex items-center justify-center mx-auto mb-4">
-        <Users size={20} className="text-[#d4a857]/60" />
+      <div className="w-12 h-12 rounded-2xl bg-[#2B6BFF]/[0.08] flex items-center justify-center mx-auto mb-4">
+        <Users size={20} className="text-[#2B6BFF]/60" />
       </div>
       <h2 className="text-[15px] font-bold text-white mb-1.5">
         {hasQuery ? "No traders match your search" : "No traders available yet"}

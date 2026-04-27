@@ -89,7 +89,7 @@ export function ContactForm() {
           <select
             value={form.category}
             onChange={set("category")}
-            className="w-full h-10 bg-white/5 border border-white/10 rounded-md px-3 text-sm text-white focus:outline-none focus:border-[#d4a857]/50 [&>option]:bg-[#0a1628]"
+            className="w-full h-10 bg-white/5 border border-white/10 rounded-md px-3 text-sm text-white focus:outline-none focus:border-[#2B6BFF]/50 [&>option]:bg-[#0a1628]"
           >
             {CATEGORIES.map((c) => (
               <option key={c.value} value={c.value}>{c.label}</option>
@@ -112,13 +112,13 @@ export function ContactForm() {
         </div>
 
         <Button type="submit"
-          className="w-full bg-[#d4a857] hover:bg-[#d4a857] text-white font-semibold h-11 inline-flex items-center justify-center gap-2">
+          className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-11 inline-flex items-center justify-center gap-2">
           <Send size={14} /> Send to Support
         </Button>
         <p className="text-[11px] text-slate-500 text-center leading-relaxed">
           This form opens your email client with the message pre-filled and addressed to the right
           team. You can also email us directly at{" "}
-          <a href={`mailto:${CONTACT.supportEmail}`} className="text-[#d4a857] hover:text-[#e8c178]">
+          <a href={`mailto:${CONTACT.supportEmail}`} className="text-[#2B6BFF] hover:text-[#5C8BFF]">
             {CONTACT.supportEmail}
           </a>.
         </p>
