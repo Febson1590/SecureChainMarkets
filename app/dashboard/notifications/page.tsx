@@ -38,12 +38,12 @@ export default async function NotificationsPage() {
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Notifications</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A]">Notifications</h1>
           <p className="text-sm text-slate-500 mt-0.5">{unread > 0 ? `${unread} unread` : "All caught up"}</p>
         </div>
         {unread > 0 && (
           <form action={markAllNotificationsRead}>
-            <Button type="submit" variant="outline" size="sm" className="border-white/10 text-slate-400 hover:bg-white/5 text-xs">
+            <Button type="submit" variant="outline" size="sm" className="border-white/10 text-[#64748B] hover:bg-white/5 text-xs">
               <CheckCheck size={13} className="mr-1" /> Mark all read
             </Button>
           </form>
@@ -67,10 +67,10 @@ export default async function NotificationsPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <div className="text-sm font-medium text-white truncate">{notif.title}</div>
+                    <div className="text-sm font-medium text-[#0F172A] truncate">{notif.title}</div>
                     {!notif.isRead && <span className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF] flex-shrink-0" />}
                   </div>
-                  <div className="text-xs text-slate-400 mt-0.5 leading-relaxed">{notif.message}</div>
+                  <div className="text-xs text-[#64748B] mt-0.5 leading-relaxed">{notif.message}</div>
                   <div className="text-xs text-slate-600 mt-1">{formatDateTime(notif.createdAt)}</div>
                 </div>
               </div>

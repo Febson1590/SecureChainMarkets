@@ -24,7 +24,7 @@ export function StatCard({ title, value, subtitle, change, icon: Icon, iconColor
           </div>
         )}
       </div>
-      <div className="text-2xl font-bold text-white mb-1">{value}</div>
+      <div className="text-2xl font-bold text-[#0F172A] mb-1">{value}</div>
       {(subtitle || change !== undefined) && (
         <div className="flex items-center gap-2">
           {change !== undefined && (

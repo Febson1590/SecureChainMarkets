@@ -14,8 +14,8 @@ import { adminUpdateWallet, updateUserStatus, adminSendNotification } from "@/li
 
 // ── Helpers ───────────────────────────────────────────────────
 const CARD = "glass-card rounded-2xl border border-white/[0.07] p-5";
-const INPUT = "w-full bg-white/[0.06] border border-white/[0.12] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
-const LABEL = "text-[11px] font-semibold text-slate-400 uppercase tracking-wider";
+const INPUT = "w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const LABEL = "text-[11px] font-semibold text-[#64748B] uppercase tracking-wider";
 
 const CURRENCIES = ["USD", "BTC", "ETH", "USDT"] as const;
 const STATUS_OPTS = ["ACTIVE", "FROZEN", "RESTRICTED", "SUSPENDED"] as const;
@@ -36,7 +36,7 @@ const TX_CLR: Record<string, string> = {
 
 function StatusChip({ s }: { s: string }) {
   return (
-    <span className={`inline-flex items-center text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${STATUS_CLR[s] ?? "bg-slate-500/10 border-slate-500/25 text-slate-400"}`}>
+    <span className={`inline-flex items-center text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${STATUS_CLR[s] ?? "bg-slate-500/10 border-slate-500/25 text-[#64748B]"}`}>
       {s}
     </span>
   );
@@ -165,14 +165,14 @@ export default function AdminUserDetailPage() {
   );
   if (!user) return (
     <div className="text-center py-16 space-y-3">
-      <div className="text-slate-400 text-sm">User not found.</div>
+      <div className="text-[#64748B] text-sm">User not found.</div>
       {loadError && (
         <div className="max-w-lg mx-auto text-xs text-red-400/80 bg-red-500/5 border border-red-500/15 rounded-lg px-4 py-3 text-left break-words">
           <span className="font-semibold text-red-400">Error: </span>{loadError}
         </div>
       )}
       <Link href="/admin/users">
-        <Button variant="outline" size="sm" className="border-white/10 text-slate-300 mt-2">
+        <Button variant="outline" size="sm" className="border-white/10 text-[#0F172A] mt-2">
           <ArrowLeft size={13} className="mr-1" /> Back to Users
         </Button>
       </Link>
@@ -199,19 +199,19 @@ export default function AdminUserDetailPage() {
       {/* ─── HEADER ─────────────────────────────────────── */}
       <div className="flex flex-wrap items-center gap-3">
         <Link href="/admin/users">
-          <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white -ml-2 h-8 px-2">
+          <Button variant="ghost" size="sm" className="text-[#64748B] hover:text-[#0F172A] -ml-2 h-8 px-2">
             <ArrowLeft size={14} className="mr-1" /> Users
           </Button>
         </Link>
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <div
-            className="w-11 h-11 rounded-xl flex-shrink-0 flex items-center justify-center text-sm font-extrabold text-white shadow-lg"
+            className="w-11 h-11 rounded-xl flex-shrink-0 flex items-center justify-center text-sm font-extrabold text-[#0F172A] shadow-lg"
             style={{ background: `hsl(${avatarHue(user.name ?? "", user.email)} 55% 22%)`, border: `1.5px solid hsl(${avatarHue(user.name ?? "", user.email)} 55% 32%)` }}
           >
             {initials(user.name ?? "", user.email)}
           </div>
           <div className="min-w-0">
-            <h1 className="text-lg font-extrabold text-white leading-tight truncate">
+            <h1 className="text-lg font-extrabold text-[#0F172A] leading-tight truncate">
               {user.name || "Unnamed User"}
             </h1>
             <p className="text-xs text-slate-500 truncate">{user.email}</p>
@@ -229,7 +229,7 @@ export default function AdminUserDetailPage() {
           {
             label: "USD Balance",
             value: `$${totalUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
-            color: "text-white",
+            color: "text-[#0F172A]",
           },
           {
             label: "Transactions",
@@ -247,7 +247,7 @@ export default function AdminUserDetailPage() {
             color: activeCopies.length > 0 ? "text-purple-400" : "text-slate-500",
           },
         ].map(s => (
-          <div key={s.label} className="glass-card rounded-xl p-3.5 border border-white/[0.06]">
+          <div key={s.label} className="glass-card rounded-xl p-3.5 border border-[#BFD5FF]">
             <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">{s.label}</div>
             <div className={`text-base font-extrabold truncate ${s.color}`}>{s.value}</div>
           </div>
@@ -261,7 +261,7 @@ export default function AdminUserDetailPage() {
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-5">
             <ShieldCheck size={15} className="text-[#2B6BFF]" />
-            <h2 className="text-sm font-bold text-white">Account Status</h2>
+            <h2 className="text-sm font-bold text-[#0F172A]">Account Status</h2>
           </div>
           <div className="space-y-4">
             <div>
@@ -278,10 +278,10 @@ export default function AdminUserDetailPage() {
                   className={INPUT + " appearance-none pr-8"}
                 >
                   {STATUS_OPTS.map(s => (
-                    <option key={s} value={s} className="bg-[#0E1A30]">{s}</option>
+                    <option key={s} value={s} className="bg-white">{s}</option>
                   ))}
                 </select>
-                <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
               </div>
             </div>
             <Button
@@ -301,7 +301,7 @@ export default function AdminUserDetailPage() {
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-5">
             <Bell size={15} className="text-[#2B6BFF]" />
-            <h2 className="text-sm font-bold text-white">Send Notification</h2>
+            <h2 className="text-sm font-bold text-[#0F172A]">Send Notification</h2>
           </div>
           <div className="space-y-3">
             <div>
@@ -323,10 +323,10 @@ export default function AdminUserDetailPage() {
               <div className="relative mt-1.5">
                 <select value={nType} onChange={e => setNType(e.target.value)} className={INPUT + " appearance-none pr-8"}>
                   {["INFO", "SUCCESS", "WARNING", "ERROR"].map(t => (
-                    <option key={t} value={t} className="bg-[#0E1A30]">{t}</option>
+                    <option key={t} value={t} className="bg-white">{t}</option>
                   ))}
                 </select>
-                <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
               </div>
             </div>
             <Button
@@ -347,7 +347,7 @@ export default function AdminUserDetailPage() {
       <div className={CARD}>
         <div className="flex items-center gap-2 mb-5">
           <Wallet size={15} className="text-[#2B6BFF]" />
-          <h2 className="text-sm font-bold text-white">Wallet Manager</h2>
+          <h2 className="text-sm font-bold text-[#0F172A]">Wallet Manager</h2>
         </div>
 
         {/* Balance overview — clickable to select */}
@@ -356,27 +356,27 @@ export default function AdminUserDetailPage() {
             <button
               key={c}
               onClick={() => setSelCurrency(c)}
-              className={`rounded-xl p-3.5 border text-left transition-all ${selCurrency === c ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/12 shadow-[0_0_0_1px_rgba(14,165,233,0.2)]" : "border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06]"}`}
+              className={`rounded-xl p-3.5 border text-left transition-all ${selCurrency === c ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/12 shadow-[0_0_0_1px_rgba(14,165,233,0.2)]" : "border-[#BFD5FF] bg-[#F6FAFF] hover:bg-[#F6FAFF]"}`}
             >
               <div className="flex items-center justify-between mb-1.5">
                 <span className={`text-[10px] font-extrabold uppercase tracking-widest ${selCurrency === c ? "text-[#2B6BFF]" : "text-slate-500"}`}>{c}</span>
                 {selCurrency === c && <div className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF]" />}
               </div>
-              <div className="text-sm font-extrabold text-white leading-tight">{fmtBalance(c, wallets[c] ?? 0)}</div>
+              <div className="text-sm font-extrabold text-[#0F172A] leading-tight">{fmtBalance(c, wallets[c] ?? 0)}</div>
             </button>
           ))}
         </div>
 
         {/* Adjustment form */}
-        <div className="border-t border-white/[0.06] pt-5">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+        <div className="border-t border-[#BFD5FF] pt-5">
+          <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-3">
             Adjust <span className="text-[#2B6BFF]">{selCurrency}</span> Balance
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
             <div>
               <label className={LABEL}>Amount <span className="text-red-400">*</span></label>
               <div className="relative mt-1.5">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] text-sm pointer-events-none">
                   {selCurrency === "USD" || selCurrency === "USDT" ? "$" : selCurrency === "BTC" ? "₿" : "Ξ"}
                 </span>
                 <input
@@ -444,16 +444,16 @@ export default function AdminUserDetailPage() {
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp size={15} className="text-[#2B6BFF]" />
-            <h2 className="text-sm font-bold text-white">Active Investment Plan</h2>
+            <h2 className="text-sm font-bold text-[#0F172A]">Active Investment Plan</h2>
           </div>
           {investment ? (
             <div className="space-y-0 divide-y divide-white/[0.05]">
               {[
-                { label: "Plan",         value: investment.planName,                         cls: "text-white font-semibold" },
+                { label: "Plan",         value: investment.planName,                         cls: "text-[#0F172A] font-semibold" },
                 { label: "Invested",     value: `$${Number(investment.amount).toLocaleString("en-US", { minimumFractionDigits: 2 })}`, cls: "text-[#2B6BFF] font-bold" },
                 { label: "Total Earned", value: `$${Number(investment.totalEarned).toLocaleString("en-US", { minimumFractionDigits: 2 })}`, cls: "text-emerald-400 font-bold" },
-                { label: "Profit Range", value: `${Number(investment.minProfit)}% – ${Number(investment.maxProfit)}%`, cls: "text-slate-300" },
-                { label: "Interval",     value: `${investment.profitInterval}s – ${investment.maxInterval}s`, cls: "text-slate-400" },
+                { label: "Profit Range", value: `${Number(investment.minProfit)}% – ${Number(investment.maxProfit)}%`, cls: "text-[#0F172A]" },
+                { label: "Interval",     value: `${investment.profitInterval}s – ${investment.maxInterval}s`, cls: "text-[#64748B]" },
               ].map(r => (
                 <div key={r.label} className="flex items-center justify-between py-2.5">
                   <span className="text-xs text-slate-500">{r.label}</span>
@@ -479,7 +479,7 @@ export default function AdminUserDetailPage() {
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
             <Users size={15} className="text-[#2B6BFF]" />
-            <h2 className="text-sm font-bold text-white">Selected Copy Traders</h2>
+            <h2 className="text-sm font-bold text-[#0F172A]">Selected Copy Traders</h2>
             {activeCopies.length > 0 && (
               <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 text-[#2B6BFF]">
                 {activeCopies.length} active
@@ -494,14 +494,14 @@ export default function AdminUserDetailPage() {
                 const roi = Number(t.amount) > 0 ? ((Number(t.totalEarned) / Number(t.amount)) * 100).toFixed(1) : "0.0";
                 return (
                   <div key={t.id} className="flex items-center gap-3 py-3">
-                    <div className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-xs font-bold text-white overflow-hidden border border-white/10">
+                    <div className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-xs font-bold text-[#0F172A] overflow-hidden border border-white/10">
                       {t.trader?.avatarUrl
                         ? <img src={t.trader.avatarUrl} alt={t.traderName} className="w-full h-full object-cover" />
                         : <span style={{ background: `hsl(${hue} 55% 22%)` }} className="w-full h-full flex items-center justify-center">{ini}</span>
                       }
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm font-semibold text-white truncate">{t.traderName}</div>
+                      <div className="text-sm font-semibold text-[#0F172A] truncate">{t.traderName}</div>
                       <div className="text-[10px] text-slate-500">${Number(t.amount).toLocaleString()} copied</div>
                     </div>
                     <div className="text-right flex-shrink-0">
@@ -528,21 +528,21 @@ export default function AdminUserDetailPage() {
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
             <Receipt size={15} className="text-[#2B6BFF]" />
-            <h2 className="text-sm font-bold text-white">Recent Transactions</h2>
+            <h2 className="text-sm font-bold text-[#0F172A]">Recent Transactions</h2>
           </div>
           {transactions.length > 0 ? (
             <div className="divide-y divide-white/[0.04]">
               {transactions.map((tx: any) => (
                 <div key={tx.id} className="flex items-center gap-3 py-2.5">
-                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-extrabold flex-shrink-0 ${TX_CLR[tx.type] ?? "bg-slate-500/10 text-slate-400"}`}>
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-extrabold flex-shrink-0 ${TX_CLR[tx.type] ?? "bg-slate-500/10 text-[#64748B]"}`}>
                     {tx.type.slice(0, 2)}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-semibold text-white">{tx.type.replace(/_/g, " ")}</div>
+                    <div className="text-xs font-semibold text-[#0F172A]">{tx.type.replace(/_/g, " ")}</div>
                     <div className="text-[10px] text-slate-500 truncate">{tx.description || "—"}</div>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <div className="text-xs font-bold text-white">
+                    <div className="text-xs font-bold text-[#0F172A]">
                       {Number(tx.amount).toFixed(tx.currency === "BTC" ? 8 : tx.currency === "ETH" ? 6 : 2)} {tx.currency}
                     </div>
                     <div className="text-[10px] text-slate-500">{new Date(tx.createdAt).toLocaleDateString()}</div>
@@ -562,7 +562,7 @@ export default function AdminUserDetailPage() {
         <div className={CARD}>
           <div className="flex items-center gap-2 mb-4">
             <ClipboardList size={15} className="text-[#2B6BFF]" />
-            <h2 className="text-sm font-bold text-white">Admin Action Log</h2>
+            <h2 className="text-sm font-bold text-[#0F172A]">Admin Action Log</h2>
           </div>
           {adminLog.length > 0 ? (
             <div className="divide-y divide-white/[0.04]">
@@ -570,7 +570,7 @@ export default function AdminUserDetailPage() {
                 <div key={a.id} className="flex items-start gap-3 py-2.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF]/50 flex-shrink-0 mt-1.5" />
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-semibold text-white">{a.action.replace(/_/g, " ")}</div>
+                    <div className="text-xs font-semibold text-[#0F172A]">{a.action.replace(/_/g, " ")}</div>
                     {a.description && (
                       <div className="text-[10px] text-slate-500 truncate mt-0.5">{a.description}</div>
                     )}
@@ -631,17 +631,17 @@ export default function AdminUserDetailPage() {
                 <AlertTriangle size={20} className="text-red-400" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Delete User Account</h3>
+                <h3 className="text-base font-bold text-[#0F172A]">Delete User Account</h3>
                 <p className="text-xs text-slate-500 mt-0.5">Permanent — cannot be undone</p>
               </div>
             </div>
 
-            <div className="mb-5 p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
-              <div className="text-sm font-semibold text-white">{user.name || "Unnamed User"}</div>
-              <div className="text-xs text-slate-400 mt-0.5">{user.email}</div>
+            <div className="mb-5 p-3.5 rounded-xl bg-[#F6FAFF] border border-[#BFD5FF]">
+              <div className="text-sm font-semibold text-[#0F172A]">{user.name || "Unnamed User"}</div>
+              <div className="text-xs text-[#64748B] mt-0.5">{user.email}</div>
             </div>
 
-            <p className="text-sm text-slate-300 leading-relaxed mb-6">
+            <p className="text-sm text-[#0F172A] leading-relaxed mb-6">
               Are you sure you want to permanently delete this user? All wallets, balances,
               transactions, investments, copy trading data, and KYC records will be removed.{" "}
               <span className="text-red-400 font-semibold">This cannot be undone.</span>
@@ -650,7 +650,7 @@ export default function AdminUserDetailPage() {
             <div className="flex gap-3">
               <Button
                 variant="outline"
-                className="flex-1 border-white/10 text-slate-300 hover:text-white h-10"
+                className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A] h-10"
                 onClick={() => setShowDeleteModal(false)}
                 disabled={deleteBusy}
               >

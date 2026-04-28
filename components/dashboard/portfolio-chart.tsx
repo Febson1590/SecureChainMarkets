@@ -19,8 +19,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return (
       <div className="rounded-lg px-3 py-2 text-sm border border-sky-500/20 shadow-xl"
         style={{ background: "rgba(4,10,22,0.96)" }}>
-        <p className="text-slate-400 text-[11px] mb-0.5">{label}</p>
-        <p className="text-white font-extrabold text-sm">
+        <p className="text-[#64748B] text-[11px] mb-0.5">{label}</p>
+        <p className="text-[#0F172A] font-extrabold text-sm">
           {formatCurrency(payload[0].value)}
         </p>
       </div>

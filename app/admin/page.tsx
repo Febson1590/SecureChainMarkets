@@ -32,7 +32,7 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
+        <h1 className="text-2xl font-bold text-[#0F172A]">Admin Dashboard</h1>
         <p className="text-sm text-slate-500 mt-0.5">Platform overview and key metrics</p>
       </div>
 
@@ -42,7 +42,7 @@ export default async function AdminDashboard() {
             <div className="flex items-center justify-between mb-2">
               <card.icon className={`h-4 w-4 ${card.color}`} />
             </div>
-            <div className="text-2xl font-bold text-white">{card.value}</div>
+            <div className="text-2xl font-bold text-[#0F172A]">{card.value}</div>
             <div className="text-xs text-slate-500 mt-0.5">{card.label}</div>
             <div className="text-xs text-slate-600">{card.sub}</div>
           </div>
@@ -53,7 +53,7 @@ export default async function AdminDashboard() {
         {/* Recent users */}
         <div className="glass-card rounded-xl overflow-hidden">
           <div className="p-4 border-b border-white/5">
-            <h2 className="text-sm font-semibold text-white">Recent Registrations</h2>
+            <h2 className="text-sm font-semibold text-[#0F172A]">Recent Registrations</h2>
           </div>
           <div className="divide-y divide-white/5">
             {recentUsers.map((user) => (
@@ -63,7 +63,7 @@ export default async function AdminDashboard() {
                     {user.name?.slice(0, 2).toUpperCase() || "U"}
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-white">{user.name}</div>
+                    <div className="text-sm font-medium text-[#0F172A]">{user.name}</div>
                     <div className="text-xs text-slate-500">{user.email}</div>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ export default async function AdminDashboard() {
         {/* Recent admin actions */}
         <div className="glass-card rounded-xl overflow-hidden">
           <div className="p-4 border-b border-white/5">
-            <h2 className="text-sm font-semibold text-white">Recent Admin Actions</h2>
+            <h2 className="text-sm font-semibold text-[#0F172A]">Recent Admin Actions</h2>
           </div>
           <div className="divide-y divide-white/5">
             {recentActions.length === 0 ? (
@@ -92,7 +92,7 @@ export default async function AdminDashboard() {
                   <span className="text-xs font-mono text-[#2B6BFF]">{action.action}</span>
                   <span className="text-[10px] text-slate-600">{formatDateTime(action.createdAt)}</span>
                 </div>
-                <div className="text-xs text-slate-400 mt-0.5">{action.description || "—"}</div>
+                <div className="text-xs text-[#64748B] mt-0.5">{action.description || "—"}</div>
                 <div className="text-[10px] text-slate-600">by {action.admin.name}</div>
               </div>
             ))}

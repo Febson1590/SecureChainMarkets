@@ -52,17 +52,17 @@ function DeleteModal({
             <AlertTriangle size={18} className="text-red-400" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white">Delete User Account</h3>
+            <h3 className="text-base font-bold text-[#0F172A]">Delete User Account</h3>
             <p className="text-xs text-slate-500 mt-0.5">This action is permanent and irreversible</p>
           </div>
         </div>
 
-        <div className="mb-5 p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
-          <div className="text-sm font-semibold text-white">{user.name || "Unnamed User"}</div>
-          <div className="text-xs text-slate-400 mt-0.5">{user.email}</div>
+        <div className="mb-5 p-3.5 rounded-xl bg-[#F6FAFF] border border-[#BFD5FF]">
+          <div className="text-sm font-semibold text-[#0F172A]">{user.name || "Unnamed User"}</div>
+          <div className="text-xs text-[#64748B] mt-0.5">{user.email}</div>
         </div>
 
-        <p className="text-sm text-slate-300 mb-6 leading-relaxed">
+        <p className="text-sm text-[#0F172A] mb-6 leading-relaxed">
           Are you sure you want to permanently delete this user? All wallets, balances,
           transactions, investments, copy trading data, and KYC records will be
           removed. <span className="text-red-400 font-semibold">This cannot be undone.</span>
@@ -71,7 +71,7 @@ function DeleteModal({
         <div className="flex gap-3">
           <Button
             variant="outline"
-            className="flex-1 border-white/10 text-slate-300 hover:text-white h-10"
+            className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A] h-10"
             onClick={onCancel}
             disabled={busy}
           >
@@ -142,16 +142,16 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
                 const kyc = user.verifications[0];
                 const usdWallet = user.wallets.find(w => w.currency === "USD");
                 return (
-                  <tr key={user.id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                  <tr key={user.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF] transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center text-xs font-bold text-[#2B6BFF] flex-shrink-0">
                           {user.name?.slice(0, 2).toUpperCase() || "U"}
                         </div>
-                        <span className="text-sm font-medium text-white">{user.name || "—"}</span>
+                        <span className="text-sm font-medium text-[#0F172A]">{user.name || "—"}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-xs text-slate-400">{user.email}</td>
+                    <td className="px-4 py-3 text-xs text-[#64748B]">{user.email}</td>
                     <td className="px-4 py-3">
                       <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${getStatusBg(user.status)}`}>
                         {user.status}
@@ -165,7 +165,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
                         {kyc?.status || "NONE"}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-xs text-white font-mono">
+                    <td className="px-4 py-3 text-xs text-[#0F172A] font-mono">
                       ${Number(usdWallet?.balance || 0).toFixed(2)}
                     </td>
                     <td className="px-4 py-3">
@@ -209,12 +209,12 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
             <div className="flex gap-2">
               {page > 1 && (
                 <Link href={`/admin/users?page=${page - 1}&search=${search}`}>
-                  <Button size="sm" variant="outline" className="border-white/10 text-slate-400 h-7 text-xs">Previous</Button>
+                  <Button size="sm" variant="outline" className="border-white/10 text-[#64748B] h-7 text-xs">Previous</Button>
                 </Link>
               )}
               {page < pages && (
                 <Link href={`/admin/users?page=${page + 1}&search=${search}`}>
-                  <Button size="sm" variant="outline" className="border-white/10 text-slate-400 h-7 text-xs">Next</Button>
+                  <Button size="sm" variant="outline" className="border-white/10 text-[#64748B] h-7 text-xs">Next</Button>
                 </Link>
               )}
             </div>

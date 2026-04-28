@@ -60,7 +60,7 @@ export default function SupportPage() {
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Support Center</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A]">Support Center</h1>
           <p className="text-sm text-slate-500 mt-0.5">Get help from our team anytime</p>
         </div>
         <Button
@@ -74,13 +74,13 @@ export default function SupportPage() {
 
       {view === "new" ? (
         <Card className="glass-card border-0 rounded-xl p-6">
-          <h2 className="text-base font-semibold text-white mb-5">Open a New Ticket</h2>
+          <h2 className="text-base font-semibold text-[#0F172A] mb-5">Open a New Ticket</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-1.5">
-              <Label className="text-xs text-slate-400 uppercase tracking-widest">Category</Label>
+              <Label className="text-xs text-[#64748B] uppercase tracking-widest">Category</Label>
               <Select defaultValue="General" onValueChange={(v) => v !== null && setValue("category", v)}>
-                <SelectTrigger className="bg-white/5 border-white/10 text-white h-10"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
+                <SelectTrigger className="bg-white/5 border-white/10 text-[#0F172A] h-10"><SelectValue /></SelectTrigger>
+                <SelectContent className="bg-white border-[#2B6BFF]/20 text-[#0F172A]">
                   {categories.map((c) => (
                     <SelectItem key={c} value={c} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">{c}</SelectItem>
                   ))}
@@ -89,16 +89,16 @@ export default function SupportPage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs text-slate-400 uppercase tracking-widest">Subject</Label>
-              <Input {...register("subject")} placeholder="Brief description of your issue" className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10" />
+              <Label className="text-xs text-[#64748B] uppercase tracking-widest">Subject</Label>
+              <Input {...register("subject")} placeholder="Brief description of your issue" className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10" />
               {errors.subject && <p className="text-xs text-red-400">{errors.subject.message}</p>}
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs text-slate-400 uppercase tracking-widest">Priority</Label>
+              <Label className="text-xs text-[#64748B] uppercase tracking-widest">Priority</Label>
               <Select defaultValue="MEDIUM" onValueChange={(v) => v !== null && setValue("priority", v)}>
-                <SelectTrigger className="bg-white/5 border-white/10 text-white h-10"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
+                <SelectTrigger className="bg-white/5 border-white/10 text-[#0F172A] h-10"><SelectValue /></SelectTrigger>
+                <SelectContent className="bg-white border-[#2B6BFF]/20 text-[#0F172A]">
                   {["LOW", "MEDIUM", "HIGH", "URGENT"].map((p) => (
                     <SelectItem key={p} value={p} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">{p}</SelectItem>
                   ))}
@@ -107,8 +107,8 @@ export default function SupportPage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs text-slate-400 uppercase tracking-widest">Message</Label>
-              <Textarea {...register("message")} rows={6} placeholder="Describe your issue in detail..." className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 resize-none" />
+              <Label className="text-xs text-[#64748B] uppercase tracking-widest">Message</Label>
+              <Textarea {...register("message")} rows={6} placeholder="Describe your issue in detail..." className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 resize-none" />
               {errors.message && <p className="text-xs text-red-400">{errors.message.message}</p>}
             </div>
 
@@ -126,15 +126,15 @@ export default function SupportPage() {
                 <HeadphonesIcon className="h-5 w-5 text-[#2B6BFF]" />
               </div>
               <div>
-                <div className="text-sm font-semibold text-white">24/7 Support Available</div>
+                <div className="text-sm font-semibold text-[#0F172A]">24/7 Support Available</div>
                 <div className="text-xs text-slate-500">Average response time: under 4 hours</div>
               </div>
             </div>
             <div className="flex gap-2">
-              <div className="flex items-center gap-2 text-xs text-slate-400 bg-white/5 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs text-[#64748B] bg-white/5 px-3 py-2 rounded-lg">
                 <CheckCircle2 size={12} className="text-emerald-400" /> Email Support
               </div>
-              <div className="flex items-center gap-2 text-xs text-slate-400 bg-white/5 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs text-[#64748B] bg-white/5 px-3 py-2 rounded-lg">
                 <CheckCircle2 size={12} className="text-emerald-400" /> Ticket System
               </div>
             </div>
@@ -143,13 +143,13 @@ export default function SupportPage() {
           {/* FAQ */}
           <div className="glass-card rounded-xl overflow-hidden">
             <div className="p-5 border-b border-white/5">
-              <h2 className="text-sm font-semibold text-white">Frequently Asked Questions</h2>
+              <h2 className="text-sm font-semibold text-[#0F172A]">Frequently Asked Questions</h2>
             </div>
             <div className="divide-y divide-white/5">
               {faqs.map((faq) => (
                 <div key={faq.q} className="p-5">
-                  <div className="text-sm font-medium text-white mb-1.5">{faq.q}</div>
-                  <div className="text-sm text-slate-400">{faq.a}</div>
+                  <div className="text-sm font-medium text-[#0F172A] mb-1.5">{faq.q}</div>
+                  <div className="text-sm text-[#64748B]">{faq.a}</div>
                 </div>
               ))}
             </div>

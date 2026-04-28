@@ -54,14 +54,14 @@ export default function AdminVerificationPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-white">KYC Verification</h1>
+        <h1 className="text-2xl font-bold text-[#0F172A]">KYC Verification</h1>
         <p className="text-sm text-slate-500 mt-0.5">Review and approve identity verification submissions</p>
       </div>
 
       <div className="glass-card rounded-xl overflow-hidden">
         <div className="p-4 border-b border-white/5 flex items-center gap-3">
           <ShieldCheck className="h-4 w-4 text-[#2B6BFF]" />
-          <span className="text-sm font-semibold text-white">{pending.length} Pending Review</span>
+          <span className="text-sm font-semibold text-[#0F172A]">{pending.length} Pending Review</span>
           <span className="text-xs text-slate-500 ml-2">— {verifications.length} total submissions</span>
         </div>
 
@@ -79,7 +79,7 @@ export default function AdminVerificationPage() {
                       {v.user?.name?.slice(0, 2).toUpperCase() || "U"}
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-white">{v.user?.name}</div>
+                      <div className="text-sm font-medium text-[#0F172A]">{v.user?.name}</div>
                       <div className="text-xs text-slate-500">{v.user?.email}</div>
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${getStatusBg(v.status)}`}>{v.status}</span>
@@ -143,12 +143,12 @@ export default function AdminVerificationPage() {
                     })()}
 
                     <div className="space-y-2">
-                      <div className="text-xs text-slate-400">Review Notes (optional — required for rejection)</div>
+                      <div className="text-xs text-[#64748B]">Review Notes (optional — required for rejection)</div>
                       <Textarea
                         placeholder="Add notes for the user..."
                         value={notes[v.id] || ""}
                         onChange={(e) => setNotes((p) => ({ ...p, [v.id]: e.target.value }))}
-                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 text-sm resize-none h-20"
+                        className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 text-sm resize-none h-20"
                       />
                     </div>
 
@@ -163,7 +163,7 @@ export default function AdminVerificationPage() {
                         <XCircle size={11} className="mr-1" />Reject
                       </Button>
                       <Button size="sm" variant="ghost" onClick={() => setExpanded(null)}
-                        className="text-slate-500 hover:text-white h-8 px-3 text-xs">Cancel</Button>
+                        className="text-slate-500 hover:text-[#0F172A] h-8 px-3 text-xs">Cancel</Button>
                     </div>
                   </div>
                 )}

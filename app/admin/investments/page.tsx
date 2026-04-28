@@ -47,8 +47,8 @@ const STATUS_COLORS: Record<string, string> = {
   COMPLETED: "bg-[#2B6BFF]/12 border-[#2B6BFF]/25 text-[#2B6BFF]",
   CANCELLED: "bg-red-500/10 border-red-500/25 text-red-400",
 };
-const inputCls = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
-const labelCls = "text-xs font-medium text-slate-400 uppercase tracking-wider";
+const inputCls = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const labelCls = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 /**
  * Paired numeric + unit selector for duration fields. Canonical storage
@@ -84,10 +84,10 @@ function DurationField({
             onChange={(e) => onUnitChange(e.target.value as DurationUnit)}
             className={inputCls + " appearance-none pr-8 w-[110px]"}
           >
-            <option value="minutes" className="bg-[#0E1A30]">{UNIT_LABELS.minutes}</option>
-            <option value="hours"   className="bg-[#0E1A30]">{UNIT_LABELS.hours}</option>
+            <option value="minutes" className="bg-white">{UNIT_LABELS.minutes}</option>
+            <option value="hours"   className="bg-white">{UNIT_LABELS.hours}</option>
           </select>
-          <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+          <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
         </div>
       </div>
       {error && <p className="text-[11px] text-red-400 mt-1">{error}</p>}
@@ -225,7 +225,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
         className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
         onClick={e => e.stopPropagation()}
       >
-        <h3 className="text-base font-bold text-white mb-5">
+        <h3 className="text-base font-bold text-[#0F172A] mb-5">
           {plan ? "Edit Plan" : "Create Investment Plan"}
         </h3>
         <div className="space-y-4">
@@ -298,7 +298,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
           </p>
 
           {/* Loss simulation — fewer losses, more profits */}
-          <div className="pt-4 mt-1 border-t border-white/[0.06]">
+          <div className="pt-4 mt-1 border-t border-[#BFD5FF]">
             <div className="text-[11px] font-semibold text-amber-300 uppercase tracking-wider mb-2">
               Loss simulation
             </div>
@@ -353,7 +353,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
               onChange={(e) => set("isPopular", e.target.checked)}
               className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#2B6BFF] focus:ring-[#2B6BFF] focus:ring-offset-0"
             />
-            <span className="text-xs text-slate-300">
+            <span className="text-xs text-[#0F172A]">
               Mark as <strong className="text-[#2B6BFF]">Most Popular</strong>{" "}
               <span className="text-slate-500">(only one plan can hold this badge)</span>
             </span>
@@ -361,7 +361,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
         </div>
 
         <div className="flex gap-2 mt-6">
-          <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A]" onClick={onClose}>Cancel</Button>
           <Button className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold" onClick={submit} disabled={loading}>
             {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : null}
             {plan ? "Save" : "Create"}
@@ -536,7 +536,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
         className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
         onClick={e => e.stopPropagation()}
       >
-        <h3 className="text-base font-bold text-white mb-1">
+        <h3 className="text-base font-bold text-[#0F172A] mb-1">
           {isEdit ? "Edit User Investment" : "Assign Investment"}
         </h3>
         <p className="text-[11.5px] text-slate-500 mb-5">
@@ -555,14 +555,14 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
                   onChange={e => set("userId", e.target.value)}
                   className={inputCls + " appearance-none pr-8"}
                 >
-                  <option value="" className="bg-[#0E1A30]">Select user…</option>
+                  <option value="" className="bg-white">Select user…</option>
                   {users.map(u => (
-                    <option key={u.id} value={u.id} className="bg-[#0E1A30]">
+                    <option key={u.id} value={u.id} className="bg-white">
                       {u.name || "—"} ({u.email})
                     </option>
                   ))}
                 </select>
-                <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
               </div>
               {err("userId")}
             </div>
@@ -570,8 +570,8 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
           {isEdit && investment && (
             <div>
               <label className={labelCls}>User</label>
-              <div className="mt-1 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-sm">
-                <span className="text-white font-medium">{investment.user.name || "—"}</span>
+              <div className="mt-1 px-3 py-2 rounded-lg bg-[#F6FAFF] border border-white/10 text-sm">
+                <span className="text-[#0F172A] font-medium">{investment.user.name || "—"}</span>
                 <span className="text-slate-500 ml-2">{investment.user.email}</span>
               </div>
             </div>
@@ -586,14 +586,14 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
                 onChange={(e) => applyPlan(e.target.value)}
                 className={inputCls + " appearance-none pr-8"}
               >
-                <option value="" className="bg-[#0E1A30]">
+                <option value="" className="bg-white">
                   {isEdit ? "Custom (keep current values)" : "Custom — fill fields manually"}
                 </option>
                 {plans.filter(p => p.isActive).map(p => (
-                  <option key={p.id} value={p.id} className="bg-[#0E1A30]">{p.name}</option>
+                  <option key={p.id} value={p.id} className="bg-white">{p.name}</option>
                 ))}
               </select>
-              <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+              <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
             </div>
             <p className="text-[10.5px] text-slate-500 mt-1">
               Picking a plan copies its profit, duration and loss settings below — you can still override any value.
@@ -651,7 +651,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
           </p>
 
           {/* Loss simulation — same layout as PlanModal */}
-          <div className="pt-4 mt-1 border-t border-white/[0.06]">
+          <div className="pt-4 mt-1 border-t border-[#BFD5FF]">
             <div className="text-[11px] font-semibold text-amber-300 uppercase tracking-wider mb-2">
               Loss simulation
             </div>
@@ -683,7 +683,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
         </div>
 
         <div className="flex gap-2 mt-6">
-          <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose} disabled={loading}>Cancel</Button>
+          <Button variant="outline" className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A]" onClick={onClose} disabled={loading}>Cancel</Button>
           <Button className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold" onClick={submit} disabled={loading}>
             {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : null}{isEdit ? "Save" : "Assign"}
           </Button>
@@ -709,18 +709,18 @@ function AddFundsModal({ investment, onClose, onSuccess }: { investment: UserInv
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-start sm:items-center overflow-y-auto p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
       <div className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-6 w-full max-w-sm shadow-2xl" onClick={e => e.stopPropagation()}>
-        <h3 className="text-base font-bold text-white mb-1">Add Funds</h3>
+        <h3 className="text-base font-bold text-[#0F172A] mb-1">Add Funds</h3>
         <p className="text-xs text-slate-500 mb-4">No wallet deduction — directly adds to investment balance.</p>
-        <div className="mb-4 px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/10">
-          <div className="text-sm text-white font-medium">{investment.user.name || "—"}</div>
+        <div className="mb-4 px-3 py-2.5 rounded-lg bg-[#F6FAFF] border border-white/10">
+          <div className="text-sm text-[#0F172A] font-medium">{investment.user.name || "—"}</div>
           <div className="text-xs text-slate-500">{investment.user.email} · <span className="text-[#2B6BFF]">{investment.planName}</span></div>
-          <div className="text-xs text-slate-400 mt-0.5">Current: <span className="text-white font-semibold">{fmt(investment.amount)}</span></div>
+          <div className="text-xs text-[#64748B] mt-0.5">Current: <span className="text-[#0F172A] font-semibold">{fmt(investment.amount)}</span></div>
         </div>
         <div className="mb-5"><label className={labelCls}>Amount (USD)</label>
           <input type="number" className={inputCls + " mt-1"} value={amount} onChange={e => setAmount(e.target.value)} autoFocus />
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A]" onClick={onClose}>Cancel</Button>
           <Button className="flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold" onClick={submit} disabled={loading}>
             {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : <DollarSign size={14} className="mr-1" />}Add Funds
           </Button>
@@ -857,7 +857,7 @@ export default function AdminInvestmentsPage() {
     <div className="space-y-5">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-[#0F172A] flex items-center gap-2">
             <TrendingUp size={20} className="text-[#2B6BFF]" /> Investments
           </h1>
           <p className="text-sm text-slate-500 mt-0.5">Manage investment plans and user portfolios</p>
@@ -878,7 +878,7 @@ export default function AdminInvestmentsPage() {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "Plans",         value: plans.length,                                                  color: "text-white" },
+          { label: "Plans",         value: plans.length,                                                  color: "text-[#0F172A]" },
           { label: "Active Plans",  value: plans.filter(p => p.isActive).length,                          color: "text-emerald-400" },
           { label: "Active Invs",   value: activeInv,                                                     color: "text-[#2B6BFF]" },
           { label: "Total Earned",  value: fmt(investments.reduce((s, i) => s + i.totalEarned, 0)),       color: "text-emerald-400" },
@@ -893,7 +893,7 @@ export default function AdminInvestmentsPage() {
       <div className="flex gap-1 border-b border-white/5">
         {(["plans", "users"] as const).map(t => (
           <button key={t} onClick={() => setTab(t)}
-            className={`px-4 py-2.5 text-sm font-medium transition-colors capitalize ${tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-white"}`}>
+            className={`px-4 py-2.5 text-sm font-medium transition-colors capitalize ${tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-[#0F172A]"}`}>
             {t === "plans" ? `Plans (${plans.length})` : `Users (${investments.length})`}
           </button>
         ))}
@@ -903,7 +903,7 @@ export default function AdminInvestmentsPage() {
       {tab === "plans" && (
         <div className="glass-card rounded-xl overflow-hidden">
           <div className="p-4 border-b border-white/5">
-            <span className="text-sm font-semibold text-white">{plans.length} Plan{plans.length !== 1 ? "s" : ""}</span>
+            <span className="text-sm font-semibold text-[#0F172A]">{plans.length} Plan{plans.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
             <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
@@ -923,10 +923,10 @@ export default function AdminInvestmentsPage() {
                 </thead>
                 <tbody>
                   {plans.map(plan => (
-                    <tr key={plan.id} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
+                    <tr key={plan.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1.5">
-                          <div className="text-sm font-bold text-white">{plan.name}</div>
+                          <div className="text-sm font-bold text-[#0F172A]">{plan.name}</div>
                           {plan.isPopular && (
                             <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#2B6BFF]/15 text-[#5C8BFF] border border-[#2B6BFF]/30">
                               POPULAR
@@ -935,17 +935,17 @@ export default function AdminInvestmentsPage() {
                         </div>
                         {plan.description && <div className="text-xs text-slate-500 mt-0.5 max-w-[180px] truncate">{plan.description}</div>}
                       </td>
-                      <td className="px-4 py-3 text-sm font-semibold text-white whitespace-nowrap">
+                      <td className="px-4 py-3 text-sm font-semibold text-[#0F172A] whitespace-nowrap">
                         {fmt(plan.minAmount)}
                         {plan.maxAmount !== null && <span className="text-slate-500"> – {fmt(plan.maxAmount)}</span>}
                       </td>
                       <td className="px-4 py-3 text-sm text-emerald-400 whitespace-nowrap">{plan.minProfit}%–{plan.maxProfit}%</td>
-                      <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">
+                      <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">
                         {planCycleLabel(plan)}
                       </td>
-                      <td className="px-4 py-3 text-xs text-white font-semibold">{plan._count.userInvestments}</td>
+                      <td className="px-4 py-3 text-xs text-[#0F172A] font-semibold">{plan._count.userInvestments}</td>
                       <td className="px-4 py-3">
-                        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${plan.isActive ? "bg-emerald-500/10 border-emerald-500/25 text-emerald-400" : "bg-slate-500/10 border-slate-500/25 text-slate-400"}`}>
+                        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${plan.isActive ? "bg-emerald-500/10 border-emerald-500/25 text-emerald-400" : "bg-slate-500/10 border-slate-500/25 text-[#64748B]"}`}>
                           {plan.isActive ? "Active" : "Inactive"}
                         </span>
                       </td>
@@ -982,7 +982,7 @@ export default function AdminInvestmentsPage() {
       {tab === "users" && (
         <div className="glass-card rounded-xl overflow-hidden">
           <div className="p-4 border-b border-white/5">
-            <span className="text-sm font-semibold text-white">{investments.length} Investment{investments.length !== 1 ? "s" : ""}</span>
+            <span className="text-sm font-semibold text-[#0F172A]">{investments.length} Investment{investments.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
             <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
@@ -1002,16 +1002,16 @@ export default function AdminInvestmentsPage() {
                 </thead>
                 <tbody>
                   {investments.map(inv => (
-                    <tr key={inv.id} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
+                    <tr key={inv.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
                       <td className="px-4 py-3">
-                        <div className="text-sm text-white font-medium">{inv.user.name || "—"}</div>
+                        <div className="text-sm text-[#0F172A] font-medium">{inv.user.name || "—"}</div>
                         <div className="text-xs text-slate-500">{inv.user.email}</div>
                       </td>
-                      <td className="px-4 py-3 text-sm text-slate-300 font-medium">{inv.planName}</td>
-                      <td className="px-4 py-3 text-sm font-bold text-white">{fmt(inv.amount)}</td>
+                      <td className="px-4 py-3 text-sm text-[#0F172A] font-medium">{inv.planName}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-[#0F172A]">{fmt(inv.amount)}</td>
                       <td className="px-4 py-3 text-sm font-bold text-emerald-400">{fmt(inv.totalEarned)}</td>
-                      <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">{inv.minProfit}%–{inv.maxProfit}%</td>
-                      <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">{inv.profitInterval}s–{inv.maxInterval}s</td>
+                      <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">{inv.minProfit}%–{inv.maxProfit}%</td>
+                      <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">{inv.profitInterval}s–{inv.maxInterval}s</td>
                       <td className="px-4 py-3">
                         <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${STATUS_COLORS[inv.status] || ""}`}>{inv.status}</span>
                       </td>

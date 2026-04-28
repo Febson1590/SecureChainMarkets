@@ -42,11 +42,11 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
   return (
     <aside
       className={cn(
-        "flex flex-col bg-[#08111F] border-r border-white/[0.06] flex-shrink-0",
+        "flex flex-col bg-white border-r border-[#BFD5FF] flex-shrink-0",
         isMobile ? "w-full h-full" : "w-56 hidden lg:flex"
       )}
     >
-      <div className="flex items-center h-14 px-4 border-b border-white/[0.06] flex-shrink-0">
+      <div className="flex items-center h-14 px-4 border-b border-[#BFD5FF] flex-shrink-0">
         <Logo size="sm" href="/admin" />
       </div>
       <div className="px-2 py-2 flex-shrink-0">
@@ -66,7 +66,7 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
                 "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                 active
                   ? "bg-[#2B6BFF]/10 text-white"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
+                  : "text-[#64748B] hover:text-[#0F172A] hover:bg-[#F6FAFF]"
               )}
             >
               {active && (

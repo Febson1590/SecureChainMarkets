@@ -32,8 +32,8 @@ interface DepositWallet {
 
 /* ─── Styling helpers (matches other admin pages) ────────────────────── */
 
-const inputCls  = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
-const labelCls  = "text-xs font-medium text-slate-400 uppercase tracking-wider";
+const inputCls  = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const labelCls  = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 /* A short selection list so admins don't make typos. Free-form input is
    still allowed by typing into the field. */
@@ -116,7 +116,7 @@ function WalletModal({
       >
         <div className="flex items-start justify-between mb-5">
           <div>
-            <h3 className="text-base font-bold text-white">
+            <h3 className="text-base font-bold text-[#0F172A]">
               {wallet ? "Edit Deposit Wallet" : "Add Deposit Wallet"}
             </h3>
             <p className="text-[11px] text-slate-500 mt-0.5">
@@ -127,7 +127,7 @@ function WalletModal({
             type="button"
             onClick={onClose}
             disabled={loading}
-            className="text-slate-400 hover:text-white transition-colors flex-shrink-0 ml-2"
+            className="text-[#64748B] hover:text-[#0F172A] transition-colors flex-shrink-0 ml-2"
             aria-label="Close"
           >
             <X size={18} />
@@ -217,7 +217,7 @@ function WalletModal({
               onChange={(e) => set("isActive", e.target.checked)}
               className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#2B6BFF] focus:ring-[#2B6BFF] focus:ring-offset-0"
             />
-            <span className="text-xs text-slate-300">
+            <span className="text-xs text-[#0F172A]">
               Active <span className="text-slate-500">(users can deposit to this wallet)</span>
             </span>
           </label>
@@ -226,7 +226,7 @@ function WalletModal({
         <div className="flex gap-2 mt-6">
           <Button
             variant="outline"
-            className="flex-1 border-white/10 text-slate-300 hover:text-white"
+            className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A]"
             onClick={onClose}
             disabled={loading}
           >
@@ -283,8 +283,8 @@ function DeleteDialog({
             <AlertTriangle size={18} className="text-red-400" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white">Delete Wallet?</h3>
-            <p className="text-[11.5px] text-slate-400 mt-1 leading-relaxed">
+            <h3 className="text-base font-bold text-[#0F172A]">Delete Wallet?</h3>
+            <p className="text-[11.5px] text-[#64748B] mt-1 leading-relaxed">
               Users will no longer be able to deposit {wallet.asset}
               {wallet.network ? ` on ${wallet.network}` : ""}.
               Existing deposit records are kept.
@@ -295,7 +295,7 @@ function DeleteDialog({
         <div className="flex gap-2 mt-5">
           <Button
             variant="outline"
-            className="flex-1 border-white/10 text-slate-300 hover:text-white"
+            className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A]"
             onClick={onClose}
             disabled={loading}
           >
@@ -371,7 +371,7 @@ export default function AdminDepositWalletsPage() {
       {/* Header */}
       <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold text-white">Deposit Wallets</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A]">Deposit Wallets</h1>
           <p className="text-sm text-slate-500 mt-0.5">
             Manage the cryptocurrency wallets users deposit to.
           </p>
@@ -388,7 +388,7 @@ export default function AdminDepositWalletsPage() {
       {/* Summary bar */}
       <div className="glass-card rounded-xl p-4 flex items-center gap-2">
         <Wallet className="h-4 w-4 text-[#2B6BFF]" />
-        <span className="text-sm font-semibold text-white">
+        <span className="text-sm font-semibold text-[#0F172A]">
           {wallets.length} total · {activeCount} active
         </span>
       </div>
@@ -403,7 +403,7 @@ export default function AdminDepositWalletsPage() {
         ) : wallets.length === 0 ? (
           <div className="p-12 text-center">
             <Wallet className="h-10 w-10 text-slate-600 mx-auto mb-3" />
-            <div className="text-sm text-white font-semibold mb-1">No deposit wallets yet</div>
+            <div className="text-sm text-[#0F172A] font-semibold mb-1">No deposit wallets yet</div>
             <div className="text-xs text-slate-500 mb-4">
               Add a wallet so users can start depositing.
             </div>
@@ -432,17 +432,17 @@ export default function AdminDepositWalletsPage() {
               </thead>
               <tbody>
                 {wallets.map((w) => (
-                  <tr key={w.id} className="border-b border-white/5 hover:bg-white/[0.02]">
+                  <tr key={w.id} className="border-b border-white/5 hover:bg-[#F6FAFF]">
                     <td className="px-4 py-3">
-                      <div className="text-sm font-semibold text-white">{w.asset}</div>
+                      <div className="text-sm font-semibold text-[#0F172A]">{w.asset}</div>
                       <div className="text-[11px] text-slate-500">{w.label}</div>
                     </td>
-                    <td className="px-4 py-3 text-xs text-slate-300">
+                    <td className="px-4 py-3 text-xs text-[#0F172A]">
                       {w.network || <span className="text-slate-600">—</span>}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <code className="text-[11.5px] text-slate-200 font-mono">
+                        <code className="text-[11.5px] text-[#0F172A] font-mono">
                           {shortAddress(w.address, 14, 5)}
                         </code>
                         <button
@@ -455,7 +455,7 @@ export default function AdminDepositWalletsPage() {
                         </button>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-xs text-slate-300 tabular-nums">
+                    <td className="px-4 py-3 text-xs text-[#0F172A] tabular-nums">
                       {w.minDeposit != null
                         ? `$${w.minDeposit.toLocaleString("en-US")}`
                         : <span className="text-slate-600">—</span>}
@@ -465,7 +465,7 @@ export default function AdminDepositWalletsPage() {
                         className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
                           w.isActive
                             ? "bg-emerald-500/10 border-emerald-500/25 text-emerald-400"
-                            : "bg-slate-500/10 border-slate-500/25 text-slate-400"
+                            : "bg-slate-500/10 border-slate-500/25 text-[#64748B]"
                         }`}
                       >
                         {w.isActive ? "Active" : "Inactive"}
@@ -477,7 +477,7 @@ export default function AdminDepositWalletsPage() {
                           type="button"
                           onClick={() => toggleActive(w)}
                           disabled={toggling === w.id}
-                          className="h-7 w-7 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 flex items-center justify-center text-slate-300 transition-colors"
+                          className="h-7 w-7 rounded-md bg-[#F6FAFF] hover:bg-[#EEF5FF] border border-white/10 flex items-center justify-center text-[#0F172A] transition-colors"
                           title={w.isActive ? "Deactivate" : "Activate"}
                         >
                           {toggling === w.id ? (
@@ -491,7 +491,7 @@ export default function AdminDepositWalletsPage() {
                         <button
                           type="button"
                           onClick={() => setEditing(w)}
-                          className="h-7 w-7 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 flex items-center justify-center text-slate-300 transition-colors"
+                          className="h-7 w-7 rounded-md bg-[#F6FAFF] hover:bg-[#EEF5FF] border border-white/10 flex items-center justify-center text-[#0F172A] transition-colors"
                           title="Edit wallet"
                         >
                           <Pencil size={12} />

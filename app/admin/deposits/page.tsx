@@ -96,7 +96,7 @@ export default function AdminDepositsPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-white">Deposit Requests</h1>
+        <h1 className="text-2xl font-bold text-[#0F172A]">Deposit Requests</h1>
         <p className="text-sm text-slate-500 mt-0.5">
           Review and approve user deposit requests
         </p>
@@ -105,7 +105,7 @@ export default function AdminDepositsPage() {
       <div className="glass-card rounded-xl overflow-hidden">
         <div className="p-4 border-b border-white/5 flex items-center gap-2">
           <Clock className="h-4 w-4 text-yellow-400" />
-          <span className="text-sm font-semibold text-white">
+          <span className="text-sm font-semibold text-[#0F172A]">
             {deposits.filter((d) => d.status === "PENDING").length} Pending
           </span>
         </div>
@@ -135,13 +135,13 @@ export default function AdminDepositsPage() {
               </thead>
               <tbody>
                 {deposits.map((dep) => (
-                  <tr key={dep.id} className="border-b border-white/5 hover:bg-white/[0.02] align-top">
+                  <tr key={dep.id} className="border-b border-white/5 hover:bg-[#F6FAFF] align-top">
                     <td className="px-4 py-3">
-                      <div className="text-sm text-white">{dep.user?.name || "—"}</div>
+                      <div className="text-sm text-[#0F172A]">{dep.user?.name || "—"}</div>
                       <div className="text-xs text-slate-500">{dep.user?.email}</div>
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap">
-                      <div className="text-sm font-semibold text-white tabular-nums">
+                      <div className="text-sm font-semibold text-[#0F172A] tabular-nums">
                         {formatCurrency(Number(dep.amount))}
                       </div>
                       {dep.cryptoAmount !== null && dep.cryptoSymbol && (
@@ -151,7 +151,7 @@ export default function AdminDepositsPage() {
                       )}
                     </td>
                     <td className="px-4 py-3">
-                      <div className="text-sm text-white font-semibold">{dep.cryptoSymbol || dep.currency}</div>
+                      <div className="text-sm text-[#0F172A] font-semibold">{dep.cryptoSymbol || dep.currency}</div>
                       <div className="text-[11px] text-slate-500">
                         {dep.cryptoNetwork || dep.wallet?.network || dep.method || "—"}
                       </div>
@@ -159,7 +159,7 @@ export default function AdminDepositsPage() {
                     <td className="px-4 py-3">
                       {dep.wallet?.address ? (
                         <div>
-                          <code className="text-[11px] text-slate-200 font-mono">
+                          <code className="text-[11px] text-[#0F172A] font-mono">
                             {shortAddress(dep.wallet.address, 12, 5)}
                           </code>
                           {dep.wallet.label && (
@@ -242,11 +242,11 @@ export default function AdminDepositsPage() {
             className="w-full max-w-md rounded-2xl border border-white/10 bg-[rgba(10,18,34,0.98)] p-5 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-base font-bold text-white">Reject deposit</h2>
+            <h2 className="text-base font-bold text-[#0F172A]">Reject deposit</h2>
             <p className="text-xs text-slate-500 mt-1">
               {rejectTarget.user?.email} · {formatCurrency(Number(rejectTarget.amount))}
             </p>
-            <p className="text-[12.5px] text-slate-400 mt-3">
+            <p className="text-[12.5px] text-[#64748B] mt-3">
               This reason is shown to the user in their notification and email.
             </p>
             <textarea
@@ -255,13 +255,13 @@ export default function AdminDepositsPage() {
               onChange={(e) => setRejectReason(e.target.value)}
               placeholder="e.g. Could not verify the transaction on-chain."
               rows={4}
-              className="mt-2 w-full rounded-xl bg-white/[0.03] border border-white/[0.08] px-3 py-2.5 text-[13px] text-white placeholder:text-slate-600 focus:outline-none focus:border-[#2B6BFF]/40 resize-none"
+              className="mt-2 w-full rounded-xl bg-[#F6FAFF] border border-[#BFD5FF] px-3 py-2.5 text-[13px] text-[#0F172A] placeholder:text-slate-600 focus:outline-none focus:border-[#2B6BFF]/40 resize-none"
             />
             <div className="flex gap-2 mt-4">
               <Button
                 disabled={!!processing}
                 onClick={() => setRejectTarget(null)}
-                className="flex-1 h-10 bg-white/[0.04] hover:bg-white/[0.07] text-slate-300 border border-white/10 font-semibold text-[13px]"
+                className="flex-1 h-10 bg-[#F6FAFF] hover:bg-[#F6FAFF] text-[#0F172A] border border-white/10 font-semibold text-[13px]"
               >
                 Cancel
               </Button>

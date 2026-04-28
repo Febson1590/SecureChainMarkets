@@ -14,8 +14,8 @@ import {
 /* ─── Styling shared with other admin forms ──────────────────────────── */
 
 const inputCls =
-  "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
-const labelCls = "text-xs font-medium text-slate-400 uppercase tracking-wider";
+  "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const labelCls = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 /* ─── Form state ─────────────────────────────────────────────────────── */
 
@@ -111,7 +111,7 @@ export default function AdminLimitsPage() {
 
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-[#0F172A] flex items-center gap-2">
           <SlidersHorizontal size={18} className="text-[#2B6BFF]" />
           Deposit &amp; Withdrawal Limits
         </h1>
@@ -135,7 +135,7 @@ export default function AdminLimitsPage() {
                 <ArrowDownToLine size={14} className="text-emerald-400" />
               </div>
               <div>
-                <h2 className="text-[14px] font-bold text-white">Deposit Limits</h2>
+                <h2 className="text-[14px] font-bold text-[#0F172A]">Deposit Limits</h2>
                 <p className="text-[11.5px] text-slate-500">
                   Applied to every cryptocurrency deposit unless a wallet overrides the minimum.
                 </p>
@@ -177,7 +177,7 @@ export default function AdminLimitsPage() {
                 <ArrowUpFromLine size={14} className="text-[#2B6BFF]" />
               </div>
               <div>
-                <h2 className="text-[14px] font-bold text-white">Withdrawal Limits</h2>
+                <h2 className="text-[14px] font-bold text-[#0F172A]">Withdrawal Limits</h2>
                 <p className="text-[11.5px] text-slate-500">
                   Users can&apos;t submit a withdrawal below the minimum or above the maximum.
                 </p>

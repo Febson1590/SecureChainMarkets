@@ -202,7 +202,7 @@ export function DualAmountInput({
       {/* USD input */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
-          <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+          <Label className="text-[11px] font-semibold text-[#0F172A] uppercase tracking-wider">
             {titlePrefix} (USD)
           </Label>
           {usdRightAction}
@@ -217,7 +217,7 @@ export function DualAmountInput({
             placeholder="0.00"
             value={state.usd}
             onChange={(e) => state.setUsd(e.target.value)}
-            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-12 pr-16 text-base font-semibold tabular-nums"
+            className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-slate-600 h-12 pr-16 text-base font-semibold tabular-nums"
           />
           <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[13px] text-slate-500 font-medium pointer-events-none">
             | USD
@@ -227,7 +227,7 @@ export function DualAmountInput({
 
       {/* Crypto input */}
       <div className="space-y-1.5">
-        <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+        <Label className="text-[11px] font-semibold text-[#0F172A] uppercase tracking-wider">
           {titlePrefix} ({asset})
         </Label>
         <div className="relative">
@@ -238,7 +238,7 @@ export function DualAmountInput({
             placeholder="0.00000000"
             value={state.crypto}
             onChange={(e) => state.setCrypto(e.target.value)}
-            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-12 pr-20 text-base font-semibold tabular-nums"
+            className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-slate-600 h-12 pr-20 text-base font-semibold tabular-nums"
           />
           <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[13px] text-slate-500 font-medium pointer-events-none">
             | {asset}
@@ -252,7 +252,7 @@ export function DualAmountInput({
           <Clock size={10} className={rateStale ? "text-amber-400" : "text-emerald-400"} />
           <span>
             1 {asset} ={" "}
-            <span className="text-slate-300 tabular-nums font-medium">
+            <span className="text-[#0F172A] tabular-nums font-medium">
               {rate > 0
                 ? `$${rate.toLocaleString("en-US", { maximumFractionDigits: 2 })}`
                 : "—"}

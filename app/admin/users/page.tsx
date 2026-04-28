@@ -34,7 +34,7 @@ export default async function AdminUsersPage({
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">User Management</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A]">User Management</h1>
           <p className="text-sm text-slate-500 mt-0.5">{total} total users</p>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default async function AdminUsersPage({
             name="search"
             defaultValue={search}
             placeholder="Search by name or email…"
-            className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-9 text-sm"
+            className="pl-9 bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-9 text-sm"
           />
         </div>
         <Button type="submit" size="sm" className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white h-9 px-4 text-sm font-semibold">

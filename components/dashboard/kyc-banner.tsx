@@ -70,7 +70,7 @@ export function KycBanner({ kycStatus, className }: KycBannerProps) {
       {cfg.ctaSolid ? (
         <Link
           href="/dashboard/verification"
-          className="flex-shrink-0 inline-flex items-center gap-1 px-4 h-9 rounded-md text-xs font-semibold text-white transition-all hover:brightness-110"
+          className="flex-shrink-0 inline-flex items-center gap-1 px-4 h-9 rounded-md text-xs font-semibold text-[#0F172A] transition-all hover:brightness-110"
           style={{
             background: "#2B6BFF",
             boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px rgba(43,107,255,0.30)",

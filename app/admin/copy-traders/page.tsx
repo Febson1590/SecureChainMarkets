@@ -44,8 +44,8 @@ const STATUS_COLORS: Record<string, string> = {
   PAUSED:  "bg-yellow-500/10 border-yellow-500/25 text-yellow-400",
   STOPPED: "bg-red-500/10 border-red-500/25 text-red-400",
 };
-const inputCls = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
-const labelCls = "text-xs font-medium text-slate-400 uppercase tracking-wider";
+const inputCls = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const labelCls = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 // ── Image compression — resize to max 300×300, JPEG 75% (~30–80 KB) ──────────
 function compressImage(file: File): Promise<string> {
@@ -240,7 +240,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
         className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
         onClick={e => e.stopPropagation()}
       >
-        <h3 className="text-base font-bold text-white mb-5">
+        <h3 className="text-base font-bold text-[#0F172A] mb-5">
           {trader ? "Edit Trader" : "Create Copy Trader"}
         </h3>
 
@@ -260,7 +260,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
           <div>
             <label className={labelCls}>Trader Photo (optional)</label>
             <div className="mt-2 flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/10 bg-white/[0.06] flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/10 bg-[#F6FAFF] flex items-center justify-center">
                 {imgLoading
                   ? <Loader2 size={18} className="animate-spin text-[#2B6BFF]" />
                   : avatarUrl
@@ -269,7 +269,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
                 }
               </div>
               <div className="flex-1">
-                <label className="cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.06] border border-white/[0.15] text-xs text-slate-300 hover:bg-white/[0.10] hover:text-white transition-colors">
+                <label className="cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#F6FAFF] border border-white/[0.15] text-xs text-[#0F172A] hover:bg-[#EEF5FF] hover:text-[#0F172A] transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                     <polyline points="17 8 12 3 7 8"/>
@@ -308,19 +308,19 @@ function TraderModal({ trader, onClose, onSuccess }: {
                   onChange={e => set("country", e.target.value)}
                   className={inputCls + " appearance-none pr-8"}
                 >
-                  <option value="" className="bg-[#0E1A30]">— Select a country —</option>
+                  <option value="" className="bg-white">— Select a country —</option>
                   {COUNTRIES_SORTED.map((c) => (
-                    <option key={c.code} value={c.code} className="bg-[#0E1A30]">
+                    <option key={c.code} value={c.code} className="bg-white">
                       {flagEmoji(c.code)} {c.name}
                     </option>
                   ))}
                 </select>
-                <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
               </div>
               {form.country && (
                 <div className="mt-1 text-[11px] text-slate-500">
                   <span className="mr-1">{flagEmoji(form.country)}</span>
-                  Stored as <code className="text-slate-300">{form.country}</code>
+                  Stored as <code className="text-[#0F172A]">{form.country}</code>
                 </div>
               )}
             </div>
@@ -360,9 +360,9 @@ function TraderModal({ trader, onClose, onSuccess }: {
               <label className={labelCls}>Risk</label>
               <select value={form.riskLevel} onChange={e => set("riskLevel", e.target.value)}
                 className={inputCls + " mt-1"}>
-                <option value="LOW" className="bg-[#0E1A30]">Low</option>
-                <option value="MEDIUM" className="bg-[#0E1A30]">Medium</option>
-                <option value="HIGH" className="bg-[#0E1A30]">High</option>
+                <option value="LOW" className="bg-white">Low</option>
+                <option value="MEDIUM" className="bg-white">Medium</option>
+                <option value="HIGH" className="bg-white">High</option>
               </select>
             </div>
           </div>
@@ -419,10 +419,10 @@ function TraderModal({ trader, onClose, onSuccess }: {
                         onChange={(e) => set(uKey, e.target.value)}
                         className={inputCls + " appearance-none pr-8 w-[110px]"}
                       >
-                        <option value="minutes" className="bg-[#0E1A30]">{UNIT_LABELS.minutes}</option>
-                        <option value="hours"   className="bg-[#0E1A30]">{UNIT_LABELS.hours}</option>
+                        <option value="minutes" className="bg-white">{UNIT_LABELS.minutes}</option>
+                        <option value="hours"   className="bg-white">{UNIT_LABELS.hours}</option>
                       </select>
-                      <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
                     </div>
                   </div>
                   {errors[vKey] && <p className="text-[11px] text-red-400 mt-1">{errors[vKey]}</p>}
@@ -435,7 +435,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
           </p>
 
           {/* Loss simulation */}
-          <div className="pt-4 mt-1 border-t border-white/[0.06]">
+          <div className="pt-4 mt-1 border-t border-[#BFD5FF]">
             <div className="text-[11px] font-semibold text-amber-300 uppercase tracking-wider mb-2">
               Loss simulation
             </div>
@@ -486,7 +486,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
         <div className="flex gap-2 mt-6">
           <Button
             variant="outline"
-            className="flex-1 border-white/10 text-slate-300 hover:text-white"
+            className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A]"
             onClick={() => !loading && onClose()}
             disabled={loading}
           >
@@ -537,28 +537,28 @@ function DeleteTraderModal({
             <AlertTriangle size={18} className="text-red-400" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white">Delete Copy Trader</h3>
+            <h3 className="text-base font-bold text-[#0F172A]">Delete Copy Trader</h3>
             <p className="text-xs text-slate-500 mt-0.5">This action is permanent and irreversible</p>
           </div>
         </div>
 
-        <div className="mb-5 p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center gap-3">
+        <div className="mb-5 p-3.5 rounded-xl bg-[#F6FAFF] border border-[#BFD5FF] flex items-center gap-3">
           {trader.avatarUrl ? (
             <img src={trader.avatarUrl} alt={trader.name} className="w-9 h-9 rounded-full object-cover flex-shrink-0 border border-white/10" />
           ) : (
-            <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+            <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-[#0F172A] flex-shrink-0"
               style={{ background: `hsl(${hue} 55% 22%)`, border: `1px solid hsl(${hue} 55% 32%)` }}>
               {ini}
             </div>
           )}
           <div>
-            <div className="text-sm font-semibold text-white">{trader.name}</div>
+            <div className="text-sm font-semibold text-[#0F172A]">{trader.name}</div>
             <div className="text-xs text-slate-500">{trader.userCopyTrades.length} active {trader.userCopyTrades.length === 1 ? "copy" : "copies"} will be stopped</div>
           </div>
         </div>
 
-        <p className="text-sm text-slate-300 leading-relaxed mb-6">
-          Are you sure you want to delete <span className="font-semibold text-white">{trader.name}</span>?
+        <p className="text-sm text-[#0F172A] leading-relaxed mb-6">
+          Are you sure you want to delete <span className="font-semibold text-[#0F172A]">{trader.name}</span>?
           All active copy trades referencing this trader will be removed.{" "}
           <span className="text-red-400 font-semibold">This cannot be undone.</span>
         </p>
@@ -566,7 +566,7 @@ function DeleteTraderModal({
         <div className="flex gap-3">
           <Button
             variant="outline"
-            className="flex-1 border-white/10 text-slate-300 hover:text-white h-10"
+            className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A] h-10"
             onClick={onCancel}
             disabled={busy}
           >
@@ -621,28 +621,28 @@ function AssignTradeModal({ traders, users, onClose, onSuccess }: {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
       <div className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-6 w-full max-w-md shadow-2xl" onClick={e => e.stopPropagation()}>
-        <h3 className="text-base font-bold text-white mb-5">Assign Copy Trade</h3>
+        <h3 className="text-base font-bold text-[#0F172A] mb-5">Assign Copy Trade</h3>
         <div className="space-y-4">
           <div>
             <label className={labelCls}>User</label>
             <div className="relative mt-1">
               <select value={form.userId} onChange={e => set("userId", e.target.value)} className={inputCls + " appearance-none pr-8"}>
-                <option value="" className="bg-[#0E1A30]">Select user…</option>
-                {users.map(u => <option key={u.id} value={u.id} className="bg-[#0E1A30]">{u.name || "—"} ({u.email})</option>)}
+                <option value="" className="bg-white">Select user…</option>
+                {users.map(u => <option key={u.id} value={u.id} className="bg-white">{u.name || "—"} ({u.email})</option>)}
               </select>
-              <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+              <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
             </div>
           </div>
           <div>
             <label className={labelCls}>Trader</label>
             <div className="relative mt-1">
               <select value={form.traderId} onChange={e => set("traderId", e.target.value)} className={inputCls + " appearance-none pr-8"}>
-                <option value="" className="bg-[#0E1A30]">Select trader…</option>
+                <option value="" className="bg-white">Select trader…</option>
                 {traders.filter(t => t.isActive).map(t => (
-                  <option key={t.id} value={t.id} className="bg-[#0E1A30]">{t.name} ({t.winRate}% win)</option>
+                  <option key={t.id} value={t.id} className="bg-white">{t.name} ({t.winRate}% win)</option>
                 ))}
               </select>
-              <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+              <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
             </div>
           </div>
           <div>
@@ -651,7 +651,7 @@ function AssignTradeModal({ traders, users, onClose, onSuccess }: {
           </div>
         </div>
         <div className="flex gap-2 mt-6">
-          <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose} disabled={loading}>Cancel</Button>
+          <Button variant="outline" className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A]" onClick={onClose} disabled={loading}>Cancel</Button>
           <Button className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold" onClick={submit} disabled={loading}>
             {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : null}Assign
           </Button>
@@ -795,7 +795,7 @@ export default function AdminCopyTradersPage() {
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-[#0F172A] flex items-center gap-2">
             <Users size={20} className="text-[#2B6BFF]" /> Copy Traders
           </h1>
           <p className="text-sm text-slate-500 mt-0.5">Manage traders and user copy assignments</p>
@@ -834,7 +834,7 @@ export default function AdminCopyTradersPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "Traders",        value: traders.length,                                    color: "text-white" },
+          { label: "Traders",        value: traders.length,                                    color: "text-[#0F172A]" },
           { label: "Active Traders", value: traders.filter(t => t.isActive).length,            color: "text-emerald-400" },
           { label: "Active Copies",  value: trades.filter(t => t.status === "ACTIVE").length,  color: "text-[#2B6BFF]" },
           { label: "Total Earned",   value: fmt(trades.reduce((s, t) => s + t.totalEarned, 0)), color: "text-emerald-400" },
@@ -853,7 +853,7 @@ export default function AdminCopyTradersPage() {
             key={t}
             onClick={() => setTab(t)}
             className={`px-4 py-2.5 text-sm font-medium transition-colors ${
-              tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-white"
+              tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-[#0F172A]"
             }`}
           >
             {t === "traders" ? `Traders (${traders.length})` : `Assignments (${trades.length})`}
@@ -865,7 +865,7 @@ export default function AdminCopyTradersPage() {
       {tab === "traders" && (
         <div className="glass-card rounded-xl overflow-hidden">
           <div className="p-4 border-b border-white/5">
-            <span className="text-sm font-semibold text-white">{traders.length} Trader{traders.length !== 1 ? "s" : ""}</span>
+            <span className="text-sm font-semibold text-[#0F172A]">{traders.length} Trader{traders.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
             <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
@@ -888,7 +888,7 @@ export default function AdminCopyTradersPage() {
                     const hue      = [...tr.name].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
                     const initials = tr.name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
                     return (
-                      <tr key={tr.id} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
+                      <tr key={tr.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2">
                             {tr.avatarUrl ? (
@@ -899,14 +899,14 @@ export default function AdminCopyTradersPage() {
                               />
                             ) : (
                               <div
-                                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-[#0F172A] flex-shrink-0"
                                 style={{ background: `hsl(${hue} 60% 25%)`, border: `1px solid hsl(${hue} 60% 35%)` }}
                               >
                                 {initials}
                               </div>
                             )}
                             <div>
-                              <div className="text-sm font-semibold text-white flex items-center gap-1.5">
+                              <div className="text-sm font-semibold text-[#0F172A] flex items-center gap-1.5">
                                 {tr.name}
                                 {tr.country && (
                                   <span className="text-[13px] leading-none" title={tr.country}>
@@ -918,7 +918,7 @@ export default function AdminCopyTradersPage() {
                                 <span className={`text-[10px] px-1.5 py-0.5 rounded-full border ${
                                   tr.isActive
                                     ? "bg-emerald-500/10 border-emerald-500/25 text-emerald-400"
-                                    : "bg-slate-500/10 border-slate-500/25 text-slate-400"
+                                    : "bg-slate-500/10 border-slate-500/25 text-[#64748B]"
                                 }`}>
                                   {tr.isActive ? "Active" : "Inactive"}
                                 </span>
@@ -934,12 +934,12 @@ export default function AdminCopyTradersPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-xs text-slate-400">{tr.specialty || "—"}</td>
+                        <td className="px-4 py-3 text-xs text-[#64748B]">{tr.specialty || "—"}</td>
                         <td className="px-4 py-3 text-sm font-semibold text-emerald-400">{tr.winRate}%</td>
                         <td className="px-4 py-3 text-sm font-semibold text-[#2B6BFF]">+{tr.totalROI}%</td>
-                        <td className="px-4 py-3 text-xs text-slate-400">{tr.followers.toLocaleString()}</td>
-                        <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">{tr.minProfit}%–{tr.maxProfit}%</td>
-                        <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">
+                        <td className="px-4 py-3 text-xs text-[#64748B]">{tr.followers.toLocaleString()}</td>
+                        <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">{tr.minProfit}%–{tr.maxProfit}%</td>
+                        <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">
                           {(() => {
                             // Same shared resolver as the edit modal — a
                             // legit 1-minute trader renders "1–2m", not "—".
@@ -952,7 +952,7 @@ export default function AdminCopyTradersPage() {
                             return `${minSecs / div}–${maxSecs / div}${unit}`;
                           })()}
                         </td>
-                        <td className="px-4 py-3 text-xs text-white font-semibold">{tr.userCopyTrades.length}</td>
+                        <td className="px-4 py-3 text-xs text-[#0F172A] font-semibold">{tr.userCopyTrades.length}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
                             <Button
@@ -985,7 +985,7 @@ export default function AdminCopyTradersPage() {
       {tab === "assignments" && (
         <div className="glass-card rounded-xl overflow-hidden">
           <div className="p-4 border-b border-white/5">
-            <span className="text-sm font-semibold text-white">{trades.length} Assignment{trades.length !== 1 ? "s" : ""}</span>
+            <span className="text-sm font-semibold text-[#0F172A]">{trades.length} Assignment{trades.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
             <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
@@ -1005,13 +1005,13 @@ export default function AdminCopyTradersPage() {
                 </thead>
                 <tbody>
                   {trades.map(trade => (
-                    <tr key={trade.id} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
+                    <tr key={trade.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
                       <td className="px-4 py-3">
-                        <div className="text-sm text-white font-medium">{trade.user.name || "—"}</div>
+                        <div className="text-sm text-[#0F172A] font-medium">{trade.user.name || "—"}</div>
                         <div className="text-xs text-slate-500">{trade.user.email}</div>
                       </td>
-                      <td className="px-4 py-3 text-sm text-slate-300 font-medium">{trade.traderName}</td>
-                      <td className="px-4 py-3 text-sm font-bold text-white">{fmt(trade.amount)}</td>
+                      <td className="px-4 py-3 text-sm text-[#0F172A] font-medium">{trade.traderName}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-[#0F172A]">{fmt(trade.amount)}</td>
                       <td className="px-4 py-3 text-sm font-bold text-emerald-400">{fmt(trade.totalEarned)}</td>
                       <td className="px-4 py-3">
                         <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${STATUS_COLORS[trade.status] || ""}`}>

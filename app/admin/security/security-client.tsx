@@ -98,7 +98,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Admin Security</h1>
+        <h1 className="text-2xl font-bold text-[#0F172A]">Admin Security</h1>
         <p className="text-sm text-slate-500 mt-0.5">
           Manage the sign-in credentials for this admin account.
         </p>
@@ -111,12 +111,12 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
             <ShieldCheck className="h-5 w-5 text-[#2B6BFF]" />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="text-[13px] font-semibold text-white truncate">{name}</div>
+            <div className="text-[13px] font-semibold text-[#0F172A] truncate">{name}</div>
             <div className="text-[12px] text-slate-500 truncate">{email}</div>
           </div>
           <div className="text-right">
             <div className="text-[9.5px] uppercase tracking-widest text-slate-600 font-semibold">Record updated</div>
-            <div className="text-[11px] text-slate-400 tabular-nums">{lastChangedLabel}</div>
+            <div className="text-[11px] text-[#64748B] tabular-nums">{lastChangedLabel}</div>
           </div>
         </div>
       </Card>
@@ -128,7 +128,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
             <KeyRound className="h-5 w-5 text-amber-400" />
           </div>
           <div>
-            <h2 className="text-base font-semibold text-white">Change Admin Password</h2>
+            <h2 className="text-base font-semibold text-[#0F172A]">Change Admin Password</h2>
             <p className="text-xs text-slate-500">
               You&rsquo;ll be signed out after a successful change and must sign in again.
             </p>
@@ -143,7 +143,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
           )}
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-slate-400 uppercase tracking-widest">Current password</Label>
+            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Current password</Label>
             <div className="relative">
               <Input
                 required
@@ -152,12 +152,12 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
                 onChange={(e) => setCurrentPwd(e.target.value)}
                 placeholder="Enter your current password"
                 autoComplete="current-password"
-                className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10 pr-10"
+                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10 pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowCurrent((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[#0F172A]"
                 aria-label={showCurrent ? "Hide current password" : "Show current password"}
               >
                 {showCurrent ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -166,7 +166,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-slate-400 uppercase tracking-widest">New password</Label>
+            <Label className="text-xs text-[#64748B] uppercase tracking-widest">New password</Label>
             <div className="relative">
               <Input
                 required
@@ -175,12 +175,12 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
                 onChange={(e) => setNewPwd(e.target.value)}
                 placeholder="Min 8 characters, 1 uppercase, 1 number"
                 autoComplete="new-password"
-                className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10 pr-10"
+                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10 pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowNew((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[#0F172A]"
                 aria-label={showNew ? "Hide new password" : "Show new password"}
               >
                 {showNew ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -194,7 +194,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-slate-400 uppercase tracking-widest">Confirm new password</Label>
+            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Confirm new password</Label>
             <Input
               required
               type="password"
@@ -202,7 +202,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
               onChange={(e) => setConfirmPwd(e.target.value)}
               placeholder="Re-enter the new password"
               autoComplete="new-password"
-              className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
+              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10"
             />
             {confirmPwd && newPwd && confirmPwd === newPwd && (
               <p className="text-[11px] text-emerald-400 inline-flex items-center gap-1 mt-1">
@@ -217,7 +217,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
               variant="outline"
               onClick={() => { setCurrentPwd(""); setNewPwd(""); setConfirmPwd(""); setError(""); }}
               disabled={loading}
-              className="border-white/10 text-slate-300 hover:text-white h-10 px-4"
+              className="border-white/10 text-[#0F172A] hover:text-[#0F172A] h-10 px-4"
             >
               Clear
             </Button>
