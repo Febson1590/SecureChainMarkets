@@ -932,3 +932,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 .ed-up      { color: #0F7A4D; }
 .ed-down    { color: #B23A3A; }
 
+
+/* Utility: hide scrollbars on horizontally-scrollable rows (e.g. mobile ticker). */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }

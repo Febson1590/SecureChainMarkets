@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { getMarketAssets } from "@/lib/coingecko";
 import { formatCurrency, formatCompact } from "@/lib/utils";
+import { CryptoIcon } from "@/components/public/crypto-icon";
 
 const CRYPTO_COLORS: Record<string, string> = {
   BTC: "#F7931A", ETH: "#627EEA", USDT: "#26A17B", BNB: "#F3BA2F",
@@ -96,7 +97,7 @@ export default async function HomePage() {
           }}
         />
 
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-12 lg:gap-12 items-center">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-14 lg:gap-12 items-center">
           {/* Left — copy */}
           <div className="min-w-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-[12px] font-semibold text-[#0A1A3A] mb-6 shadow-[0_4px_12px_-6px_rgba(15,23,42,0.10)]">
@@ -104,7 +105,7 @@ export default async function HomePage() {
               Live markets · {marketAssets.length}+ assets
             </div>
 
-            <h1 className="text-[40px] sm:text-[52px] lg:text-[64px] leading-[1.04] font-bold tracking-tight">
+            <h1 className="text-[36px] sm:text-[48px] lg:text-[64px] leading-[1.04] font-bold tracking-tight">
               Trade Secure.
               <br />
               <span className="text-[#2B6BFF]">Grow Confident.</span>
@@ -170,23 +171,17 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 lg:px-8 -mt-4 sm:-mt-8 pb-12 relative z-10">
         <div className="max-w-[1200px] mx-auto">
           <div className="bg-white rounded-2xl border border-slate-200 shadow-[0_24px_60px_-26px_rgba(15,23,42,0.20)] overflow-hidden">
-            <div className="flex items-stretch">
+            <div className="flex items-stretch flex-col sm:flex-row">
               <div className="flex-1 min-w-0 overflow-x-auto no-scrollbar">
                 <div className="flex items-stretch divide-x divide-slate-100 min-w-max">
                   {tickerData.map((a) => {
-                    const color = CRYPTO_COLORS[a.symbol] ?? "#2B6BFF";
                     const up = a.change >= 0;
                     return (
                       <div
                         key={a.symbol}
-                        className="flex items-center gap-3 px-5 py-4 text-[12.5px] tabular-nums whitespace-nowrap hover:bg-[#F7FAFF] transition-colors"
+                        className="flex items-center gap-3 px-4 sm:px-5 py-4 text-[12.5px] tabular-nums whitespace-nowrap hover:bg-[#F7FAFF] transition-colors"
                       >
-                        <span
-                          className="w-7 h-7 rounded-full inline-flex items-center justify-center text-[10px] font-black flex-shrink-0"
-                          style={{ background: `${color}1F`, border: `1px solid ${color}55`, color }}
-                        >
-                          {a.symbol.slice(0, 1)}
-                        </span>
+                        <CryptoIcon symbol={a.symbol} size={26} className="flex-shrink-0" />
                         <div className="flex flex-col leading-tight">
                           <span className="font-bold text-[#0A1A3A] text-[12.5px]">{a.symbol}/USDT</span>
                           <span className="text-slate-500 text-[10.5px]">{a.symbol === "BTC" ? "Bitcoin" : a.symbol === "ETH" ? "Ethereum" : a.symbol === "BNB" ? "BNB" : a.symbol === "SOL" ? "Solana" : "XRP"}</span>
@@ -201,7 +196,7 @@ export default async function HomePage() {
                   })}
                 </div>
               </div>
-              <div className="flex items-center px-3 sm:px-4 border-l border-slate-100 flex-shrink-0">
+              <div className="flex items-center justify-center sm:justify-start px-3 sm:px-4 py-3 sm:py-0 border-t sm:border-t-0 sm:border-l border-slate-100 flex-shrink-0">
                 <Link
                   href="/markets"
                   className="inline-flex items-center gap-1.5 px-4 h-10 rounded-md text-[12.5px] font-semibold text-[#2B6BFF] border border-[#2B6BFF]/30 hover:bg-[#2B6BFF] hover:text-white hover:border-[#2B6BFF] transition-colors"
@@ -218,7 +213,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           3 · WHY TRADERS CHOOSE US
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-24 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-14">
             <Eyebrow>Why Us</Eyebrow>
@@ -284,14 +279,14 @@ export default async function HomePage() {
 
             <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-y-10 lg:gap-y-0 lg:divide-x lg:divide-slate-200">
               {stats.map((s) => (
-                <div key={s.label} className="flex flex-col items-center text-center px-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0 mb-4">
-                    <s.icon className="h-6 w-6 text-[#2B6BFF]" strokeWidth={2} />
+                <div key={s.label} className="flex flex-col items-center text-center px-3 sm:px-4">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0 mb-3 sm:mb-4">
+                    <s.icon className="h-5 w-5 sm:h-6 sm:w-6 text-[#2B6BFF]" strokeWidth={2} />
                   </div>
-                  <div className="text-[28px] sm:text-[34px] font-bold text-[#0A1A3A] tabular-nums leading-none">
+                  <div className="text-[24px] sm:text-[30px] lg:text-[34px] font-bold text-[#0A1A3A] tabular-nums leading-none">
                     {s.value}
                   </div>
-                  <div className="text-[13px] text-slate-600 mt-2">{s.label}</div>
+                  <div className="text-[12px] sm:text-[13px] text-slate-600 mt-2 leading-tight">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -304,7 +299,7 @@ export default async function HomePage() {
       ════════════════════════════════════════════════════════════════ */}
       <section
         id="how-it-works"
-        className="px-4 sm:px-6 lg:px-8 py-24 bg-[#F7FAFF] scroll-mt-24"
+        className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-[#F7FAFF] scroll-mt-24"
       >
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-16">
@@ -502,7 +497,7 @@ function HeroMockup({
       </div>
 
       {/* Floating phone */}
-      <div className="hidden sm:block absolute right-2 lg:right-0 bottom-[-36px] w-[28%] max-w-[195px]">
+      <div className="absolute right-1 sm:right-2 lg:right-0 bottom-[-30px] sm:bottom-[-36px] w-[30%] max-w-[150px] sm:max-w-[195px]">
         <PhoneMockup btcPrice={btcPrice} btcChange={btcChange} />
       </div>
     </div>
@@ -534,7 +529,7 @@ function DashboardScreen({
         </div>
       </div>
 
-      <div className="grid grid-cols-[44px_1fr]">
+      <div className="grid grid-cols-[36px_1fr] sm:grid-cols-[44px_1fr]">
         {/* Sidebar */}
         <div className="bg-white border-r border-slate-100 py-3 flex flex-col items-center gap-3">
           <div className="w-7 h-7 rounded-md bg-[#2B6BFF] inline-flex items-center justify-center">
@@ -572,15 +567,12 @@ function DashboardScreen({
             </div>
           </div>
 
-          <div className="grid grid-cols-[1fr_148px] gap-3">
+          <div className="grid grid-cols-[1fr_120px] sm:grid-cols-[1fr_148px] gap-2 sm:gap-3">
             {/* Chart panel */}
             <div className="rounded-lg border border-slate-200 bg-white p-3">
               <div className="flex items-center justify-between mb-2.5">
                 <div className="flex items-center gap-2">
-                  <span
-                    className="w-5 h-5 rounded-full inline-flex items-center justify-center text-[8px] font-black"
-                    style={{ background: "#F7931A1F", border: "1px solid #F7931A55", color: "#F7931A" }}
-                  >B</span>
+                  <CryptoIcon symbol="BTC" size={20} />
                   <div className="leading-tight">
                     <div className="font-bold text-[#0A1A3A] text-[11px]">BTC/USDT</div>
                     <div className="text-[8.5px] text-slate-400">Bitcoin · Spot</div>
@@ -665,17 +657,11 @@ function DashboardScreen({
                 </div>
                 <ul className="space-y-1.5">
                   {watchlist.map((a) => {
-                    const color = CRYPTO_COLORS[a.symbol] ?? "#2B6BFF";
                     const isUp = a.change >= 0;
                     return (
                       <li key={a.symbol} className="flex items-center justify-between text-[9.5px]">
                         <span className="flex items-center gap-1.5 min-w-0 flex-1">
-                          <span
-                            className="w-3.5 h-3.5 rounded-full inline-flex items-center justify-center text-[6.5px] font-black flex-shrink-0"
-                            style={{ background: `${color}26`, color }}
-                          >
-                            {a.symbol.slice(0, 1)}
-                          </span>
+                          <CryptoIcon symbol={a.symbol} size={14} className="flex-shrink-0" />
                           <span className="font-semibold text-[#0A1A3A] truncate">{a.symbol}</span>
                         </span>
                         <span className={`tabular-nums text-[8.5px] font-semibold ${isUp ? "text-emerald-600" : "text-rose-600"}`}>
@@ -736,14 +722,13 @@ function PhoneMockup({ btcPrice, btcChange }: { btcPrice: number; btcChange: num
 
         <ul className="mt-2 space-y-1">
           {[
-            { s: "BTC", c: "#F7931A", chg: "+2.45" },
-            { s: "ETH", c: "#627EEA", chg: "+1.24" },
-            { s: "SOL", c: "#9945FF", chg: "+3.82" },
+            { s: "BTC", chg: "+2.45" },
+            { s: "ETH", chg: "+1.24" },
+            { s: "SOL", chg: "+3.82" },
           ].map((i) => (
             <li key={i.s} className="flex items-center justify-between text-[9px]">
               <span className="flex items-center gap-1.5">
-                <span className="w-3.5 h-3.5 rounded-full inline-flex items-center justify-center text-[6.5px] font-black"
-                  style={{ background: `${i.c}26`, color: i.c }}>{i.s.slice(0,1)}</span>
+                <CryptoIcon symbol={i.s} size={14} />
                 <span className="font-bold text-[#0A1A3A]">{i.s}</span>
               </span>
               <span className="text-emerald-600 font-semibold tabular-nums text-[8.5px]">{i.chg}%</span>
@@ -786,10 +771,13 @@ function CtaPhoneVisual({ btcPrice }: { btcPrice: number }) {
           <div className="absolute left-1/2 -translate-x-1/2 top-3 w-[40%] h-1.5 rounded-full bg-black z-10" />
           <div className="rounded-[22px] bg-white overflow-hidden p-4 pt-7">
             <div className="flex items-center justify-between">
-              <div>
-                <div className="text-[9px] text-slate-400 font-semibold tracking-wider">BTC / USDT</div>
-                <div className="text-[20px] font-bold text-[#0A1A3A] tabular-nums leading-none mt-0.5">
-                  {formatCurrency(btcPrice)}
+              <div className="flex items-center gap-2">
+                <CryptoIcon symbol="BTC" size={28} />
+                <div>
+                  <div className="text-[9px] text-slate-400 font-semibold tracking-wider">BTC / USDT</div>
+                  <div className="text-[20px] font-bold text-[#0A1A3A] tabular-nums leading-none mt-0.5">
+                    {formatCurrency(btcPrice)}
+                  </div>
                 </div>
               </div>
               <span className="px-2 py-1 rounded text-[10px] font-bold text-emerald-700 bg-emerald-50">+2.45%</span>
