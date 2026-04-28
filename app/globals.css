@@ -84,6 +84,26 @@
   --sidebar-ring: oklch(0.65 0.2 215);
 }
 
+/* ─── SecureChainMarkets brand tokens ──────────────────────────────
+   Single source of truth for the dashboard + landing palette. These
+   variables are read by .glass-card / .vx-panel / .scm-* utilities
+   below and can be referenced inline in components via
+   `color: var(--scm-text)` etc. */
+:root {
+  --scm-primary:        #2F6BFF;
+  --scm-primary-strong: #1E50CC;
+  --scm-navy:           #07142F;
+  --scm-card-navy:      #111827;
+  --scm-bg-soft:        #EEF5FF;
+  --scm-bg-surface:     #F6FAFF;
+  --scm-border-blue:    #BFD5FF;
+  --scm-text:           #0F172A;
+  --scm-text-muted:     #64748B;
+  --scm-success:        #16A34A;
+  --scm-warning:        #F59E0B;
+  --scm-error:          #DC2626;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -197,13 +217,11 @@
 
 /* ─── Card surface — light, sits on the brand gradient ──────────── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px -16px rgba(15, 23, 42, 0.18);
-  color: #0A1A3A;
+  background: #FFFFFF;
+  border: 1px solid var(--scm-border-blue);
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(47, 107, 255, 0.10);
+  color: var(--scm-text);
 }
 
 .glass-card-hover {
@@ -212,11 +230,10 @@
               border-color 0.3s ease;
 }
 .glass-card-hover:hover {
-  border-color: rgba(43, 107, 255, 0.35);
+  border-color: var(--scm-primary);
   box-shadow:
-    0 0 0 1px rgba(43, 107, 255, 0.08),
-    0 14px 36px -16px rgba(43, 107, 255, 0.18),
-    0 22px 50px -22px rgba(15, 23, 42, 0.18);
+    0 0 0 1px rgba(47, 107, 255, 0.10),
+    0 18px 40px rgba(47, 107, 255, 0.16);
 }
 
 /* ─── Mockup frame (dashboard) ───────────────────── */
@@ -562,18 +579,15 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
    reads from the same visual vocabulary.
    ════════════════════════════════════════════════════════════════════════ */
 
-/* ── Panel — the core surface for exchange-grade modules ───────────── */
+/* ── Panel — light brand surface for dashboard + landing modules ─── */
 .vx-panel {
   position: relative;
-  background: linear-gradient(180deg, rgba(8, 16, 32, 0.92) 0%, rgba(5, 12, 26, 0.95) 100%);
-  border: 1px solid rgba(148, 163, 184, 0.08);
+  background: #FFFFFF;
+  border: 1px solid var(--scm-border-blue);
   border-radius: 14px;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 0 0 1px rgba(43, 107, 255, 0.02),
-    0 24px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 30px rgba(47, 107, 255, 0.10);
   overflow: hidden;
-  /* Never overflow the parent container — critical for mobile grids. */
+  color: var(--scm-text);
   max-width: 100%;
   min-width: 0;
 }
@@ -581,15 +595,13 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 .vx-panel-hover:hover {
-  border-color: rgba(43, 107, 255, 0.18);
+  border-color: var(--scm-primary);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.05) inset,
-    0 0 0 1px rgba(43, 107, 255, 0.05),
-    0 28px 70px rgba(0, 0, 0, 0.55),
-    0 0 36px rgba(43, 107, 255, 0.04);
+    0 0 0 1px rgba(47, 107, 255, 0.10),
+    0 18px 40px rgba(47, 107, 255, 0.16);
 }
 
-/* Panel header — a consistent 44px strip used by every exchange module */
+/* Panel header — a consistent 44px strip used by every panel module */
 .vx-panel-header {
   display: flex;
   align-items: center;
@@ -597,8 +609,9 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   gap: 12px;
   padding: 0 14px;
   height: 44px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
-  background: linear-gradient(180deg, rgba(10, 20, 38, 0.65) 0%, rgba(6, 14, 30, 0.2) 100%);
+  border-bottom: 1px solid var(--scm-border-blue);
+  background: var(--scm-bg-surface);
+  color: var(--scm-text);
 }
 .vx-panel-title {
   font-size: 11px;
@@ -972,3 +985,51 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 /* Utility: hide scrollbars on horizontally-scrollable rows (e.g. mobile ticker). */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   SCM dashboard utilities — branded button + surface tokens. Dashboard
+   pages can drop these classes in instead of inline styles to stay on
+   the SecureChainMarkets palette.
+   ════════════════════════════════════════════════════════════════════════ */
+.scm-btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  height: 44px; padding: 0 1.25rem; border-radius: 12px;
+  background: var(--scm-primary); color: #FFFFFF;
+  font-weight: 600; letter-spacing: -0.005em;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(47,107,255,0.30);
+  transition: filter 180ms ease, transform 140ms ease;
+}
+.scm-btn-primary:hover { filter: brightness(1.08); }
+.scm-btn-primary:active { transform: translateY(1px); }
+.scm-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: none; }
+
+.scm-btn-navy {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  height: 44px; padding: 0 1.25rem; border-radius: 12px;
+  background: var(--scm-navy); color: #FFFFFF;
+  font-weight: 600; letter-spacing: -0.005em;
+  box-shadow: 0 8px 22px rgba(7,20,47,0.25);
+  transition: filter 180ms ease, transform 140ms ease;
+}
+.scm-btn-navy:hover { filter: brightness(1.18); }
+.scm-btn-navy:active { transform: translateY(1px); }
+
+.scm-btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  height: 44px; padding: 0 1.25rem; border-radius: 12px;
+  background: #FFFFFF; color: var(--scm-primary);
+  border: 1px solid var(--scm-border-blue);
+  font-weight: 600; letter-spacing: -0.005em;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+.scm-btn-outline:hover { background: var(--scm-bg-surface); border-color: var(--scm-primary); }
+
+/* Dashboard avatar — light blue circle, navy border, blue initials */
+.scm-avatar {
+  background: var(--scm-bg-soft);
+  color: var(--scm-primary);
+  border: 1px solid var(--scm-navy);
+}
+
+/* Branded divider for inside cards / between rows */
+.scm-divider { background: var(--scm-border-blue); height: 1px; }

@@ -46,22 +46,24 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
   return (
     <aside
       className={cn(
-        "flex flex-col backdrop-blur-md border-r border-slate-200 transition-all duration-300 flex-shrink-0",
+        "flex flex-col backdrop-blur-md transition-all duration-300 flex-shrink-0",
         !isMobile && (isCollapsed ? "hidden lg:flex w-16" : "hidden lg:flex w-60"),
         isMobile && "w-full h-full"
       )}
       style={{
         backgroundImage:
-          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
-          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
-          "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
+          "linear-gradient(180deg, #FFFFFF 0%, var(--scm-bg-surface) 100%)",
+        borderRight: "1px solid var(--scm-border-blue)",
       }}
     >
       {/* Logo — bleeds vertically, same treatment as the public navbar */}
-      <div className={cn(
-        "flex items-center h-[60px] sm:h-[72px] lg:h-[80px] px-4 border-b border-slate-200 flex-shrink-0",
-        isCollapsed && "justify-center px-2"
-      )}>
+      <div
+        className={cn(
+          "flex items-center h-[60px] sm:h-[72px] lg:h-[80px] px-4 flex-shrink-0",
+          isCollapsed && "justify-center px-2"
+        )}
+        style={{ borderBottom: "1px solid var(--scm-border-blue)" }}
+      >
         {isCollapsed ? (
           <Link href="/dashboard" aria-label="SecureChainMarkets — dashboard" className="inline-flex items-center">
             <Image
@@ -104,21 +106,21 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
               className={cn(
                 "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group",
                 active
-                  ? "bg-[#2B6BFF]/12 text-[#0A1A3A] shadow-[inset_0_0_0_1px_rgba(43,107,255,0.20)]"
-                  : "text-slate-600 hover:text-[#0A1A3A] hover:bg-white/70",
+                  ? "bg-[#EEF5FF] text-[#2F6BFF] shadow-[inset_0_0_0_1px_#BFD5FF]"
+                  : "text-[#07142F] hover:text-[#2F6BFF] hover:bg-[#F6FAFF]",
                 isCollapsed && "justify-center px-2"
               )}
             >
               {active && !isCollapsed && (
                 <span
-                  className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-[#2B6BFF]"
-                  style={{ boxShadow: "0 0 12px rgba(43,107,255,0.45)" }}
+                  className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-[#2F6BFF]"
+                  style={{ boxShadow: "0 0 12px rgba(47,107,255,0.45)" }}
                 />
               )}
               <item.icon
                 className={cn(
                   "h-[17px] w-[17px] flex-shrink-0 transition-colors",
-                  active ? "text-[#2B6BFF]" : "text-slate-500 group-hover:text-[#0A1A3A]"
+                  active ? "text-[#2F6BFF]" : "text-[#07142F] group-hover:text-[#2F6BFF]"
                 )}
               />
               {!isCollapsed && <span className="tracking-tight">{item.label}</span>}
@@ -128,12 +130,15 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
       </nav>
 
       {/* Bottom actions */}
-      <div className="p-2 border-t border-slate-200 space-y-0.5">
+      <div
+        className="p-2 space-y-0.5"
+        style={{ borderTop: "1px solid var(--scm-border-blue)" }}
+      >
         <Link
           href="/dashboard/notifications"
           onClick={onNavClick}
           className={cn(
-            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0A1A3A] hover:bg-white/70 transition-colors relative",
+            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#07142F] hover:text-[#2F6BFF] hover:bg-[#F6FAFF] transition-colors relative",
             isCollapsed && "justify-center px-2"
           )}
         >
@@ -142,7 +147,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
           {unreadCount > 0 && (
             <span
               className={cn(
-                "text-white text-xs font-bold rounded-full flex items-center justify-center bg-[#2B6BFF]",
+                "text-white text-xs font-bold rounded-full flex items-center justify-center bg-[#2F6BFF]",
                 isCollapsed
                   ? "absolute -top-1 -right-1 w-4 h-4 text-[10px]"
                   : "ml-auto w-5 h-5"
@@ -157,7 +162,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
           <button
             type="submit"
             className={cn(
-              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-colors",
+              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#07142F] hover:text-[#DC2626] hover:bg-rose-50 transition-colors",
               isCollapsed && "justify-center px-2"
             )}
           >
@@ -171,7 +176,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
           <button
             onClick={() => setCollapsed(!isCollapsed)}
             className={cn(
-              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:text-[#0A1A3A] hover:bg-white/70 transition-colors",
+              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#64748B] hover:text-[#07142F] hover:bg-[#F6FAFF] transition-colors",
               isCollapsed && "justify-center px-2"
             )}
           >

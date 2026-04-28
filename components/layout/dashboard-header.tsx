@@ -39,7 +39,10 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
     : "U";
 
   return (
-    <header className="h-[60px] sm:h-[72px] lg:h-[80px] bg-white/95 backdrop-blur-md border-b border-slate-200 flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30">
+    <header
+      className="h-[60px] sm:h-[72px] lg:h-[80px] bg-white/95 backdrop-blur-md flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30"
+      style={{ borderBottom: "1px solid var(--scm-border-blue)" }}
+    >
       {/* Mobile menu — controlled Sheet so we can close it on nav click */}
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger render={<button className="lg:hidden p-2 text-slate-600 hover:text-[#0A1A3A] mr-2" />}>
@@ -47,12 +50,11 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="w-72 p-0 border-slate-200 overflow-hidden text-[#0A1A3A]"
+          className="w-[280px] sm:w-72 p-0 overflow-hidden text-[#0F172A]"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
-              "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
-              "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
+              "linear-gradient(180deg, #FFFFFF 0%, var(--scm-bg-surface) 100%)",
+            borderRight: "1px solid var(--scm-border-blue)",
           }}
         >
           <DashboardSidebar
@@ -110,8 +112,8 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
         {/* User menu */}
         <DropdownMenu>
           <DropdownMenuTrigger render={<button className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors" />}>
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="bg-[#2B6BFF]/15 text-[#2B6BFF] text-xs font-bold">
+            <Avatar className="h-8 w-8 ring-1 ring-[#07142F]">
+              <AvatarFallback className="scm-avatar text-xs font-bold">
                 {initials}
               </AvatarFallback>
             </Avatar>

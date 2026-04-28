@@ -36,12 +36,12 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div
-      className="flex h-[100dvh] w-full text-[#0A1A3A] overflow-hidden"
+      className="flex h-[100dvh] w-full text-[#0F172A] overflow-hidden"
       style={{
         backgroundImage:
-          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
-          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
-          "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
+          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(47,107,255,0.10), rgba(47,107,255,0) 62%)," +
+          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(47,107,255,0.06), rgba(47,107,255,0) 65%)," +
+          "linear-gradient(180deg, #F6FAFF 0%, #EEF5FF 100%)",
       }}
     >
       <DashboardSidebar unreadCount={unreadCount} />
