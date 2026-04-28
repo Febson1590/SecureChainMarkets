@@ -124,7 +124,7 @@ export default async function HomePage() {
           }}
         />
 
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-y-7 sm:gap-y-10 lg:gap-x-12 items-start">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] gap-y-7 sm:gap-y-10 lg:gap-x-6 xl:gap-x-8 items-start">
           {/* Cell A: Copy block (mobile order 1, desktop col 1 row 1) */}
           <div className="min-w-0 lg:col-start-1 lg:row-start-1">
             <Eyebrow>Digital-Asset Brokerage</Eyebrow>
@@ -178,7 +178,7 @@ export default async function HomePage() {
           </div>
 
           {/* Cell B: Hero visual (mobile order 2, desktop col 2 spans both rows) */}
-          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0">
+          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0 md:-translate-x-5 lg:-translate-x-12 xl:-translate-x-14">
             <HeroProductShot />
           </div>
 
@@ -597,10 +597,21 @@ export default async function HomePage() {
    Backed by gpt-image-1 generated assets in /public/landing/.
    ══════════════════════════════════════════════════════════════════════ */
 function HeroProductShot() {
-  /* Strong radial vignette mask so every edge feathers into the page bg.
-     Pure radial works the same on phone (full-bleed) and desktop (right column). */
-  const vignette =
-    "radial-gradient(115% 95% at 55% 50%, #000 55%, rgba(0,0,0,0.5) 80%, transparent 100%)";
+  /* Soft elliptical mask — every edge (top, bottom, left, right) feathers
+     into transparency so there's no rectangular boundary. */
+  const ellipseMask =
+    "radial-gradient(ellipse 78% 76% at 50% 50%, " +
+    "rgba(0,0,0,1) 58%, " +
+    "rgba(0,0,0,0.75) 72%, " +
+    "rgba(0,0,0,0) 100%)";
+
+  /* Four-side white gradient overlay — paints the page bg color over the
+     outer band of the image so blends are stronger near the edges. */
+  const fourSideOverlay =
+    "linear-gradient(to right,  #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)," +
+    "linear-gradient(to left,   #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)," +
+    "linear-gradient(to bottom, #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)," +
+    "linear-gradient(to top,    #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)";
 
   return (
     <div className="relative w-full">
@@ -608,7 +619,7 @@ function HeroProductShot() {
         className="relative w-full will-change-transform"
         style={{
           filter:
-            "drop-shadow(0 24px 32px rgba(15,23,42,0.10)) drop-shadow(0 6px 14px rgba(15,23,42,0.05))",
+            "drop-shadow(0 22px 30px rgba(15,23,42,0.08)) drop-shadow(0 6px 14px rgba(15,23,42,0.05))",
         }}
       >
         <Image
@@ -620,11 +631,18 @@ function HeroProductShot() {
           sizes="(max-width: 1024px) 100vw, 640px"
           className="relative w-full h-auto object-contain scale-[1.02] sm:scale-[1.04]"
           style={{
-            opacity: 0.97,
-            filter: "brightness(1.04) contrast(1.05) saturate(1.02)",
-            maskImage: vignette,
-            WebkitMaskImage: vignette,
+            opacity: 0.98,
+            filter: "brightness(1.02) contrast(1.02)",
+            maskImage: ellipseMask,
+            WebkitMaskImage: ellipseMask,
           }}
+        />
+        {/* Four-side white blend — sits above the masked image so
+            the residual edges fade smoothly into the page bg. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none z-[2]"
+          style={{ background: fourSideOverlay }}
         />
       </div>
     </div>
