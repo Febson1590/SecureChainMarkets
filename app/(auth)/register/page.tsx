@@ -66,9 +66,10 @@ function flagEmoji(code: string): string {
 }
 
 const PWD_RULES = [
-  { label: "At least 8 characters",      test: (p: string) => p.length >= 8 },
-  { label: "Contains uppercase letter",   test: (p: string) => /[A-Z]/.test(p) },
-  { label: "Contains number",             test: (p: string) => /[0-9]/.test(p) },
+  { label: "At least 8 characters",     test: (p: string) => p.length >= 8 },
+  { label: "Contains uppercase letter", test: (p: string) => /[A-Z]/.test(p) },
+  { label: "Contains lowercase letter", test: (p: string) => /[a-z]/.test(p) },
+  { label: "Contains number",           test: (p: string) => /[0-9]/.test(p) },
 ];
 
 const STEPS = [
@@ -167,6 +168,9 @@ export default function RegisterPage() {
     email:           "",
     phone:           "",
     country:         "",
+    state:           "",
+    city:            "",
+    address:         "",
     password:        "",
     confirmPassword: "",
   });
@@ -176,6 +180,7 @@ export default function RegisterPage() {
   const [showConfirm,  setShowConfirm]  = useState(false);
   const [verifyState,  setVerifyState]  = useState<"idle" | "checking" | "verified">("idle");
   const [termsOk,      setTermsOk]      = useState(false);
+  const [privacyOk,    setPrivacyOk]    = useState(false);
   const [loading,      setLoading]      = useState(false);
   const [submitError,  setSubmitError]  = useState("");
 
@@ -198,10 +203,12 @@ export default function RegisterPage() {
     if (s === 3) {
       if (formData.password.length < 8) errs.password = "Password must be at least 8 characters";
       else if (!/[A-Z]/.test(formData.password)) errs.password = "Include at least one uppercase letter";
+      else if (!/[a-z]/.test(formData.password)) errs.password = "Include at least one lowercase letter";
       else if (!/[0-9]/.test(formData.password)) errs.password = "Include at least one number";
       if (formData.password !== formData.confirmPassword) errs.confirmPassword = "Passwords do not match";
       if (verifyState !== "verified") errs.verify = "Please complete human verification";
-      if (!termsOk) errs.terms = "You must accept the Terms & Privacy Policy";
+      if (!termsOk)   errs.terms   = "You must accept the Terms & Conditions";
+      if (!privacyOk) errs.privacy = "You must accept the Privacy Policy";
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -375,7 +382,7 @@ export default function RegisterPage() {
               <div className="space-y-5">
                 <StepHeader step={step} />
 
-                <Field label="Country / Region" error={errors.country} required>
+                <Field label="Country" error={errors.country} required>
                   <div className="relative">
                     <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 z-10 pointer-events-none" />
                     <ChevronRight className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 z-10 pointer-events-none rotate-90" />
@@ -387,6 +394,32 @@ export default function RegisterPage() {
                         return <option key={c} value={c}>{flag}{c}</option>;
                       })}
                     </select>
+                  </div>
+                </Field>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <Field label="State / Region" error={errors.state}>
+                    <div className="relative">
+                      <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                      <input value={formData.state} onChange={set("state")}
+                        placeholder="e.g. California" className={inputCls} />
+                    </div>
+                  </Field>
+
+                  <Field label="City" error={errors.city}>
+                    <div className="relative">
+                      <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                      <input value={formData.city} onChange={set("city")}
+                        placeholder="e.g. San Francisco" className={inputCls} />
+                    </div>
+                  </Field>
+                </div>
+
+                <Field label="Address" error={errors.address}>
+                  <div className="relative">
+                    <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <input value={formData.address} onChange={set("address")}
+                      placeholder="Street address (optional)" className={inputCls} />
                   </div>
                 </Field>
 
@@ -491,7 +524,7 @@ export default function RegisterPage() {
                   )}
                 </div>
 
-                {/* Terms */}
+                {/* Terms checkbox */}
                 <div className="space-y-1.5">
                   <label
                     className="flex items-start gap-3.5 cursor-pointer group"
@@ -512,15 +545,45 @@ export default function RegisterPage() {
                     </div>
                     <span className="text-[12.5px] text-slate-600 leading-relaxed mt-0.5">
                       I agree to SecureChainMarkets&apos;s{" "}
-                      <Link href="/terms" target="_blank" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Terms of Service</Link>
-                      {" "}and{" "}
-                      <Link href="/privacy" target="_blank" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Privacy Policy</Link>.
-                      {" "}I confirm I am at least 18 years old.
+                      <Link href="/terms" target="_blank" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Terms &amp; Conditions</Link>
+                      {" "}and confirm I am at least 18 years old.
                     </span>
                   </label>
                   {errors.terms && (
                     <p className="flex items-center gap-1.5 text-[12px] text-rose-500 pl-8">
                       <AlertCircle size={11} /> {errors.terms}
+                    </p>
+                  )}
+                </div>
+
+                {/* Privacy checkbox */}
+                <div className="space-y-1.5">
+                  <label
+                    className="flex items-start gap-3.5 cursor-pointer group"
+                    onClick={() => {
+                      setPrivacyOk(v => {
+                        if (errors.privacy && !v) setErrors(prev => { const next = { ...prev }; delete next.privacy; return next; });
+                        return !v;
+                      });
+                    }}
+                  >
+                    <div className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-200
+                      ${privacyOk
+                        ? "bg-[#2B6BFF] border border-[#2B6BFF]"
+                        : errors.privacy
+                          ? "bg-rose-50 border border-rose-300"
+                          : "bg-white border border-slate-300 group-hover:border-slate-400"}`}>
+                      {privacyOk && <Check size={12} className="text-white" strokeWidth={3} />}
+                    </div>
+                    <span className="text-[12.5px] text-slate-600 leading-relaxed mt-0.5">
+                      I have read and accept the{" "}
+                      <Link href="/privacy" target="_blank" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Privacy Policy</Link>
+                      {" "}covering how my data is collected and used.
+                    </span>
+                  </label>
+                  {errors.privacy && (
+                    <p className="flex items-center gap-1.5 text-[12px] text-rose-500 pl-8">
+                      <AlertCircle size={11} /> {errors.privacy}
                     </p>
                   )}
                 </div>

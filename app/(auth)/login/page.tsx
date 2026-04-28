@@ -143,10 +143,6 @@ export default function LoginPage() {
     }
   }
 
-  function comingSoon(provider: string) {
-    toast.info(`${provider} sign-in is coming soon.`);
-  }
-
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
@@ -277,33 +273,6 @@ export default function LoginPage() {
                   </button>
                 </form>
 
-                {/* or continue with */}
-                <div className="mt-7 flex items-center gap-3">
-                  <div className="flex-1 h-px bg-slate-200" />
-                  <span className="text-[12.5px] text-slate-500">or continue with</span>
-                  <div className="flex-1 h-px bg-slate-200" />
-                </div>
-
-                {/* Social buttons */}
-                <div className="mt-5 space-y-3">
-                  <button
-                    type="button"
-                    onClick={() => comingSoon("Google")}
-                    className="w-full h-12 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors inline-flex items-center justify-center gap-3 text-[14px] font-semibold text-[#0A1A3A]"
-                  >
-                    <GoogleIcon />
-                    Continue with Google
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => comingSoon("Apple")}
-                    className="w-full h-12 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors inline-flex items-center justify-center gap-3 text-[14px] font-semibold text-[#0A1A3A]"
-                  >
-                    <AppleIcon />
-                    Continue with Apple
-                  </button>
-                </div>
-
                 {/* Secure Login info card */}
                 <div className="mt-6 p-4 rounded-xl bg-[#EAF2FF] border border-[#DCE6FA] flex items-start gap-3">
                   <ShieldCheck className="h-5 w-5 text-[#2B6BFF] flex-shrink-0 mt-0.5" />
@@ -432,25 +401,6 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-/* ── Inline brand icons (Google, Apple) ───────────────────────────────── */
-function GoogleIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
-      <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.55-.21-2.27H12v4.3h6.43c-.28 1.5-1.13 2.78-2.41 3.62v3h3.9c2.28-2.1 3.57-5.18 3.57-8.65z" />
-      <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.9-3c-1.08.72-2.46 1.16-4.05 1.16-3.12 0-5.76-2.1-6.7-4.93H1.27v3.1A12 12 0 0 0 12 24z" />
-      <path fill="#FBBC05" d="M5.3 14.32A7.2 7.2 0 0 1 4.92 12c0-.81.14-1.6.38-2.32V6.58H1.27A12 12 0 0 0 0 12c0 1.94.46 3.78 1.27 5.42l4.03-3.1z" />
-      <path fill="#EA4335" d="M12 4.75c1.76 0 3.34.6 4.59 1.8l3.44-3.44C17.95 1.18 15.24 0 12 0A12 12 0 0 0 1.27 6.58l4.03 3.1C6.24 6.85 8.88 4.75 12 4.75z" />
-    </svg>
-  );
-}
-function AppleIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden fill="#0A1A3A">
-      <path d="M16.365 1.43c0 1.14-.43 2.23-1.16 3.04-.78.87-2.04 1.55-3.18 1.46-.14-1.13.42-2.3 1.13-3.05.79-.84 2.1-1.47 3.21-1.45zM20.1 17.18c-.55 1.27-.81 1.83-1.51 2.95-.99 1.56-2.39 3.5-4.13 3.51-1.55.02-1.95-.99-4.05-.97-2.1.01-2.55.99-4.1.96-1.74-.02-3.07-1.78-4.06-3.34C-.4 16.04-.69 10.97 1.46 8.27c1.53-1.92 3.94-3.04 6.2-3.04 2.3 0 3.74 1.27 5.65 1.27 1.85 0 2.97-1.27 5.62-1.27 2.01 0 4.13 1.1 5.65 3-4.97 2.71-4.16 9.78-4.48 8.95z" />
-    </svg>
   );
 }
 

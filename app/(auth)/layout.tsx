@@ -1,38 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { AuthHeader } from "./_header";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-[#F7FAFF] text-[#0A1A3A]">
-      {/* ── Top header ────────────────────────────────────────────────────── */}
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-10 h-[80px] flex items-center justify-between">
-          <Link
-            href="/"
-            aria-label="SecureChainMarkets — home"
-            className="inline-flex items-center"
-          >
-            <Image
-              src="/assets/logos/securechainmarkets-logo.png"
-              alt="SecureChainMarkets"
-              width={1774}
-              height={887}
-              priority
-              className="h-10 sm:h-11 w-auto pointer-events-none select-none"
-            />
-          </Link>
-
-          <div className="flex items-center gap-2 text-[13.5px]">
-            <span className="hidden sm:inline text-slate-600">Don&apos;t have an account?</span>
-            <Link
-              href="/register"
-              className="font-semibold text-[#2B6BFF] hover:text-[#1A4FCC] transition-colors"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      </header>
+      <AuthHeader />
 
       {/* ── Main slot — pages render their own body ──────────────────────── */}
       <main className="flex-1">{children}</main>
