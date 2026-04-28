@@ -4,11 +4,11 @@ import { AuthHeader } from "./_header";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAFF] text-[#0A1A3A]">
+    <div className="bg-[#F7FAFF] text-[#0A1A3A]">
       <AuthHeader />
 
       {/* ── Main slot — pages render their own body ──────────────────────── */}
-      <main className="flex-1">{children}</main>
+      <main>{children}</main>
 
       {/* ── Footer ────────────────────────────────────────────────────────── */}
       <footer className="bg-white border-t border-slate-200">
