@@ -178,7 +178,7 @@ export default async function HomePage() {
           </div>
 
           {/* Cell B: Hero visual (mobile order 2, desktop col 2 spans both rows) */}
-          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0 lg:-translate-x-16 xl:-translate-x-20">
+          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0 md:-translate-x-8 lg:-translate-x-32 xl:-translate-x-44">
             <HeroProductShot />
           </div>
 
