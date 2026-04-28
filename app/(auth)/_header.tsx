@@ -12,7 +12,7 @@ export function AuthHeader() {
             width={1774}
             height={887}
             priority
-            className="h-[144px] sm:h-[160px] w-auto pointer-events-none select-none"
+            className="h-[104px] sm:h-[120px] w-auto pointer-events-none select-none"
           />
         </Link>
       </div>

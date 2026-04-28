@@ -52,7 +52,7 @@ export function PublicNavbar() {
               width={1774}
               height={887}
               priority
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-[144px] sm:h-[160px] lg:h-[176px] w-auto max-w-none pointer-events-none select-none"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-[108px] sm:h-[120px] lg:h-[128px] w-auto max-w-none pointer-events-none select-none"
             />
           </Link>
 
