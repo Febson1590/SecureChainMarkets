@@ -99,7 +99,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           1 · HERO
       ════════════════════════════════════════════════════════════════ */}
-      <section className="relative pt-20 sm:pt-28 lg:pt-36 pb-12 sm:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden pt-20 sm:pt-28 lg:pt-36 pb-12 sm:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8">
         {/* Soft layered glow */}
         <div
           aria-hidden
@@ -124,9 +124,30 @@ export default async function HomePage() {
           }}
         />
 
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] gap-y-7 sm:gap-y-10 lg:gap-x-6 xl:gap-x-8 items-start">
-          {/* Cell A: Copy block (mobile order 1, desktop col 1 row 1) */}
-          <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+        {/* DESKTOP background hero image — absolute, behind the text. Sits to
+            the right of the section, fills vertically, device anchored right. */}
+        <div
+          aria-hidden
+          className="hidden lg:block absolute top-0 bottom-0 left-[36%] right-[-4%] xl:right-[-2%] pointer-events-none z-0"
+        >
+          <Image
+            src="/landing/hero.png"
+            alt=""
+            width={1536}
+            height={1024}
+            priority
+            sizes="65vw"
+            className="absolute inset-0 w-full h-full object-contain object-right"
+            style={{
+              opacity: 0.98,
+              filter: "brightness(1.02) contrast(1.02)",
+            }}
+          />
+        </div>
+
+        <div className="max-w-[1200px] mx-auto relative z-10">
+          {/* Cell A: Copy block — sits above the bg image on lg+ */}
+          <div className="min-w-0 lg:max-w-[56%]">
             <Eyebrow>Digital-Asset Brokerage</Eyebrow>
 
             <Link
@@ -177,13 +198,25 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Cell B: Hero visual (mobile order 2, desktop col 2 spans both rows) */}
-          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0 md:-translate-x-8 lg:-translate-x-32 xl:-translate-x-44">
-            <HeroProductShot />
+          {/* MOBILE/TABLET hero visual — in normal flow under the copy. */}
+          <div className="lg:hidden relative mt-8 sm:mt-12 -mx-4 sm:mx-0">
+            <Image
+              src="/landing/hero.png"
+              alt="SecureChainMarkets dashboard shown on a laptop and phone"
+              width={1536}
+              height={1024}
+              priority
+              sizes="(max-width: 640px) 100vw, 90vw"
+              className="block w-full h-auto object-contain max-w-[450px] sm:max-w-[640px] mx-auto"
+              style={{
+                opacity: 0.98,
+                filter: "brightness(1.02) contrast(1.02)",
+              }}
+            />
           </div>
 
-          {/* Cell C: Stat chips (mobile order 3 — under hero, desktop col 1 row 2) */}
-          <div className="min-w-0 lg:col-start-1 lg:row-start-2">
+          {/* Stat chips — under copy on desktop, after hero visual on mobile */}
+          <div className="mt-7 sm:mt-10 lg:mt-9 lg:max-w-[56%]">
             <div className="grid grid-cols-2 gap-2.5 sm:gap-3 max-w-[480px]">
               {heroStats.map((s) => (
                 <div key={s.label} className="rounded-xl bg-white border border-slate-200 px-3 sm:px-4 py-2.5 sm:py-3 shadow-[0_4px_14px_-8px_rgba(15,23,42,0.10)]">
@@ -591,39 +624,3 @@ export default async function HomePage() {
   );
 }
 
-
-/* ══════════════════════════════════════════════════════════════════════
-   HERO PRODUCT SHOT — photoreal laptop + phone composition
-   Backed by gpt-image-1 generated assets in /public/landing/.
-   ══════════════════════════════════════════════════════════════════════ */
-function HeroProductShot() {
-  /* The new hero asset already has white padding around the device that
-     blends with the page background, so we don't apply heavy masks or
-     white overlays. Just a very soft edge fade as a safety net for any
-     residual rectangle, and a subtle filter for crispness. */
-  const softEdge =
-    "radial-gradient(ellipse at center, " +
-    "rgba(0,0,0,1) 70%, " +
-    "rgba(0,0,0,0.4) 90%, " +
-    "rgba(0,0,0,0) 100%)";
-
-  return (
-    <div className="relative w-full">
-      <Image
-        src="/landing/hero.png"
-        alt="SecureChainMarkets dashboard shown on a laptop and phone"
-        width={1536}
-        height={1024}
-        priority
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 820px"
-        className="block h-auto object-contain w-full max-w-[420px] sm:max-w-[560px] mx-auto lg:mx-0 lg:max-w-[760px] lg:w-[115%] xl:max-w-[820px] xl:w-[118%]"
-        style={{
-          opacity: 0.98,
-          filter: "brightness(1.02) contrast(1.02)",
-          maskImage: softEdge,
-          WebkitMaskImage: softEdge,
-        }}
-      />
-    </div>
-  );
-}
