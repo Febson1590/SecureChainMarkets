@@ -259,7 +259,7 @@ export default function RegisterPage() {
     "w-full h-12 pl-11 pr-9 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all appearance-none cursor-pointer";
 
   return (
-    <div className="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
+    <div className="px-4 sm:px-6 lg:px-10 py-8 sm:py-12 lg:py-14 pb-12 sm:pb-16">
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
 
         {/* ════════════════════ LEFT — Branding panel (desktop only) ═════════════════ */}
@@ -290,9 +290,9 @@ export default function RegisterPage() {
         </div>
 
         {/* ════════════════════ RIGHT — Form card ═════════════════ */}
-        <div className="order-1 lg:order-2 w-full">
+        <div className="order-1 lg:order-2 w-full max-w-[560px] mx-auto lg:mx-0 lg:max-w-none">
           <div
-            className="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9"
+            className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8 lg:p-9"
             style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
           >
             <h2 className="text-[26px] sm:text-[28px] font-bold text-[#0A1A3A] tracking-tight">

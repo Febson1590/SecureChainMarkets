@@ -142,7 +142,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
+    <div className="px-4 sm:px-6 lg:px-10 py-8 sm:py-12 lg:py-14 pb-12 sm:pb-16">
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
 
         {/* ════════════════════ LEFT: Branding panel (desktop only) ═════════════════ */}
@@ -173,9 +173,9 @@ export default function LoginPage() {
         </div>
 
         {/* ════════════════════ RIGHT: Form card ═════════════════ */}
-        <div className="order-1 lg:order-2 w-full">
+        <div className="order-1 lg:order-2 w-full max-w-[560px] mx-auto lg:mx-0 lg:max-w-none">
           <div
-            className="bg-white rounded-2xl border border-slate-200 p-7 sm:p-9"
+            className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8 lg:p-9"
             style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
           >
             {step === "credentials" && (
