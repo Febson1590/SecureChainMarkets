@@ -61,14 +61,14 @@ export function PublicFooter() {
             <Link
               href="/"
               aria-label="SecureChainMarkets — home"
-              className="inline-flex items-center h-14 px-5 rounded-full bg-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)] mb-5"
+              className="relative inline-flex items-center justify-center h-36 w-[280px] rounded-3xl bg-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.55)] mb-6"
             >
               <Image
                 src="/assets/logos/securechainmarkets-logo.png"
                 alt="SecureChainMarkets"
                 width={1774}
                 height={887}
-                className="h-8 w-auto pointer-events-none select-none"
+                className="h-28 w-auto max-w-none pointer-events-none select-none"
               />
             </Link>
             <p className="text-[13px] leading-relaxed text-slate-400 max-w-xs mb-6">
