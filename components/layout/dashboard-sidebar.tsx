@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, TrendingUp, Users, ArrowDownToLine,
@@ -46,20 +46,49 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
   return (
     <aside
       className={cn(
-        "flex flex-col bg-[#0B1220]/80 backdrop-blur-md border-r border-white/[0.06] transition-all duration-300 flex-shrink-0",
+        "flex flex-col backdrop-blur-md border-r border-slate-200 transition-all duration-300 flex-shrink-0",
         !isMobile && (isCollapsed ? "hidden lg:flex w-16" : "hidden lg:flex w-60"),
         isMobile && "w-full h-full"
       )}
+      style={{
+        backgroundImage:
+          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
+          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
+          "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
+      }}
     >
-      {/* Logo */}
+      {/* Logo — bleeds vertically, same treatment as the public navbar */}
       <div className={cn(
-        "flex items-center h-16 px-4 border-b border-white/[0.06] flex-shrink-0",
+        "flex items-center h-[60px] sm:h-[72px] lg:h-[80px] px-4 border-b border-slate-200 flex-shrink-0",
         isCollapsed && "justify-center px-2"
       )}>
-        {isCollapsed
-          ? <Logo variant="icon" size="sm" href="/dashboard" />
-          : <Logo size="sm" href="/dashboard" />
-        }
+        {isCollapsed ? (
+          <Link href="/dashboard" aria-label="SecureChainMarkets — dashboard" className="inline-flex items-center">
+            <Image
+              src="/assets/logos/securechainmarkets-icon.png"
+              alt="SecureChainMarkets"
+              width={32}
+              height={32}
+              priority
+              className="flex-shrink-0"
+            />
+          </Link>
+        ) : (
+          <Link
+            href="/dashboard"
+            aria-label="SecureChainMarkets — dashboard"
+            className="relative h-full w-full"
+          >
+            <Image
+              src="/assets/logos/securechainmarkets-logo.png"
+              alt="SecureChainMarkets"
+              width={1774}
+              height={887}
+              priority
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-[100px] sm:h-[120px] lg:h-[128px] w-auto max-w-none pointer-events-none select-none"
+            />
+          </Link>
+        )}
       </div>
 
       {/* Nav */}
@@ -75,21 +104,21 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
               className={cn(
                 "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group",
                 active
-                  ? "bg-[#2B6BFF]/12 text-white shadow-[inset_0_0_0_1px_rgba(43,107,255,0.18)]"
-                  : "text-slate-300 hover:text-white hover:bg-white/[0.05]",
+                  ? "bg-[#2B6BFF]/12 text-[#0A1A3A] shadow-[inset_0_0_0_1px_rgba(43,107,255,0.20)]"
+                  : "text-slate-600 hover:text-[#0A1A3A] hover:bg-white/70",
                 isCollapsed && "justify-center px-2"
               )}
             >
               {active && !isCollapsed && (
                 <span
-                  className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-[#3B82F6]"
-                  style={{ boxShadow: "0 0 12px rgba(59,130,246,0.55)" }}
+                  className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-[#2B6BFF]"
+                  style={{ boxShadow: "0 0 12px rgba(43,107,255,0.45)" }}
                 />
               )}
               <item.icon
                 className={cn(
                   "h-[17px] w-[17px] flex-shrink-0 transition-colors",
-                  active ? "text-[#3B82F6]" : "text-slate-400 group-hover:text-white"
+                  active ? "text-[#2B6BFF]" : "text-slate-500 group-hover:text-[#0A1A3A]"
                 )}
               />
               {!isCollapsed && <span className="tracking-tight">{item.label}</span>}
@@ -99,12 +128,12 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
       </nav>
 
       {/* Bottom actions */}
-      <div className="p-2 border-t border-white/[0.06] space-y-0.5">
+      <div className="p-2 border-t border-slate-200 space-y-0.5">
         <Link
           href="/dashboard/notifications"
           onClick={onNavClick}
           className={cn(
-            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-colors relative",
+            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0A1A3A] hover:bg-white/70 transition-colors relative",
             isCollapsed && "justify-center px-2"
           )}
         >
@@ -113,12 +142,11 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
           {unreadCount > 0 && (
             <span
               className={cn(
-                "text-[#08111F] text-xs font-bold rounded-full flex items-center justify-center",
+                "text-white text-xs font-bold rounded-full flex items-center justify-center bg-[#2B6BFF]",
                 isCollapsed
                   ? "absolute -top-1 -right-1 w-4 h-4 text-[10px]"
                   : "ml-auto w-5 h-5"
               )}
-              style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}
             >
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
@@ -129,7 +157,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
           <button
             type="submit"
             className={cn(
-              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-colors",
+              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-colors",
               isCollapsed && "justify-center px-2"
             )}
           >
@@ -143,7 +171,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
           <button
             onClick={() => setCollapsed(!isCollapsed)}
             className={cn(
-              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:text-white hover:bg-white/5 transition-colors",
+              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:text-[#0A1A3A] hover:bg-white/70 transition-colors",
               isCollapsed && "justify-center px-2"
             )}
           >

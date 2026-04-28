@@ -21,12 +21,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div
-      className="flex h-[100dvh] w-full text-slate-200 overflow-hidden"
+      className="flex h-[100dvh] w-full text-[#0A1A3A] overflow-hidden"
       style={{
-        background:
-          "radial-gradient(70% 55% at 90% 0%, rgba(43,107,255,0.22), transparent 65%)," +
-          "radial-gradient(55% 45% at 0% 100%, rgba(43,107,255,0.14), transparent 70%)," +
-          "linear-gradient(135deg, #0A0F1F 0%, #16243F 50%, #0A0F1F 100%)",
+        backgroundImage:
+          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
+          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
+          "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
       }}
     >
       {/* Desktop sidebar — hidden on mobile (AdminNav handles its own visibility) */}

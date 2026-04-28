@@ -195,14 +195,15 @@
 ::-webkit-scrollbar-thumb { background: oklch(0.25 0.03 240); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: oklch(0.35 0.03 240); }
 
-/* ─── Glass ─────────────────────────────────────── */
+/* ─── Card surface — light, sits on the brand gradient ──────────── */
 .glass-card {
-  background: rgba(15, 23, 42, 0.78);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 30px -16px rgba(15, 23, 42, 0.18);
+  color: #0A1A3A;
 }
 
 .glass-card-hover {
@@ -211,11 +212,11 @@
               border-color 0.3s ease;
 }
 .glass-card-hover:hover {
-  border-color: rgba(59, 130, 246, 0.35);
+  border-color: rgba(43, 107, 255, 0.35);
   box-shadow:
-    0 0 0 1px rgba(59, 130, 246, 0.08),
-    0 10px 32px rgba(59, 130, 246, 0.10),
-    0 20px 50px rgba(0, 0, 0, 0.40);
+    0 0 0 1px rgba(43, 107, 255, 0.08),
+    0 14px 36px -16px rgba(43, 107, 255, 0.18),
+    0 22px 50px -22px rgba(15, 23, 42, 0.18);
 }
 
 /* ─── Mockup frame (dashboard) ───────────────────── */
