@@ -2,50 +2,67 @@ import Link from "next/link";
 import { Fragment } from "react";
 import {
   ArrowRight, ArrowUpRight, ArrowDownRight,
-  ShieldCheck, BarChart3, Users, BadgeCheck, Headphones,
-  TrendingUp, Globe, Lock, ChevronRight,
-  UserPlus, CreditCard, LineChart, Search, Bell,
-  Wallet, Activity,
+  ShieldCheck, BarChart3, Users, Lock, Eye, Award,
+  LineChart, ChevronRight, LayoutGrid,
+  Sparkles, Bitcoin, Landmark, Coins,
+  Activity, KeyRound, FileCheck2, CheckCircle2,
 } from "lucide-react";
 import { getMarketAssets } from "@/lib/coingecko";
-import { formatCurrency, formatCompact } from "@/lib/utils";
+import { formatCurrency, formatPercent, formatCompact } from "@/lib/utils";
 import { CryptoIcon } from "@/components/public/crypto-icon";
+import { PLATFORM } from "@/lib/company";
 
-const CRYPTO_COLORS: Record<string, string> = {
-  BTC: "#F7931A", ETH: "#627EEA", USDT: "#26A17B", BNB: "#F3BA2F",
-  SOL: "#9945FF", XRP: "#346AA9", ADA: "#3CC8C8", DOGE: "#C2A633",
-  AVAX: "#E84142", DOT: "#E6007A", LINK: "#2A5ADA", LTC: "#BEBEBE",
-};
-
-/* ── Why Traders Choose Us ────────────────────────────────── */
-const valueProps = [
-  { icon: ShieldCheck, title: "Secure & Reliable",      desc: "Top-tier security with cold storage, encryption, and multi-layer protection for your assets." },
-  { icon: TrendingUp,  title: "Advanced Trading",       desc: "Powerful tools, real-time data, and low spreads for a superior trading experience." },
-  { icon: Users,       title: "User Focused",           desc: "Intuitive platform, 24/7 support, and a smooth experience for every level of trader." },
-  { icon: BadgeCheck,  title: "Regulated & Transparent",desc: "We operate with full transparency and compliance with global regulatory standards." },
+/* ─── Credibility bar ───────────────────────────────────────────────── */
+const credibility = [
+  { icon: ShieldCheck, title: "Account Protection",   desc: "Two-factor sign-in, password hashing and session monitoring on every account." },
+  { icon: LineChart,   title: "Transparent Trading",  desc: "Bid, ask and order details shown clearly before every confirmation." },
+  { icon: BarChart3,   title: "Portfolio Monitoring", desc: "Real-time holdings, P&L and full transaction history in one workspace." },
+  { icon: FileCheck2,  title: "Secure Verification",  desc: "Manual KYC review and identity checks before live funding is enabled." },
 ];
 
-const stats = [
-  { icon: Users,       value: "50K+",   label: "Active Traders"       },
-  { icon: BarChart3,   value: "$2.5B+", label: "Daily Trading Volume" },
-  { icon: Globe,       value: "150+",   label: "Countries"            },
-  { icon: ShieldCheck, value: "99.9%",  label: "Platform Uptime"      },
+/* ─── Feature cards ─────────────────────────────────────────────────── */
+const features = [
+  { icon: Bitcoin,    title: "Crypto Trading",         desc: "Buy and sell supported digital assets with market or limit orders and clear, itemised confirmations." },
+  { icon: BarChart3,  title: "Investment Plans",       desc: "Structured plans with stated terms — review the plan details and risk information before participating." },
+  { icon: Users,      title: "Copy Trading",           desc: "Mirror selected traders' activity in your own account. Transparent performance history; pause or exit any time." },
+  { icon: LayoutGrid, title: "Wallet Management",      desc: "Manage deposit and withdrawal addresses with reviewable activity and per-asset balances." },
+  { icon: ShieldCheck,title: "Account Verification",   desc: "Identity verification is required before funding. Submissions go through a manual review process before approval." },
+  { icon: Eye,        title: "Transaction Monitoring", desc: "Every deposit, trade, and withdrawal is logged with timestamps and visible in your activity history." },
 ];
 
+/* ─── Trust & Operations ────────────────────────────────────────────── */
+const trust = [
+  { icon: Lock,       title: "Encrypted Transport", desc: "All traffic to the platform is sent over TLS. Passwords are hashed with bcrypt and are never stored in plain text." },
+  { icon: Eye,        title: "Full Activity Log",   desc: "Every deposit, trade, and withdrawal you make is visible in your account history with timestamps." },
+  { icon: FileCheck2, title: "Reviewed Onboarding", desc: "Every funded account is manually reviewed against the identity documents you submit during KYC." },
+  { icon: Award,      title: "Transparent Fees",    desc: "Trading fees are published up-front and the final cost is shown on the order confirmation before you submit." },
+];
+
+/* ─── Markets we cover ──────────────────────────────────────────────── */
+const coveredMarkets = [
+  { icon: Bitcoin,    title: "Bitcoin",      desc: "Buy, sell and hold BTC directly — the most-traded asset on the platform, priced in USD." },
+  { icon: Coins,      title: "Ethereum",     desc: "ETH spot trading with market or limit orders, quoted against USD and available on every plan." },
+  { icon: LayoutGrid, title: "Top Altcoins", desc: "SOL, BNB, XRP, ADA, AVAX, LINK, DOT, LTC and other majors — 15 listed assets under one USD quote layer." },
+  { icon: Landmark,   title: "Stablecoins",  desc: "USDT for parking balance between trades or funding an investment plan without market exposure." },
+];
+
+/* ─── Onboarding steps ──────────────────────────────────────────────── */
 const steps = [
-  { n: 1, icon: UserPlus,   title: "Create Account",    desc: "Sign up in minutes and verify your identity securely." },
-  { n: 2, icon: CreditCard, title: "Fund Your Account", desc: "Deposit funds using multiple secure payment methods."   },
-  { n: 3, icon: LineChart,  title: "Start Trading",     desc: "Access markets and trade with confidence and ease."     },
+  { n: "01", title: "Create your account",                    desc: "Register with your email and confirm ownership with a one-time code. No credit card required." },
+  { n: "02", title: "Complete verification",                  desc: "Upload a government-issued ID and a short selfie. Submissions go through a manual review process before approval." },
+  { n: "03", title: "Fund, trade and monitor your portfolio", desc: "Deposit through supported methods, place market or limit orders, and watch holdings in real time." },
 ];
 
-const heroBadges = [
-  { icon: Lock,        title: "256-bit SSL",  sub: "Encryption" },
-  { icon: BadgeCheck,  title: "Regulated &",  sub: "Compliant"  },
-  { icon: ShieldCheck, title: "Secure Asset", sub: "Protection" },
-  { icon: Headphones,  title: "24/7 Expert",  sub: "Support"    },
+/* ─── Security checklist ────────────────────────────────────────────── */
+const securityList = [
+  { icon: KeyRound,    text: "Encrypted access — TLS on every connection and bcrypt-hashed passwords" },
+  { icon: ShieldCheck, text: "Identity verification reviewed manually before live funding is enabled" },
+  { icon: Eye,         text: "Account activity log accessible from your dashboard at any time" },
+  { icon: FileCheck2,  text: "Withdrawal review on every outbound transfer" },
+  { icon: Activity,    text: "Email and in-app activity notifications for sign-ins and balance changes" },
 ];
 
-/* ── Section eyebrow label ────────────────────────────────── */
+/* ─── Section eyebrow label ─────────────────────────────────────────── */
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#2B6BFF] mb-3">
@@ -62,7 +79,18 @@ export default async function HomePage() {
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
   const btc = marketAssets.find((a) => a.symbol === "BTC");
-  const eth = marketAssets.find((a) => a.symbol === "ETH");
+
+  /* Derived stats for the hero. */
+  const totalVolume = marketAssets.reduce((acc, a) => acc + a.volume24h, 0);
+  const totalMcap   = marketAssets.reduce((acc, a) => acc + a.marketCap, 0);
+  const avgChange   = marketAssets.reduce((acc, a) => acc + a.change, 0) / (marketAssets.length || 1);
+
+  const heroStats: { label: string; value: string; accent?: "up" | "down" }[] = [
+    { label: "24h Volume", value: `$${formatCompact(totalVolume)}` },
+    { label: "Market Cap", value: `$${formatCompact(totalMcap)}`   },
+    { label: "Avg 24h Δ",  value: formatPercent(avgChange), accent: avgChange >= 0 ? "up" : "down" },
+    { label: "Listed",     value: `${marketAssets.length}`         },
+  ];
 
   return (
     <div className="bg-white text-[#0A1A3A] overflow-x-hidden">
@@ -71,7 +99,7 @@ export default async function HomePage() {
           1 · HERO
       ════════════════════════════════════════════════════════════════ */}
       <section className="relative pt-32 sm:pt-36 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8">
-        {/* Soft layered glow background — premium fintech, no kitsch */}
+        {/* Soft layered glow */}
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none -z-10"
@@ -90,30 +118,35 @@ export default async function HomePage() {
             backgroundImage:
               "radial-gradient(rgba(10,26,58,0.05) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
-            maskImage:
-              "radial-gradient(60% 60% at 50% 40%, black, transparent 80%)",
-            WebkitMaskImage:
-              "radial-gradient(60% 60% at 50% 40%, black, transparent 80%)",
+            maskImage: "radial-gradient(60% 60% at 50% 40%, black, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(60% 60% at 50% 40%, black, transparent 80%)",
           }}
         />
 
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-14 lg:gap-12 items-center">
           {/* Left — copy */}
           <div className="min-w-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-[12px] font-semibold text-[#0A1A3A] mb-6 shadow-[0_4px_12px_-6px_rgba(15,23,42,0.10)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Live markets · {marketAssets.length}+ assets
-            </div>
+            <Eyebrow>Digital-Asset Brokerage</Eyebrow>
 
-            <h1 className="text-[36px] sm:text-[48px] lg:text-[64px] leading-[1.04] font-bold tracking-tight">
-              Trade Secure.
+            <Link
+              href="/markets"
+              className="group inline-flex items-center gap-2 px-3 py-1.5 mb-5 rounded-full text-[11px] font-semibold tabular-nums text-[#0A1A3A] border border-slate-200 bg-white hover:border-[#2B6BFF]/40 transition-colors shadow-[0_4px_12px_-6px_rgba(15,23,42,0.10)]"
+            >
+              <span className="inline-flex items-center gap-1 px-1.5 py-[1px] rounded-full bg-[#2B6BFF] text-white text-[9px] font-black tracking-wider">
+                <Sparkles className="h-2.5 w-2.5" /> NEW
+              </span>
+              Copy Top Traders in One Click
+              <ArrowRight className="h-3 w-3 opacity-70 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+
+            <h1 className="text-[36px] sm:text-[48px] lg:text-[60px] leading-[1.04] font-bold tracking-tight">
+              Trade Digital Assets
               <br />
-              <span className="text-[#2B6BFF]">Grow Confident.</span>
+              <span className="text-[#2B6BFF]">with Confidence.</span>
             </h1>
             <p className="mt-5 text-[15px] sm:text-[17px] leading-[1.65] text-slate-600 max-w-[510px]">
-              Secure Chain Markets offers a next-generation trading
-              experience with advanced tools, deep liquidity,
-              and institutional-grade security.
+              Access crypto markets, investment tools, and copy-trading features
+              from one secure platform built for modern investors.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -125,26 +158,36 @@ export default async function HomePage() {
                   boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 28px rgba(43,107,255,0.32)",
                 }}
               >
-                Start Trading Now <ArrowRight className="h-4 w-4" />
+                Create Account <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/markets"
-                className="inline-flex items-center justify-center h-12 px-7 rounded-md text-[14px] font-semibold text-[#0A1A3A] bg-white border border-[#0A1A3A]/15 hover:border-[#2B6BFF] hover:text-[#2B6BFF] transition-colors"
+                href="/login"
+                className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md text-[14px] font-semibold text-[#0A1A3A] bg-white border border-[#0A1A3A]/15 hover:border-[#2B6BFF] hover:text-[#2B6BFF] transition-colors"
               >
-                Explore Markets
+                Sign In <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
 
-            {/* Security badges — 2x2 */}
-            <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-5 max-w-[480px]">
-              {heroBadges.map((b) => (
-                <div key={b.title} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 inline-flex items-center justify-center flex-shrink-0 shadow-[0_4px_10px_-4px_rgba(15,23,42,0.08)]">
-                    <b.icon className="h-[18px] w-[18px] text-[#2B6BFF]" strokeWidth={2} />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-[12.5px] font-semibold text-[#0A1A3A] leading-tight">{b.title}</div>
-                    <div className="text-[11.5px] text-slate-500 leading-tight">{b.sub}</div>
+            {/* Trust badges */}
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-slate-500">
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> Secure Account Access</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> KYC Verification</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> Real-Time Portfolio Tracking</span>
+            </div>
+
+            {/* Stat chips — 2x2 */}
+            <div className="mt-8 grid grid-cols-2 gap-3 max-w-[480px]">
+              {heroStats.map((s) => (
+                <div key={s.label} className="rounded-xl bg-white border border-slate-200 px-4 py-3 shadow-[0_4px_14px_-8px_rgba(15,23,42,0.10)]">
+                  <div className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold truncate">{s.label}</div>
+                  <div
+                    className={`mt-1 text-[16px] font-bold tabular-nums truncate ${
+                      s.accent === "up"   ? "text-emerald-600" :
+                      s.accent === "down" ? "text-rose-600" :
+                      "text-[#0A1A3A]"
+                    }`}
+                  >
+                    {s.value}
                   </div>
                 </div>
               ))}
@@ -156,8 +199,6 @@ export default async function HomePage() {
             <HeroMockup
               btcPrice={btc?.price ?? 63321.25}
               btcChange={btc?.change ?? 2.45}
-              ethPrice={eth?.price ?? 3142.88}
-              ethChange={eth?.change ?? 1.24}
               btcSpark={btc?.sparkline ?? []}
               assets={marketAssets}
             />
@@ -166,7 +207,7 @@ export default async function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          2 · MARKET TICKER CARD
+          TICKER CARD
       ════════════════════════════════════════════════════════════════ */}
       <section className="px-4 sm:px-6 lg:px-8 -mt-4 sm:-mt-8 pb-12 relative z-10">
         <div className="max-w-[1200px] mx-auto">
@@ -211,33 +252,23 @@ export default async function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          3 · WHY TRADERS CHOOSE US
+          CREDIBILITY BAR (4 cards)
       ════════════════════════════════════════════════════════════════ */}
       <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto">
-          <div className="text-center mb-14">
-            <Eyebrow>Why Us</Eyebrow>
-            <h2 className="text-[30px] sm:text-[38px] font-bold text-[#0A1A3A] tracking-tight">
-              Why Traders Choose Us
-            </h2>
-            <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-[#2B6BFF]" />
-            <p className="mx-auto mt-5 text-[14.5px] text-slate-600 max-w-[640px] leading-[1.6]">
-              Built for serious traders. Designed for everyone. Backed by world-class
-              security and transparent operations.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {valueProps.map((v) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {credibility.map((c) => (
               <div
-                key={v.title}
-                className="group relative bg-white rounded-2xl border border-slate-200 p-7 text-center transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgba(43,107,255,0.35)] flex flex-col"
+                key={c.title}
+                className="group bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
               >
-                <div className="mx-auto w-14 h-14 rounded-2xl bg-slate-50 group-hover:bg-[#2B6BFF]/12 inline-flex items-center justify-center mb-5 transition-colors duration-300">
-                  <v.icon className="h-6 w-6 text-[#2B6BFF]" strokeWidth={2} />
+                <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                  <c.icon className="h-[18px] w-[18px] text-[#2B6BFF]" strokeWidth={2} />
                 </div>
-                <h3 className="text-[16px] font-semibold text-[#0A1A3A] mb-2">{v.title}</h3>
-                <p className="text-[13px] text-slate-600 leading-[1.6] flex-1">{v.desc}</p>
+                <div className="min-w-0">
+                  <h3 className="text-[14px] font-semibold text-[#0A1A3A] mb-1">{c.title}</h3>
+                  <p className="text-[12.5px] text-slate-600 leading-relaxed">{c.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -245,70 +276,58 @@ export default async function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          4 · STATS — premium wide card with subtle pattern
+          FEATURE GRID — Platform
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-24 bg-white">
+      <section id="capabilities" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-[#F7FAFF] scroll-mt-24">
         <div className="max-w-[1200px] mx-auto">
-          <div
-            className="relative bg-white rounded-3xl border border-slate-200 shadow-[0_30px_70px_-32px_rgba(15,23,42,0.18)] py-12 px-6 sm:px-12 overflow-hidden"
-          >
-            {/* Subtle grid pattern background — refined, not childish */}
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(43,107,255,0.05) 1px, transparent 1px)," +
-                  "linear-gradient(90deg, rgba(43,107,255,0.05) 1px, transparent 1px)",
-                backgroundSize: "44px 44px",
-                maskImage:
-                  "radial-gradient(70% 70% at 50% 50%, black 0%, transparent 100%)",
-                WebkitMaskImage:
-                  "radial-gradient(70% 70% at 50% 50%, black 0%, transparent 100%)",
-              }}
-            />
-            {/* Soft tint */}
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(60% 80% at 50% 0%, rgba(43,107,255,0.06), transparent 60%)",
-              }}
-            />
+          <div className="max-w-2xl mb-12">
+            <Eyebrow>Platform</Eyebrow>
+            <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1]">
+              Everything you need to{" "}
+              <span className="text-[#2B6BFF]">trade with precision.</span>
+            </h2>
+            <p className="text-[14px] text-slate-600 mt-4 leading-relaxed">
+              A focused set of tools and account controls — designed around how
+              traders actually work.
+            </p>
+          </div>
 
-            <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-y-10 lg:gap-y-0 lg:divide-x lg:divide-slate-200">
-              {stats.map((s) => (
-                <div key={s.label} className="flex flex-col items-center text-center px-3 sm:px-4">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0 mb-3 sm:mb-4">
-                    <s.icon className="h-5 w-5 sm:h-6 sm:w-6 text-[#2B6BFF]" strokeWidth={2} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="group bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#2B6BFF]/15">
+                    <f.icon className="h-[18px] w-[18px] text-[#2B6BFF]" strokeWidth={2} />
                   </div>
-                  <div className="text-[24px] sm:text-[30px] lg:text-[34px] font-bold text-[#0A1A3A] tabular-nums leading-none">
-                    {s.value}
+                  <div className="min-w-0">
+                    <h3 className="text-[15px] font-semibold text-[#0A1A3A] mb-1.5">{f.title}</h3>
+                    <p className="text-[13px] text-slate-600 leading-relaxed">{f.desc}</p>
                   </div>
-                  <div className="text-[12px] sm:text-[13px] text-slate-600 mt-2 leading-tight">{s.label}</div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          5 · HOW IT WORKS
+          HOW IT WORKS — Onboarding
       ════════════════════════════════════════════════════════════════ */}
-      <section
-        id="how-it-works"
-        className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-[#F7FAFF] scroll-mt-24"
-      >
+      <section id="how-it-works" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-white scroll-mt-24">
         <div className="max-w-[1200px] mx-auto">
-          <div className="text-center mb-16">
-            <Eyebrow>How It Works</Eyebrow>
-            <h2 className="text-[30px] sm:text-[38px] font-bold text-[#0A1A3A] tracking-tight">
-              Start Your Journey in 3 Simple Steps
-            </h2>
-            <p className="mx-auto mt-5 text-[14.5px] text-slate-600 max-w-[600px] leading-[1.6]">
-              From sign-up to your first trade — a clear, monitored process from start to finish.
+          <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
+            <div>
+              <Eyebrow>Onboarding</Eyebrow>
+              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1]">
+                How account opening works.
+              </h2>
+            </div>
+            <p className="text-[14px] text-slate-600 max-w-md leading-relaxed">
+              A monitored, multi-step process. Identity verification goes through
+              a manual review and typically takes one business day.
             </p>
           </div>
 
@@ -316,38 +335,22 @@ export default async function HomePage() {
             {/* Desktop dashed connector */}
             <div
               aria-hidden
-              className="hidden lg:block absolute top-[44px] left-[16%] right-[16%] h-px"
-              style={{
-                background: "linear-gradient(90deg, transparent, #2B6BFF55 12%, #2B6BFF55 88%, transparent)",
-                backgroundSize: "100% 100%",
-              }}
+              className="hidden lg:block absolute top-[26px] left-[14%] right-[14%] h-[1.5px] border-t-[1.5px] border-dashed border-[#2B6BFF]/30"
             />
-            <div className="hidden lg:block absolute top-[42px] left-[16%] right-[16%] h-[5px] -translate-y-1/2 border-t-[1.5px] border-dashed border-[#2B6BFF]/30" />
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-12 lg:gap-x-8 relative">
-              {steps.map((s, i) => (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
+              {steps.map((s) => (
                 <Fragment key={s.n}>
-                  <div className="flex flex-col items-center text-center px-2">
-                    {/* Numbered circle with icon */}
-                    <div className="relative mb-6">
+                  <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
                       <div
-                        className="w-[88px] h-[88px] rounded-full bg-white border-2 border-[#2B6BFF]/15 inline-flex items-center justify-center"
-                        style={{ boxShadow: "0 18px 40px -18px rgba(43,107,255,0.30)" }}
+                        className="w-12 h-12 rounded-lg inline-flex items-center justify-center text-[15px] font-bold text-[#2B6BFF] bg-[#2B6BFF]/10 border border-[#2B6BFF]/15 tabular-nums"
                       >
-                        <div className="w-[64px] h-[64px] rounded-full bg-[#2B6BFF] inline-flex items-center justify-center">
-                          <s.icon className="h-6 w-6 text-white" strokeWidth={2} />
-                        </div>
-                      </div>
-                      <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-[#0A1A3A] text-white text-[12px] font-bold inline-flex items-center justify-center">
                         {s.n}
                       </div>
+                      <h3 className="text-[15px] font-semibold text-[#0A1A3A] leading-tight">{s.title}</h3>
                     </div>
-                    <h3 className="text-[18px] font-semibold text-[#0A1A3A] mb-2">{s.title}</h3>
-                    <p className="text-[13.5px] text-slate-600 leading-[1.6] max-w-[280px]">{s.desc}</p>
+                    <p className="text-[13px] text-slate-600 leading-relaxed">{s.desc}</p>
                   </div>
-                  {i < steps.length - 1 && (
-                    <div className="hidden absolute" aria-hidden />
-                  )}
                 </Fragment>
               ))}
             </div>
@@ -356,19 +359,141 @@ export default async function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          6 · FINAL CTA
+          TRUST & SECURITY
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-[#F7FAFF]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-12 items-start">
+            <div>
+              <Eyebrow>Security</Eyebrow>
+              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1] mb-5">
+                Built around{" "}
+                <span className="text-[#2B6BFF]">your account&rsquo;s safety.</span>
+              </h2>
+              <p className="text-[14px] text-slate-600 leading-relaxed mb-6 max-w-lg">
+                Every sign-in, deposit, trade, and withdrawal is recorded with timestamps in
+                your account history. Identity documents and outbound transfers go through a
+                manual review process, and you&rsquo;re notified of any meaningful activity on
+                your account.
+              </p>
+
+              <ul className="space-y-2.5 max-w-md">
+                {securityList.map((item) => (
+                  <li key={item.text} className="flex items-center gap-3 text-[13px] text-[#0A1A3A]">
+                    <div className="w-8 h-8 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="h-4 w-4 text-[#2B6BFF]" strokeWidth={2} />
+                    </div>
+                    <span className="leading-snug">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {trust.map((t) => (
+                <div key={t.title} className="bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]">
+                  <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 flex items-center justify-center mb-3">
+                    <t.icon className="h-4 w-4 text-[#2B6BFF]" strokeWidth={2} />
+                  </div>
+                  <h4 className="text-[14px] font-semibold text-[#0A1A3A] mb-1.5">{t.title}</h4>
+                  <p className="text-[12.5px] text-slate-600 leading-relaxed">{t.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          MARKETS WE COVER
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
+            <div>
+              <Eyebrow>Coverage</Eyebrow>
+              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1]">
+                Markets we cover.
+              </h2>
+            </div>
+            <p className="text-[14px] text-slate-600 max-w-md leading-relaxed">
+              Every asset you see on the landing is in the dashboard today —
+              {" "}{PLATFORM.listedAssets} digital assets quoted against {PLATFORM.quoteCurrency},
+              with the same fees, the same execution, and the same one-click buy/sell.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {coveredMarkets.map((m) => (
+              <div
+                key={m.title}
+                className="relative overflow-hidden bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
+              >
+                {/* Sparkline */}
+                <svg viewBox="0 0 120 36" className="absolute right-3 top-3 w-[70px] h-[22px] opacity-70">
+                  <defs>
+                    <linearGradient id={`mk-${m.title}`} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%"  stopColor="#2B6BFF" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M2,28 L16,22 L30,26 L44,18 L58,20 L72,12 L86,16 L100,8 L118,10"
+                    stroke="#2B6BFF" strokeWidth="1.4" fill="none" strokeLinecap="round"
+                  />
+                  <path
+                    d="M2,28 L16,22 L30,26 L44,18 L58,20 L72,12 L86,16 L100,8 L118,10 L118,36 L2,36 Z"
+                    fill={`url(#mk-${m.title})`}
+                  />
+                </svg>
+                <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/15 flex items-center justify-center mb-4">
+                  <m.icon className="h-[18px] w-[18px] text-[#2B6BFF]" strokeWidth={2} />
+                </div>
+                <h3 className="text-[15px] font-semibold text-[#0A1A3A] mb-1.5">{m.title}</h3>
+                <p className="text-[12.5px] text-slate-600 leading-relaxed">{m.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          RISK DISCLOSURE BAND
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24 bg-white">
+        <div className="max-w-[1000px] mx-auto">
+          <div className="rounded-2xl p-5 sm:p-6 flex items-start gap-4 bg-[#EAF2FF] border border-[#DCE6FA]">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white border border-[#2B6BFF]/20">
+              <ShieldCheck className="h-4 w-4 text-[#2B6BFF]" />
+            </div>
+            <div>
+              <div className="text-[12px] font-bold tracking-[0.18em] text-[#2B6BFF] uppercase mb-1.5">Trade Informed</div>
+              <p className="text-[13px] text-slate-600 leading-relaxed">
+                Markets move quickly, and every investor&rsquo;s situation is different. We
+                publish a full{" "}
+                <Link href="/risk" className="text-[#2B6BFF] underline-offset-2 hover:underline font-semibold">
+                  risk overview
+                </Link>{" "}
+                so you can review the details and trade with confidence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          CTA — Open an Account
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-20 bg-white">
         <div className="max-w-[1200px] mx-auto">
           <div
-            className="relative rounded-3xl px-7 sm:px-14 py-14 sm:py-20 overflow-hidden border border-[#DCE6FA]"
+            className="relative rounded-3xl px-7 sm:px-12 py-14 sm:py-20 overflow-hidden text-center border border-[#DCE6FA]"
             style={{
-              background:
-                "linear-gradient(135deg, #EAF2FF 0%, #F4F8FF 50%, #FFFFFF 100%)",
+              background: "linear-gradient(135deg, #EAF2FF 0%, #F4F8FF 50%, #FFFFFF 100%)",
               boxShadow: "0 30px 80px -36px rgba(43,107,255,0.30)",
             }}
           >
-            {/* Subtle grid */}
+            {/* Subtle grid background */}
             <div
               aria-hidden
               className="absolute inset-0 pointer-events-none opacity-60"
@@ -378,56 +503,48 @@ export default async function HomePage() {
                   "linear-gradient(90deg, rgba(43,107,255,0.06) 1px, transparent 1px)",
                 backgroundSize: "32px 32px",
                 maskImage:
-                  "radial-gradient(60% 70% at 100% 50%, black, transparent 90%)",
+                  "radial-gradient(70% 70% at 50% 50%, black, transparent 100%)",
                 WebkitMaskImage:
-                  "radial-gradient(60% 70% at 100% 50%, black, transparent 90%)",
+                  "radial-gradient(70% 70% at 50% 50%, black, transparent 100%)",
               }}
             />
-            {/* Soft glow */}
+            {/* Soft halo */}
             <div
               aria-hidden
-              className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full pointer-events-none"
-              style={{ background: "radial-gradient(circle, rgba(43,107,255,0.15), transparent 60%)" }}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] pointer-events-none"
+              style={{ background: "radial-gradient(circle, rgba(43,107,255,0.12), transparent 60%)" }}
             />
 
-            <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-10 items-center">
-              <div className="min-w-0">
-                <Eyebrow>Get Started Today</Eyebrow>
-                <h2 className="text-[30px] sm:text-[42px] lg:text-[48px] font-bold text-[#0A1A3A] tracking-tight leading-[1.05]">
-                  Ready to Trade Smarter?
-                </h2>
-                <p className="mt-5 text-[14.5px] sm:text-[16px] text-slate-600 max-w-[480px] leading-[1.65]">
-                  Join thousands of traders already using Secure Chain Markets
-                  to trade and invest in digital assets.
-                </p>
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Link
-                    href="/register"
-                    className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md text-[14px] font-semibold text-white transition-all hover:brightness-110 hover:-translate-y-[1px]"
-                    style={{
-                      background: "#2B6BFF",
-                      boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 28px rgba(43,107,255,0.32)",
-                    }}
-                  >
-                    Create Your Account <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/markets"
-                    className="inline-flex items-center justify-center h-12 px-7 rounded-md text-[14px] font-semibold text-[#0A1A3A] bg-white border border-[#0A1A3A]/15 hover:border-[#2B6BFF] hover:text-[#2B6BFF] transition-colors"
-                  >
-                    Explore Markets
-                  </Link>
-                </div>
-                <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-slate-500">
-                  <span className="inline-flex items-center gap-1.5"><ShieldCheck size={13} className="text-emerald-600" /> Bank-grade security</span>
-                  <span className="inline-flex items-center gap-1.5"><BadgeCheck size={13} className="text-emerald-600" /> Regulated platform</span>
-                  <span className="inline-flex items-center gap-1.5"><Headphones size={13} className="text-emerald-600" /> 24/7 expert support</span>
-                </div>
+            <div className="relative max-w-[680px] mx-auto">
+              <div className="inline-flex"><Eyebrow>Open an Account</Eyebrow></div>
+              <h2 className="text-[30px] sm:text-[42px] lg:text-[48px] font-bold text-[#0A1A3A] tracking-tight leading-[1.05]">
+                Ready when you are.
+              </h2>
+              <p className="mt-5 text-[14.5px] sm:text-[16px] text-slate-600 leading-[1.65]">
+                Create an account with your email to review the full dashboard. Identity verification
+                is required before funding an account or placing an order.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center gap-2 h-[52px] px-8 rounded-md text-[14px] font-semibold text-white transition-all hover:brightness-110 hover:-translate-y-[1px]"
+                  style={{
+                    background: "#2B6BFF",
+                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 28px rgba(43,107,255,0.32)",
+                  }}
+                >
+                  Create Account <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center justify-center h-[52px] px-7 rounded-md text-[14px] font-semibold text-[#0A1A3A] bg-white border border-[#0A1A3A]/15 hover:border-[#2B6BFF] hover:text-[#2B6BFF] transition-colors"
+                >
+                  Sign In
+                </Link>
               </div>
-
-              <div className="relative min-h-[320px] flex items-center justify-center">
-                <CtaPhoneVisual btcPrice={btc?.price ?? 63321.25} />
-              </div>
+              <p className="text-[12px] text-slate-500 mt-6">
+                No account fee · Manual KYC review · Supported digital assets only
+              </p>
             </div>
           </div>
         </div>
@@ -438,15 +555,13 @@ export default async function HomePage() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   HERO MOCKUP — Premium laptop + floating phone, real fintech feel
+   HERO MOCKUP — Premium browser/laptop dashboard with floating phone
    ══════════════════════════════════════════════════════════════════════ */
 function HeroMockup({
-  btcPrice, btcChange, ethPrice, ethChange, btcSpark, assets,
+  btcPrice, btcChange, btcSpark, assets,
 }: {
   btcPrice: number;
   btcChange: number;
-  ethPrice: number;
-  ethChange: number;
   btcSpark: number[];
   assets: import("@/lib/coingecko").MarketAsset[];
 }) {
@@ -455,7 +570,6 @@ function HeroMockup({
 
   return (
     <div className="relative w-full">
-      {/* Ambient glow behind laptop */}
       <div
         aria-hidden
         className="absolute -inset-6 pointer-events-none"
@@ -465,13 +579,10 @@ function HeroMockup({
         }}
       />
 
-      {/* Laptop */}
       <div className="relative w-full">
-        {/* Top bezel */}
         <div className="rounded-t-2xl bg-[#0F1729] h-3 mx-[3%] relative">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#1F2A3F]" />
         </div>
-        {/* Screen body */}
         <div
           className="rounded-b-md border-x border-b border-[#0F1729]/40 bg-white overflow-hidden"
           style={{ boxShadow: "0 30px 70px -28px rgba(15,23,42,0.45), 0 8px 18px -8px rgba(15,23,42,0.18)" }}
@@ -479,24 +590,19 @@ function HeroMockup({
           <DashboardScreen
             btcPrice={btcPrice}
             btcChange={btcChange}
-            ethPrice={ethPrice}
-            ethChange={ethChange}
             sparkPath={sparkPath}
             watchlist={watchlist}
           />
         </div>
-        {/* Hinge / base */}
         <div
           className="h-[14px] -mx-[6%] rounded-b-[16px]"
           style={{
-            background:
-              "linear-gradient(180deg, #C7CFD9 0%, #94A0B0 55%, #6E7886 100%)",
+            background: "linear-gradient(180deg, #C7CFD9 0%, #94A0B0 55%, #6E7886 100%)",
           }}
         />
         <div className="mx-auto -mt-[11px] h-[7px] w-[28%] rounded-b-md bg-[#5E6878]" />
       </div>
 
-      {/* Floating phone */}
       <div className="absolute right-1 sm:right-2 lg:right-0 bottom-[-30px] sm:bottom-[-36px] w-[30%] max-w-[150px] sm:max-w-[195px]">
         <PhoneMockup btcPrice={btcPrice} btcChange={btcChange} />
       </div>
@@ -509,15 +615,12 @@ function DashboardScreen({
 }: {
   btcPrice:  number;
   btcChange: number;
-  ethPrice?:  number;
-  ethChange?: number;
   sparkPath: { line: string; area: string } | null;
   watchlist: import("@/lib/coingecko").MarketAsset[];
 }) {
   const up = btcChange >= 0;
   return (
     <div className="bg-[#FBFCFE] text-[10.5px]">
-      {/* Window chrome */}
       <div className="bg-white border-b border-slate-100 flex items-center px-3 h-7 gap-2">
         <div className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
@@ -530,13 +633,12 @@ function DashboardScreen({
       </div>
 
       <div className="grid grid-cols-[36px_1fr] sm:grid-cols-[44px_1fr]">
-        {/* Sidebar */}
         <div className="bg-white border-r border-slate-100 py-3 flex flex-col items-center gap-3">
           <div className="w-7 h-7 rounded-md bg-[#2B6BFF] inline-flex items-center justify-center">
             <ShieldCheck className="h-3.5 w-3.5 text-white" strokeWidth={2.4} />
           </div>
           <div className="w-px h-2 bg-slate-100" />
-          {[BarChart3, Wallet, Activity, Users, Globe].map((Icon, i) => (
+          {[BarChart3, Activity, Users].map((Icon, i) => (
             <div
               key={i}
               className={`w-7 h-7 rounded-md inline-flex items-center justify-center ${
@@ -548,27 +650,16 @@ function DashboardScreen({
           ))}
         </div>
 
-        {/* Main */}
         <div className="p-3.5 sm:p-4">
-          {/* Top bar: search + bell + avatar */}
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2 min-w-0">
               <span className="text-[12px] font-bold text-[#0A1A3A]">Dashboard</span>
               <span className="hidden sm:inline text-[9px] text-slate-400">/ Markets</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="hidden sm:flex items-center gap-1.5 h-6 rounded bg-slate-100 px-2 text-[9px] text-slate-500">
-                <Search size={9} /> Search
-              </div>
-              <div className="w-6 h-6 rounded bg-slate-100 inline-flex items-center justify-center">
-                <Bell size={10} className="text-slate-500" />
-              </div>
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2B6BFF] to-[#1A4FCC]" />
-            </div>
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2B6BFF] to-[#1A4FCC]" />
           </div>
 
           <div className="grid grid-cols-[1fr_120px] sm:grid-cols-[1fr_148px] gap-2 sm:gap-3">
-            {/* Chart panel */}
             <div className="rounded-lg border border-slate-200 bg-white p-3">
               <div className="flex items-center justify-between mb-2.5">
                 <div className="flex items-center gap-2">
@@ -586,7 +677,6 @@ function DashboardScreen({
                 </div>
               </div>
 
-              {/* Timeframe pills */}
               <div className="flex items-center gap-1 mb-2">
                 {["1H","4H","1D","1W","1M"].map((t, i) => (
                   <span
@@ -596,10 +686,8 @@ function DashboardScreen({
                     }`}
                   >{t}</span>
                 ))}
-                <div className="ml-auto text-[8.5px] text-slate-400">Candle</div>
               </div>
 
-              {/* Chart */}
               <div className="relative h-[110px]">
                 <svg viewBox="0 0 320 110" preserveAspectRatio="none" className="w-full h-full">
                   <defs>
@@ -608,7 +696,6 @@ function DashboardScreen({
                       <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
                     </linearGradient>
                   </defs>
-                  {/* Y grid */}
                   {[20, 45, 70, 95].map((y) => (
                     <line key={y} x1="0" y1={y} x2="320" y2={y} stroke="#EEF2F7" strokeWidth="1" />
                   ))}
@@ -624,37 +711,12 @@ function DashboardScreen({
                     </>
                   )}
                 </svg>
-                {/* Y-axis labels */}
-                <div className="absolute right-1 top-0 flex flex-col justify-between h-full text-[7.5px] text-slate-400 tabular-nums font-semibold py-1">
-                  <span>{formatCurrency(btcPrice * 1.015)}</span>
-                  <span>{formatCurrency(btcPrice * 1.005)}</span>
-                  <span>{formatCurrency(btcPrice * 0.99)}</span>
-                </div>
-              </div>
-
-              {/* Mini stats below chart */}
-              <div className="grid grid-cols-4 gap-1.5 mt-2.5">
-                {[
-                  { l: "24h High",  v: formatCurrency(btcPrice * 1.012) },
-                  { l: "24h Low",   v: formatCurrency(btcPrice * 0.988) },
-                  { l: "24h Vol",   v: "$1.46B" },
-                  { l: "Active",    v: "12" },
-                ].map((c) => (
-                  <div key={c.l} className="rounded bg-slate-50 px-1.5 py-1.5">
-                    <div className="text-[7.5px] text-slate-400 uppercase tracking-wider truncate">{c.l}</div>
-                    <div className="text-[9.5px] font-semibold text-[#0A1A3A] tabular-nums truncate">{c.v}</div>
-                  </div>
-                ))}
               </div>
             </div>
 
-            {/* Watchlist + portfolio */}
             <div className="space-y-2">
               <div className="rounded-lg border border-slate-200 bg-white p-2.5">
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="text-[9px] font-bold uppercase text-slate-500 tracking-wider">Watchlist</div>
-                  <Search size={9} className="text-slate-400" />
-                </div>
+                <div className="text-[9px] font-bold uppercase text-slate-500 tracking-wider mb-1.5">Watchlist</div>
                 <ul className="space-y-1.5">
                   {watchlist.map((a) => {
                     const isUp = a.change >= 0;
@@ -699,7 +761,6 @@ function PhoneMockup({ btcPrice, btcChange }: { btcPrice: number; btcChange: num
         boxShadow: "0 30px 60px -20px rgba(15,23,42,0.55), 0 10px 24px -8px rgba(15,23,42,0.30)",
       }}
     >
-      {/* Dynamic island */}
       <div className="absolute left-1/2 -translate-x-1/2 top-2.5 w-[36%] h-1.5 rounded-full bg-black z-10" />
       <div className="rounded-[20px] bg-white overflow-hidden p-3 pt-5">
         <div className="text-[8px] text-slate-400 font-semibold tracking-wider mb-0.5">PORTFOLIO</div>
@@ -708,7 +769,6 @@ function PhoneMockup({ btcPrice, btcChange }: { btcPrice: number; btcChange: num
           {up ? "+" : ""}{btcChange.toFixed(2)}% · {formatCurrency(btcPrice)}
         </div>
 
-        {/* Mini chart */}
         <svg viewBox="0 0 160 50" className="w-full h-[40px] mt-2">
           <defs>
             <linearGradient id="phone-spark" x1="0" y1="0" x2="0" y2="1">
@@ -735,80 +795,6 @@ function PhoneMockup({ btcPrice, btcChange }: { btcPrice: number; btcChange: num
             </li>
           ))}
         </ul>
-      </div>
-    </div>
-  );
-}
-
-/* ── CTA visual: refined phone (no toy coin badges) ─────────────────── */
-function CtaPhoneVisual({ btcPrice }: { btcPrice: number }) {
-  return (
-    <div className="relative w-full h-full flex items-center justify-center py-4">
-      {/* Soft halo */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 50% 50%, rgba(43,107,255,0.15), transparent 70%)",
-        }}
-      />
-
-      <div className="relative w-[230px]">
-        {/* Backing card silhouette to add depth */}
-        <div
-          aria-hidden
-          className="absolute -right-5 top-6 w-[200px] h-[300px] rounded-[24px] bg-white/70 border border-[#DCE6FA]"
-          style={{ boxShadow: "0 30px 60px -28px rgba(15,23,42,0.20)" }}
-        />
-        {/* Phone */}
-        <div
-          className="relative rounded-[28px] bg-[#0A1A3A] p-1.5 border border-slate-700"
-          style={{
-            boxShadow: "0 35px 70px -22px rgba(15,23,42,0.50)",
-          }}
-        >
-          <div className="absolute left-1/2 -translate-x-1/2 top-3 w-[40%] h-1.5 rounded-full bg-black z-10" />
-          <div className="rounded-[22px] bg-white overflow-hidden p-4 pt-7">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <CryptoIcon symbol="BTC" size={28} />
-                <div>
-                  <div className="text-[9px] text-slate-400 font-semibold tracking-wider">BTC / USDT</div>
-                  <div className="text-[20px] font-bold text-[#0A1A3A] tabular-nums leading-none mt-0.5">
-                    {formatCurrency(btcPrice)}
-                  </div>
-                </div>
-              </div>
-              <span className="px-2 py-1 rounded text-[10px] font-bold text-emerald-700 bg-emerald-50">+2.45%</span>
-            </div>
-
-            <svg viewBox="0 0 200 70" className="w-full h-[60px] mt-3">
-              <defs>
-                <linearGradient id="cta-spark" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#2B6BFF" stopOpacity="0.35" />
-                  <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              {[15, 35, 55].map(y => (
-                <line key={y} x1="0" y1={y} x2="200" y2={y} stroke="#F1F5F9" strokeWidth="1" />
-              ))}
-              <path d="M0,55 L20,46 L40,52 L60,38 L80,44 L100,28 L120,34 L140,18 L160,24 L180,10 L200,16" stroke="#2B6BFF" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M0,55 L20,46 L40,52 L60,38 L80,44 L100,28 L120,34 L140,18 L160,24 L180,10 L200,16 L200,70 L0,70 Z" fill="url(#cta-spark)" />
-            </svg>
-
-            <div className="grid grid-cols-3 gap-1.5 mt-3">
-              {["1H","1D","1W"].map((t, i) => (
-                <div key={t} className={`h-7 rounded text-[10px] font-semibold inline-flex items-center justify-center ${i === 1 ? "bg-[#2B6BFF]/10 text-[#2B6BFF]" : "text-slate-500 bg-slate-50"}`}>{t}</div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 mt-3">
-              <div className="h-9 rounded-md text-[12px] font-bold text-white bg-emerald-500 inline-flex items-center justify-center">Buy</div>
-              <div className="h-9 rounded-md text-[12px] font-bold text-white bg-rose-500 inline-flex items-center justify-center">Sell</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
