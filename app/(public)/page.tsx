@@ -128,7 +128,7 @@ export default async function HomePage() {
             the right of the section, fills vertically, device anchored right. */}
         <div
           aria-hidden
-          className="hidden lg:block absolute top-0 bottom-0 left-[18%] xl:left-[14%] right-[-6%] xl:right-[-3%] pointer-events-none z-0"
+          className="hidden lg:block absolute top-0 bottom-0 left-[12%] xl:left-[8%] right-[2%] xl:right-[3%] pointer-events-none z-0"
         >
           <Image
             src="/landing/hero.png"
