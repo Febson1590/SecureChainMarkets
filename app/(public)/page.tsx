@@ -556,17 +556,42 @@ export default async function HomePage() {
    Backed by gpt-image-1 generated assets in /public/landing/.
    ══════════════════════════════════════════════════════════════════════ */
 function HeroProductShot() {
+  /* Mask: fade left edge toward the copy column AND soften every edge with a
+     radial vignette, so there's no visible image rectangle against the white
+     page background. */
+  const fadeMask =
+    "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.55) 8%, #000 22%, #000 100%), " +
+    "radial-gradient(120% 110% at 60% 50%, #000 60%, rgba(0,0,0,0.5) 82%, transparent 100%)";
+
   return (
     <div className="relative w-full">
-      <Image
-        src="/landing/hero.png"
-        alt="SecureChainMarkets dashboard shown on a laptop and phone"
-        width={1536}
-        height={1024}
-        priority
-        sizes="(max-width: 1024px) 100vw, 640px"
-        className="relative w-full h-auto object-contain"
-      />
+      <div
+        className="relative w-full will-change-transform"
+        style={{
+          transform: "scale(1.05)",
+          transformOrigin: "center center",
+          filter:
+            "drop-shadow(0 30px 40px rgba(15,23,42,0.10)) drop-shadow(0 8px 18px rgba(15,23,42,0.06))",
+        }}
+      >
+        <Image
+          src="/landing/hero.png"
+          alt="SecureChainMarkets dashboard shown on a laptop and phone"
+          width={1536}
+          height={1024}
+          priority
+          sizes="(max-width: 1024px) 100vw, 640px"
+          className="relative w-full h-auto object-contain"
+          style={{
+            opacity: 0.97,
+            filter: "brightness(1.04) contrast(1.05) saturate(1.02)",
+            maskImage: fadeMask,
+            WebkitMaskImage: fadeMask,
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
+          }}
+        />
+      </div>
     </div>
   );
 }
