@@ -178,7 +178,7 @@ export default async function HomePage() {
           </div>
 
           {/* Cell B: Hero visual (mobile order 2, desktop col 2 spans both rows) */}
-          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0">
+          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0 lg:-translate-x-16 xl:-translate-x-20">
             <HeroProductShot />
           </div>
 
@@ -615,8 +615,8 @@ function HeroProductShot() {
         width={1536}
         height={1024}
         priority
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 720px"
-        className="block w-full h-auto object-contain mx-auto max-w-[640px] sm:max-w-[720px] lg:max-w-none"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 820px"
+        className="block h-auto object-contain w-full max-w-[420px] sm:max-w-[560px] mx-auto lg:mx-0 lg:max-w-[760px] lg:w-[115%] xl:max-w-[820px] xl:w-[118%]"
         style={{
           opacity: 0.98,
           filter: "brightness(1.02) contrast(1.02)",
