@@ -527,29 +527,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════════════════════
-          RISK DISCLOSURE BAND
-      ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24 bg-white">
-        <div className="max-w-[1000px] mx-auto">
-          <div className="rounded-2xl p-5 sm:p-6 flex items-start gap-4 bg-[#EAF2FF] border border-[#DCE6FA]">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white border border-[#2B6BFF]/20">
-              <ShieldCheck className="h-4 w-4 text-[#2B6BFF]" />
-            </div>
-            <div>
-              <div className="text-[12px] font-bold tracking-[0.18em] text-[#2B6BFF] uppercase mb-1.5">Trade Informed</div>
-              <p className="text-[13px] text-slate-600 leading-relaxed">
-                Markets move quickly, and every investor&rsquo;s situation is different. We
-                publish a full{" "}
-                <Link href="/risk" className="text-[#2B6BFF] underline-offset-2 hover:underline font-semibold">
-                  risk overview
-                </Link>{" "}
-                so you can review the details and trade with confidence.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ════════════════════════════════════════════════════════════════
           CTA — Open an Account
