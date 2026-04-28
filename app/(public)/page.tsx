@@ -99,7 +99,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           1 · HERO
       ════════════════════════════════════════════════════════════════ */}
-      <section className="relative pt-32 sm:pt-36 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-20 sm:pt-28 lg:pt-36 pb-12 sm:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8">
         {/* Soft layered glow */}
         <div
           aria-hidden
@@ -124,9 +124,9 @@ export default async function HomePage() {
           }}
         />
 
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-14 lg:gap-12 items-center">
-          {/* Left — copy */}
-          <div className="min-w-0">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-y-7 sm:gap-y-10 lg:gap-x-12 items-start">
+          {/* Cell A: Copy block (mobile order 1, desktop col 1 row 1) */}
+          <div className="min-w-0 lg:col-start-1 lg:row-start-1">
             <Eyebrow>Digital-Asset Brokerage</Eyebrow>
 
             <Link
@@ -140,17 +140,17 @@ export default async function HomePage() {
               <ArrowRight className="h-3 w-3 opacity-70 group-hover:translate-x-0.5 transition-transform" />
             </Link>
 
-            <h1 className="text-[36px] sm:text-[48px] lg:text-[60px] leading-[1.04] font-bold tracking-tight">
+            <h1 className="text-[32px] sm:text-[44px] lg:text-[60px] leading-[1.05] font-bold tracking-tight">
               Trade Digital Assets
               <br />
               <span className="text-[#2B6BFF]">with Confidence.</span>
             </h1>
-            <p className="mt-5 text-[15px] sm:text-[17px] leading-[1.65] text-slate-600 max-w-[510px]">
+            <p className="mt-4 sm:mt-5 text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.6] text-slate-600 max-w-[510px]">
               Access crypto markets, investment tools, and copy-trading features
               from one secure platform built for modern investors.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3">
               <Link
                 href="/register"
                 className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md text-[14px] font-semibold text-white transition-all hover:brightness-110 hover:-translate-y-[1px]"
@@ -170,19 +170,26 @@ export default async function HomePage() {
             </div>
 
             {/* Trust badges */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-slate-500">
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px] sm:text-[12px] text-slate-500">
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> Secure Account Access</span>
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> KYC Verification</span>
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> Real-Time Portfolio Tracking</span>
             </div>
+          </div>
 
-            {/* Stat chips — 2x2 */}
-            <div className="mt-8 grid grid-cols-2 gap-3 max-w-[480px]">
+          {/* Cell B: Hero visual (mobile order 2, desktop col 2 spans both rows) */}
+          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0">
+            <HeroProductShot />
+          </div>
+
+          {/* Cell C: Stat chips (mobile order 3 — under hero, desktop col 1 row 2) */}
+          <div className="min-w-0 lg:col-start-1 lg:row-start-2">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 max-w-[480px]">
               {heroStats.map((s) => (
-                <div key={s.label} className="rounded-xl bg-white border border-slate-200 px-4 py-3 shadow-[0_4px_14px_-8px_rgba(15,23,42,0.10)]">
-                  <div className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold truncate">{s.label}</div>
+                <div key={s.label} className="rounded-xl bg-white border border-slate-200 px-3 sm:px-4 py-2.5 sm:py-3 shadow-[0_4px_14px_-8px_rgba(15,23,42,0.10)]">
+                  <div className="text-[9.5px] sm:text-[10px] uppercase tracking-widest text-slate-500 font-semibold truncate">{s.label}</div>
                   <div
-                    className={`mt-1 text-[16px] font-bold tabular-nums truncate ${
+                    className={`mt-0.5 sm:mt-1 text-[14px] sm:text-[16px] font-bold tabular-nums truncate ${
                       s.accent === "up"   ? "text-emerald-600" :
                       s.accent === "down" ? "text-rose-600" :
                       "text-[#0A1A3A]"
@@ -194,21 +201,55 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
-
-          {/* Right — photoreal laptop + phone product shots */}
-          <div className="relative min-w-0">
-            <HeroProductShot />
-          </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
           TICKER CARD
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 -mt-4 sm:-mt-8 pb-12 relative z-10">
+      <section className="px-4 sm:px-6 lg:px-8 -mt-2 sm:-mt-8 pb-10 sm:pb-12 relative z-10">
         <div className="max-w-[1200px] mx-auto">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-[0_24px_60px_-26px_rgba(15,23,42,0.20)] overflow-hidden">
-            <div className="flex items-stretch flex-col sm:flex-row">
+          {/* ── Mobile: horizontal-scroll chip cards + View All centered ── */}
+          <div className="sm:hidden">
+            <div className="-mx-4 px-4 overflow-x-auto no-scrollbar">
+              <div className="flex gap-3 pb-1 min-w-max">
+                {tickerData.map((a) => {
+                  const up = a.change >= 0;
+                  return (
+                    <div
+                      key={a.symbol}
+                      className="flex-shrink-0 w-[150px] rounded-xl bg-white border border-slate-200 shadow-[0_8px_22px_-14px_rgba(15,23,42,0.18)] p-3"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <CryptoIcon symbol={a.symbol} size={22} className="flex-shrink-0" />
+                        <span className="font-bold text-[#0A1A3A] text-[12px] truncate">{a.symbol}/USDT</span>
+                      </div>
+                      <div className="text-[14px] font-bold text-[#0A1A3A] tabular-nums truncate">
+                        {formatCurrency(a.price)}
+                      </div>
+                      <div className={`mt-1 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10.5px] font-semibold tabular-nums ${up ? "text-emerald-700 bg-emerald-50" : "text-rose-700 bg-rose-50"}`}>
+                        {up ? <ArrowUpRight size={10} /> : <ArrowDownRight size={10} />}
+                        {Math.abs(a.change).toFixed(2)}%
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex justify-center mt-4">
+              <Link
+                href="/markets"
+                className="inline-flex items-center gap-1.5 px-5 h-10 rounded-md text-[12.5px] font-semibold text-[#2B6BFF] border border-[#2B6BFF]/30 hover:bg-[#2B6BFF] hover:text-white hover:border-[#2B6BFF] transition-colors"
+              >
+                View All Markets
+                <ChevronRight size={14} />
+              </Link>
+            </div>
+          </div>
+
+          {/* ── Tablet+: single rounded card with row + side button ── */}
+          <div className="hidden sm:block bg-white rounded-2xl border border-slate-200 shadow-[0_24px_60px_-26px_rgba(15,23,42,0.20)] overflow-hidden">
+            <div className="flex items-stretch">
               <div className="flex-1 min-w-0 overflow-x-auto no-scrollbar">
                 <div className="flex items-stretch divide-x divide-slate-100 min-w-max">
                   {tickerData.map((a) => {
@@ -216,7 +257,7 @@ export default async function HomePage() {
                     return (
                       <div
                         key={a.symbol}
-                        className="flex items-center gap-3 px-4 sm:px-5 py-4 text-[12.5px] tabular-nums whitespace-nowrap hover:bg-[#F7FAFF] transition-colors"
+                        className="flex items-center gap-3 px-5 py-4 text-[12.5px] tabular-nums whitespace-nowrap hover:bg-[#F7FAFF] transition-colors"
                       >
                         <CryptoIcon symbol={a.symbol} size={26} className="flex-shrink-0" />
                         <div className="flex flex-col leading-tight">
@@ -233,7 +274,7 @@ export default async function HomePage() {
                   })}
                 </div>
               </div>
-              <div className="flex items-center justify-center sm:justify-start px-3 sm:px-4 py-3 sm:py-0 border-t sm:border-t-0 sm:border-l border-slate-100 flex-shrink-0">
+              <div className="flex items-center px-4 border-l border-slate-100 flex-shrink-0">
                 <Link
                   href="/markets"
                   className="inline-flex items-center gap-1.5 px-4 h-10 rounded-md text-[12.5px] font-semibold text-[#2B6BFF] border border-[#2B6BFF]/30 hover:bg-[#2B6BFF] hover:text-white hover:border-[#2B6BFF] transition-colors"
@@ -250,7 +291,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           CREDIBILITY BAR (4 cards)
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {credibility.map((c) => (
@@ -274,7 +315,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           FEATURE GRID — Platform
       ════════════════════════════════════════════════════════════════ */}
-      <section id="capabilities" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-[#F7FAFF] scroll-mt-24">
+      <section id="capabilities" className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-[#F7FAFF] scroll-mt-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="max-w-2xl mb-12">
             <Eyebrow>Platform</Eyebrow>
@@ -312,7 +353,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           HOW IT WORKS — Onboarding
       ════════════════════════════════════════════════════════════════ */}
-      <section id="how-it-works" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-white scroll-mt-24">
+      <section id="how-it-works" className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-white scroll-mt-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
             <div>
@@ -357,7 +398,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           TRUST & SECURITY
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-[#F7FAFF]">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-[#F7FAFF]">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-12 items-start">
             <div>
@@ -403,7 +444,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           MARKETS WE COVER
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
             <div>
@@ -556,22 +597,18 @@ export default async function HomePage() {
    Backed by gpt-image-1 generated assets in /public/landing/.
    ══════════════════════════════════════════════════════════════════════ */
 function HeroProductShot() {
-  /* Mask: fade left edge toward the copy column AND soften every edge with a
-     radial vignette, so there's no visible image rectangle against the white
-     page background. */
-  const fadeMask =
-    "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.55) 8%, #000 22%, #000 100%), " +
-    "radial-gradient(120% 110% at 60% 50%, #000 60%, rgba(0,0,0,0.5) 82%, transparent 100%)";
+  /* Strong radial vignette mask so every edge feathers into the page bg.
+     Pure radial works the same on phone (full-bleed) and desktop (right column). */
+  const vignette =
+    "radial-gradient(115% 95% at 55% 50%, #000 55%, rgba(0,0,0,0.5) 80%, transparent 100%)";
 
   return (
     <div className="relative w-full">
       <div
         className="relative w-full will-change-transform"
         style={{
-          transform: "scale(1.05)",
-          transformOrigin: "center center",
           filter:
-            "drop-shadow(0 30px 40px rgba(15,23,42,0.10)) drop-shadow(0 8px 18px rgba(15,23,42,0.06))",
+            "drop-shadow(0 24px 32px rgba(15,23,42,0.10)) drop-shadow(0 6px 14px rgba(15,23,42,0.05))",
         }}
       >
         <Image
@@ -581,14 +618,12 @@ function HeroProductShot() {
           height={1024}
           priority
           sizes="(max-width: 1024px) 100vw, 640px"
-          className="relative w-full h-auto object-contain"
+          className="relative w-full h-auto object-contain scale-[1.02] sm:scale-[1.04]"
           style={{
             opacity: 0.97,
             filter: "brightness(1.04) contrast(1.05) saturate(1.02)",
-            maskImage: fadeMask,
-            WebkitMaskImage: fadeMask,
-            maskComposite: "intersect",
-            WebkitMaskComposite: "source-in",
+            maskImage: vignette,
+            WebkitMaskImage: vignette,
           }}
         />
       </div>

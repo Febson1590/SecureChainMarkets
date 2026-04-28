@@ -39,12 +39,12 @@ export function PublicNavbar() {
       )}
     >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[80px]">
+        <div className="flex items-center justify-between h-[60px] sm:h-[72px] lg:h-[80px]">
           {/* ── Left: logo (bleeds vertically; row height stays at 80px) ─ */}
           <Link
             href="/"
             aria-label="SecureChainMarkets — home"
-            className="relative flex-shrink-0 h-[80px] w-[100px] sm:w-[110px] lg:w-[120px]"
+            className="relative flex-shrink-0 h-[60px] sm:h-[72px] lg:h-[80px] w-[80px] sm:w-[100px] lg:w-[120px]"
           >
             <Image
               src="/assets/logos/securechainmarkets-logo.png"
@@ -52,7 +52,7 @@ export function PublicNavbar() {
               width={1774}
               height={887}
               priority
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-[108px] sm:h-[120px] lg:h-[128px] w-auto max-w-none pointer-events-none select-none"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-[72px] sm:h-[100px] lg:h-[128px] w-auto max-w-none pointer-events-none select-none"
             />
           </Link>
 
