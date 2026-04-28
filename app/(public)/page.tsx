@@ -178,7 +178,7 @@ export default async function HomePage() {
           </div>
 
           {/* Cell B: Hero visual (mobile order 2, desktop col 2 spans both rows) */}
-          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0 md:-translate-x-5 lg:-translate-x-12 xl:-translate-x-14">
+          <div className="relative min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center -mx-4 sm:mx-0">
             <HeroProductShot />
           </div>
 
@@ -597,54 +597,33 @@ export default async function HomePage() {
    Backed by gpt-image-1 generated assets in /public/landing/.
    ══════════════════════════════════════════════════════════════════════ */
 function HeroProductShot() {
-  /* Soft elliptical mask — every edge (top, bottom, left, right) feathers
-     into transparency so there's no rectangular boundary. */
-  const ellipseMask =
-    "radial-gradient(ellipse 78% 76% at 50% 50%, " +
-    "rgba(0,0,0,1) 58%, " +
-    "rgba(0,0,0,0.75) 72%, " +
+  /* The new hero asset already has white padding around the device that
+     blends with the page background, so we don't apply heavy masks or
+     white overlays. Just a very soft edge fade as a safety net for any
+     residual rectangle, and a subtle filter for crispness. */
+  const softEdge =
+    "radial-gradient(ellipse at center, " +
+    "rgba(0,0,0,1) 70%, " +
+    "rgba(0,0,0,0.4) 90%, " +
     "rgba(0,0,0,0) 100%)";
-
-  /* Four-side white gradient overlay — paints the page bg color over the
-     outer band of the image so blends are stronger near the edges. */
-  const fourSideOverlay =
-    "linear-gradient(to right,  #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)," +
-    "linear-gradient(to left,   #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)," +
-    "linear-gradient(to bottom, #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)," +
-    "linear-gradient(to top,    #FFFFFF 0%, rgba(255,255,255,0.55) 14%, rgba(255,255,255,0) 38%)";
 
   return (
     <div className="relative w-full">
-      <div
-        className="relative w-full will-change-transform"
+      <Image
+        src="/landing/hero.png"
+        alt="SecureChainMarkets dashboard shown on a laptop and phone"
+        width={1536}
+        height={1024}
+        priority
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 720px"
+        className="block w-full h-auto object-contain mx-auto max-w-[640px] sm:max-w-[720px] lg:max-w-none"
         style={{
-          filter:
-            "drop-shadow(0 22px 30px rgba(15,23,42,0.08)) drop-shadow(0 6px 14px rgba(15,23,42,0.05))",
+          opacity: 0.98,
+          filter: "brightness(1.02) contrast(1.02)",
+          maskImage: softEdge,
+          WebkitMaskImage: softEdge,
         }}
-      >
-        <Image
-          src="/landing/hero.png"
-          alt="SecureChainMarkets dashboard shown on a laptop and phone"
-          width={1536}
-          height={1024}
-          priority
-          sizes="(max-width: 1024px) 100vw, 640px"
-          className="relative w-full h-auto object-contain scale-[1.02] sm:scale-[1.04]"
-          style={{
-            opacity: 0.98,
-            filter: "brightness(1.02) contrast(1.02)",
-            maskImage: ellipseMask,
-            WebkitMaskImage: ellipseMask,
-          }}
-        />
-        {/* Four-side white blend — sits above the masked image so
-            the residual edges fade smoothly into the page bg. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none z-[2]"
-          style={{ background: fourSideOverlay }}
-        />
-      </div>
+      />
     </div>
   );
 }
