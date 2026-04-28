@@ -56,38 +56,41 @@ export function PublicNavbar() {
             />
           </Link>
 
-          {/* ── Center: nav ────────────────────────── */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => {
-              const active =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname === link.href || pathname.startsWith(link.href.split("#")[0] + "/");
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "relative px-4 h-10 inline-flex items-center text-[14px] font-medium transition-colors",
-                    active
-                      ? "text-[#2B6BFF]"
-                      : "text-slate-600 hover:text-[#0A1A3A]"
-                  )}
-                >
-                  {link.label}
-                  {active && (
-                    <span
-                      aria-hidden
-                      className="absolute left-3 right-3 -bottom-[1px] h-[2px] rounded-full bg-[#2B6BFF]"
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+          {/* ── Right cluster: nav + language + auth CTAs ──────────────
+                Grouped on the right so the nav links sit next to the
+                language selector and the wide logo on the left has room. */}
+          <div className="hidden lg:flex items-center gap-3 ml-auto">
+            <nav className="flex items-center gap-0.5">
+              {navLinks.map((link) => {
+                const active =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname === link.href || pathname.startsWith(link.href.split("#")[0] + "/");
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "relative px-3 xl:px-4 h-10 inline-flex items-center text-[13.5px] xl:text-[14px] font-medium transition-colors",
+                      active
+                        ? "text-[#2B6BFF]"
+                        : "text-slate-600 hover:text-[#0A1A3A]"
+                    )}
+                  >
+                    {link.label}
+                    {active && (
+                      <span
+                        aria-hidden
+                        className="absolute left-3 right-3 -bottom-[1px] h-[2px] rounded-full bg-[#2B6BFF]"
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
 
-          {/* ── Right: auth CTAs ─────────────────────── */}
-          <div className="hidden lg:flex items-center gap-2">
+            <div className="w-px h-6 bg-slate-200" aria-hidden />
+
             <button
               type="button"
               aria-label="Change language"
