@@ -94,7 +94,22 @@ export default async function HomePage() {
   ];
 
   return (
-    <div className="bg-white text-[#0A1A3A] overflow-x-hidden">
+    <div
+      className="text-[#0A1A3A] overflow-x-hidden"
+      style={{
+        /* Soft gradient backdrop matching the hero photo background:
+           pale-blue arc top-right, gentle pale-blue wash bottom-left,
+           white base with a subtle diagonal blue tint. */
+        backgroundImage:
+          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
+          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
+          "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
+        backgroundAttachment: "scroll",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
 
       {/* ════════════════════════════════════════════════════════════════
           1 · HERO
@@ -106,9 +121,8 @@ export default async function HomePage() {
           className="absolute inset-0 pointer-events-none -z-10"
           style={{
             background:
-              "radial-gradient(60% 50% at 75% 30%, rgba(43,107,255,0.12) 0%, rgba(43,107,255,0) 70%)," +
-              "radial-gradient(50% 40% at 15% 80%, rgba(43,107,255,0.06) 0%, rgba(43,107,255,0) 70%)," +
-              "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 60%, #FFFFFF 100%)",
+              "radial-gradient(60% 50% at 75% 30%, rgba(43,107,255,0.10) 0%, rgba(43,107,255,0) 70%)," +
+              "radial-gradient(50% 40% at 15% 80%, rgba(43,107,255,0.05) 0%, rgba(43,107,255,0) 70%)",
           }}
         />
         {/* Subtle dot grid */}
@@ -324,7 +338,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           CREDIBILITY BAR (4 cards)
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {credibility.map((c) => (
@@ -348,7 +362,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           FEATURE GRID — Platform
       ════════════════════════════════════════════════════════════════ */}
-      <section id="capabilities" className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-[#F7FAFF] scroll-mt-24">
+      <section id="capabilities" className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 scroll-mt-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="max-w-2xl mb-12">
             <Eyebrow>Platform</Eyebrow>
@@ -386,7 +400,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           HOW IT WORKS — Onboarding
       ════════════════════════════════════════════════════════════════ */}
-      <section id="how-it-works" className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-white scroll-mt-24">
+      <section id="how-it-works" className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 scroll-mt-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
             <div>
@@ -431,7 +445,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           TRUST & SECURITY
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-[#F7FAFF]">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-12 items-start">
             <div>
@@ -477,7 +491,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           MARKETS WE COVER
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
             <div>
@@ -531,7 +545,7 @@ export default async function HomePage() {
       {/* ════════════════════════════════════════════════════════════════
           CTA — Open an Account
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-20 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 pb-20">
         <div className="max-w-[1200px] mx-auto">
           <div
             className="relative rounded-3xl px-7 sm:px-12 py-14 sm:py-20 overflow-hidden text-center border border-[#DCE6FA]"
