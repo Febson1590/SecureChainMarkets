@@ -38,10 +38,15 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
     : "U";
 
   return (
-    <header className="h-16 bg-[#0B1220]/70 backdrop-blur-md border-b border-white/[0.06] flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30">
+    <header
+      className="h-16 backdrop-blur-md border-b border-slate-200 flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30"
+      style={{
+        background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
+      }}
+    >
       {/* Mobile menu — controlled Sheet so we can close it on nav click */}
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <SheetTrigger render={<button className="lg:hidden p-2 text-slate-400 hover:text-white mr-2" />}>
+        <SheetTrigger render={<button className="lg:hidden p-2 text-slate-600 hover:text-[#0A1A3A] mr-2" />}>
           <Menu size={20} />
         </SheetTrigger>
         <SheetContent
@@ -75,7 +80,7 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
           type="button"
           aria-label="Change language"
           onClick={() => setLangOpen(true)}
-          className="p-2 text-slate-400 hover:text-white hover:bg-white/[0.04] rounded-lg transition-colors"
+          className="p-2 text-slate-600 hover:text-[#0A1A3A] hover:bg-slate-100 rounded-lg transition-colors"
         >
           <Globe size={18} />
         </button>
@@ -83,11 +88,11 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
         {/* Notifications */}
         <Link
           href="/dashboard/notifications"
-          className="relative p-2 text-slate-400 hover:text-white hover:bg-white/[0.04] rounded-lg transition-colors"
+          className="relative p-2 text-slate-600 hover:text-[#0A1A3A] hover:bg-slate-100 rounded-lg transition-colors"
         >
           <Bell size={18} />
           {unreadCount > 0 && (
-            <span className="absolute top-1 right-1 w-4 h-4 rounded-full text-[10px] font-bold text-[#08111F] flex items-center justify-center" style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}>
+            <span className="absolute top-1 right-1 w-4 h-4 rounded-full text-[10px] font-bold text-white flex items-center justify-center" style={{ background: "linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%)" }}>
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
           )}
@@ -95,14 +100,14 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
 
         {/* User menu */}
         <DropdownMenu>
-          <DropdownMenuTrigger render={<button className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-white/[0.04] transition-colors" />}>
+          <DropdownMenuTrigger render={<button className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors" />}>
             <Avatar className="h-8 w-8">
               <AvatarFallback className="bg-[#2B6BFF]/15 text-[#2B6BFF] text-xs font-bold">
                 {initials}
               </AvatarFallback>
             </Avatar>
             <div className="hidden sm:block text-left">
-              <div className="text-sm font-medium text-white leading-none mb-0.5">{user.name || "User"}</div>
+              <div className="text-sm font-medium text-[#0A1A3A] leading-none mb-0.5">{user.name || "User"}</div>
               <div className="text-xs text-slate-500 leading-none">{user.role === "ADMIN" ? "Administrator" : "Trader"}</div>
             </div>
             <ChevronDown size={14} className="text-slate-500 hidden sm:block" />
