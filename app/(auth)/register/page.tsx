@@ -262,8 +262,8 @@ export default function RegisterPage() {
     <div className="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
 
-        {/* ════════════════════ LEFT — Branding panel ═════════════════ */}
-        <div className="order-2 lg:order-1">
+        {/* ════════════════════ LEFT — Branding panel (desktop only) ═════════════════ */}
+        <div className="hidden lg:block lg:order-1">
           <h1 className="text-[36px] sm:text-[44px] font-bold tracking-tight leading-[1.05] text-[#0A1A3A]">
             Trade Smarter.
             <br />
