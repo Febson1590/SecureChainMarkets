@@ -8,7 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -152,6 +152,40 @@
   [disabled],
   [aria-disabled="true"] {
     cursor: not-allowed;
+  }
+
+  /* ── Typography baseline ────────────────────────────────────────
+     Inter as the single sans family across the entire product.
+     Body text ~1.6 line-height, tighter for headings, 600 weight on
+     buttons and labels — Stripe / Coinbase / Linear feel. */
+  html, body {
+    font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv11", "ss01", "ss03", "kern";
+  }
+  body {
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+  label {
+    font-weight: 500;
+  }
+  button {
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  /* Tabular numerals everywhere a price/number appears — keeps cards
+     and tables aligned without per-element overrides. */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }
 
@@ -399,7 +433,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
     0 0 0 1px rgba(43, 107, 255, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
   padding: 14px 14px !important;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   max-width: min(420px, calc(100vw - 1.5rem));
 }
 
@@ -806,22 +840,21 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
    Distinct from the dark glassmorphism aesthetic of the dashboard chrome.
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* Display serif — Fraunces variable. Used for hero + section headlines. */
+/* Display headings — Inter, tight letter-spacing for the fintech feel. */
 .ed-display {
-  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  font-feature-settings: "ss01", "ss02", "liga", "kern";
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01", "liga", "kern";
   letter-spacing: -0.02em;
-  font-weight: 400;
-  font-variation-settings: "opsz" 144;
+  font-weight: 700;
 }
 .ed-display em {
-  font-style: italic;
-  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-style: normal;
+  font-weight: 700;
 }
 
-/* Mono numerical / section markers (§ 01) */
+/* Mono section markers (§ 01) */
 .ed-marker {
-  font-family: var(--font-geist-mono, ui-monospace, monospace);
+  font-family: var(--font-mono, ui-monospace, monospace);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.22em;
