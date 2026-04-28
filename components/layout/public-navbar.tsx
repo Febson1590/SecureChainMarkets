@@ -59,19 +59,28 @@ export function PublicNavbar() {
           {/* ── Center: nav ────────────────────────── */}
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => {
-              const active = pathname === link.href;
+              const active =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname === link.href || pathname.startsWith(link.href.split("#")[0] + "/");
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-4 h-10 inline-flex items-center text-[14px] font-medium rounded-md transition-colors",
+                    "relative px-4 h-10 inline-flex items-center text-[14px] font-medium transition-colors",
                     active
-                      ? "text-[#0A1A3A]"
+                      ? "text-[#2B6BFF]"
                       : "text-slate-600 hover:text-[#0A1A3A]"
                   )}
                 >
                   {link.label}
+                  {active && (
+                    <span
+                      aria-hidden
+                      className="absolute left-3 right-3 -bottom-[1px] h-[2px] rounded-full bg-[#2B6BFF]"
+                    />
+                  )}
                 </Link>
               );
             })}
