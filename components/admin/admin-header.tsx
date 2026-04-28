@@ -19,7 +19,7 @@ export function AdminHeader() {
 
   return (
     <header
-      className="h-16 backdrop-blur-md border-b border-slate-200 flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30"
+      className="h-20 backdrop-blur-md border-b border-slate-200 flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30"
       style={{
         background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
       }}
@@ -36,7 +36,7 @@ export function AdminHeader() {
 
       {/* Logo — mobile only (desktop sidebar has its own logo) */}
       <div className="lg:hidden mr-2">
-        <Logo size="sm" href="/admin" />
+        <Logo size="xl" href="/admin" />
       </div>
 
       {/* Title — desktop */}

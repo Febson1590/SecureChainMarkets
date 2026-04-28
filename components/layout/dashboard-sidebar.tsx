@@ -75,7 +75,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
       {/* Logo header — matches the dashboard top navbar (white → soft blue) */}
       <div
         className={cn(
-          "flex items-center h-16 px-4 border-b border-slate-200 flex-shrink-0",
+          "flex items-center h-20 px-4 border-b border-slate-200 flex-shrink-0",
           isCollapsed && "justify-center px-2"
         )}
         style={{
@@ -83,8 +83,8 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
         }}
       >
         {isCollapsed
-          ? <Logo variant="icon" size="sm" href="/dashboard" />
-          : <Logo size="sm" href="/dashboard" />
+          ? <Logo variant="icon" size="xl" href="/dashboard" />
+          : <Logo size="xl" href="/dashboard" />
         }
       </div>
 

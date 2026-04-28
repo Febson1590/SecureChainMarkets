@@ -39,7 +39,7 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
 
   return (
     <header
-      className="h-16 backdrop-blur-md border-b border-slate-200 flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30"
+      className="h-20 backdrop-blur-md border-b border-slate-200 flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30"
       style={{
         background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
       }}
@@ -62,7 +62,7 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
       </Sheet>
 
       <div className="lg:hidden">
-        <Logo size="sm" href="/dashboard" />
+        <Logo size="xl" href="/dashboard" />
       </div>
 
       <div className="flex-1" />

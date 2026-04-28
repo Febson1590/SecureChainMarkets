@@ -75,12 +75,12 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
     >
       {/* Logo header — matches user dashboard top navbar */}
       <div
-        className="flex items-center h-16 px-4 border-b border-slate-200 flex-shrink-0"
+        className="flex items-center h-20 px-4 border-b border-slate-200 flex-shrink-0"
         style={{
           background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
         }}
       >
-        <Logo size="sm" href="/admin" />
+        <Logo size="xl" href="/admin" />
       </div>
 
       {/* Admin Control label */}
