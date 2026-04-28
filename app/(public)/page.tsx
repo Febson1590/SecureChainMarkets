@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Fragment } from "react";
 import {
   ArrowRight, ArrowUpRight, ArrowDownRight,
@@ -194,14 +195,9 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Right — laptop + phone mockup */}
+          {/* Right — photoreal laptop + phone product shots */}
           <div className="relative min-w-0">
-            <HeroMockup
-              btcPrice={btc?.price ?? 63321.25}
-              btcChange={btc?.change ?? 2.45}
-              btcSpark={btc?.sparkline ?? []}
-              assets={marketAssets}
-            />
+            <HeroProductShot />
           </div>
         </div>
       </section>
@@ -554,268 +550,47 @@ export default async function HomePage() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   HERO MOCKUP — Premium browser/laptop dashboard with floating phone
-   ══════════════════════════════════════════════════════════════════════ */
-function HeroMockup({
-  btcPrice, btcChange, btcSpark, assets,
-}: {
-  btcPrice: number;
-  btcChange: number;
-  btcSpark: number[];
-  assets: import("@/lib/coingecko").MarketAsset[];
-}) {
-  const watchlist = assets.slice(0, 5);
-  const sparkPath = sparklinePath(btcSpark);
 
+/* ══════════════════════════════════════════════════════════════════════
+   HERO PRODUCT SHOT — photoreal laptop + phone composition
+   Backed by gpt-image-1 generated assets in /public/landing/.
+   ══════════════════════════════════════════════════════════════════════ */
+function HeroProductShot() {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full aspect-[4/3] sm:aspect-[1.45/1]">
+      {/* Soft halo behind the laptop */}
       <div
         aria-hidden
-        className="absolute -inset-6 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 50%, rgba(43,107,255,0.18), transparent 70%)",
+            "radial-gradient(60% 50% at 55% 45%, rgba(43,107,255,0.18), transparent 70%)",
         }}
       />
 
-      <div className="relative w-full">
-        <div className="rounded-t-2xl bg-[#0F1729] h-3 mx-[3%] relative">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#1F2A3F]" />
-        </div>
-        <div
-          className="rounded-b-md border-x border-b border-[#0F1729]/40 bg-white overflow-hidden"
-          style={{ boxShadow: "0 30px 70px -28px rgba(15,23,42,0.45), 0 8px 18px -8px rgba(15,23,42,0.18)" }}
-        >
-          <DashboardScreen
-            btcPrice={btcPrice}
-            btcChange={btcChange}
-            sparkPath={sparkPath}
-            watchlist={watchlist}
-          />
-        </div>
-        <div
-          className="h-[14px] -mx-[6%] rounded-b-[16px]"
-          style={{
-            background: "linear-gradient(180deg, #C7CFD9 0%, #94A0B0 55%, #6E7886 100%)",
-          }}
+      {/* Laptop */}
+      <Image
+        src="/landing/hero-laptop.png"
+        alt="SecureChainMarkets dashboard on a laptop"
+        width={1536}
+        height={1024}
+        priority
+        sizes="(max-width: 1024px) 100vw, 600px"
+        className="relative w-full h-auto object-contain drop-shadow-[0_30px_50px_rgba(15,23,42,0.20)]"
+      />
+
+      {/* Phone overlay — bottom-right, slight overlap */}
+      <div className="absolute right-[2%] sm:right-[6%] -bottom-[6%] sm:-bottom-[10%] w-[28%] sm:w-[26%] max-w-[180px]">
+        <Image
+          src="/landing/hero-phone.png"
+          alt="SecureChainMarkets mobile trading app on a phone"
+          width={1024}
+          height={1536}
+          priority
+          sizes="(max-width: 640px) 35vw, 180px"
+          className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(15,23,42,0.25)]"
         />
-        <div className="mx-auto -mt-[11px] h-[7px] w-[28%] rounded-b-md bg-[#5E6878]" />
-      </div>
-
-      <div className="absolute right-1 sm:right-2 lg:right-0 bottom-[-30px] sm:bottom-[-36px] w-[30%] max-w-[150px] sm:max-w-[195px]">
-        <PhoneMockup btcPrice={btcPrice} btcChange={btcChange} />
       </div>
     </div>
   );
-}
-
-function DashboardScreen({
-  btcPrice, btcChange, sparkPath, watchlist,
-}: {
-  btcPrice:  number;
-  btcChange: number;
-  sparkPath: { line: string; area: string } | null;
-  watchlist: import("@/lib/coingecko").MarketAsset[];
-}) {
-  const up = btcChange >= 0;
-  return (
-    <div className="bg-[#FBFCFE] text-[10.5px]">
-      <div className="bg-white border-b border-slate-100 flex items-center px-3 h-7 gap-2">
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-        </div>
-        <div className="ml-3 flex-1 max-w-[180px] h-4 rounded bg-slate-100 flex items-center justify-center text-[8px] text-slate-400 font-medium">
-          securechainmarkets.com/dashboard
-        </div>
-      </div>
-
-      <div className="grid grid-cols-[36px_1fr] sm:grid-cols-[44px_1fr]">
-        <div className="bg-white border-r border-slate-100 py-3 flex flex-col items-center gap-3">
-          <div className="w-7 h-7 rounded-md bg-[#2B6BFF] inline-flex items-center justify-center">
-            <ShieldCheck className="h-3.5 w-3.5 text-white" strokeWidth={2.4} />
-          </div>
-          <div className="w-px h-2 bg-slate-100" />
-          {[BarChart3, Activity, Users].map((Icon, i) => (
-            <div
-              key={i}
-              className={`w-7 h-7 rounded-md inline-flex items-center justify-center ${
-                i === 0 ? "bg-[#2B6BFF]/10 text-[#2B6BFF]" : "text-slate-400"
-              }`}
-            >
-              <Icon className="h-3.5 w-3.5" strokeWidth={2} />
-            </div>
-          ))}
-        </div>
-
-        <div className="p-3.5 sm:p-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2 min-w-0">
-              <span className="text-[12px] font-bold text-[#0A1A3A]">Dashboard</span>
-              <span className="hidden sm:inline text-[9px] text-slate-400">/ Markets</span>
-            </div>
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2B6BFF] to-[#1A4FCC]" />
-          </div>
-
-          <div className="grid grid-cols-[1fr_120px] sm:grid-cols-[1fr_148px] gap-2 sm:gap-3">
-            <div className="rounded-lg border border-slate-200 bg-white p-3">
-              <div className="flex items-center justify-between mb-2.5">
-                <div className="flex items-center gap-2">
-                  <CryptoIcon symbol="BTC" size={20} />
-                  <div className="leading-tight">
-                    <div className="font-bold text-[#0A1A3A] text-[11px]">BTC/USDT</div>
-                    <div className="text-[8.5px] text-slate-400">Bitcoin · Spot</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 tabular-nums">
-                  <span className="font-bold text-[#0A1A3A] text-[12px]">{formatCurrency(btcPrice)}</span>
-                  <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${up ? "text-emerald-700 bg-emerald-50" : "text-rose-700 bg-rose-50"}`}>
-                    {up ? "▲" : "▼"} {Math.abs(btcChange).toFixed(2)}%
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-1 mb-2">
-                {["1H","4H","1D","1W","1M"].map((t, i) => (
-                  <span
-                    key={t}
-                    className={`px-1.5 py-0.5 rounded text-[8.5px] font-semibold ${
-                      i === 2 ? "bg-[#2B6BFF]/10 text-[#2B6BFF]" : "text-slate-400"
-                    }`}
-                  >{t}</span>
-                ))}
-              </div>
-
-              <div className="relative h-[110px]">
-                <svg viewBox="0 0 320 110" preserveAspectRatio="none" className="w-full h-full">
-                  <defs>
-                    <linearGradient id="chart-area" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%"  stopColor="#2B6BFF" stopOpacity="0.30" />
-                      <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  {[20, 45, 70, 95].map((y) => (
-                    <line key={y} x1="0" y1={y} x2="320" y2={y} stroke="#EEF2F7" strokeWidth="1" />
-                  ))}
-                  {sparkPath ? (
-                    <>
-                      <path d={sparkPath.line} stroke="#2B6BFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d={sparkPath.area} fill="url(#chart-area)" />
-                    </>
-                  ) : (
-                    <>
-                      <path d="M0,85 L26,75 L52,82 L78,62 L104,68 L130,46 L156,54 L182,38 L208,44 L234,28 L260,34 L286,18 L320,24" stroke="#2B6BFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M0,85 L26,75 L52,82 L78,62 L104,68 L130,46 L156,54 L182,38 L208,44 L234,28 L260,34 L286,18 L320,24 L320,110 L0,110 Z" fill="url(#chart-area)" />
-                    </>
-                  )}
-                </svg>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="rounded-lg border border-slate-200 bg-white p-2.5">
-                <div className="text-[9px] font-bold uppercase text-slate-500 tracking-wider mb-1.5">Watchlist</div>
-                <ul className="space-y-1.5">
-                  {watchlist.map((a) => {
-                    const isUp = a.change >= 0;
-                    return (
-                      <li key={a.symbol} className="flex items-center justify-between text-[9.5px]">
-                        <span className="flex items-center gap-1.5 min-w-0 flex-1">
-                          <CryptoIcon symbol={a.symbol} size={14} className="flex-shrink-0" />
-                          <span className="font-semibold text-[#0A1A3A] truncate">{a.symbol}</span>
-                        </span>
-                        <span className={`tabular-nums text-[8.5px] font-semibold ${isUp ? "text-emerald-600" : "text-rose-600"}`}>
-                          {isUp ? "+" : ""}{a.change.toFixed(2)}%
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-
-              <div className="rounded-lg border border-slate-200 bg-white p-2.5">
-                <div className="text-[9px] font-bold uppercase text-slate-500 tracking-wider mb-1">Portfolio</div>
-                <div className="text-[14px] font-bold text-[#0A1A3A] tabular-nums leading-none">$87,650.18</div>
-                <div className="text-[8.5px] text-emerald-600 font-semibold mt-0.5">+2.45% today</div>
-                <div className="grid grid-cols-2 gap-1 mt-2">
-                  <div className="h-6 rounded text-[8.5px] font-bold text-white bg-emerald-500 inline-flex items-center justify-center">Buy</div>
-                  <div className="h-6 rounded text-[8.5px] font-bold text-white bg-rose-500 inline-flex items-center justify-center">Sell</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PhoneMockup({ btcPrice, btcChange }: { btcPrice: number; btcChange: number }) {
-  const up = btcChange >= 0;
-  return (
-    <div
-      className="relative rounded-[26px] bg-[#0A1A3A] p-1.5 border border-slate-700"
-      style={{
-        boxShadow: "0 30px 60px -20px rgba(15,23,42,0.55), 0 10px 24px -8px rgba(15,23,42,0.30)",
-      }}
-    >
-      <div className="absolute left-1/2 -translate-x-1/2 top-2.5 w-[36%] h-1.5 rounded-full bg-black z-10" />
-      <div className="rounded-[20px] bg-white overflow-hidden p-3 pt-5">
-        <div className="text-[8px] text-slate-400 font-semibold tracking-wider mb-0.5">PORTFOLIO</div>
-        <div className="text-[14px] font-bold text-[#0A1A3A] tabular-nums leading-none">$87,650.18</div>
-        <div className={`text-[8px] mt-0.5 font-semibold ${up ? "text-emerald-600" : "text-rose-600"}`}>
-          {up ? "+" : ""}{btcChange.toFixed(2)}% · {formatCurrency(btcPrice)}
-        </div>
-
-        <svg viewBox="0 0 160 50" className="w-full h-[40px] mt-2">
-          <defs>
-            <linearGradient id="phone-spark" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"  stopColor="#2B6BFF" stopOpacity="0.30" />
-              <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path d="M0,38 L20,32 L40,36 L60,24 L80,28 L100,18 L120,22 L140,12 L160,16" stroke="#2B6BFF" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M0,38 L20,32 L40,36 L60,24 L80,28 L100,18 L120,22 L140,12 L160,16 L160,50 L0,50 Z" fill="url(#phone-spark)" />
-        </svg>
-
-        <ul className="mt-2 space-y-1">
-          {[
-            { s: "BTC", chg: "+2.45" },
-            { s: "ETH", chg: "+1.24" },
-            { s: "SOL", chg: "+3.82" },
-          ].map((i) => (
-            <li key={i.s} className="flex items-center justify-between text-[9px]">
-              <span className="flex items-center gap-1.5">
-                <CryptoIcon symbol={i.s} size={14} />
-                <span className="font-bold text-[#0A1A3A]">{i.s}</span>
-              </span>
-              <span className="text-emerald-600 font-semibold tabular-nums text-[8.5px]">{i.chg}%</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Sparkline path generator ───────────────────────────────────────── */
-function sparklinePath(data: number[]): { line: string; area: string } | null {
-  if (!data || data.length < 2) return null;
-  const W = 320, H = 110, P = 4;
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = max - min || 1;
-  const step = (W - P * 2) / (data.length - 1);
-  const pts = data.map((v, i) => {
-    const x = P + step * i;
-    const y = P + (H - P * 2) * (1 - (v - min) / range);
-    return [x, y];
-  });
-  const line = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
-  const last = pts[pts.length - 1]!;
-  const first = pts[0]!;
-  const area = `${line} L${last[0].toFixed(1)},${H} L${first[0].toFixed(1)},${H} Z`;
-  return { line, area };
 }
