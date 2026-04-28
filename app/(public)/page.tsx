@@ -557,40 +557,16 @@ export default async function HomePage() {
    ══════════════════════════════════════════════════════════════════════ */
 function HeroProductShot() {
   return (
-    <div className="relative w-full aspect-[4/3] sm:aspect-[1.45/1]">
-      {/* Soft halo behind the laptop */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 55% 45%, rgba(43,107,255,0.18), transparent 70%)",
-        }}
-      />
-
-      {/* Laptop */}
+    <div className="relative w-full">
       <Image
-        src="/landing/hero-laptop.png"
-        alt="SecureChainMarkets dashboard on a laptop"
+        src="/landing/hero.png"
+        alt="SecureChainMarkets dashboard shown on a laptop and phone"
         width={1536}
         height={1024}
         priority
-        sizes="(max-width: 1024px) 100vw, 600px"
-        className="relative w-full h-auto object-contain drop-shadow-[0_30px_50px_rgba(15,23,42,0.20)]"
+        sizes="(max-width: 1024px) 100vw, 640px"
+        className="relative w-full h-auto object-contain"
       />
-
-      {/* Phone overlay — bottom-right, slight overlap */}
-      <div className="absolute right-[2%] sm:right-[6%] -bottom-[6%] sm:-bottom-[10%] w-[28%] sm:w-[26%] max-w-[180px]">
-        <Image
-          src="/landing/hero-phone.png"
-          alt="SecureChainMarkets mobile trading app on a phone"
-          width={1024}
-          height={1536}
-          priority
-          sizes="(max-width: 640px) 35vw, 180px"
-          className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(15,23,42,0.25)]"
-        />
-      </div>
     </div>
   );
 }
