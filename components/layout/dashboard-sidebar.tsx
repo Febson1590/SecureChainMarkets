@@ -46,7 +46,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
   return (
     <aside
       className={cn(
-        "flex flex-col bg-[#08111F] border-r border-white/[0.06] transition-all duration-300 flex-shrink-0",
+        "flex flex-col bg-[#0B1220]/80 backdrop-blur-md border-r border-white/[0.06] transition-all duration-300 flex-shrink-0",
         !isMobile && (isCollapsed ? "hidden lg:flex w-16" : "hidden lg:flex w-60"),
         isMobile && "w-full h-full"
       )}
@@ -75,18 +75,21 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
               className={cn(
                 "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group",
                 active
-                  ? "bg-[#2B6BFF]/10 text-white"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.04]",
+                  ? "bg-[#2B6BFF]/12 text-white shadow-[inset_0_0_0_1px_rgba(43,107,255,0.18)]"
+                  : "text-slate-300 hover:text-white hover:bg-white/[0.05]",
                 isCollapsed && "justify-center px-2"
               )}
             >
               {active && !isCollapsed && (
-                <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#2B6BFF]" />
+                <span
+                  className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-[#3B82F6]"
+                  style={{ boxShadow: "0 0 12px rgba(59,130,246,0.55)" }}
+                />
               )}
               <item.icon
                 className={cn(
                   "h-[17px] w-[17px] flex-shrink-0 transition-colors",
-                  active ? "text-[#2B6BFF]" : "text-slate-500 group-hover:text-white"
+                  active ? "text-[#3B82F6]" : "text-slate-400 group-hover:text-white"
                 )}
               />
               {!isCollapsed && <span className="tracking-tight">{item.label}</span>}

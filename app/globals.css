@@ -163,10 +163,12 @@
 
 /* ─── Glass ─────────────────────────────────────── */
 .glass-card {
-  background: rgba(7, 15, 30, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(43, 107, 255, 0.16);
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .glass-card-hover {
@@ -175,11 +177,11 @@
               border-color 0.3s ease;
 }
 .glass-card-hover:hover {
-  border-color: rgba(43, 107, 255, 0.35);
+  border-color: rgba(59, 130, 246, 0.35);
   box-shadow:
-    0 0 0 1px rgba(43, 107, 255, 0.07),
-    0 8px 32px rgba(43, 107, 255, 0.08),
-    0 20px 50px rgba(0, 0, 0, 0.4);
+    0 0 0 1px rgba(59, 130, 246, 0.08),
+    0 10px 32px rgba(59, 130, 246, 0.10),
+    0 20px 50px rgba(0, 0, 0, 0.40);
 }
 
 /* ─── Mockup frame (dashboard) ───────────────────── */

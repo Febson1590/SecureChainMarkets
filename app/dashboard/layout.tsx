@@ -35,7 +35,15 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const unreadCount = user.notifications.length;
 
   return (
-    <div className="flex h-[100dvh] bg-[#08111F] text-slate-300 overflow-hidden">
+    <div
+      className="flex h-[100dvh] text-slate-200 overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(60% 50% at 90% 0%, rgba(43,107,255,0.10), transparent 65%)," +
+          "radial-gradient(45% 40% at 0% 100%, rgba(43,107,255,0.06), transparent 70%)," +
+          "linear-gradient(135deg, #0B1220 0%, #0F1A2F 50%, #0B1220 100%)",
+      }}
+    >
       <DashboardSidebar unreadCount={unreadCount} />
       <div className="flex flex-col flex-1 min-w-0">
         <DashboardHeader

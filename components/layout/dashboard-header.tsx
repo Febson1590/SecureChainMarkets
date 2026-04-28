@@ -38,13 +38,21 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
     : "U";
 
   return (
-    <header className="h-16 bg-[#08111F]/95 backdrop-blur-sm border-b border-white/[0.06] flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30">
+    <header className="h-16 bg-[#0B1220]/70 backdrop-blur-md border-b border-white/[0.06] flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30">
       {/* Mobile menu — controlled Sheet so we can close it on nav click */}
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger render={<button className="lg:hidden p-2 text-slate-400 hover:text-white mr-2" />}>
           <Menu size={20} />
         </SheetTrigger>
-        <SheetContent side="left" className="w-72 p-0 bg-[#08111F] border-white/[0.06] overflow-hidden">
+        <SheetContent
+          side="left"
+          className="w-72 p-0 border-white/[0.06] overflow-hidden text-slate-200"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 90% 0%, rgba(43,107,255,0.10), transparent 65%)," +
+              "linear-gradient(135deg, #0B1220 0%, #0F1A2F 50%, #0B1220 100%)",
+          }}
+        >
           <DashboardSidebar
             unreadCount={unreadCount}
             isMobile={true}
