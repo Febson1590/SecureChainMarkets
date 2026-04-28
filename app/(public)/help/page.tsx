@@ -23,9 +23,9 @@ const faqs = [
     q: "What trading fees do you charge?",
     a: (
       <>
-        Our current fees are listed on the{" "}
-        <Link href="/pricing" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Fees &amp; Pricing</Link>{" "}
-        page. There are no deposit, withdrawal, or account maintenance fees.
+        Trading fees are shown on the order confirmation before you submit, and the
+        full schedule is visible inside the dashboard. There are no deposit, withdrawal,
+        or account maintenance fees.
       </>
     ),
   },

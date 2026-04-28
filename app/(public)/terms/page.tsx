@@ -75,8 +75,8 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-white mb-2">7. Fees</h2>
             <p>
-              Current trading fees are listed on our{" "}
-              <a href="/pricing" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Fees &amp; Pricing</a> page.
+              Current trading fees are shown on the order confirmation before you submit, and the
+              full schedule is visible inside the dashboard.
               Fees may be updated from time to time, and continued use of the platform after a fee change
               constitutes acceptance of the updated fees.
             </p>

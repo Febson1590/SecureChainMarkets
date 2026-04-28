@@ -166,8 +166,7 @@ export default function AboutPage() {
           <p className="text-sm text-slate-400 leading-relaxed">
             SecureChainMarkets does not provide investment, tax, or legal advice. Published fees,
             processing times, and supported assets may change — changes are reflected directly
-            in the dashboard and on the{" "}
-            <Link href="/pricing" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Fees page</Link>.
+            in the dashboard before you submit any order.
             Your responsibilities are detailed in our{" "}
             <Link href="/terms" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Terms of Service</Link>{" "}
             and{" "}

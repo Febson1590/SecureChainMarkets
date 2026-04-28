@@ -12,7 +12,6 @@ const navLinks = [
   { href: "/markets",         label: "Markets"       },
   { href: "/#how-it-works",   label: "How It Works"  },
   { href: "/about",           label: "About Company" },
-  { href: "/pricing",         label: "Account Types" },
   { href: "/contact",         label: "Contact Us"    },
 ];
 
