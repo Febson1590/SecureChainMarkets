@@ -7,51 +7,65 @@ import {
   LineChart, ChevronRight, LayoutGrid,
   Sparkles, Bitcoin, Landmark, Coins,
   Activity, KeyRound, FileCheck2, CheckCircle2,
+  CandlestickChart, PieChart, BadgeCheck, Fingerprint,
+  Wallet, TrendingUp, UserPlus,
 } from "lucide-react";
+
+type Tone = "blue" | "indigo" | "green" | "red" | "amber" | "violet" | "teal";
+
+const TONE_STYLES: Record<Tone, { bg: string; fg: string; ring: string }> = {
+  blue:   { bg: "bg-[#2B6BFF]/10",   fg: "text-[#2B6BFF]",   ring: "ring-[#2B6BFF]/20" },
+  indigo: { bg: "bg-indigo-500/10",  fg: "text-indigo-600",  ring: "ring-indigo-500/20" },
+  green:  { bg: "bg-emerald-500/12", fg: "text-emerald-600", ring: "ring-emerald-500/20" },
+  red:    { bg: "bg-rose-500/12",    fg: "text-rose-600",    ring: "ring-rose-500/20" },
+  amber:  { bg: "bg-amber-500/12",   fg: "text-amber-600",   ring: "ring-amber-500/20" },
+  violet: { bg: "bg-violet-500/10",  fg: "text-violet-600",  ring: "ring-violet-500/20" },
+  teal:   { bg: "bg-teal-500/12",    fg: "text-teal-600",    ring: "ring-teal-500/20" },
+};
 import { getMarketAssets } from "@/lib/coingecko";
 import { formatCurrency, formatPercent, formatCompact } from "@/lib/utils";
 import { CryptoIcon } from "@/components/public/crypto-icon";
 import { PLATFORM } from "@/lib/company";
 
 /* ─── Credibility bar ───────────────────────────────────────────────── */
-const credibility = [
-  { icon: ShieldCheck, title: "Account Protection",   desc: "Two-factor sign-in, password hashing and session monitoring on every account." },
-  { icon: LineChart,   title: "Transparent Trading",  desc: "Bid, ask and order details shown clearly before every confirmation." },
-  { icon: BarChart3,   title: "Portfolio Monitoring", desc: "Real-time holdings, P&L and full transaction history in one workspace." },
-  { icon: FileCheck2,  title: "Secure Verification",  desc: "Manual KYC review and identity checks before live funding is enabled." },
+const credibility: { icon: typeof ShieldCheck; title: string; desc: string; tone: Tone }[] = [
+  { icon: Fingerprint,       title: "Account Protection",   tone: "blue",   desc: "Two-factor sign-in, password hashing and session monitoring on every account." },
+  { icon: CandlestickChart,  title: "Transparent Trading",  tone: "green",  desc: "Bid, ask and order details shown clearly before every confirmation." },
+  { icon: PieChart,          title: "Portfolio Monitoring", tone: "violet", desc: "Real-time holdings, P&L and full transaction history in one workspace." },
+  { icon: BadgeCheck,        title: "Secure Verification",  tone: "amber",  desc: "Manual KYC review and identity checks before live funding is enabled." },
 ];
 
 /* ─── Feature cards ─────────────────────────────────────────────────── */
-const features = [
-  { icon: Bitcoin,    title: "Crypto Trading",         desc: "Buy and sell supported digital assets with market or limit orders and clear, itemised confirmations." },
-  { icon: BarChart3,  title: "Investment Plans",       desc: "Structured plans with stated terms — review the plan details and risk information before participating." },
-  { icon: Users,      title: "Copy Trading",           desc: "Mirror selected traders' activity in your own account. Transparent performance history; pause or exit any time." },
-  { icon: LayoutGrid, title: "Wallet Management",      desc: "Manage deposit and withdrawal addresses with reviewable activity and per-asset balances." },
-  { icon: ShieldCheck,title: "Account Verification",   desc: "Identity verification is required before funding. Submissions go through a manual review process before approval." },
-  { icon: Eye,        title: "Transaction Monitoring", desc: "Every deposit, trade, and withdrawal is logged with timestamps and visible in your activity history." },
+const features: { icon: typeof Bitcoin; title: string; desc: string; tone: Tone }[] = [
+  { icon: Bitcoin,          title: "Crypto Trading",         tone: "amber",  desc: "Buy and sell supported digital assets with market or limit orders and clear, itemised confirmations." },
+  { icon: TrendingUp,       title: "Investment Plans",       tone: "green",  desc: "Structured plans with stated terms — review the plan details and risk information before participating." },
+  { icon: Users,            title: "Copy Trading",           tone: "blue",   desc: "Mirror selected traders' activity in your own account. Transparent performance history; pause or exit any time." },
+  { icon: Wallet,           title: "Wallet Management",      tone: "violet", desc: "Manage deposit and withdrawal addresses with reviewable activity and per-asset balances." },
+  { icon: BadgeCheck,       title: "Account Verification",   tone: "teal",   desc: "Identity verification is required before funding. Submissions go through a manual review process before approval." },
+  { icon: Activity,         title: "Transaction Monitoring", tone: "indigo", desc: "Every deposit, trade, and withdrawal is logged with timestamps and visible in your activity history." },
 ];
 
 /* ─── Trust & Operations ────────────────────────────────────────────── */
-const trust = [
-  { icon: Lock,       title: "Encrypted Transport", desc: "All traffic to the platform is sent over TLS. Passwords are hashed with bcrypt and are never stored in plain text." },
-  { icon: Eye,        title: "Full Activity Log",   desc: "Every deposit, trade, and withdrawal you make is visible in your account history with timestamps." },
-  { icon: FileCheck2, title: "Reviewed Onboarding", desc: "Every funded account is manually reviewed against the identity documents you submit during KYC." },
-  { icon: Award,      title: "Transparent Fees",    desc: "Trading fees are published up-front and the final cost is shown on the order confirmation before you submit." },
+const trust: { icon: typeof Lock; title: string; desc: string; tone: Tone }[] = [
+  { icon: KeyRound,   title: "Encrypted Transport", tone: "blue",   desc: "All traffic to the platform is sent over TLS. Passwords are hashed with bcrypt and are never stored in plain text." },
+  { icon: Activity,   title: "Full Activity Log",   tone: "indigo", desc: "Every deposit, trade, and withdrawal you make is visible in your account history with timestamps." },
+  { icon: FileCheck2, title: "Reviewed Onboarding", tone: "teal",   desc: "Every funded account is manually reviewed against the identity documents you submit during KYC." },
+  { icon: Coins,      title: "Transparent Fees",    tone: "amber",  desc: "Trading fees are published up-front and the final cost is shown on the order confirmation before you submit." },
 ];
 
 /* ─── Markets we cover ──────────────────────────────────────────────── */
-const coveredMarkets = [
-  { icon: Bitcoin,    title: "Bitcoin",      desc: "Buy, sell and hold BTC directly — the most-traded asset on the platform, priced in USD." },
-  { icon: Coins,      title: "Ethereum",     desc: "ETH spot trading with market or limit orders, quoted against USD and available on every plan." },
-  { icon: LayoutGrid, title: "Top Altcoins", desc: "SOL, BNB, XRP, ADA, AVAX, LINK, DOT, LTC and other majors — 15 listed assets under one USD quote layer." },
-  { icon: Landmark,   title: "Stablecoins",  desc: "USDT for parking balance between trades or funding an investment plan without market exposure." },
+const coveredMarkets: { kind: "crypto" | "stack"; symbol?: string; symbols?: string[]; title: string; desc: string }[] = [
+  { kind: "crypto", symbol: "BTC",                       title: "Bitcoin",      desc: "Buy, sell and hold BTC directly — the most-traded asset on the platform, priced in USD." },
+  { kind: "crypto", symbol: "ETH",                       title: "Ethereum",     desc: "ETH spot trading with market or limit orders, quoted against USD and available on every plan." },
+  { kind: "stack",  symbols: ["SOL", "BNB", "XRP"],      title: "Top Altcoins", desc: "SOL, BNB, XRP, ADA, AVAX, LINK, DOT, LTC and other majors — 15 listed assets under one USD quote layer." },
+  { kind: "crypto", symbol: "USDT",                      title: "Stablecoins",  desc: "USDT for parking balance between trades or funding an investment plan without market exposure." },
 ];
 
 /* ─── Onboarding steps ──────────────────────────────────────────────── */
-const steps = [
-  { n: "01", title: "Create your account",                    desc: "Register with your email and confirm ownership with a one-time code. No credit card required." },
-  { n: "02", title: "Complete verification",                  desc: "Upload a government-issued ID and a short selfie. Submissions go through a manual review process before approval." },
-  { n: "03", title: "Fund, trade and monitor your portfolio", desc: "Deposit through supported methods, place market or limit orders, and watch holdings in real time." },
+const steps: { n: string; title: string; desc: string; icon: typeof UserPlus; tone: Tone }[] = [
+  { n: "01", title: "Create your account",                    icon: UserPlus,   tone: "blue",  desc: "Register with your email and confirm ownership with a one-time code. No credit card required." },
+  { n: "02", title: "Complete verification",                  icon: BadgeCheck, tone: "amber", desc: "Upload a government-issued ID and a short selfie. Submissions go through a manual review process before approval." },
+  { n: "03", title: "Fund, trade and monitor your portfolio", icon: TrendingUp, tone: "green", desc: "Deposit through supported methods, place market or limit orders, and watch holdings in real time." },
 ];
 
 /* ─── Security checklist ────────────────────────────────────────────── */
@@ -86,11 +100,38 @@ export default async function HomePage() {
   const totalMcap   = marketAssets.reduce((acc, a) => acc + a.marketCap, 0);
   const avgChange   = marketAssets.reduce((acc, a) => acc + a.change, 0) / (marketAssets.length || 1);
 
-  const heroStats: { label: string; value: string; accent?: "up" | "down" }[] = [
-    { label: "24h Volume", value: `$${formatCompact(totalVolume)}` },
-    { label: "Market Cap", value: `$${formatCompact(totalMcap)}`   },
-    { label: "Avg 24h Δ",  value: formatPercent(avgChange), accent: avgChange >= 0 ? "up" : "down" },
-    { label: "Listed",     value: `${marketAssets.length}`         },
+  const heroStats: {
+    label: string;
+    value: string;
+    accent?: "up" | "down";
+    Icon: typeof BarChart3;
+    tone: "blue" | "indigo" | "green" | "red" | "amber";
+  }[] = [
+    {
+      label: "24h Volume",
+      value: `$${formatCompact(totalVolume)}`,
+      Icon: BarChart3,
+      tone: "blue",
+    },
+    {
+      label: "Market Cap",
+      value: `$${formatCompact(totalMcap)}`,
+      Icon: Coins,
+      tone: "indigo",
+    },
+    {
+      label: "Avg 24h Δ",
+      value: formatPercent(avgChange),
+      accent: avgChange >= 0 ? "up" : "down",
+      Icon: avgChange >= 0 ? ArrowUpRight : ArrowDownRight,
+      tone: avgChange >= 0 ? "green" : "red",
+    },
+    {
+      label: "Listed",
+      value: `${marketAssets.length}`,
+      Icon: LayoutGrid,
+      tone: "amber",
+    },
   ];
 
   return (
@@ -232,20 +273,29 @@ export default async function HomePage() {
           {/* Stat chips — under copy on desktop, after hero visual on mobile */}
           <div className="mt-7 sm:mt-10 lg:mt-9 lg:max-w-[56%]">
             <div className="grid grid-cols-2 gap-2.5 sm:gap-3 max-w-[480px]">
-              {heroStats.map((s) => (
-                <div key={s.label} className="rounded-xl bg-white border border-slate-200 px-3 sm:px-4 py-2.5 sm:py-3 shadow-[0_4px_14px_-8px_rgba(15,23,42,0.10)]">
-                  <div className="text-[9.5px] sm:text-[10px] uppercase tracking-widest text-slate-500 font-semibold truncate">{s.label}</div>
+              {heroStats.map((s) => {
+                const tone = TONE_STYLES[s.tone];
+                return (
                   <div
-                    className={`mt-0.5 sm:mt-1 text-[14px] sm:text-[16px] font-bold tabular-nums truncate ${
-                      s.accent === "up"   ? "text-emerald-600" :
-                      s.accent === "down" ? "text-rose-600" :
-                      "text-[#0A1A3A]"
-                    }`}
+                    key={s.label}
+                    className="group rounded-xl bg-white border border-slate-200 px-3 sm:px-4 py-2.5 sm:py-3 shadow-[0_4px_14px_-8px_rgba(15,23,42,0.10)] flex items-center gap-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-12px_rgba(15,23,42,0.18)]"
                   >
-                    {s.value}
+                    <div
+                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg ${tone.bg} ring-1 ${tone.ring} inline-flex items-center justify-center flex-shrink-0`}
+                    >
+                      <s.Icon className={`h-[15px] w-[15px] sm:h-4 sm:w-4 ${tone.fg}`} strokeWidth={2.2} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[9.5px] sm:text-[10px] uppercase tracking-widest text-slate-500 font-semibold truncate">
+                        {s.label}
+                      </div>
+                      <div className={`mt-0.5 text-[14px] sm:text-[16px] font-bold tabular-nums truncate ${tone.fg}`}>
+                        {s.value}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -341,20 +391,23 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {credibility.map((c) => (
-              <div
-                key={c.title}
-                className="group bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
-              >
-                <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0 transition-colors duration-300">
-                  <c.icon className="h-[18px] w-[18px] text-[#2B6BFF]" strokeWidth={2} />
+            {credibility.map((c) => {
+              const t = TONE_STYLES[c.tone];
+              return (
+                <div
+                  key={c.title}
+                  className="group bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
+                >
+                  <div className={`w-11 h-11 rounded-lg ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
+                    <c.icon className={`h-[18px] w-[18px] ${t.fg}`} strokeWidth={2} />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-[14px] font-semibold text-[#0A1A3A] mb-1">{c.title}</h3>
+                    <p className="text-[12.5px] text-slate-600 leading-relaxed">{c.desc}</p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <h3 className="text-[14px] font-semibold text-[#0A1A3A] mb-1">{c.title}</h3>
-                  <p className="text-[12.5px] text-slate-600 leading-relaxed">{c.desc}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -377,22 +430,25 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="group bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#2B6BFF]/15">
-                    <f.icon className="h-[18px] w-[18px] text-[#2B6BFF]" strokeWidth={2} />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-[15px] font-semibold text-[#0A1A3A] mb-1.5">{f.title}</h3>
-                    <p className="text-[13px] text-slate-600 leading-relaxed">{f.desc}</p>
+            {features.map((f) => {
+              const t = TONE_STYLES[f.tone];
+              return (
+                <div
+                  key={f.title}
+                  className="group bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`w-11 h-11 rounded-lg ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
+                      <f.icon className={`h-[18px] w-[18px] ${t.fg}`} strokeWidth={2} />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-[15px] font-semibold text-[#0A1A3A] mb-1.5">{f.title}</h3>
+                      <p className="text-[13px] text-slate-600 leading-relaxed">{f.desc}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -422,21 +478,25 @@ export default async function HomePage() {
               className="hidden lg:block absolute top-[26px] left-[14%] right-[14%] h-[1.5px] border-t-[1.5px] border-dashed border-[#2B6BFF]/30"
             />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
-              {steps.map((s) => (
-                <Fragment key={s.n}>
-                  <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className="w-12 h-12 rounded-lg inline-flex items-center justify-center text-[15px] font-bold text-[#2B6BFF] bg-[#2B6BFF]/10 border border-[#2B6BFF]/15 tabular-nums"
-                      >
-                        {s.n}
+              {steps.map((s) => {
+                const t = TONE_STYLES[s.tone];
+                return (
+                  <Fragment key={s.n}>
+                    <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`relative w-12 h-12 rounded-lg ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
+                          <s.icon className={`h-[18px] w-[18px] ${t.fg}`} strokeWidth={2.2} />
+                          <span className={`absolute -top-1.5 -right-1.5 h-5 min-w-5 px-1 rounded-full bg-white border border-slate-200 text-[10px] font-bold tabular-nums ${t.fg} inline-flex items-center justify-center`}>
+                            {s.n}
+                          </span>
+                        </div>
+                        <h3 className="text-[15px] font-semibold text-[#0A1A3A] leading-tight">{s.title}</h3>
                       </div>
-                      <h3 className="text-[15px] font-semibold text-[#0A1A3A] leading-tight">{s.title}</h3>
+                      <p className="text-[13px] text-slate-600 leading-relaxed">{s.desc}</p>
                     </div>
-                    <p className="text-[13px] text-slate-600 leading-relaxed">{s.desc}</p>
-                  </div>
-                </Fragment>
-              ))}
+                  </Fragment>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -474,15 +534,18 @@ export default async function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {trust.map((t) => (
-                <div key={t.title} className="bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]">
-                  <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 flex items-center justify-center mb-3">
-                    <t.icon className="h-4 w-4 text-[#2B6BFF]" strokeWidth={2} />
+              {trust.map((t) => {
+                const ts = TONE_STYLES[t.tone];
+                return (
+                  <div key={t.title} className="bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]">
+                    <div className={`w-10 h-10 rounded-lg ${ts.bg} ring-1 ${ts.ring} flex items-center justify-center mb-3`}>
+                      <t.icon className={`h-4 w-4 ${ts.fg}`} strokeWidth={2} />
+                    </div>
+                    <h4 className="text-[14px] font-semibold text-[#0A1A3A] mb-1.5">{t.title}</h4>
+                    <p className="text-[12.5px] text-slate-600 leading-relaxed">{t.desc}</p>
                   </div>
-                  <h4 className="text-[14px] font-semibold text-[#0A1A3A] mb-1.5">{t.title}</h4>
-                  <p className="text-[12.5px] text-slate-600 leading-relaxed">{t.desc}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -530,8 +593,22 @@ export default async function HomePage() {
                     fill={`url(#mk-${m.title})`}
                   />
                 </svg>
-                <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/15 flex items-center justify-center mb-4">
-                  <m.icon className="h-[18px] w-[18px] text-[#2B6BFF]" strokeWidth={2} />
+                {/* Real crypto brand mark, or a stack of marks for "Top Altcoins" */}
+                <div className="mb-4 inline-flex items-center">
+                  {m.kind === "crypto" && m.symbol ? (
+                    <CryptoIcon symbol={m.symbol} size={44} />
+                  ) : m.kind === "stack" && m.symbols ? (
+                    <div className="flex items-center -space-x-2">
+                      {m.symbols.map((sym) => (
+                        <div
+                          key={sym}
+                          className="w-9 h-9 rounded-full ring-2 ring-white inline-flex items-center justify-center bg-white"
+                        >
+                          <CryptoIcon symbol={sym} size={36} />
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
                 <h3 className="text-[15px] font-semibold text-[#0A1A3A] mb-1.5">{m.title}</h3>
                 <p className="text-[12.5px] text-slate-600 leading-relaxed">{m.desc}</p>
