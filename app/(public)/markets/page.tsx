@@ -1,8 +1,7 @@
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { getMarketAssets } from "@/lib/coingecko";
 import { formatCurrency, formatPercent, formatCompact } from "@/lib/utils";
+import { CryptoIcon } from "@/components/public/crypto-icon";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Markets" };
@@ -11,94 +10,174 @@ export default async function MarketsPage() {
   const assets = await getMarketAssets();
 
   return (
-    <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6 lg:px-8 hero-bg">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-10 text-center">
-          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">Markets</Badge>
-          <h1 className="text-4xl font-bold text-white mb-3">Market Overview</h1>
-          <p className="text-slate-400">Market snapshot — latest prices and 24-hour performance for the digital assets listed on SecureChainMarkets.</p>
-        </div>
+    <div className="bg-white text-[#0A1A3A] overflow-x-hidden">
+      {/* Soft hero glow background, matching the landing page */}
+      <section className="relative pt-24 sm:pt-28 lg:pt-32 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8">
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none -z-10"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 75% 30%, rgba(43,107,255,0.10) 0%, rgba(43,107,255,0) 70%)," +
+              "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 60%, #FFFFFF 100%)",
+          }}
+        />
 
-        {/* Summary cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {assets.slice(0, 4).map((asset) => {
-            const isUp = asset.change >= 0;
-            return (
-              <div key={asset.id} className="glass-card rounded-xl p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-[#2B6BFF]">{asset.symbol}</span>
-                  <span className={`text-xs font-medium ${isUp ? "text-emerald-400" : "text-red-400"}`}>
-                    {formatPercent(asset.change)}
-                  </span>
-                </div>
-                <div className="text-lg font-bold text-white">{formatCurrency(asset.price)}</div>
-              </div>
-            );
-          })}
+        <div className="max-w-[1200px] mx-auto text-center">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] bg-[#EAF2FF] text-[#2B6BFF] border border-[#DCE6FA] mb-4">
+            Markets
+          </span>
+          <h1 className="text-[30px] sm:text-[40px] lg:text-[48px] font-bold tracking-tight leading-[1.05]">
+            Market Overview
+          </h1>
+          <p className="mt-4 text-[14px] sm:text-[15.5px] text-slate-600 leading-[1.6] max-w-[640px] mx-auto">
+            Latest prices and 24-hour performance for the digital assets listed on SecureChainMarkets.
+          </p>
         </div>
+      </section>
 
-        <Card className="glass-card border-0 rounded-2xl overflow-hidden">
-          <div className="p-4 border-b border-white/5 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-white">All Assets</h2>
-            <span className="text-xs text-slate-500">{assets.length} markets</span>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full premium-table">
-              <thead>
-                <tr className="border-b border-white/5">
-                  {["#", "Asset", "Price", "24h Change", "Market Cap", "Volume 24h", "Supply"].map((h, i) => (
-                    <th
-                      key={h}
-                      className={`text-left text-xs font-medium text-slate-500 px-6 py-4 uppercase tracking-widest ${i > 3 ? "hidden md:table-cell" : ""} ${i === 6 ? "hidden lg:table-cell" : ""} ${i >= 2 ? "text-right" : ""}`}
+      {/* Summary cards */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {assets.slice(0, 4).map((a) => {
+              const up = a.change >= 0;
+              return (
+                <div
+                  key={a.id}
+                  className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-[0_8px_22px_-14px_rgba(15,23,42,0.18)]"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <CryptoIcon symbol={a.symbol} size={22} className="flex-shrink-0" />
+                      <span className="text-[13px] font-bold text-[#0A1A3A] truncate">{a.symbol}</span>
+                    </div>
+                    <span
+                      className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[11px] font-semibold tabular-nums ${
+                        up ? "text-emerald-700 bg-emerald-50" : "text-rose-700 bg-rose-50"
+                      }`}
                     >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {assets.map((asset) => {
-                  const isUp = asset.change >= 0;
-                  return (
-                    <tr key={asset.id} className="border-b border-white/5 hover:bg-[#2B6BFF]/2 transition-colors">
-                      <td className="px-6 py-4 text-sm text-slate-500">{asset.rank}</td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-xs font-bold text-[#2B6BFF]">{asset.symbol.slice(0, 2)}</span>
-                          </div>
-                          <div>
-                            <div className="text-sm font-semibold text-white">{asset.name}</div>
-                            <div className="text-xs text-slate-500">{asset.symbol}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <span className="text-sm font-bold text-white">{formatCurrency(asset.price)}</span>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-md ${isUp ? "bg-emerald-500/10 text-emerald-400" : "bg-red-500/10 text-red-400"}`}>
-                          {isUp ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-                          {formatPercent(asset.change)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right text-sm text-slate-400 hidden md:table-cell">
-                        ${formatCompact(asset.marketCap)}
-                      </td>
-                      <td className="px-6 py-4 text-right text-sm text-slate-400 hidden md:table-cell">
-                        ${formatCompact(asset.volume24h)}
-                      </td>
-                      <td className="px-6 py-4 text-right text-sm text-slate-400 hidden lg:table-cell">
-                        {formatCompact(asset.supply)} {asset.symbol}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                      {up ? <ArrowUpRight size={11} /> : <ArrowDownRight size={11} />}
+                      {Math.abs(a.change).toFixed(2)}%
+                    </span>
+                  </div>
+                  <div className="text-[16px] sm:text-[18px] font-bold text-[#0A1A3A] tabular-nums truncate">
+                    {formatCurrency(a.price)}
+                  </div>
+                  <div className="text-[11px] text-slate-500 mt-1 truncate">{a.name}</div>
+                </div>
+              );
+            })}
           </div>
-        </Card>
-      </div>
+        </div>
+      </section>
+
+      {/* All assets — mobile cards + desktop table */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-20 sm:pb-24">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-[0_18px_50px_-26px_rgba(15,23,42,0.18)] overflow-hidden">
+            <div className="px-4 sm:px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+              <h2 className="text-[14px] sm:text-[15px] font-semibold text-[#0A1A3A]">All Assets</h2>
+              <span className="text-[11.5px] text-slate-500">{assets.length} markets</span>
+            </div>
+
+            {/* ── Mobile cards ── */}
+            <ul className="md:hidden divide-y divide-slate-100">
+              {assets.map((a) => {
+                const up = a.change >= 0;
+                return (
+                  <li key={a.id} className="px-4 py-3.5 flex items-center gap-3">
+                    <span className="text-[11px] font-semibold text-slate-400 w-5 text-right tabular-nums flex-shrink-0">
+                      {a.rank}
+                    </span>
+                    <CryptoIcon symbol={a.symbol} size={28} className="flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[13.5px] font-semibold text-[#0A1A3A] truncate leading-tight">
+                        {a.name}
+                      </div>
+                      <div className="text-[11px] text-slate-500 leading-tight">{a.symbol}</div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-[13.5px] font-bold text-[#0A1A3A] tabular-nums">
+                        {formatCurrency(a.price)}
+                      </div>
+                      <span
+                        className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10.5px] font-semibold tabular-nums mt-1 ${
+                          up ? "text-emerald-700 bg-emerald-50" : "text-rose-700 bg-rose-50"
+                        }`}
+                      >
+                        {up ? <ArrowUpRight size={10} /> : <ArrowDownRight size={10} />}
+                        {Math.abs(a.change).toFixed(2)}%
+                      </span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* ── Desktop / tablet table ── */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-[13px]">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-[#F7FAFF]">
+                    {["#", "Asset", "Price", "24h Change", "Market Cap", "Volume 24h", "Supply"].map((h, i) => (
+                      <th
+                        key={h}
+                        className={`text-[11px] font-bold uppercase tracking-widest text-slate-500 px-4 lg:px-6 py-3.5 whitespace-nowrap
+                          ${i >= 2 ? "text-right" : "text-left"}
+                          ${i === 6 ? "hidden lg:table-cell" : ""}`}
+                      >
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {assets.map((a) => {
+                    const up = a.change >= 0;
+                    return (
+                      <tr key={a.id} className="border-b border-slate-100 hover:bg-[#F7FAFF] transition-colors">
+                        <td className="px-4 lg:px-6 py-4 text-slate-500 tabular-nums">{a.rank}</td>
+                        <td className="px-4 lg:px-6 py-4">
+                          <div className="flex items-center gap-3 min-w-0">
+                            <CryptoIcon symbol={a.symbol} size={28} className="flex-shrink-0" />
+                            <div className="min-w-0">
+                              <div className="text-[13.5px] font-semibold text-[#0A1A3A] truncate">{a.name}</div>
+                              <div className="text-[11px] text-slate-500">{a.symbol}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-4 lg:px-6 py-4 text-right">
+                          <span className="text-[13.5px] font-bold text-[#0A1A3A] tabular-nums">{formatCurrency(a.price)}</span>
+                        </td>
+                        <td className="px-4 lg:px-6 py-4 text-right">
+                          <span
+                            className={`inline-flex items-center gap-0.5 text-[11.5px] font-semibold px-2 py-0.5 rounded-md tabular-nums ${
+                              up ? "text-emerald-700 bg-emerald-50" : "text-rose-700 bg-rose-50"
+                            }`}
+                          >
+                            {up ? <ArrowUpRight size={11} /> : <ArrowDownRight size={11} />}
+                            {formatPercent(a.change)}
+                          </span>
+                        </td>
+                        <td className="px-4 lg:px-6 py-4 text-right text-[12.5px] text-slate-600 tabular-nums">
+                          ${formatCompact(a.marketCap)}
+                        </td>
+                        <td className="px-4 lg:px-6 py-4 text-right text-[12.5px] text-slate-600 tabular-nums">
+                          ${formatCompact(a.volume24h)}
+                        </td>
+                        <td className="px-4 lg:px-6 py-4 text-right text-[12.5px] text-slate-600 tabular-nums hidden lg:table-cell whitespace-nowrap">
+                          {formatCompact(a.supply)} {a.symbol}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
