@@ -51,11 +51,16 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
         isMobile && "w-full h-full"
       )}
     >
-      {/* Logo */}
-      <div className={cn(
-        "flex items-center h-16 px-4 border-b border-white/[0.06] flex-shrink-0",
-        isCollapsed && "justify-center px-2"
-      )}>
+      {/* Logo header — matches the dashboard top navbar (white → soft blue) */}
+      <div
+        className={cn(
+          "flex items-center h-16 px-4 border-b border-slate-200 flex-shrink-0",
+          isCollapsed && "justify-center px-2"
+        )}
+        style={{
+          background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
+        }}
+      >
         {isCollapsed
           ? <Logo variant="icon" size="sm" href="/dashboard" />
           : <Logo size="sm" href="/dashboard" />
