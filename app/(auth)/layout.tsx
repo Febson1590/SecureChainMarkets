@@ -23,7 +23,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               alt="SecureChainMarkets"
               width={1774}
               height={887}
-              className="h-7 w-auto pointer-events-none select-none"
+              className="h-14 w-auto pointer-events-none select-none"
             />
           </Link>
           <p className="text-[12.5px] text-slate-500">
