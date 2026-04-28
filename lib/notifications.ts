@@ -256,9 +256,9 @@ function buildNotificationEmail(opts: {
               <img
                 src="${LOGO_URL}"
                 alt="SecureChainMarkets"
-                width="195"
-                height="36"
-                style="display:block;border:0;width:195px;height:36px;outline:none;max-width:60vw;-ms-interpolation-mode:bicubic;"
+                width="200"
+                height="100"
+                style="display:block;border:0;width:200px;height:100px;outline:none;max-width:60vw;-ms-interpolation-mode:bicubic;"
               />
             </td>
           </tr>
@@ -294,8 +294,8 @@ function buildNotificationEmail(opts: {
                             src="${LOGO_URL}"
                             alt="SecureChainMarkets"
                             width="260"
-                            height="48"
-                            style="display:block;border:0;width:260px;height:48px;outline:none;max-width:65vw;-ms-interpolation-mode:bicubic;"
+                            height="130"
+                            style="display:block;border:0;width:260px;height:130px;outline:none;max-width:65vw;-ms-interpolation-mode:bicubic;"
                           />
                         </td>
                       </tr>

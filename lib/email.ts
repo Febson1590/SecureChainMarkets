@@ -74,7 +74,7 @@ function buildVerificationEmail(opts: {
       .em-h1         { font-size: 22px !important; }
       .em-message    { font-size: 14px !important; }
       .em-otp-cell   { width: 38px !important; height: 50px !important; line-height: 50px !important; font-size: 26px !important; }
-      .em-logo       { width: 180px !important; height: auto !important; }
+      .em-logo       { width: 180px !important; height: 90px !important; }
     }
   </style>
 </head>
@@ -93,19 +93,21 @@ function buildVerificationEmail(opts: {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
 
           <!-- ─── LOGO ──────────────────────────────────────────────────
-               Native aspect ratio is 1774 × 887 (~2 : 1). Forcing both
-               width and height was slanting the mark on most clients —
-               we now set width only and let height resolve from CSS so
-               every email client renders it sharp and proportional. -->
+               Native aspect ratio is 1774 × 887 (~2 : 1). Both width and
+               height attributes AND the inline width/height are set to
+               that exact 2:1 ratio so Gmail mobile, Outlook and Apple
+               Mail can't recompute one dimension and slant the mark.
+               220 × 110 desktop, 180 × 90 mobile (via .em-logo media). -->
           <tr>
-            <td align="center" style="padding:24px 0 32px 0;">
-              <a href="${APP_URL}" target="_blank" style="text-decoration:none;display:inline-block;">
+            <td align="center" style="padding:24px 0 32px 0;line-height:0;font-size:0;">
+              <a href="${APP_URL}" target="_blank" style="text-decoration:none;display:inline-block;line-height:0;font-size:0;">
                 <img
                   src="${LOGO_URL}"
                   alt="SecureChainMarkets"
                   width="220"
+                  height="110"
                   class="em-logo"
-                  style="display:block;margin:0 auto;border:0;outline:none;text-decoration:none;width:220px;height:auto;max-width:80vw;object-fit:contain;"
+                  style="display:block;margin:0 auto;border:0;outline:none;text-decoration:none;width:220px;height:110px;-ms-interpolation-mode:bicubic;"
                 />
               </a>
             </td>
