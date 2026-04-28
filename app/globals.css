@@ -215,13 +215,12 @@
 ::-webkit-scrollbar-thumb { background: oklch(0.25 0.03 240); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: oklch(0.35 0.03 240); }
 
-/* ─── Card surface — light, sits on the brand gradient ──────────── */
+/* ─── Glass card — dark surface used by dashboard + secondary public pages */
 .glass-card {
-  background: #FFFFFF;
-  border: 1px solid var(--scm-border-blue);
-  border-radius: 22px;
-  box-shadow: 0 12px 30px rgba(47, 107, 255, 0.10);
-  color: var(--scm-text);
+  background: rgba(7, 15, 30, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(43, 107, 255, 0.16);
 }
 
 .glass-card-hover {
@@ -230,10 +229,11 @@
               border-color 0.3s ease;
 }
 .glass-card-hover:hover {
-  border-color: var(--scm-primary);
+  border-color: rgba(43, 107, 255, 0.35);
   box-shadow:
-    0 0 0 1px rgba(47, 107, 255, 0.10),
-    0 18px 40px rgba(47, 107, 255, 0.16);
+    0 0 0 1px rgba(43, 107, 255, 0.07),
+    0 8px 32px rgba(43, 107, 255, 0.08),
+    0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 /* ─── Mockup frame (dashboard) ───────────────────── */
@@ -579,15 +579,17 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
    reads from the same visual vocabulary.
    ════════════════════════════════════════════════════════════════════════ */
 
-/* ── Panel — light brand surface for dashboard + landing modules ─── */
+/* ── Panel — the core surface for exchange-grade modules ───────────── */
 .vx-panel {
   position: relative;
-  background: #FFFFFF;
-  border: 1px solid var(--scm-border-blue);
+  background: linear-gradient(180deg, rgba(8, 16, 32, 0.92) 0%, rgba(5, 12, 26, 0.95) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.08);
   border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(47, 107, 255, 0.10);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 0 0 1px rgba(43, 107, 255, 0.02),
+    0 24px 60px rgba(0, 0, 0, 0.45);
   overflow: hidden;
-  color: var(--scm-text);
   max-width: 100%;
   min-width: 0;
 }
@@ -595,13 +597,15 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 .vx-panel-hover:hover {
-  border-color: var(--scm-primary);
+  border-color: rgba(43, 107, 255, 0.18);
   box-shadow:
-    0 0 0 1px rgba(47, 107, 255, 0.10),
-    0 18px 40px rgba(47, 107, 255, 0.16);
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 0 0 1px rgba(43, 107, 255, 0.05),
+    0 28px 70px rgba(0, 0, 0, 0.55),
+    0 0 36px rgba(43, 107, 255, 0.04);
 }
 
-/* Panel header — a consistent 44px strip used by every panel module */
+/* Panel header — a consistent 44px strip used by every exchange module */
 .vx-panel-header {
   display: flex;
   align-items: center;
@@ -609,9 +613,8 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   gap: 12px;
   padding: 0 14px;
   height: 44px;
-  border-bottom: 1px solid var(--scm-border-blue);
-  background: var(--scm-bg-surface);
-  color: var(--scm-text);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+  background: linear-gradient(180deg, rgba(10, 20, 38, 0.65) 0%, rgba(6, 14, 30, 0.2) 100%);
 }
 .vx-panel-title {
   font-size: 11px;

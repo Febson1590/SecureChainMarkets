@@ -106,8 +106,8 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-[#0F172A]">Account Settings</h1>
-        <p className="text-sm text-[#64748B] mt-0.5">Manage your profile and account preferences</p>
+        <h1 className="text-2xl font-bold text-white">Account Settings</h1>
+        <p className="text-sm text-slate-500 mt-0.5">Manage your profile and account preferences</p>
       </div>
 
       {/* Profile */}
@@ -117,8 +117,8 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
             <User className="h-5 w-5 text-[#2B6BFF]" />
           </div>
           <div>
-            <h2 className="text-base font-semibold text-[#0F172A]">Personal Information</h2>
-            <p className="text-xs text-[#64748B]">
+            <h2 className="text-base font-semibold text-white">Personal Information</h2>
+            <p className="text-xs text-slate-500">
               {initial.kycApproved
                 ? "Legal name is locked once KYC is approved. Other details remain editable."
                 : "Update your profile details. Changes here auto-fill your KYC form."}
@@ -129,23 +129,23 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
         <form onSubmit={handleSave} className="space-y-4">
           {/* Email (read-only) */}
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Email</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Email</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B]" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
               <Input
                 readOnly
                 value={initial.email}
                 aria-label="Email (read only)"
-                className="pl-10 bg-white/5 border-white/10 text-[#64748B] h-10 cursor-not-allowed"
+                className="pl-10 bg-white/5 border-white/10 text-slate-400 h-10 cursor-not-allowed"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <Label className="text-xs text-[#64748B] uppercase tracking-widest flex items-center gap-1.5">
+              <Label className="text-xs text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                 First Name
-                {initial.kycApproved && <Lock className="h-3 w-3 text-[#64748B]" aria-label="Locked (KYC approved)" />}
+                {initial.kycApproved && <Lock className="h-3 w-3 text-slate-500" aria-label="Locked (KYC approved)" />}
               </Label>
               <Input
                 name="firstName"
@@ -154,13 +154,13 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
                 disabled={initial.kycApproved}
                 required
                 placeholder="Your first name"
-                className={`bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10 ${initial.kycApproved ? "cursor-not-allowed opacity-70" : ""}`}
+                className={`bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10 ${initial.kycApproved ? "cursor-not-allowed opacity-70" : ""}`}
               />
             </div>
             <div className="space-y-1.5">
-              <Label className="text-xs text-[#64748B] uppercase tracking-widest flex items-center gap-1.5">
+              <Label className="text-xs text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                 Last Name
-                {initial.kycApproved && <Lock className="h-3 w-3 text-[#64748B]" aria-label="Locked (KYC approved)" />}
+                {initial.kycApproved && <Lock className="h-3 w-3 text-slate-500" aria-label="Locked (KYC approved)" />}
               </Label>
               <Input
                 name="lastName"
@@ -168,67 +168,67 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
                 onChange={(e) => setLastName(e.target.value)}
                 disabled={initial.kycApproved}
                 placeholder="Your last name"
-                className={`bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10 ${initial.kycApproved ? "cursor-not-allowed opacity-70" : ""}`}
+                className={`bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10 ${initial.kycApproved ? "cursor-not-allowed opacity-70" : ""}`}
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Phone Number</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Phone Number</Label>
             <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B]" />
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
               <Input
                 name="phone"
                 defaultValue={initial.phone}
                 placeholder="+1 (555) 000-0000"
-                className="pl-10 bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
+                className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Country</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Country</Label>
             <div className="relative">
-              <Globe className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B]" />
+              <Globe className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
               <Input
                 name="country"
                 defaultValue={initial.country}
                 placeholder="United States"
-                className="pl-10 bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
+                className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <Label className="text-xs text-[#64748B] uppercase tracking-widest">City</Label>
+              <Label className="text-xs text-slate-400 uppercase tracking-widest">City</Label>
               <Input
                 name="city"
                 defaultValue={initial.city}
                 placeholder="City"
-                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
+                className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
               />
             </div>
             <div className="space-y-1.5">
-              <Label className="text-xs text-[#64748B] uppercase tracking-widest">Zip Code</Label>
+              <Label className="text-xs text-slate-400 uppercase tracking-widest">Zip Code</Label>
               <Input
                 name="zipCode"
                 defaultValue={initial.zipCode}
                 placeholder="Postal / ZIP"
-                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
+                className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Street Address</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Street Address</Label>
             <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B]" />
+              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
               <Input
                 name="address"
                 defaultValue={initial.address}
                 placeholder="Street address"
-                className="pl-10 bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
+                className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
               />
             </div>
           </div>
@@ -262,8 +262,8 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
             <Mail className="h-5 w-5 text-emerald-400" />
           </div>
           <div>
-            <h2 className="text-base font-semibold text-[#0F172A]">Security & Login</h2>
-            <p className="text-xs text-[#64748B]">Manage your password and security options</p>
+            <h2 className="text-base font-semibold text-white">Security & Login</h2>
+            <p className="text-xs text-slate-500">Manage your password and security options</p>
           </div>
         </div>
 
@@ -272,17 +272,17 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
           <div className="p-4 bg-white/3 rounded-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Lock className="h-4 w-4 text-[#64748B]" />
+                <Lock className="h-4 w-4 text-slate-400" />
                 <div>
-                  <div className="text-sm font-medium text-[#0F172A]">Password</div>
-                  <div className="text-xs text-[#64748B]">Change your account password</div>
+                  <div className="text-sm font-medium text-white">Password</div>
+                  <div className="text-xs text-slate-500">Change your account password</div>
                 </div>
               </div>
               <Button
                 size="sm"
                 variant="outline"
                 onClick={() => { setShowPwdForm(!showPwdForm); setPwdError(""); }}
-                className="border-white/10 text-[#0F172A] hover:bg-white/5 text-xs"
+                className="border-white/10 text-slate-300 hover:bg-white/5 text-xs"
               >
                 {showPwdForm ? "Cancel" : "Change"}
               </Button>
@@ -297,7 +297,7 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
                 )}
 
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-[#64748B]">Current Password</Label>
+                  <Label className="text-xs text-slate-400">Current Password</Label>
                   <div className="relative">
                     <Input
                       required
@@ -305,17 +305,17 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
                       value={currentPwd}
                       onChange={(e) => setCurrentPwd(e.target.value)}
                       placeholder="Enter current password"
-                      className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10 pr-10"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10 pr-10"
                     />
                     <button type="button" onClick={() => setShowCurrent(!showCurrent)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]">
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
                       {showCurrent ? <EyeOff size={15} /> : <Eye size={15} />}
                     </button>
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-[#64748B]">New Password</Label>
+                  <Label className="text-xs text-slate-400">New Password</Label>
                   <div className="relative">
                     <Input
                       required
@@ -323,24 +323,24 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
                       value={newPwd}
                       onChange={(e) => setNewPwd(e.target.value)}
                       placeholder="Min 8 characters, 1 uppercase, 1 number"
-                      className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10 pr-10"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10 pr-10"
                     />
                     <button type="button" onClick={() => setShowNew(!showNew)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]">
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
                       {showNew ? <EyeOff size={15} /> : <Eye size={15} />}
                     </button>
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-[#64748B]">Confirm New Password</Label>
+                  <Label className="text-xs text-slate-400">Confirm New Password</Label>
                   <Input
                     required
                     type="password"
                     value={confirmPwd}
                     onChange={(e) => setConfirmPwd(e.target.value)}
                     placeholder="Re-enter new password"
-                    className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
+                    className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
                   />
                 </div>
 
@@ -354,8 +354,8 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
           {/* Login notifications */}
           <div className="flex items-center justify-between p-4 bg-white/3 rounded-lg">
             <div>
-              <div className="text-sm font-medium text-[#0F172A]">Login Notifications</div>
-              <div className="text-xs text-[#64748B]">Email OTP required on every sign-in</div>
+              <div className="text-sm font-medium text-white">Login Notifications</div>
+              <div className="text-xs text-slate-500">Email OTP required on every sign-in</div>
             </div>
             <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-md">
               Always On
@@ -369,8 +369,8 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
         <h2 className="text-base font-semibold text-red-400 mb-4">Danger Zone</h2>
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-sm font-medium text-[#0F172A]">Close Account</div>
-            <div className="text-xs text-[#64748B]">Permanently delete your account and all data</div>
+            <div className="text-sm font-medium text-white">Close Account</div>
+            <div className="text-xs text-slate-500">Permanently delete your account and all data</div>
           </div>
           <Button size="sm" variant="outline" className="border-red-500/30 text-red-400 hover:bg-red-500/10 text-xs">
             Close Account

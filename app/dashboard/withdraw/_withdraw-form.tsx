@@ -260,13 +260,13 @@ export default function WithdrawForm({
       <div>
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-1.5 text-sm text-[#64748B] hover:text-[#0F172A] transition-colors mb-3"
+          className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors mb-3"
         >
           <ArrowLeft size={14} />
           Back
         </Link>
-        <h1 className="text-2xl font-bold text-[#0F172A]">Withdraw Funds</h1>
-        <p className="text-sm text-[#64748B] mt-1">
+        <h1 className="text-2xl font-bold text-white">Withdraw Funds</h1>
+        <p className="text-sm text-slate-500 mt-1">
           Withdraw crypto to your external wallet.
         </p>
       </div>
@@ -279,7 +279,7 @@ export default function WithdrawForm({
 
         {/* Select Crypto — chips */}
         <div className="space-y-2">
-          <Label className="text-[11px] font-semibold text-[#0F172A] uppercase tracking-wider">
+          <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
             Select Cryptocurrency
           </Label>
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1">
@@ -295,15 +295,15 @@ export default function WithdrawForm({
                     flex-shrink-0 flex items-center gap-2 h-11 px-4 rounded-xl border transition-all
                     ${isActive
                       ? "border-[#2B6BFF]/50 bg-[#2B6BFF]/[0.08] shadow-[0_0_0_1px_rgba(14,165,233,0.2)]"
-                      : "border-[#BFD5FF] bg-[#F6FAFF] hover:bg-[#F6FAFF]"}
+                      : "border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05]"}
                   `}
                 >
                   <AssetIcon asset={asset} size={26} />
                   <div className="flex flex-col items-start leading-tight">
-                    <span className={`text-[13px] font-semibold ${isActive ? "text-[#0F172A]" : "text-[#0F172A]"}`}>
+                    <span className={`text-[13px] font-semibold ${isActive ? "text-white" : "text-slate-300"}`}>
                       {asset}
                     </span>
-                    <span className="text-[9.5px] text-[#64748B] tabular-nums">
+                    <span className="text-[9.5px] text-slate-500 tabular-nums">
                       {r > 0 ? `$${r.toLocaleString("en-US", { maximumFractionDigits: 0 })}` : "—"}
                     </span>
                   </div>
@@ -314,17 +314,17 @@ export default function WithdrawForm({
         </div>
 
         {/* Available balance — primary USD + secondary crypto */}
-        <div className="rounded-xl border border-[#BFD5FF] bg-[#F6FAFF] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+        <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
           <div>
-            <div className="text-[10px] font-semibold text-[#64748B] uppercase tracking-widest">
+            <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">
               Available Balance
             </div>
-            <div className="text-[17px] font-bold text-[#0F172A] tabular-nums mt-0.5">
+            <div className="text-[17px] font-bold text-white tabular-nums mt-0.5">
               ${usdBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
-              <span className="text-[13px] font-medium text-[#64748B]">USD</span>
+              <span className="text-[13px] font-medium text-slate-400">USD</span>
             </div>
             {currentRate > 0 && (
-              <div className="text-[11.5px] text-[#64748B] tabular-nums mt-0.5">
+              <div className="text-[11.5px] text-slate-500 tabular-nums mt-0.5">
                 ≈ {formatCrypto(cryptoBalance)} {selectedAsset}
               </div>
             )}
@@ -358,22 +358,22 @@ export default function WithdrawForm({
 
         {/* Fee breakdown — informational only; not deducted from payout */}
         {usdAmount > 0 && (feePercent > 0 || feeFixed > 0) && (
-          <div className="rounded-lg border border-[#BFD5FF] bg-[#F6FAFF] px-4 py-3 text-[12px]">
+          <div className="rounded-lg border border-white/[0.05] bg-white/[0.02] px-4 py-3 text-[12px]">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-[#64748B]">Withdrawal Amount</span>
-              <span className="text-[#0F172A] font-semibold tabular-nums">${formatUsd(usdAmount)}</span>
+              <span className="text-slate-400">Withdrawal Amount</span>
+              <span className="text-white font-semibold tabular-nums">${formatUsd(usdAmount)}</span>
             </div>
             <div className="flex items-center justify-between gap-3 mt-1.5">
-              <span className="text-[#64748B]">Fee</span>
-              <span className="text-[#0F172A] tabular-nums">${formatUsd(feeUsd)}</span>
+              <span className="text-slate-400">Fee</span>
+              <span className="text-slate-300 tabular-nums">${formatUsd(feeUsd)}</span>
             </div>
-            <div className="mt-2.5 pt-2.5 border-t border-[#BFD5FF] flex items-center justify-between gap-3">
-              <span className="text-[#0F172A] font-medium">You&rsquo;ll receive</span>
+            <div className="mt-2.5 pt-2.5 border-t border-white/[0.06] flex items-center justify-between gap-3">
+              <span className="text-slate-300 font-medium">You&rsquo;ll receive</span>
               <span className="text-emerald-300 font-semibold tabular-nums text-[13px]">
                 ${formatUsd(netReceiveUsd)}
               </span>
             </div>
-            <p className="mt-2 text-[10.5px] text-[#64748B] leading-relaxed">
+            <p className="mt-2 text-[10.5px] text-slate-500 leading-relaxed">
               Withdrawal fee is charged separately and is not deducted from
               the requested withdrawal amount.
             </p>
@@ -382,7 +382,7 @@ export default function WithdrawForm({
 
         {/* Wallet address */}
         <div className="space-y-1.5">
-          <Label className="text-[11px] font-semibold text-[#0F172A] uppercase tracking-wider">
+          <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
             {selectedAsset} Wallet Address
           </Label>
           <div className="flex items-stretch gap-2">
@@ -391,7 +391,7 @@ export default function WithdrawForm({
               placeholder={`Paste your ${selectedAsset} address`}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="flex-1 bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-[#64748B] h-11 font-mono text-[13px]"
+              className="flex-1 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-11 font-mono text-[13px]"
             />
             <button
               type="button"
@@ -408,14 +408,14 @@ export default function WithdrawForm({
         {/* Network */}
         {availableNetworks.length > 0 && (
           <div className="space-y-1.5">
-            <Label className="text-[11px] font-semibold text-[#0F172A] uppercase tracking-wider">
+            <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
               Network
             </Label>
             <Select value={network} onValueChange={(v) => v && setNetwork(v)}>
-              <SelectTrigger className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] h-11">
+              <SelectTrigger className="bg-white/[0.04] border-white/[0.08] text-white h-11">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-white border-[#2B6BFF]/20 text-[#0F172A]">
+              <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
                 {availableNetworks.map((n) => (
                   <SelectItem key={n} value={n} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">
                     {n}
@@ -423,9 +423,9 @@ export default function WithdrawForm({
                 ))}
               </SelectContent>
             </Select>
-            <div className="text-[11px] text-[#64748B]">
+            <div className="text-[11px] text-slate-500">
               Make sure the receiving wallet supports{" "}
-              <span className="text-[#0F172A] font-medium">{network}</span>.
+              <span className="text-slate-300 font-medium">{network}</span>.
             </div>
           </div>
         )}
@@ -457,7 +457,7 @@ export default function WithdrawForm({
       {/* ── Withdrawal history ──────────────────────────────────── */}
       {recent.length > 0 && (
         <div className="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
-          <h2 className="text-[15px] font-bold text-[#0F172A]">Withdrawal History</h2>
+          <h2 className="text-[15px] font-bold text-white">Withdrawal History</h2>
 
           <div className="space-y-3">
             {recent.map((w) => (
@@ -468,7 +468,7 @@ export default function WithdrawForm({
       )}
 
       {/* ── Footer note ─────────────────────────────────────────── */}
-      <p className="text-[12px] text-[#64748B] leading-relaxed px-2">
+      <p className="text-[12px] text-slate-500 leading-relaxed px-2">
         Withdrawals are processed manually and may take 1–3 business days after approval.
       </p>
 
@@ -508,26 +508,26 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
   const cryptoAmt = w.cryptoAmount;
 
   return (
-    <div className="rounded-2xl border border-[#BFD5FF] bg-[#F6FAFF] overflow-hidden">
+    <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] overflow-hidden">
 
       {/* Top row */}
       <div className="flex items-center gap-3 p-4">
         <AssetIcon asset={asset} size={36} />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[14px] font-bold text-[#0F172A]">{asset}</span>
+            <span className="text-[14px] font-bold text-white">{asset}</span>
             {(w.cryptoNetwork || w.method) && (
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#64748B] border border-white/[0.1] rounded px-1.5 py-0.5">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 border border-white/[0.1] rounded px-1.5 py-0.5">
                 {w.cryptoNetwork || w.method}
               </span>
             )}
           </div>
           {w.destination && (
-            <div className="text-[11px] text-[#64748B] font-mono truncate mt-0.5">
+            <div className="text-[11px] text-slate-500 font-mono truncate mt-0.5">
               To {shortAddress(w.destination, 12, 6)}
             </div>
           )}
-          <div className="text-[10px] text-[#64748B] mt-0.5">
+          <div className="text-[10px] text-slate-600 mt-0.5">
             {timeShort(w.createdAt)}
           </div>
         </div>
@@ -536,7 +536,7 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
             −${w.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
           {cryptoAmt !== null && (
-            <div className="text-[10.5px] text-[#64748B] tabular-nums mt-0.5">
+            <div className="text-[10.5px] text-slate-500 tabular-nums mt-0.5">
               Withdrawn as {formatCrypto(cryptoAmt)} {asset}
             </div>
           )}
@@ -544,17 +544,17 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
       </div>
 
       {/* Status pill */}
-      <div className="border-t border-[#BFD5FF] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+      <div className="border-t border-white/[0.05] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
         <span className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-full border ${meta.bg} ${meta.border} ${meta.color}`}>
           <Icon size={11} />
           {meta.label}
         </span>
 
         {ui === "pending" && (
-          <span className="text-[11px] text-[#64748B]">Awaiting admin review</span>
+          <span className="text-[11px] text-slate-500">Awaiting admin review</span>
         )}
         {ui === "processing" && (
-          <span className="text-[11px] text-[#64748B]">Being sent on-chain</span>
+          <span className="text-[11px] text-slate-500">Being sent on-chain</span>
         )}
         {ui === "completed" && (
           <span className="text-[11px] text-emerald-300/80">
@@ -565,11 +565,11 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
 
       {/* Rejection reason */}
       {ui === "rejected" && w.adminNotes && (
-        <div className="border-t border-[#BFD5FF] px-4 py-3 bg-red-500/[0.04]">
+        <div className="border-t border-white/[0.05] px-4 py-3 bg-red-500/[0.04]">
           <div className="text-[10px] font-semibold text-red-400 uppercase tracking-widest mb-1">
             Reason
           </div>
-          <p className="text-[12px] text-[#0F172A] leading-relaxed">
+          <p className="text-[12px] text-slate-300 leading-relaxed">
             {w.adminNotes}
           </p>
         </div>
@@ -606,14 +606,14 @@ function ConfirmModal({
     >
       <div
         className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
-        style={{ background: "#FFFFFF" }}
+        style={{ background: "rgba(7,15,30,0.98)" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-5 pt-5 pb-4 border-b border-[#BFD5FF] flex items-start gap-3">
+        <div className="px-5 pt-5 pb-4 border-b border-white/[0.05] flex items-start gap-3">
           <AssetIcon asset={asset} size={36} />
           <div className="flex-1">
-            <h3 className="text-base font-bold text-[#0F172A]">Confirm Withdrawal</h3>
-            <p className="text-[11px] text-[#64748B] mt-0.5">
+            <h3 className="text-base font-bold text-white">Confirm Withdrawal</h3>
+            <p className="text-[11px] text-slate-500 mt-0.5">
               Double-check these details before submitting.
             </p>
           </div>
@@ -621,7 +621,7 @@ function ConfirmModal({
             type="button"
             onClick={onClose}
             disabled={loading}
-            className="text-[#64748B] hover:text-[#0F172A] transition-colors flex-shrink-0"
+            className="text-slate-400 hover:text-white transition-colors flex-shrink-0"
             aria-label="Close"
           >
             <X size={18} />
@@ -629,19 +629,19 @@ function ConfirmModal({
         </div>
 
         <div className="p-5 space-y-3 text-[12.5px]">
-          <Row label="Asset"   value={<>{asset}{network ? <span className="text-[#64748B]"> · {network}</span> : null}</>} />
+          <Row label="Asset"   value={<>{asset}{network ? <span className="text-slate-500"> · {network}</span> : null}</>} />
           <Row
             label="Amount"
             value={
               <div className="text-right">
                 <div className="tabular-nums font-semibold">${usdAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                <div className="text-[11px] text-[#64748B] tabular-nums">
+                <div className="text-[11px] text-slate-500 tabular-nums">
                   ≈ {formatCrypto(cryptoAmount)} {asset}
                 </div>
               </div>
             }
           />
-          <Row label="Rate" value={<span className="tabular-nums text-[#0F172A]">1 {asset} = ${exchangeRate.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span>} />
+          <Row label="Rate" value={<span className="tabular-nums text-slate-300">1 {asset} = ${exchangeRate.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span>} />
           {showFee && (
             <Row label="Fee" value={<span className="tabular-nums">${feeUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>} />
           )}
@@ -651,11 +651,11 @@ function ConfirmModal({
               value={<span className="tabular-nums text-emerald-300 font-semibold">${netReceiveUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
             />
           )}
-          <div className="pt-2 border-t border-[#BFD5FF]">
-            <div className="text-[10px] font-semibold text-[#64748B] uppercase tracking-widest mb-1">
+          <div className="pt-2 border-t border-white/[0.05]">
+            <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1">
               Destination Address
             </div>
-            <code className="block text-[11.5px] text-[#0F172A] font-mono break-all leading-relaxed">
+            <code className="block text-[11.5px] text-white font-mono break-all leading-relaxed">
               {address}
             </code>
           </div>
@@ -671,7 +671,7 @@ function ConfirmModal({
         <div className="px-5 pb-5 flex gap-2">
           <Button
             variant="outline"
-            className="flex-1 h-10 border-white/10 text-[#0F172A] hover:text-[#0F172A]"
+            className="flex-1 h-10 border-white/10 text-slate-300 hover:text-white"
             onClick={onClose}
             disabled={loading}
           >
@@ -697,8 +697,8 @@ function ConfirmModal({
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">{label}</span>
-      <span className="text-[#0F172A] text-right">{value}</span>
+      <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">{label}</span>
+      <span className="text-white text-right">{value}</span>
     </div>
   );
 }

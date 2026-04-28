@@ -17,14 +17,14 @@ export function StatCard({ title, value, subtitle, change, icon: Icon, iconColor
   return (
     <div className={cn("glass-card glass-card-hover rounded-xl p-5", className)}>
       <div className="flex items-start justify-between mb-3">
-        <span className="text-xs font-medium text-[#64748B] uppercase tracking-widest">{title}</span>
+        <span className="text-xs font-medium text-slate-500 uppercase tracking-widest">{title}</span>
         {Icon && (
           <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center">
             <Icon className={cn("h-4 w-4", iconColor)} />
           </div>
         )}
       </div>
-      <div className="text-2xl font-bold text-[#0F172A] mb-1">{value}</div>
+      <div className="text-2xl font-bold text-white mb-1">{value}</div>
       {(subtitle || change !== undefined) && (
         <div className="flex items-center gap-2">
           {change !== undefined && (
@@ -33,7 +33,7 @@ export function StatCard({ title, value, subtitle, change, icon: Icon, iconColor
               {isPositive ? "+" : ""}{change.toFixed(2)}%
             </span>
           )}
-          {subtitle && <span className="text-xs text-[#64748B]">{subtitle}</span>}
+          {subtitle && <span className="text-xs text-slate-500">{subtitle}</span>}
         </div>
       )}
     </div>

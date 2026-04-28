@@ -113,8 +113,8 @@ function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-[#BFD5FF] ${className}`}
-      style={{ background: "#FFFFFF" }}
+      className={`rounded-2xl border border-white/[0.06] ${className}`}
+      style={{ background: "rgba(10,18,34,0.7)" }}
     >
       {children}
     </div>
@@ -132,10 +132,10 @@ function CardHeader({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#BFD5FF]">
+    <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.05]">
       <div className="flex items-center gap-2">
         {Icon && <Icon size={14} className="text-[#2B6BFF]" />}
-        <span className="text-[13px] font-semibold text-[#0F172A]">{title}</span>
+        <span className="text-[13px] font-semibold text-white">{title}</span>
       </div>
       {action}
     </div>
@@ -173,13 +173,13 @@ function AddFundsModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm" onClick={onClose}>
       <div
         className="w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-[#2B6BFF]/20"
-        style={{ background: "#FFFFFF" }}
+        style={{ background: "rgba(7,15,30,0.98)" }}
         onClick={e => e.stopPropagation()}
       >
-        <h3 className="text-base font-semibold text-[#0F172A] mb-1">Add Funds to Investment</h3>
-        <p className="text-xs text-[#64748B] mb-5">
+        <h3 className="text-base font-semibold text-white mb-1">Add Funds to Investment</h3>
+        <p className="text-xs text-slate-400 mb-5">
           From <span className="text-[#5C8BFF] font-semibold">Deposit Balance</span>:{" "}
-          <span className="text-[#0F172A] font-semibold">{fmt(usdBalance)}</span>
+          <span className="text-white font-semibold">{fmt(usdBalance)}</span>
         </p>
         <input
           type="number"
@@ -187,10 +187,10 @@ function AddFundsModal({
           value={amount}
           onChange={e => setAmount(e.target.value)}
           autoFocus
-          className="w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg px-4 py-3 text-[#0F172A] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/50 mb-4"
+          className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg px-4 py-3 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/50 mb-4"
         />
         <div className="flex gap-2">
-          <Button variant="outline" className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A] h-10" onClick={onClose}>
+          <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white h-10" onClick={onClose}>
             Cancel
           </Button>
           <Button
@@ -302,30 +302,30 @@ function UpgradeModal({
     >
       <div
         className="w-full max-w-md rounded-2xl border border-[#2B6BFF]/20 shadow-2xl my-4 sm:my-auto"
-        style={{ background: "#FFFFFF" }}
+        style={{ background: "rgba(7,15,30,0.98)" }}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-5 pt-5 pb-4 border-b border-[#BFD5FF]">
-          <h3 className="text-base font-bold text-[#0F172A]">Upgrade Investment Plan</h3>
-          <p className="text-[11.5px] text-[#64748B] mt-1">
-            Currently on <span className="text-[#0F172A] font-medium">{currentPlanName}</span>{" "}·{" "}
-            <span className="text-[#0F172A] font-medium tabular-nums">{fmt(currentInvested)}</span> invested
+        <div className="px-5 pt-5 pb-4 border-b border-white/[0.05]">
+          <h3 className="text-base font-bold text-white">Upgrade Investment Plan</h3>
+          <p className="text-[11.5px] text-slate-500 mt-1">
+            Currently on <span className="text-white font-medium">{currentPlanName}</span>{" "}·{" "}
+            <span className="text-white font-medium tabular-nums">{fmt(currentInvested)}</span> invested
           </p>
         </div>
 
         {/* Body */}
         <div className="p-5 space-y-4">
           {loading ? (
-            <div className="py-8 flex items-center justify-center text-[#64748B] text-sm">
+            <div className="py-8 flex items-center justify-center text-slate-500 text-sm">
               <Loader2 size={16} className="animate-spin mr-2" /> Loading eligible plans…
             </div>
           ) : plans && plans.length === 0 ? (
-            <div className="rounded-lg border border-[#BFD5FF] bg-[#F6FAFF] px-4 py-6 text-center">
-              <div className="text-[13px] font-semibold text-[#0F172A] mb-1">
+            <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-6 text-center">
+              <div className="text-[13px] font-semibold text-white mb-1">
                 You&apos;re already on the highest available plan.
               </div>
-              <div className="text-[11.5px] text-[#64748B]">
+              <div className="text-[11.5px] text-slate-500">
                 No higher-tier plans are currently configured.
               </div>
             </div>
@@ -343,20 +343,20 @@ function UpgradeModal({
                       className={`w-full text-left rounded-xl border px-4 py-3 transition ${
                         active
                           ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/[0.08]"
-                          : "border-[#BFD5FF] bg-[#F6FAFF] hover:border-[#BFD5FF]"
+                          : "border-white/[0.08] bg-white/[0.02] hover:border-white/[0.16]"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-2">
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-[14px] font-bold text-[#0F172A] truncate">{p.name}</span>
+                            <span className="text-[14px] font-bold text-white truncate">{p.name}</span>
                             {p.isPopular && (
                               <span className="text-[9px] font-black tracking-widest text-amber-300 px-1.5 py-[1px] rounded-full bg-amber-500/15 border border-amber-400/30">
                                 POPULAR
                               </span>
                             )}
                           </div>
-                          <div className="text-[11.5px] text-[#64748B] tabular-nums mt-0.5">
+                          <div className="text-[11.5px] text-slate-400 tabular-nums mt-0.5">
                             Min {fmt(p.minAmount)}
                             {p.maxAmount !== null && <> · Max {fmt(p.maxAmount)}</>}
                           </div>
@@ -364,11 +364,11 @@ function UpgradeModal({
                         <div className="text-right flex-shrink-0">
                           <div className="text-[12px] font-bold tabular-nums whitespace-nowrap">
                             <span className="text-amber-400">{p.minProfit}%</span>
-                            <span className="text-[#64748B] mx-1">–</span>
+                            <span className="text-slate-500 mx-1">–</span>
                             <span className="text-emerald-400">{p.maxProfit}%</span>
                           </div>
                           {p.minDurationHours != null && p.maxDurationHours != null && (
-                            <div className="text-[10px] text-[#64748B] mt-0.5">
+                            <div className="text-[10px] text-slate-500 mt-0.5">
                               every{" "}
                               {p.minDurationHours === p.maxDurationHours
                                 ? `${p.minDurationHours}h`
@@ -384,26 +384,26 @@ function UpgradeModal({
 
               {/* Top-up controls */}
               {selected && (
-                <div className="pt-2 border-t border-[#BFD5FF] space-y-3">
+                <div className="pt-2 border-t border-white/[0.06] space-y-3">
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-                      <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Target min</div>
+                    <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
+                      <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Target min</div>
                       <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{fmt(selected.minAmount)}</div>
                     </div>
-                    <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-                      <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Projected</div>
-                      <div className={`text-[13px] font-semibold tabular-nums ${meetsMin && !exceedsMax ? "text-emerald-400" : "text-[#0F172A]"}`}>
+                    <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
+                      <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Projected</div>
+                      <div className={`text-[13px] font-semibold tabular-nums ${meetsMin && !exceedsMax ? "text-emerald-400" : "text-white"}`}>
                         {fmt(projected)}
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">
+                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                       Top up from Deposit Balance (optional)
                     </label>
                     <div className="relative mt-1.5">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] text-sm">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">$</span>
                       <input
                         type="number"
                         min={0}
@@ -411,11 +411,11 @@ function UpgradeModal({
                         placeholder={required > 0 ? String(required) : "0"}
                         value={topUp}
                         onChange={(e) => setTopUp(e.target.value)}
-                        className="w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg pl-7 pr-3 py-2.5 text-[#0F172A] text-sm focus:outline-none focus:border-[#2B6BFF]/50"
+                        className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg pl-7 pr-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#2B6BFF]/50"
                       />
                     </div>
-                    <div className="text-[11px] text-[#64748B] mt-1.5">
-                      Deposit Balance: <span className="text-[#0F172A] font-semibold tabular-nums">{fmt(usdBalance)}</span>
+                    <div className="text-[11px] text-slate-500 mt-1.5">
+                      Deposit Balance: <span className="text-white font-semibold tabular-nums">{fmt(usdBalance)}</span>
                     </div>
                     {required > 0 && (
                       <p className="text-[11px] text-amber-400 mt-1.5">
@@ -448,7 +448,7 @@ function UpgradeModal({
         <div className="px-5 pb-5 flex gap-2">
           <Button
             variant="outline"
-            className="flex-1 h-10 border-white/10 text-[#0F172A] hover:text-[#0F172A]"
+            className="flex-1 h-10 border-white/10 text-slate-300 hover:text-white"
             onClick={onClose}
             disabled={saving}
           >
@@ -567,11 +567,11 @@ export default function DashboardClient({
 
       {/* ── 1. Top greeting ─────────────────────────────────────── */}
       <div>
-        <h1 className="text-[20px] sm:text-[22px] font-bold text-[#0F172A] flex items-center gap-2">
+        <h1 className="text-[20px] sm:text-[22px] font-bold text-white flex items-center gap-2">
           {greetingFor(user.name)} <span aria-hidden="true">👋</span>
         </h1>
         {daily !== null && (
-          <p className="text-[13px] text-[#64748B] mt-1">
+          <p className="text-[13px] text-slate-400 mt-1">
             Your portfolio is {daily.value >= 0 ? "up" : "down"}{" "}
             <span className={daily.value >= 0 ? "text-emerald-400 font-semibold" : "text-red-400 font-semibold"}>
               {fmtPct(daily.pct)}
@@ -584,13 +584,13 @@ export default function DashboardClient({
       {/* ── 2. MAIN HERO BALANCE CARD ──────────────────────────── */}
       <Card className="overflow-hidden">
         <div className="px-5 pt-5 pb-4">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-[#64748B] font-semibold mb-2">
+          <p className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-semibold mb-2">
             Available Balance
           </p>
-          <div className="text-[32px] sm:text-[36px] font-bold text-[#0F172A] tracking-tight leading-none">
+          <div className="text-[32px] sm:text-[36px] font-bold text-white tracking-tight leading-none">
             {fmt(usdBalance)}
           </div>
-          <p className="text-[11px] text-[#64748B] mt-1.5 leading-relaxed">
+          <p className="text-[11px] text-slate-500 mt-1.5 leading-relaxed">
             Funds ready to invest, upgrade, or withdraw. Earned profit from active
             trades is shown below and released when a trade ends.
           </p>
@@ -600,7 +600,7 @@ export default function DashboardClient({
               <span className={daily.value >= 0 ? "text-emerald-400 font-semibold" : "text-red-400 font-semibold"}>
                 {daily.value >= 0 ? "+" : ""}{fmt(daily.value)} today
               </span>
-              <span className="text-[#64748B] ml-1.5">
+              <span className="text-slate-500 ml-1.5">
                 ({fmtPct(daily.pct)})
               </span>
             </div>
@@ -617,7 +617,7 @@ export default function DashboardClient({
             <Link href={isKycApproved ? "/dashboard/withdraw" : kycHref} className="flex-1 sm:flex-none">
               <Button
                 variant="outline"
-                className="w-full sm:w-auto h-10 px-5 border-white/10 text-[#0F172A] hover:bg-[#F6FAFF] font-semibold text-[13px]"
+                className="w-full sm:w-auto h-10 px-5 border-white/10 text-slate-200 hover:bg-white/[0.04] font-semibold text-[13px]"
               >
                 <ArrowUpFromLine size={14} className="mr-1.5" />
                 Withdraw
@@ -656,7 +656,7 @@ export default function DashboardClient({
           }
           return (
             <div className="px-5 pb-5 pt-1">
-              <p className="text-[11px] text-[#64748B]">
+              <p className="text-[11px] text-slate-600">
                 Balance history chart will appear after your first confirmed deposit.
               </p>
             </div>
@@ -681,10 +681,10 @@ export default function DashboardClient({
           icon={TrendingUp}
           title="Portfolio Overview"
         />
-        <div className="divide-y divide-[#BFD5FF]">
+        <div className="divide-y divide-white/[0.04]">
           <Row label="Active Investment" value={activeInvested > 0 ? fmt(activeInvested) : "—"} />
-          <Row label="Total Profit"      value={fmt(totalEarned)} valueClassName={totalEarned > 0 ? "text-emerald-400" : "text-[#64748B]"} />
-          <Row label="ROI"               value={activeInvested > 0 ? fmtPct(roiPct) : "—"}      valueClassName={roiPct > 0 ? "text-emerald-400" : "text-[#64748B]"} />
+          <Row label="Total Profit"      value={fmt(totalEarned)} valueClassName={totalEarned > 0 ? "text-emerald-400" : "text-slate-400"} />
+          <Row label="ROI"               value={activeInvested > 0 ? fmtPct(roiPct) : "—"}      valueClassName={roiPct > 0 ? "text-emerald-400" : "text-slate-400"} />
           <Row label="Copy Trading"      value={copyTradingTotal > 0 ? `${fmt(copyTradingTotal)} active` : "—"} />
         </div>
       </Card>
@@ -767,28 +767,28 @@ export default function DashboardClient({
             icon={Users}
             title="Copy Trading"
             action={
-              <span className="text-[11px] text-[#64748B]">
+              <span className="text-[11px] text-slate-500">
                 {activeCopyTrades.length} active
               </span>
             }
           />
-          <div className="divide-y divide-[#BFD5FF]">
+          <div className="divide-y divide-white/[0.04]">
             {activeCopyTrades.map((trade) => {
               const hue = [...trade.traderName].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
               const initials = trade.traderName.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
               return (
                 <div key={trade.id} className="px-5 py-4 flex items-center gap-3">
                   <div
-                    className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-xs font-bold text-[#0F172A]"
+                    className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-xs font-bold text-white"
                     style={{
-                      background: `hsl( 80% 92%)`,
-                      border: `1px solid hsl( 75% 70%)`,
+                      background: `hsl(${hue} 55% 22%)`,
+                      border: `1px solid hsl(${hue} 55% 32%)`,
                     }}
                   >
                     {initials}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-[13px] font-semibold text-[#0F172A] truncate">
+                    <div className="text-[13px] font-semibold text-white truncate">
                       {trade.traderName}
                     </div>
                     <div className="flex items-center gap-2 mt-0.5">
@@ -801,7 +801,7 @@ export default function DashboardClient({
                       >
                         {trade.status}
                       </span>
-                      <span className="text-[11px] text-[#64748B] tabular-nums">
+                      <span className="text-[11px] text-slate-500 tabular-nums">
                         {fmt(trade.amount)} copied
                       </span>
                     </div>
@@ -810,7 +810,7 @@ export default function DashboardClient({
                     <div className={`text-[13px] font-semibold tabular-nums ${Number(trade.totalEarned) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                       {Number(trade.totalEarned) >= 0 ? "+" : "-"}{fmt(Math.abs(Number(trade.totalEarned)))}
                     </div>
-                    <div className="text-[10px] text-[#64748B] mt-0.5">earned profit</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5">earned profit</div>
                   </div>
                 </div>
               );
@@ -834,13 +834,13 @@ export default function DashboardClient({
           }
         />
         {activity.length === 0 ? (
-          <div className="px-5 py-8 text-center text-[12px] text-[#64748B]">
+          <div className="px-5 py-8 text-center text-[12px] text-slate-500">
             No activity yet
           </div>
         ) : (
-          <div className="divide-y divide-[#BFD5FF]">
+          <div className="divide-y divide-white/[0.04]">
             {activity.slice(0, 5).map((item) => {
-              const color = ACT_COLOR[item.type] ?? "text-[#0F172A]";
+              const color = ACT_COLOR[item.type] ?? "text-slate-300";
               const dot   = ACT_DOT[item.type]   ?? "bg-slate-500";
               // Render any non-null, non-zero amount. Losses are
               // negative and need the red colour + "-" prefix; profits
@@ -853,10 +853,10 @@ export default function DashboardClient({
                 <div key={item.id} className="flex items-center gap-3 px-5 py-3">
                   <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${dot}`} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-[12.5px] font-medium text-[#0F172A] truncate">
+                    <div className="text-[12.5px] font-medium text-white truncate">
                       {item.title}
                     </div>
-                    <div className="text-[10px] text-[#64748B] mt-0.5">
+                    <div className="text-[10px] text-slate-500 mt-0.5">
                       {timeAgo(item.createdAt)}
                     </div>
                   </div>
@@ -911,10 +911,10 @@ function QuickAction({
   return (
     <Link
       href={href}
-      className="flex-shrink-0 flex items-center gap-2 h-10 px-4 rounded-full border border-[#BFD5FF] bg-[#F6FAFF] hover:bg-[#F6FAFF] hover:border-[#2B6BFF]/25 transition-colors"
+      className="flex-shrink-0 flex items-center gap-2 h-10 px-4 rounded-full border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#2B6BFF]/25 transition-colors"
     >
       <Icon size={14} className="text-[#2B6BFF]" />
-      <span className="text-[12.5px] font-medium text-[#0F172A]">{label}</span>
+      <span className="text-[12.5px] font-medium text-slate-200">{label}</span>
     </Link>
   );
 }
@@ -929,8 +929,8 @@ function Row({
 }) {
   return (
     <div className="flex items-center justify-between px-5 py-3">
-      <span className="text-[12px] text-[#64748B]">{label}</span>
-      <span className={`text-[13px] font-semibold tabular-nums ${valueClassName || "text-[#0F172A]"}`}>
+      <span className="text-[12px] text-slate-400">{label}</span>
+      <span className={`text-[13px] font-semibold tabular-nums ${valueClassName || "text-white"}`}>
         {value}
       </span>
     </div>
@@ -947,8 +947,8 @@ function MetaRow({
 }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-[12px] text-[#64748B]">{label}</span>
-      <span className={`text-[13px] font-semibold tabular-nums ${valueClassName || "text-[#0F172A]"}`}>
+      <span className="text-[12px] text-slate-400">{label}</span>
+      <span className={`text-[13px] font-semibold tabular-nums ${valueClassName || "text-white"}`}>
         {value}
       </span>
     </div>
@@ -971,7 +971,7 @@ function KycBanner({ kycStatus }: { kycStatus: "not_submitted" | "pending" | "ap
           <ShieldAlert className="h-5 w-5 text-yellow-400 flex-shrink-0" />
           <div>
             <p className="text-[13px] font-semibold text-yellow-300">Identity Verification Required</p>
-            <p className="text-[11.5px] text-[#64748B] mt-0.5">Complete KYC to unlock deposits, withdrawals and investing.</p>
+            <p className="text-[11.5px] text-slate-400 mt-0.5">Complete KYC to unlock deposits, withdrawals and investing.</p>
           </div>
         </div>
         <Link href="/dashboard/verification" className="flex-shrink-0">
@@ -992,7 +992,7 @@ function KycBanner({ kycStatus }: { kycStatus: "not_submitted" | "pending" | "ap
           <Clock className="h-5 w-5 text-[#2B6BFF] flex-shrink-0" />
           <div>
             <p className="text-[13px] font-semibold text-[#5C8BFF]">Verification Under Review</p>
-            <p className="text-[11.5px] text-[#64748B] mt-0.5">Your documents are being reviewed. We&apos;ll notify you once complete.</p>
+            <p className="text-[11.5px] text-slate-400 mt-0.5">Your documents are being reviewed. We&apos;ll notify you once complete.</p>
           </div>
         </div>
         <Link href="/dashboard/verification" className="flex-shrink-0">
@@ -1013,7 +1013,7 @@ function KycBanner({ kycStatus }: { kycStatus: "not_submitted" | "pending" | "ap
         <XCircle className="h-5 w-5 text-red-400 flex-shrink-0" />
         <div>
           <p className="text-[13px] font-semibold text-red-300">Verification Rejected</p>
-          <p className="text-[11.5px] text-[#64748B] mt-0.5">Your submission was not accepted. Please resubmit with valid documents.</p>
+          <p className="text-[11.5px] text-slate-400 mt-0.5">Your submission was not accepted. Please resubmit with valid documents.</p>
         </div>
       </div>
       <Link href="/dashboard/verification" className="flex-shrink-0">
@@ -1078,7 +1078,7 @@ function PortfolioChartWrapper({
             className={`text-[9px] font-semibold px-2 py-0.5 rounded transition-all ${
               range === r
                 ? "bg-[#2B6BFF]/20 text-[#5C8BFF]"
-                : "text-[#64748B] hover:text-[#0F172A]"
+                : "text-slate-500 hover:text-slate-300"
             }`}
           >
             {r.toUpperCase()}

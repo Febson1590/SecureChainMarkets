@@ -117,13 +117,13 @@ export default function CopyTradingClient({ traders, usdBalance, kycStatus }: Pr
       <div>
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-1.5 text-sm text-[#64748B] hover:text-[#0F172A] transition-colors mb-4"
+          className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors mb-4"
         >
           <ArrowLeft size={14} />
           Back
         </button>
-        <h1 className="text-2xl font-bold text-[#0F172A]">Copy Trading</h1>
-        <p className="text-sm text-[#64748B] mt-1">Follow top traders automatically.</p>
+        <h1 className="text-2xl font-bold text-white">Copy Trading</h1>
+        <p className="text-sm text-slate-500 mt-1">Follow top traders automatically.</p>
       </div>
 
       {/* ── KYC banner ───────────────────────────────────────────── */}
@@ -134,35 +134,35 @@ export default function CopyTradingClient({ traders, usdBalance, kycStatus }: Pr
         <div className="relative flex-1">
           <Search
             size={14}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
           />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search traders"
-            className="w-full h-11 pl-9 pr-3 text-[13px] bg-[#F6FAFF] border border-[#BFD5FF] rounded-xl text-[#0F172A] placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/40"
+            className="w-full h-11 pl-9 pr-3 text-[13px] bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/40"
           />
         </div>
 
         <div className="relative">
           <button
             onClick={() => setShowSort((v) => !v)}
-            className="h-11 px-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#0F172A] bg-[#F6FAFF] border border-[#BFD5FF] rounded-xl hover:bg-[#F6FAFF] transition-colors"
+            className="h-11 px-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-slate-200 bg-white/[0.03] border border-white/[0.08] rounded-xl hover:bg-white/[0.05] transition-colors"
           >
             <SlidersHorizontal size={13} /> Filter
-            <ChevronDown size={11} className={`text-[#64748B] transition-transform ${showSort ? "rotate-180" : ""}`} />
+            <ChevronDown size={11} className={`text-slate-500 transition-transform ${showSort ? "rotate-180" : ""}`} />
           </button>
           {showSort && (
             <div
-              className="absolute right-0 top-12 z-30 min-w-[180px] rounded-xl border border-[#BFD5FF] shadow-2xl"
-              style={{ background: "#FFFFFF" }}
+              className="absolute right-0 top-12 z-30 min-w-[180px] rounded-xl border border-white/[0.08] shadow-2xl"
+              style={{ background: "rgba(8,14,28,0.98)" }}
             >
               {SORT_OPTS.map((opt) => (
                 <button
                   key={opt.key}
                   onClick={() => { setSort(opt.key); setShowSort(false); }}
-                  className="w-full text-left px-3.5 py-2.5 text-[12.5px] text-[#0F172A] hover:bg-[#F6FAFF] flex items-center justify-between first:rounded-t-xl last:rounded-b-xl"
+                  className="w-full text-left px-3.5 py-2.5 text-[12.5px] text-slate-300 hover:bg-white/[0.04] flex items-center justify-between first:rounded-t-xl last:rounded-b-xl"
                 >
                   {opt.label}
                   {sort === opt.key && <Check size={12} className="text-[#2B6BFF]" />}
@@ -190,7 +190,7 @@ export default function CopyTradingClient({ traders, usdBalance, kycStatus }: Pr
 
       {/* ── Footer disclaimer ────────────────────────────────────── */}
       <div className="pt-2 pb-1 text-center">
-        <p className="text-[11.5px] text-[#64748B]">
+        <p className="text-[11.5px] text-slate-500">
           Trader performance can vary over time. Review each trader&rsquo;s history before allocating.
         </p>
       </div>
@@ -218,8 +218,8 @@ function TraderCard({ trader, disabled }: { trader: Trader; disabled: boolean })
   return (
     <Link
       href={href}
-      className="block rounded-2xl border border-[#BFD5FF] hover:border-[#2B6BFF]/25 transition-colors overflow-hidden"
-      style={{ background: "#FFFFFF" }}
+      className="block rounded-2xl border border-white/[0.06] hover:border-[#2B6BFF]/25 transition-colors overflow-hidden"
+      style={{ background: "rgba(10,18,34,0.7)" }}
     >
       <div className="p-4 sm:p-5 flex items-center gap-4">
 
@@ -234,10 +234,10 @@ function TraderCard({ trader, disabled }: { trader: Trader; disabled: boolean })
             />
           ) : (
             <div
-              className="w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold text-[#0F172A]"
+              className="w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold text-white"
               style={{
-                background: `hsl( 80% 92%)`,
-                border: `1px solid hsl( 75% 70%)`,
+                background: `hsl(${hue} 55% 22%)`,
+                border: `1px solid hsl(${hue} 55% 32%)`,
               }}
             >
               {initials(trader.name)}
@@ -248,7 +248,7 @@ function TraderCard({ trader, disabled }: { trader: Trader; disabled: boolean })
         {/* Name + performance + meta */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h3 className="text-[15px] font-bold text-[#0F172A] truncate">{trader.name}</h3>
+            <h3 className="text-[15px] font-bold text-white truncate">{trader.name}</h3>
             {trader.country && (
               <span className="text-[15px] leading-none" aria-label={trader.country}>
                 {flagEmoji(trader.country)}
@@ -256,15 +256,15 @@ function TraderCard({ trader, disabled }: { trader: Trader; disabled: boolean })
             )}
           </div>
 
-          <div className="flex items-center gap-2.5 mt-1.5 flex-wrap text-[11.5px] text-[#64748B]">
+          <div className="flex items-center gap-2.5 mt-1.5 flex-wrap text-[11.5px] text-slate-500">
             {trader.winRate > 0 && (
               <span className="flex items-center gap-1">
-                <TrendingUp size={11} className="text-[#64748B]" />
+                <TrendingUp size={11} className="text-slate-500" />
                 {trader.winRate.toFixed(0)}% win rate
               </span>
             )}
             <span className="flex items-center gap-1">
-              <Users size={11} className="text-[#64748B]" />
+              <Users size={11} className="text-slate-500" />
               {trader.followers.toLocaleString()}
             </span>
             {(() => {
@@ -297,22 +297,22 @@ function TraderCard({ trader, disabled }: { trader: Trader; disabled: boolean })
 
 function EmptyState({ hasQuery }: { hasQuery: boolean }) {
   return (
-    <div className="rounded-2xl border border-[#BFD5FF] p-10 text-center"
-      style={{ background: "#FFFFFF" }}>
+    <div className="rounded-2xl border border-white/[0.06] p-10 text-center"
+      style={{ background: "rgba(10,18,34,0.7)" }}>
       <div className="w-12 h-12 rounded-2xl bg-[#2B6BFF]/[0.08] flex items-center justify-center mx-auto mb-4">
         <Users size={20} className="text-[#2B6BFF]/60" />
       </div>
-      <h2 className="text-[15px] font-bold text-[#0F172A] mb-1.5">
+      <h2 className="text-[15px] font-bold text-white mb-1.5">
         {hasQuery ? "No traders match your search" : "No traders available yet"}
       </h2>
-      <p className="text-[12.5px] text-[#64748B] max-w-sm mx-auto leading-relaxed">
+      <p className="text-[12.5px] text-slate-500 max-w-sm mx-auto leading-relaxed">
         {hasQuery
           ? "Try a different search term or adjust the filter."
           : "Copy traders haven't been configured by the platform admin yet."}
       </p>
       {!hasQuery && (
-        <div className="mt-4 inline-flex items-center gap-1.5 text-[11px] text-[#64748B]">
-          <ShieldCheck size={11} className="text-[#64748B]" />
+        <div className="mt-4 inline-flex items-center gap-1.5 text-[11px] text-slate-600">
+          <ShieldCheck size={11} className="text-slate-500" />
           Verified traders only
         </div>
       )}

@@ -54,21 +54,21 @@ export default function AdminVerificationPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-[#0F172A]">KYC Verification</h1>
-        <p className="text-sm text-[#64748B] mt-0.5">Review and approve identity verification submissions</p>
+        <h1 className="text-2xl font-bold text-white">KYC Verification</h1>
+        <p className="text-sm text-slate-500 mt-0.5">Review and approve identity verification submissions</p>
       </div>
 
       <div className="glass-card rounded-xl overflow-hidden">
         <div className="p-4 border-b border-white/5 flex items-center gap-3">
           <ShieldCheck className="h-4 w-4 text-[#2B6BFF]" />
-          <span className="text-sm font-semibold text-[#0F172A]">{pending.length} Pending Review</span>
-          <span className="text-xs text-[#64748B] ml-2">— {verifications.length} total submissions</span>
+          <span className="text-sm font-semibold text-white">{pending.length} Pending Review</span>
+          <span className="text-xs text-slate-500 ml-2">— {verifications.length} total submissions</span>
         </div>
 
         {loading ? (
-          <div className="p-12 text-center text-[#64748B] text-sm">Loading...</div>
+          <div className="p-12 text-center text-slate-500 text-sm">Loading...</div>
         ) : verifications.length === 0 ? (
-          <div className="p-12 text-center text-[#64748B] text-sm">No verification submissions yet</div>
+          <div className="p-12 text-center text-slate-500 text-sm">No verification submissions yet</div>
         ) : (
           <div className="divide-y divide-white/5">
             {[...pending, ...others].map((v) => (
@@ -79,13 +79,13 @@ export default function AdminVerificationPage() {
                       {v.user?.name?.slice(0, 2).toUpperCase() || "U"}
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-[#0F172A]">{v.user?.name}</div>
-                      <div className="text-xs text-[#64748B]">{v.user?.email}</div>
+                      <div className="text-sm font-medium text-white">{v.user?.name}</div>
+                      <div className="text-xs text-slate-500">{v.user?.email}</div>
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${getStatusBg(v.status)}`}>{v.status}</span>
-                        <span className="text-xs text-[#64748B]">{v.type}</span>
-                        {v.documentType && <span className="text-xs text-[#64748B]">• {v.documentType}</span>}
-                        <span className="text-xs text-[#64748B]">{formatDateTime(v.submittedAt)}</span>
+                        <span className="text-xs text-slate-500">{v.type}</span>
+                        {v.documentType && <span className="text-xs text-slate-500">• {v.documentType}</span>}
+                        <span className="text-xs text-slate-600">{formatDateTime(v.submittedAt)}</span>
                       </div>
                     </div>
                   </div>
@@ -112,7 +112,7 @@ export default function AdminVerificationPage() {
 
                       if (docs.length === 0) {
                         return (
-                          <div className="text-xs text-[#64748B]">No documents uploaded</div>
+                          <div className="text-xs text-slate-600">No documents uploaded</div>
                         );
                       }
 
@@ -120,7 +120,7 @@ export default function AdminVerificationPage() {
                         <div className={`grid grid-cols-1 ${docs.length >= 2 ? "md:grid-cols-2" : ""} ${docs.length >= 3 ? "lg:grid-cols-3" : ""} gap-3`}>
                           {docs.map((doc) => (
                             <div key={doc.label} className="glass-card rounded-lg p-3 border border-white/5">
-                              <div className="text-xs text-[#64748B] mb-2">{doc.label}</div>
+                              <div className="text-xs text-slate-500 mb-2">{doc.label}</div>
                               {isImageUrl(doc.url) ? (
                                 <a href={doc.url} target="_blank" rel="noopener noreferrer" className="block">
                                   <img
@@ -143,12 +143,12 @@ export default function AdminVerificationPage() {
                     })()}
 
                     <div className="space-y-2">
-                      <div className="text-xs text-[#64748B]">Review Notes (optional — required for rejection)</div>
+                      <div className="text-xs text-slate-400">Review Notes (optional — required for rejection)</div>
                       <Textarea
                         placeholder="Add notes for the user..."
                         value={notes[v.id] || ""}
                         onChange={(e) => setNotes((p) => ({ ...p, [v.id]: e.target.value }))}
-                        className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] text-sm resize-none h-20"
+                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 text-sm resize-none h-20"
                       />
                     </div>
 
@@ -163,7 +163,7 @@ export default function AdminVerificationPage() {
                         <XCircle size={11} className="mr-1" />Reject
                       </Button>
                       <Button size="sm" variant="ghost" onClick={() => setExpanded(null)}
-                        className="text-[#64748B] hover:text-[#0F172A] h-8 px-3 text-xs">Cancel</Button>
+                        className="text-slate-500 hover:text-white h-8 px-3 text-xs">Cancel</Button>
                     </div>
                   </div>
                 )}

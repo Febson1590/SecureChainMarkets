@@ -19,8 +19,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return (
       <div className="rounded-lg px-3 py-2 text-sm border border-sky-500/20 shadow-xl"
         style={{ background: "rgba(4,10,22,0.96)" }}>
-        <p className="text-[#64748B] text-[11px] mb-0.5">{label}</p>
-        <p className="text-[#0F172A] font-extrabold text-sm">
+        <p className="text-slate-400 text-[11px] mb-0.5">{label}</p>
+        <p className="text-white font-extrabold text-sm">
           {formatCurrency(payload[0].value)}
         </p>
       </div>
@@ -52,7 +52,7 @@ export function PortfolioChart({ data, isLoading = false }: PortfolioChartProps)
       {/* Loading overlay */}
       {isLoading && (
         <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg"
-          style={{ background: "#FFFFFF" }}>
+          style={{ background: "rgba(7,15,30,0.55)" }}>
           <Loader2 size={18} className="text-sky-400 animate-spin" />
         </div>
       )}
@@ -64,7 +64,7 @@ export function PortfolioChart({ data, isLoading = false }: PortfolioChartProps)
             style={{ background: "rgba(14,165,233,0.08)", border: "1px solid rgba(14,165,233,0.15)" }}>
             <TrendingUp size={16} className="text-sky-600" />
           </div>
-          <p className="text-xs text-[#64748B] font-medium">
+          <p className="text-xs text-slate-600 font-medium">
             No transaction history yet
           </p>
           <p className="text-[10px] text-slate-700">

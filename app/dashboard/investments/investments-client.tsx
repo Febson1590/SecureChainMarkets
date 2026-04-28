@@ -78,15 +78,15 @@ export default function InvestmentsClient({ plans, usdBalance, kycStatus }: Prop
       <div>
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-1.5 text-sm text-[#64748B] hover:text-[#0F172A] transition-colors mb-4"
+          className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors mb-4"
         >
           <ArrowLeft size={14} />
           Back
         </button>
-        <h1 className="text-[26px] sm:text-[28px] font-black text-[#0F172A] tracking-tight uppercase">
+        <h1 className="text-[26px] sm:text-[28px] font-black text-white tracking-tight uppercase">
           Investment Plans
         </h1>
-        <p className="text-[13.5px] text-[#64748B] mt-2 leading-relaxed max-w-lg">
+        <p className="text-[13.5px] text-slate-400 mt-2 leading-relaxed max-w-lg">
           Choose an investment plan that fits your goals and risk tolerance.
           Invest any amount within the plan limits and earn profit daily.
         </p>
@@ -147,8 +147,8 @@ function PlanCard({
 
   return (
     <div
-      className="relative rounded-2xl overflow-hidden border border-[#BFD5FF] transition-colors hover:border-[#BFD5FF]"
-      style={{ background: "#FFFFFF" }}
+      className="relative rounded-2xl overflow-hidden border border-white/[0.07] transition-colors hover:border-white/[0.12]"
+      style={{ background: "rgba(10,18,34,0.75)" }}
     >
       {/* Diagonal POPULAR ribbon — top-right. Placed on the right so it
           doesn't block the plan name or "Starts at $X" text on the left. */}
@@ -184,16 +184,16 @@ function PlanCard({
             Stacks vertically on the smallest screens, side-by-side from sm. */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3">
           <div className="min-w-0">
-            <h3 className="text-[19px] sm:text-[22px] font-bold text-[#0F172A] leading-tight truncate">
+            <h3 className="text-[19px] sm:text-[22px] font-bold text-white leading-tight truncate">
               {plan.name}
             </h3>
-            <div className="text-[12.5px] sm:text-[13px] text-[#64748B] mt-1">
+            <div className="text-[12.5px] sm:text-[13px] text-slate-400 mt-1">
               Starts at{" "}
-              <span className="text-[#0F172A] font-semibold tabular-nums">
+              <span className="text-white font-semibold tabular-nums">
                 {formatCurrency(plan.minAmount)}
               </span>
               {plan.maxAmount !== null && (
-                <span className="text-[#64748B] hidden sm:inline">
+                <span className="text-slate-500 hidden sm:inline">
                   {" "}· up to {formatCurrency(plan.maxAmount)}
                 </span>
               )}
@@ -203,10 +203,10 @@ function PlanCard({
           <div className="sm:text-right flex-shrink-0">
             <div className="text-[14px] sm:text-[17px] font-bold tabular-nums whitespace-nowrap">
               <span className="text-amber-400">{fmtPct(plan.minProfit)}</span>
-              <span className="text-[#64748B] mx-1">–</span>
+              <span className="text-slate-500 mx-1">–</span>
               <span className="text-emerald-400">{fmtPct(plan.maxProfit)}</span>
             </div>
-            <div className="text-[9.5px] sm:text-[10px] uppercase tracking-widest text-[#64748B] font-semibold mt-0.5">
+            <div className="text-[9.5px] sm:text-[10px] uppercase tracking-widest text-slate-500 font-semibold mt-0.5">
               Daily Return
             </div>
           </div>
@@ -214,25 +214,25 @@ function PlanCard({
 
         {/* Max amount shown on its own line on mobile */}
         {plan.maxAmount !== null && (
-          <div className="sm:hidden text-[11.5px] text-[#64748B] mt-1">
+          <div className="sm:hidden text-[11.5px] text-slate-500 mt-1">
             up to {formatCurrency(plan.maxAmount)}
           </div>
         )}
 
         {/* Optional description */}
         {plan.description && (
-          <p className="text-[12.5px] text-[#64748B] mt-3 leading-relaxed">
+          <p className="text-[12.5px] text-slate-500 mt-3 leading-relaxed">
             {plan.description}
           </p>
         )}
 
         {/* Divider */}
-        <div className="my-4 border-t border-[#BFD5FF]" />
+        <div className="my-4 border-t border-white/[0.05]" />
 
         {/* Bottom row — duration  +  Invest Now.
             Stacks vertically under 420px; otherwise side-by-side. */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div className="flex items-center gap-2 text-[12.5px] sm:text-[13px] text-[#0F172A] min-w-0">
+          <div className="flex items-center gap-2 text-[12.5px] sm:text-[13px] text-slate-300 min-w-0">
             <span
               className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
               style={{
@@ -242,8 +242,8 @@ function PlanCard({
             >
               <Calendar size={13} className="text-[#2B6BFF]" />
             </span>
-            <span className="text-[#64748B] flex-shrink-0">Cycle</span>
-            <span className="text-[#0F172A] font-semibold tabular-nums truncate">
+            <span className="text-slate-400 flex-shrink-0">Cycle</span>
+            <span className="text-white font-semibold tabular-nums truncate">
               {duration ?? "—"}
             </span>
           </div>
@@ -268,19 +268,19 @@ function PlanCard({
 function EmptyState() {
   return (
     <div
-      className="rounded-2xl border border-[#BFD5FF] p-12 text-center"
-      style={{ background: "#FFFFFF" }}
+      className="rounded-2xl border border-white/[0.06] p-12 text-center"
+      style={{ background: "rgba(10,18,34,0.7)" }}
     >
       <div className="w-14 h-14 rounded-2xl bg-[#2B6BFF]/[0.08] flex items-center justify-center mx-auto mb-4">
         <Sparkles size={22} className="text-[#2B6BFF]/60" />
       </div>
-      <h2 className="text-base font-bold text-[#0F172A] mb-2">No plans available yet</h2>
-      <p className="text-[13px] text-[#64748B] max-w-sm mx-auto leading-relaxed">
+      <h2 className="text-base font-bold text-white mb-2">No plans available yet</h2>
+      <p className="text-[13px] text-slate-500 max-w-sm mx-auto leading-relaxed">
         Investment plans haven&apos;t been configured by the platform admin yet. Please check
         back later or contact support for details.
       </p>
       <Link href="/dashboard/support" className="inline-block mt-5">
-        <Button variant="outline" className="border-white/10 text-[#0F172A] hover:text-[#0F172A] h-10 px-5">
+        <Button variant="outline" className="border-white/10 text-slate-300 hover:text-white h-10 px-5">
           Contact Support
         </Button>
       </Link>
@@ -338,13 +338,13 @@ function InvestModal({
     >
       <div
         className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
-        style={{ background: "#FFFFFF" }}
+        style={{ background: "rgba(7,15,30,0.98)" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-5 pt-5 pb-4 border-b border-[#BFD5FF]">
-          <h3 className="text-base font-bold text-[#0F172A]">Invest in {plan.name}</h3>
-          <p className="text-[11.5px] text-[#64748B] mt-1 leading-relaxed">
+        <div className="px-5 pt-5 pb-4 border-b border-white/[0.05]">
+          <h3 className="text-base font-bold text-white">Invest in {plan.name}</h3>
+          <p className="text-[11.5px] text-slate-500 mt-1 leading-relaxed">
             <span className="text-emerald-400 font-semibold tabular-nums">
               {fmtPct(plan.minProfit)} – {fmtPct(plan.maxProfit)}
             </span>{" "}
@@ -352,7 +352,7 @@ function InvestModal({
             {duration && (
               <>
                 {" "}·{" "}
-                <span className="text-[#0F172A] font-medium tabular-nums">{duration}</span>
+                <span className="text-white font-medium tabular-nums">{duration}</span>
               </>
             )}
           </p>
@@ -361,22 +361,22 @@ function InvestModal({
         {/* Body */}
         <div className="p-5 space-y-4">
           <div className="grid grid-cols-2 gap-2">
-            <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-              <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Balance</div>
-              <div className="text-[13px] font-semibold text-[#0F172A] tabular-nums">{formatCurrency(usdBalance)}</div>
+            <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
+              <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Balance</div>
+              <div className="text-[13px] font-semibold text-white tabular-nums">{formatCurrency(usdBalance)}</div>
             </div>
-            <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-              <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Min amount</div>
+            <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
+              <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Min amount</div>
               <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{formatCurrency(plan.minAmount)}</div>
             </div>
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">
+            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Amount (USD)
             </label>
             <div className="relative mt-1.5">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] text-sm">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">$</span>
               <input
                 type="number"
                 autoFocus
@@ -384,7 +384,7 @@ function InvestModal({
                 min={plan.minAmount}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg pl-7 pr-3 py-2.5 text-[#0F172A] text-sm focus:outline-none focus:border-[#2B6BFF]/50"
+                className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg pl-7 pr-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#2B6BFF]/50"
               />
             </div>
             {val > 0 && !meetsMin && (
@@ -410,8 +410,8 @@ function InvestModal({
           {needsDeposit && (
             <div className="flex items-start gap-2 rounded-lg px-3 py-2.5 bg-yellow-500/[0.05] border border-yellow-500/20">
               <AlertTriangle size={13} className="text-yellow-400 flex-shrink-0 mt-0.5" />
-              <div className="text-[11.5px] text-[#0F172A] leading-relaxed">
-                You need at least <span className="font-semibold text-[#0F172A]">{formatCurrency(plan.minAmount)}</span>{" "}
+              <div className="text-[11.5px] text-slate-300 leading-relaxed">
+                You need at least <span className="font-semibold text-white">{formatCurrency(plan.minAmount)}</span>{" "}
                 in your USD wallet to start this plan.{" "}
                 <Link href="/dashboard/deposit" className="text-[#2B6BFF] hover:text-[#5C8BFF] font-semibold">
                   Make a deposit
@@ -425,7 +425,7 @@ function InvestModal({
         <div className="px-5 pb-5 flex gap-2">
           <Button
             variant="outline"
-            className="flex-1 h-10 border-white/10 text-[#0F172A] hover:text-[#0F172A]"
+            className="flex-1 h-10 border-white/10 text-slate-300 hover:text-white"
             onClick={onClose}
             disabled={isPending}
           >

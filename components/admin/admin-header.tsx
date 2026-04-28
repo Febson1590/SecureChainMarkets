@@ -18,13 +18,13 @@ export function AdminHeader() {
   }, [pathname]);
 
   return (
-    <header className="h-14 bg-white/95 backdrop-blur-sm border-b border-[#BFD5FF] flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30">
+    <header className="h-14 bg-[#08111F]/95 backdrop-blur-sm border-b border-white/[0.06] flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30">
       {/* Mobile hamburger — visible on < lg */}
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger render={<button className="lg:hidden p-2 text-[#64748B] hover:text-[#0F172A] mr-2" />}>
+        <SheetTrigger render={<button className="lg:hidden p-2 text-slate-400 hover:text-white mr-2" />}>
           <Menu size={20} />
         </SheetTrigger>
-        <SheetContent side="left" className="w-72 p-0 bg-white border-[#BFD5FF] overflow-hidden">
+        <SheetContent side="left" className="w-72 p-0 bg-[#08111F] border-white/[0.06] overflow-hidden">
           <AdminNav isMobile onNavClick={() => setOpen(false)} />
         </SheetContent>
       </Sheet>
@@ -35,7 +35,7 @@ export function AdminHeader() {
       </div>
 
       {/* Title — desktop */}
-      <div className="hidden lg:flex items-center gap-2 text-xs text-[#64748B]">
+      <div className="hidden lg:flex items-center gap-2 text-xs text-slate-500">
         <span className="font-semibold text-[#2B6BFF] uppercase tracking-widest">Admin Panel</span>
       </div>
 

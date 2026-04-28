@@ -22,7 +22,7 @@ const TX_COLORS: Record<string, string> = {
   WITHDRAWAL: "text-red-400",
   BUY: "text-[#2B6BFF]",
   SELL: "text-orange-400",
-  FEE: "text-[#64748B]",
+  FEE: "text-slate-400",
   BONUS: "text-yellow-400",
   ADJUSTMENT: "text-violet-400",
 };
@@ -52,16 +52,16 @@ export default async function AdminTransactionsPage({
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-[#0F172A]">Transactions</h1>
-        <p className="text-sm text-[#64748B] mt-0.5">Complete ledger of all platform transactions</p>
+        <h1 className="text-2xl font-bold text-white">Transactions</h1>
+        <p className="text-sm text-slate-500 mt-0.5">Complete ledger of all platform transactions</p>
       </div>
 
       {/* Type filters */}
       <div className="flex flex-wrap gap-2">
-        <a href="/admin/transactions" className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${!typeFilter ? "bg-[#2B6BFF]/20 border-[#2B6BFF]/40 text-[#2B6BFF]" : "border-white/10 text-[#64748B] hover:border-white/20"}`}>All</a>
+        <a href="/admin/transactions" className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${!typeFilter ? "bg-[#2B6BFF]/20 border-[#2B6BFF]/40 text-[#2B6BFF]" : "border-white/10 text-slate-400 hover:border-white/20"}`}>All</a>
         {TX_TYPES.map((type) => (
           <a key={type} href={`/admin/transactions?type=${type}`}
-            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${typeFilter === type ? "bg-[#2B6BFF]/20 border-[#2B6BFF]/40 text-[#2B6BFF]" : "border-white/10 text-[#64748B] hover:border-white/20"}`}>
+            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${typeFilter === type ? "bg-[#2B6BFF]/20 border-[#2B6BFF]/40 text-[#2B6BFF]" : "border-white/10 text-slate-400 hover:border-white/20"}`}>
             {type}
           </a>
         ))}
@@ -69,31 +69,31 @@ export default async function AdminTransactionsPage({
 
       <div className="glass-card rounded-xl overflow-hidden">
         <div className="p-4 border-b border-white/5 flex items-center justify-between">
-          <span className="text-sm font-semibold text-[#0F172A]">{transactions.length} transactions</span>
-          <span className="text-xs text-[#64748B]">Total: {formatCurrency(totalAmount)}</span>
+          <span className="text-sm font-semibold text-white">{transactions.length} transactions</span>
+          <span className="text-xs text-slate-500">Total: {formatCurrency(totalAmount)}</span>
         </div>
 
         {transactions.length === 0 ? (
-          <div className="p-12 text-center text-[#64748B] text-sm">No transactions found</div>
+          <div className="p-12 text-center text-slate-500 text-sm">No transactions found</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full premium-table">
               <thead>
                 <tr className="border-b border-white/5">
                   {["User", "Type", "Currency", "Amount", "Fee", "Status", "Description", "Date"].map((h) => (
-                    <th key={h} className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
+                    <th key={h} className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {transactions.map((tx) => {
                   const Icon = TX_ICONS[tx.type] || RefreshCw;
-                  const color = TX_COLORS[tx.type] || "text-[#64748B]";
+                  const color = TX_COLORS[tx.type] || "text-slate-400";
                   return (
                     <tr key={tx.id} className="border-b border-white/5 hover:bg-white/2">
                       <td className="px-4 py-3">
-                        <div className="text-sm text-[#0F172A]">{tx.user?.name}</div>
-                        <div className="text-xs text-[#64748B]">{tx.user?.email}</div>
+                        <div className="text-sm text-white">{tx.user?.name}</div>
+                        <div className="text-xs text-slate-500">{tx.user?.email}</div>
                       </td>
                       <td className="px-4 py-3">
                         <div className={`flex items-center gap-1.5 ${color}`}>
@@ -101,14 +101,14 @@ export default async function AdminTransactionsPage({
                           <span className="text-xs font-semibold">{tx.type}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-xs text-[#64748B] font-mono">{tx.currency}</td>
-                      <td className="px-4 py-3 text-sm font-semibold text-[#0F172A]">{formatCurrency(Number(tx.amount))}</td>
-                      <td className="px-4 py-3 text-xs text-[#64748B]">{Number(tx.fee) > 0 ? formatCurrency(Number(tx.fee)) : "—"}</td>
+                      <td className="px-4 py-3 text-xs text-slate-400 font-mono">{tx.currency}</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-white">{formatCurrency(Number(tx.amount))}</td>
+                      <td className="px-4 py-3 text-xs text-slate-500">{Number(tx.fee) > 0 ? formatCurrency(Number(tx.fee)) : "—"}</td>
                       <td className="px-4 py-3">
                         <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${getStatusBg(tx.status)}`}>{tx.status}</span>
                       </td>
-                      <td className="px-4 py-3 text-xs text-[#64748B] max-w-[200px] truncate">{tx.description || "—"}</td>
-                      <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">{formatDateTime(tx.createdAt)}</td>
+                      <td className="px-4 py-3 text-xs text-slate-400 max-w-[200px] truncate">{tx.description || "—"}</td>
+                      <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">{formatDateTime(tx.createdAt)}</td>
                     </tr>
                   );
                 })}

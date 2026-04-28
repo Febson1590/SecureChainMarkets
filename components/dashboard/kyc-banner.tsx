@@ -6,40 +6,34 @@ import type { KycStatus } from "@/lib/kyc";
 
 const CONFIG: Record<
   Exclude<KycStatus, "approved">,
-  { icon: typeof ShieldAlert; color: string; bg: string; border: string; iconBg: string; title: string; message: string; cta: string; ctaSolid: boolean }
+  { icon: typeof ShieldAlert; color: string; bg: string; border: string; title: string; message: string; cta: string }
 > = {
   not_submitted: {
     icon: ShieldAlert,
-    color: "text-[#0A1A3A]",
-    bg: "bg-[#EAF2FF]",
-    border: "border-[#DCE6FA]",
-    iconBg: "bg-white",
+    color: "text-yellow-400",
+    bg: "bg-yellow-500/[0.07]",
+    border: "border-yellow-500/25",
     title: "Identity verification required",
     message: "Complete KYC to unlock deposits, withdrawals, and investing.",
     cta: "Verify Now",
-    ctaSolid: true,
   },
   pending: {
     icon: Clock,
-    color: "text-[#0A1A3A]",
-    bg: "bg-[#EAF2FF]",
-    border: "border-[#DCE6FA]",
-    iconBg: "bg-white",
+    color: "text-sky-400",
+    bg: "bg-sky-500/[0.07]",
+    border: "border-sky-500/25",
     title: "Verification under review",
     message: "Our compliance team is reviewing your documents. This typically takes 1–3 business days.",
     cta: "View Status",
-    ctaSolid: false,
   },
   rejected: {
     icon: XCircle,
-    color: "text-rose-700",
-    bg: "bg-rose-50",
-    border: "border-rose-200",
-    iconBg: "bg-white",
+    color: "text-red-400",
+    bg: "bg-red-500/[0.07]",
+    border: "border-red-500/25",
     title: "Verification rejected",
     message: "Please resubmit with valid documents to unlock full platform access.",
     cta: "Resubmit",
-    ctaSolid: true,
   },
 };
 
@@ -60,32 +54,19 @@ export function KycBanner({ kycStatus, className }: KycBannerProps) {
 
   return (
     <div className={`rounded-xl p-4 flex items-center gap-4 border ${cfg.bg} ${cfg.border} ${className ?? ""}`}>
-      <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${cfg.iconBg} ring-1 ring-[#2B6BFF]/15`}>
-        <Icon className={`h-5 w-5 ${cfg.color === "text-rose-700" ? "text-rose-600" : "text-[#2B6BFF]"}`} />
+      <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${cfg.bg}`}>
+        <Icon className={`h-5 w-5 ${cfg.color}`} />
       </div>
       <div className="flex-1 min-w-0">
         <p className={`text-sm font-semibold ${cfg.color}`}>{cfg.title}</p>
-        <p className="text-xs text-[#64748B] mt-0.5">{cfg.message}</p>
+        <p className="text-xs text-slate-400 mt-0.5">{cfg.message}</p>
       </div>
-      {cfg.ctaSolid ? (
-        <Link
-          href="/dashboard/verification"
-          className="flex-shrink-0 inline-flex items-center gap-1 px-4 h-9 rounded-md text-xs font-semibold text-[#0F172A] transition-all hover:brightness-110"
-          style={{
-            background: "#2B6BFF",
-            boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px rgba(43,107,255,0.30)",
-          }}
-        >
-          {cfg.cta} <ChevronRight size={12} />
-        </Link>
-      ) : (
-        <Link
-          href="/dashboard/verification"
-          className="flex-shrink-0 inline-flex items-center gap-1 px-4 h-9 rounded-md text-xs font-semibold text-[#2B6BFF] border border-[#2B6BFF]/30 hover:bg-[#2B6BFF] hover:text-white transition-colors"
-        >
-          {cfg.cta} <ChevronRight size={12} />
-        </Link>
-      )}
+      <Link
+        href="/dashboard/verification"
+        className={`flex-shrink-0 inline-flex items-center gap-1 text-xs font-semibold ${cfg.color} hover:underline`}
+      >
+        {cfg.cta} <ChevronRight size={12} />
+      </Link>
     </div>
   );
 }

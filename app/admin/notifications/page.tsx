@@ -74,8 +74,8 @@ export default function AdminNotificationsPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-[#0F172A]">Notifications</h1>
-        <p className="text-sm text-[#64748B] mt-0.5">Send platform-wide or user-specific notifications</p>
+        <h1 className="text-2xl font-bold text-white">Notifications</h1>
+        <p className="text-sm text-slate-500 mt-0.5">Send platform-wide or user-specific notifications</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -83,16 +83,16 @@ export default function AdminNotificationsPage() {
         <div className="glass-card rounded-xl p-5 space-y-4">
           <div className="flex items-center gap-2 mb-1">
             <Bell className="h-4 w-4 text-[#2B6BFF]" />
-            <h2 className="text-sm font-semibold text-[#0F172A]">Compose Notification</h2>
+            <h2 className="text-sm font-semibold text-white">Compose Notification</h2>
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Recipient</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Recipient</Label>
             <Select value={userId} onValueChange={(v) => v !== null && setUserId(v)}>
-              <SelectTrigger className="bg-white/5 border-white/10 text-[#0F172A] h-10">
+              <SelectTrigger className="bg-white/5 border-white/10 text-white h-10">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-white border-[#2B6BFF]/20 text-[#0F172A] max-h-60 overflow-y-auto">
+              <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white max-h-60 overflow-y-auto">
                 <SelectItem value="all" className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">
                   <div className="flex items-center gap-2">
                     <Users size={12} />
@@ -109,12 +109,12 @@ export default function AdminNotificationsPage() {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Type</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Type</Label>
             <Select value={type} onValueChange={(v) => v !== null && setType(v)}>
-              <SelectTrigger className="bg-white/5 border-white/10 text-[#0F172A] h-10">
+              <SelectTrigger className="bg-white/5 border-white/10 text-white h-10">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-white border-[#2B6BFF]/20 text-[#0F172A]">
+              <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
                 {["INFO", "SUCCESS", "WARNING", "ERROR"].map((t) => (
                   <SelectItem key={t} value={t} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">{t}</SelectItem>
                 ))}
@@ -123,22 +123,22 @@ export default function AdminNotificationsPage() {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Title</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Title</Label>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Notification title"
-              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
+              className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10"
             />
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-[#64748B] uppercase tracking-widest">Message</Label>
+            <Label className="text-xs text-slate-400 uppercase tracking-widest">Message</Label>
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Notification message..."
-              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] resize-none h-24 text-sm"
+              className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 resize-none h-24 text-sm"
             />
           </div>
 
@@ -151,28 +151,28 @@ export default function AdminNotificationsPage() {
         {/* Recent sent */}
         <div className="glass-card rounded-xl overflow-hidden">
           <div className="p-4 border-b border-white/5">
-            <h2 className="text-sm font-semibold text-[#0F172A]">Recent Notifications</h2>
+            <h2 className="text-sm font-semibold text-white">Recent Notifications</h2>
           </div>
           {loadingSent ? (
-            <div className="p-8 text-center text-[#64748B] text-sm">Loading...</div>
+            <div className="p-8 text-center text-slate-500 text-sm">Loading...</div>
           ) : sent.length === 0 ? (
-            <div className="p-8 text-center text-[#64748B] text-sm">No notifications sent yet</div>
+            <div className="p-8 text-center text-slate-500 text-sm">No notifications sent yet</div>
           ) : (
             <div className="divide-y divide-white/5 max-h-[500px] overflow-y-auto">
               {sent.slice(0, 50).map((n: any) => {
                 const Icon = NOTIF_ICONS[n.type] || Bell;
-                const color = NOTIF_COLORS[n.type] || "text-[#64748B]";
+                const color = NOTIF_COLORS[n.type] || "text-slate-400";
                 return (
                   <div key={n.id} className="p-3 hover:bg-white/2 transition-colors">
                     <div className="flex items-start gap-3">
                       <Icon className={`h-4 w-4 mt-0.5 flex-shrink-0 ${color}`} />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <span className="text-sm font-medium text-[#0F172A] truncate">{n.title}</span>
-                          <span className="text-xs text-[#64748B] whitespace-nowrap">{formatDateTime(n.createdAt)}</span>
+                          <span className="text-sm font-medium text-white truncate">{n.title}</span>
+                          <span className="text-xs text-slate-600 whitespace-nowrap">{formatDateTime(n.createdAt)}</span>
                         </div>
-                        <div className="text-xs text-[#64748B] mt-0.5 line-clamp-2">{n.message}</div>
-                        <div className="text-xs text-[#64748B] mt-1">→ {n.user?.name || n.userId}</div>
+                        <div className="text-xs text-slate-500 mt-0.5 line-clamp-2">{n.message}</div>
+                        <div className="text-xs text-slate-600 mt-1">→ {n.user?.name || n.userId}</div>
                       </div>
                     </div>
                   </div>
