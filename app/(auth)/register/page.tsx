@@ -8,7 +8,7 @@ import {
   Eye, EyeOff, Lock, Mail, User, Phone, Globe,
   Loader2, AlertCircle, CheckCircle2, Check,
   ChevronRight, ChevronLeft, Shield, MapPin,
-  ShieldCheck, TrendingUp, Zap, Headphones,
+  ShieldCheck, Zap,
 } from "lucide-react";
 import { toast } from "sonner";
 import { friendlyError } from "@/lib/utils";
@@ -77,11 +77,10 @@ const STEPS = [
   { n: 3, label: "Security",      icon: Shield, heading: "Account Security",     sub: "Secure your trading account"           },
 ];
 
-const features = [
-  { icon: ShieldCheck, title: "Bank-Level Security",  desc: "Your funds and data are protected with 256-bit SSL encryption." },
-  { icon: TrendingUp,  title: "Advanced Trading",     desc: "Access real-time markets, advanced charts, and powerful trading tools." },
-  { icon: Zap,         title: "Instant Transactions", desc: "Deposit, trade, and withdraw with fast and secure processing." },
-  { icon: Headphones,  title: "24/7 Expert Support",  desc: "Our dedicated support team is here to help you anytime." },
+const valueProps = [
+  { icon: Globe,       title: "Major digital assets", desc: "Bitcoin, Ethereum and the most-traded altcoins quoted against USD." },
+  { icon: Zap,         title: "Built for clarity",    desc: "Bid, ask and spread shown plainly — no hidden markups." },
+  { icon: ShieldCheck, title: "Account protection",   desc: "Two-factor sign-in and reviewed funding on every account." },
 ];
 
 /* ── Stepper (light theme) ──────────────────────────────────────────── */
@@ -263,46 +262,31 @@ export default function RegisterPage() {
     <div className="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
 
-        {/* ════════════════════ LEFT — Welcome + features + illustration ═════════════════ */}
+        {/* ════════════════════ LEFT — Branding panel ═════════════════ */}
         <div className="order-2 lg:order-1">
-          <h1 className="text-[36px] sm:text-[44px] font-bold tracking-tight leading-[1.1] text-[#0A1A3A]">
-            Join the Markets.
+          <h1 className="text-[36px] sm:text-[44px] font-bold tracking-tight leading-[1.05] text-[#0A1A3A]">
+            Trade Smarter.
             <br />
-            <span className="text-[#2B6BFF]">Open Your Account.</span>
+            Invest <span className="text-[#2B6BFF]">Confidently.</span>
           </h1>
           <p className="mt-5 text-[14px] sm:text-[15px] text-slate-600 leading-[1.65] max-w-[460px]">
-            Create your SecureChainMarkets account in minutes
-            and start trading digital assets securely.
+            A focused brokerage for major digital assets — clear pricing,
+            reviewed funding, and a clean trading experience.
           </p>
 
-          <div className="mt-8 space-y-4 max-w-[460px]">
-            {features.map((f) => (
-              <div key={f.title} className="flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-200/80">
-                <div className="w-11 h-11 rounded-lg bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0">
-                  <f.icon className="h-5 w-5 text-[#2B6BFF]" strokeWidth={2} />
-                </div>
+          <ul className="mt-9 space-y-5 max-w-[460px]">
+            {valueProps.map((v) => (
+              <li key={v.title} className="flex items-start gap-4">
+                <span className="mt-0.5 w-10 h-10 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
+                  <v.icon size={17} className="text-[#2B6BFF]" />
+                </span>
                 <div className="min-w-0">
-                  <div className="text-[14px] font-semibold text-[#0A1A3A] leading-tight">{f.title}</div>
-                  <p className="text-[12.5px] text-slate-600 mt-1 leading-[1.55]">{f.desc}</p>
+                  <div className="text-[14px] font-semibold text-[#0A1A3A] leading-snug">{v.title}</div>
+                  <div className="text-[12.5px] text-slate-600 leading-relaxed mt-1">{v.desc}</div>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
-
-          <div className="mt-10 max-w-[460px]">
-            <div className="relative h-[220px] sm:h-[240px]">
-              <ShieldIllustration />
-            </div>
-          </div>
-
-          <div className="mt-6 p-4 rounded-xl bg-white border border-slate-200/80 max-w-[460px] flex items-start gap-3">
-            <Lock className="h-4 w-4 text-[#2B6BFF] mt-1 flex-shrink-0" />
-            <p className="text-[12.5px] text-slate-600 leading-[1.6]">
-              SecureChainMarkets is a regulated digital asset
-              trading platform offering secure, transparent,
-              and innovative trading solutions worldwide.
-            </p>
-          </div>
+          </ul>
         </div>
 
         {/* ════════════════════ RIGHT — Form card ═════════════════ */}
@@ -315,9 +299,9 @@ export default function RegisterPage() {
               Create Your Account
             </h2>
             <p className="mt-2 text-[13.5px] text-slate-500">
-              {step === 1 && "Tell us a little about yourself to get started"}
-              {step === 2 && "Set your region for compliant, optimal routing"}
-              {step === 3 && "Secure your account with a strong password"}
+              {step === 1 && "Step 1 of 3 — Your trading profile details"}
+              {step === 2 && "Step 2 of 3 — Your location & regional settings"}
+              {step === 3 && "Step 3 of 3 — Secure your account"}
             </p>
 
             <div className="mt-7">
@@ -598,72 +582,14 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <div className="mt-6 text-center">
-            <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#0A1A3A]">
-              <Lock size={14} className="text-[#2B6BFF]" />
-              Your security is our priority
-            </div>
-            <p className="text-[12px] text-slate-500 mt-1.5">
-              All connections are secured with 256-bit SSL encryption
-            </p>
-          </div>
+          <p className="text-[11.5px] text-slate-500 text-center mt-6">
+            By continuing you agree to our{" "}
+            <Link href="/terms" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold">Terms</Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold">Privacy Policy</Link>.
+          </p>
         </div>
       </div>
     </div>
-  );
-}
-
-/* ── Stylized shield-on-plinth illustration with candlestick backdrop ─ */
-function ShieldIllustration() {
-  return (
-    <svg viewBox="0 0 460 240" className="w-full h-full" aria-hidden>
-      <defs>
-        <linearGradient id="reg-shield-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stopColor="#5C8BFF" />
-          <stop offset="100%" stopColor="#1A4FCC" />
-        </linearGradient>
-        <linearGradient id="reg-plinth-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E8F0" />
-        </linearGradient>
-        <radialGradient id="reg-floor-glow" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0%"  stopColor="#2B6BFF" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      <g opacity="0.5">
-        {[
-          [60,140,30,8,true],   [95,120,45,8,true],  [130,100,30,8,false],
-          [165,80, 50,8,true],  [200,60, 35,8,true], [235,75, 28,8,false],
-          [355,100,40,8,true],  [385,80, 32,8,true], [415,60, 25,8,true],
-        ].map(([x,y,h,w,up], i) => {
-          const ox = Number(x), oy = Number(y), oh = Number(h), ow = Number(w);
-          const green = Boolean(up);
-          return (
-            <g key={i}>
-              <line x1={ox} y1={oy - 12} x2={ox} y2={oy + oh + 12} stroke={green ? "#10B981" : "#EF4444"} strokeWidth="1.4" opacity="0.5" />
-              <rect x={ox - ow/2} y={oy} width={ow} height={oh} fill={green ? "#10B981" : "#EF4444"} opacity="0.7" rx="1.5" />
-            </g>
-          );
-        })}
-      </g>
-
-      <ellipse cx="230" cy="210" rx="170" ry="14" fill="url(#reg-floor-glow)" />
-      <ellipse cx="230" cy="208" rx="120" ry="16" fill="#0A1A3A" opacity="0.10" />
-      <rect x="130" y="170" width="200" height="42" rx="10" fill="url(#reg-plinth-grad)" stroke="#CBD5E1" />
-      <ellipse cx="230" cy="170" rx="100" ry="10" fill="#FFFFFF" stroke="#CBD5E1" />
-
-      <g transform="translate(230 95)">
-        <path d="M0,-65 L55,-45 L55,15 C55,45 30,65 0,75 C-30,65 -55,45 -55,15 L-55,-45 Z"
-          fill="url(#reg-shield-grad)" stroke="#1A4FCC" strokeWidth="1.5" />
-        <path d="M0,-58 L48,-40 L48,12 C48,38 26,55 0,64 C-26,55 -48,38 -48,12 L-48,-40 Z"
-          fill="none" stroke="#FFFFFF" strokeOpacity="0.35" strokeWidth="1" />
-        <rect x="-16" y="-5" width="32" height="28" rx="4" fill="#FFFFFF" />
-        <path d="M-10,-5 L-10,-15 A10 10 0 0 1 10 -15 L10,-5" stroke="#FFFFFF" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <circle cx="0" cy="6" r="3" fill="#2B6BFF" />
-        <rect x="-1.5" y="6" width="3" height="8" fill="#2B6BFF" />
-      </g>
-    </svg>
   );
 }
