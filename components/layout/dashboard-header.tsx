@@ -51,12 +51,7 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="w-72 p-0 border-white/[0.06] overflow-hidden text-slate-200"
-          style={{
-            background:
-              "radial-gradient(60% 50% at 90% 0%, rgba(43,107,255,0.10), transparent 65%)," +
-              "linear-gradient(135deg, #0B1220 0%, #0F1A2F 50%, #0B1220 100%)",
-          }}
+          className="w-72 p-0 border-white/[0.06] overflow-hidden text-slate-200 bg-[#0B1220]"
         >
           <DashboardSidebar
             unreadCount={unreadCount}
@@ -112,37 +107,37 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
             </div>
             <ChevronDown size={14} className="text-slate-500 hidden sm:block" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56 bg-[#0E1A30] border-white/[0.08] text-white">
-            <div className="px-3 py-2">
-              <p className="text-sm font-medium text-white truncate">{user.name}</p>
-              <p className="text-xs text-slate-400 truncate">{user.email}</p>
+          <DropdownMenuContent align="end" className="w-60 bg-white border-slate-200 text-[#0A1A3A] shadow-[0_18px_40px_-18px_rgba(15,23,42,0.18)] rounded-xl p-1.5">
+            <div className="px-3 py-2.5">
+              <p className="text-[13.5px] font-semibold text-[#0A1A3A] truncate leading-tight">{user.name}</p>
+              <p className="text-[11.5px] text-slate-500 truncate mt-0.5">{user.email}</p>
               {user.status && (
-                <span className={`inline-flex mt-1.5 items-center text-[10px] font-medium px-2 py-0.5 rounded-full border ${getStatusBg(user.status)}`}>
+                <span className={`inline-flex mt-2 items-center text-[10px] font-semibold px-2 py-0.5 rounded-full border ${getStatusBg(user.status)}`}>
                   {user.status}
                 </span>
               )}
             </div>
-            <DropdownMenuSeparator className="bg-white/5" />
+            <DropdownMenuSeparator className="bg-slate-100 my-1" />
             {user.role === "ADMIN" && (
               <>
-                <DropdownMenuItem render={<Link href="/admin" />} className="hover:bg-white/[0.04] cursor-pointer text-[#2B6BFF]">
+                <DropdownMenuItem render={<Link href="/admin" />} className="hover:bg-slate-50 cursor-pointer text-[#2B6BFF] font-semibold rounded-lg px-3 py-2 text-[13px]">
                   Admin Panel
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-white/5" />
+                <DropdownMenuSeparator className="bg-slate-100 my-1" />
               </>
             )}
-            <DropdownMenuItem render={<Link href="/dashboard/settings" />} className="hover:bg-white/[0.04] cursor-pointer text-slate-300">
+            <DropdownMenuItem render={<Link href="/dashboard/settings" />} className="hover:bg-slate-50 cursor-pointer text-slate-700 rounded-lg px-3 py-2 text-[13px]">
               Settings
             </DropdownMenuItem>
-            <DropdownMenuItem render={<Link href="/dashboard/support" />} className="hover:bg-white/[0.04] cursor-pointer text-slate-300">
+            <DropdownMenuItem render={<Link href="/dashboard/support" />} className="hover:bg-slate-50 cursor-pointer text-slate-700 rounded-lg px-3 py-2 text-[13px]">
               Support
             </DropdownMenuItem>
-            <DropdownMenuSeparator className="bg-white/5" />
-            <DropdownMenuItem className="p-0 text-red-400 hover:bg-red-500/10 focus:text-red-400 focus:bg-red-500/10">
+            <DropdownMenuSeparator className="bg-slate-100 my-1" />
+            <DropdownMenuItem className="p-0 text-rose-600 hover:bg-rose-50 focus:text-rose-600 focus:bg-rose-50 rounded-lg">
               <form action={logoutUser} className="w-full">
                 <button
                   type="submit"
-                  className="w-full flex items-center px-1.5 py-1 text-sm !text-red-400 cursor-pointer"
+                  className="w-full flex items-center px-3 py-2 text-[13px] font-semibold !text-rose-600 cursor-pointer"
                 >
                   Sign Out
                 </button>
