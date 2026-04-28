@@ -114,7 +114,7 @@ function Card({
   return (
     <div
       className={`rounded-2xl border border-[#BFD5FF] ${className}`}
-      style={{ background: "rgba(10,18,34,0.7)" }}
+      style={{ background: "#FFFFFF" }}
     >
       {children}
     </div>
@@ -132,7 +132,7 @@ function CardHeader({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.05]">
+    <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#BFD5FF]">
       <div className="flex items-center gap-2">
         {Icon && <Icon size={14} className="text-[#2B6BFF]" />}
         <span className="text-[13px] font-semibold text-[#0F172A]">{title}</span>
@@ -173,7 +173,7 @@ function AddFundsModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm" onClick={onClose}>
       <div
         className="w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-[#2B6BFF]/20"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        style={{ background: "#FFFFFF" }}
         onClick={e => e.stopPropagation()}
       >
         <h3 className="text-base font-semibold text-[#0F172A] mb-1">Add Funds to Investment</h3>
@@ -187,7 +187,7 @@ function AddFundsModal({
           value={amount}
           onChange={e => setAmount(e.target.value)}
           autoFocus
-          className="w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg px-4 py-3 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/50 mb-4"
+          className="w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg px-4 py-3 text-[#0F172A] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/50 mb-4"
         />
         <div className="flex gap-2">
           <Button variant="outline" className="flex-1 border-white/10 text-[#0F172A] hover:text-[#0F172A] h-10" onClick={onClose}>
@@ -302,13 +302,13 @@ function UpgradeModal({
     >
       <div
         className="w-full max-w-md rounded-2xl border border-[#2B6BFF]/20 shadow-2xl my-4 sm:my-auto"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        style={{ background: "#FFFFFF" }}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-5 pt-5 pb-4 border-b border-white/[0.05]">
+        <div className="px-5 pt-5 pb-4 border-b border-[#BFD5FF]">
           <h3 className="text-base font-bold text-[#0F172A]">Upgrade Investment Plan</h3>
-          <p className="text-[11.5px] text-slate-500 mt-1">
+          <p className="text-[11.5px] text-[#64748B] mt-1">
             Currently on <span className="text-[#0F172A] font-medium">{currentPlanName}</span>{" "}·{" "}
             <span className="text-[#0F172A] font-medium tabular-nums">{fmt(currentInvested)}</span> invested
           </p>
@@ -317,7 +317,7 @@ function UpgradeModal({
         {/* Body */}
         <div className="p-5 space-y-4">
           {loading ? (
-            <div className="py-8 flex items-center justify-center text-slate-500 text-sm">
+            <div className="py-8 flex items-center justify-center text-[#64748B] text-sm">
               <Loader2 size={16} className="animate-spin mr-2" /> Loading eligible plans…
             </div>
           ) : plans && plans.length === 0 ? (
@@ -325,7 +325,7 @@ function UpgradeModal({
               <div className="text-[13px] font-semibold text-[#0F172A] mb-1">
                 You&apos;re already on the highest available plan.
               </div>
-              <div className="text-[11.5px] text-slate-500">
+              <div className="text-[11.5px] text-[#64748B]">
                 No higher-tier plans are currently configured.
               </div>
             </div>
@@ -364,11 +364,11 @@ function UpgradeModal({
                         <div className="text-right flex-shrink-0">
                           <div className="text-[12px] font-bold tabular-nums whitespace-nowrap">
                             <span className="text-amber-400">{p.minProfit}%</span>
-                            <span className="text-slate-500 mx-1">–</span>
+                            <span className="text-[#64748B] mx-1">–</span>
                             <span className="text-emerald-400">{p.maxProfit}%</span>
                           </div>
                           {p.minDurationHours != null && p.maxDurationHours != null && (
-                            <div className="text-[10px] text-slate-500 mt-0.5">
+                            <div className="text-[10px] text-[#64748B] mt-0.5">
                               every{" "}
                               {p.minDurationHours === p.maxDurationHours
                                 ? `${p.minDurationHours}h`
@@ -387,11 +387,11 @@ function UpgradeModal({
                 <div className="pt-2 border-t border-[#BFD5FF] space-y-3">
                   <div className="grid grid-cols-2 gap-2">
                     <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-                      <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Target min</div>
+                      <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Target min</div>
                       <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{fmt(selected.minAmount)}</div>
                     </div>
                     <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-                      <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Projected</div>
+                      <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Projected</div>
                       <div className={`text-[13px] font-semibold tabular-nums ${meetsMin && !exceedsMax ? "text-emerald-400" : "text-[#0F172A]"}`}>
                         {fmt(projected)}
                       </div>
@@ -403,7 +403,7 @@ function UpgradeModal({
                       Top up from Deposit Balance (optional)
                     </label>
                     <div className="relative mt-1.5">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] text-sm">$</span>
                       <input
                         type="number"
                         min={0}
@@ -414,7 +414,7 @@ function UpgradeModal({
                         className="w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg pl-7 pr-3 py-2.5 text-[#0F172A] text-sm focus:outline-none focus:border-[#2B6BFF]/50"
                       />
                     </div>
-                    <div className="text-[11px] text-slate-500 mt-1.5">
+                    <div className="text-[11px] text-[#64748B] mt-1.5">
                       Deposit Balance: <span className="text-[#0F172A] font-semibold tabular-nums">{fmt(usdBalance)}</span>
                     </div>
                     {required > 0 && (
@@ -584,13 +584,13 @@ export default function DashboardClient({
       {/* ── 2. MAIN HERO BALANCE CARD ──────────────────────────── */}
       <Card className="overflow-hidden">
         <div className="px-5 pt-5 pb-4">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-semibold mb-2">
+          <p className="text-[10px] uppercase tracking-[0.15em] text-[#64748B] font-semibold mb-2">
             Available Balance
           </p>
           <div className="text-[32px] sm:text-[36px] font-bold text-[#0F172A] tracking-tight leading-none">
             {fmt(usdBalance)}
           </div>
-          <p className="text-[11px] text-slate-500 mt-1.5 leading-relaxed">
+          <p className="text-[11px] text-[#64748B] mt-1.5 leading-relaxed">
             Funds ready to invest, upgrade, or withdraw. Earned profit from active
             trades is shown below and released when a trade ends.
           </p>
@@ -600,7 +600,7 @@ export default function DashboardClient({
               <span className={daily.value >= 0 ? "text-emerald-400 font-semibold" : "text-red-400 font-semibold"}>
                 {daily.value >= 0 ? "+" : ""}{fmt(daily.value)} today
               </span>
-              <span className="text-slate-500 ml-1.5">
+              <span className="text-[#64748B] ml-1.5">
                 ({fmtPct(daily.pct)})
               </span>
             </div>
@@ -656,7 +656,7 @@ export default function DashboardClient({
           }
           return (
             <div className="px-5 pb-5 pt-1">
-              <p className="text-[11px] text-slate-600">
+              <p className="text-[11px] text-[#64748B]">
                 Balance history chart will appear after your first confirmed deposit.
               </p>
             </div>
@@ -681,7 +681,7 @@ export default function DashboardClient({
           icon={TrendingUp}
           title="Portfolio Overview"
         />
-        <div className="divide-y divide-white/[0.04]">
+        <div className="divide-y divide-[#BFD5FF]">
           <Row label="Active Investment" value={activeInvested > 0 ? fmt(activeInvested) : "—"} />
           <Row label="Total Profit"      value={fmt(totalEarned)} valueClassName={totalEarned > 0 ? "text-emerald-400" : "text-[#64748B]"} />
           <Row label="ROI"               value={activeInvested > 0 ? fmtPct(roiPct) : "—"}      valueClassName={roiPct > 0 ? "text-emerald-400" : "text-[#64748B]"} />
@@ -767,12 +767,12 @@ export default function DashboardClient({
             icon={Users}
             title="Copy Trading"
             action={
-              <span className="text-[11px] text-slate-500">
+              <span className="text-[11px] text-[#64748B]">
                 {activeCopyTrades.length} active
               </span>
             }
           />
-          <div className="divide-y divide-white/[0.04]">
+          <div className="divide-y divide-[#BFD5FF]">
             {activeCopyTrades.map((trade) => {
               const hue = [...trade.traderName].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
               const initials = trade.traderName.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
@@ -781,8 +781,8 @@ export default function DashboardClient({
                   <div
                     className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-xs font-bold text-[#0F172A]"
                     style={{
-                      background: `hsl(${hue} 55% 22%)`,
-                      border: `1px solid hsl(${hue} 55% 32%)`,
+                      background: `hsl( 80% 92%)`,
+                      border: `1px solid hsl( 75% 70%)`,
                     }}
                   >
                     {initials}
@@ -801,7 +801,7 @@ export default function DashboardClient({
                       >
                         {trade.status}
                       </span>
-                      <span className="text-[11px] text-slate-500 tabular-nums">
+                      <span className="text-[11px] text-[#64748B] tabular-nums">
                         {fmt(trade.amount)} copied
                       </span>
                     </div>
@@ -810,7 +810,7 @@ export default function DashboardClient({
                     <div className={`text-[13px] font-semibold tabular-nums ${Number(trade.totalEarned) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                       {Number(trade.totalEarned) >= 0 ? "+" : "-"}{fmt(Math.abs(Number(trade.totalEarned)))}
                     </div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">earned profit</div>
+                    <div className="text-[10px] text-[#64748B] mt-0.5">earned profit</div>
                   </div>
                 </div>
               );
@@ -834,11 +834,11 @@ export default function DashboardClient({
           }
         />
         {activity.length === 0 ? (
-          <div className="px-5 py-8 text-center text-[12px] text-slate-500">
+          <div className="px-5 py-8 text-center text-[12px] text-[#64748B]">
             No activity yet
           </div>
         ) : (
-          <div className="divide-y divide-white/[0.04]">
+          <div className="divide-y divide-[#BFD5FF]">
             {activity.slice(0, 5).map((item) => {
               const color = ACT_COLOR[item.type] ?? "text-[#0F172A]";
               const dot   = ACT_DOT[item.type]   ?? "bg-slate-500";
@@ -856,7 +856,7 @@ export default function DashboardClient({
                     <div className="text-[12.5px] font-medium text-[#0F172A] truncate">
                       {item.title}
                     </div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">
+                    <div className="text-[10px] text-[#64748B] mt-0.5">
                       {timeAgo(item.createdAt)}
                     </div>
                   </div>
@@ -1078,7 +1078,7 @@ function PortfolioChartWrapper({
             className={`text-[9px] font-semibold px-2 py-0.5 rounded transition-all ${
               range === r
                 ? "bg-[#2B6BFF]/20 text-[#5C8BFF]"
-                : "text-slate-500 hover:text-[#0F172A]"
+                : "text-[#64748B] hover:text-[#0F172A]"
             }`}
           >
             {r.toUpperCase()}

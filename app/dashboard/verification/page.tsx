@@ -207,7 +207,7 @@ export default function VerificationPage() {
   const currentStatus = status ? STATUS_CONFIG[status] : null;
 
   /* ── Shared input class ────────────────────────────────────────────────────────── */
-  const inputCls = "bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-slate-500 h-10 focus:border-[#2B6BFF]/70 focus:bg-[#EEF5FF] hover:border-white/30 transition-colors";
+  const inputCls = "bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-[#64748B] h-10 focus:border-[#2B6BFF]/70 focus:bg-[#EEF5FF] hover:border-white/30 transition-colors";
 
   /* ── Label class ──────────────────────────────────────────────────────────────────────── */
   const labelCls = "text-xs font-medium text-[#0F172A] uppercase tracking-widest";
@@ -340,7 +340,7 @@ export default function VerificationPage() {
                   <span className="text-sm text-[#0F172A] flex-1 truncate font-medium">
                     {docFile.name}
                   </span>
-                  <span className="text-xs text-slate-500 flex-shrink-0">
+                  <span className="text-xs text-[#64748B] flex-shrink-0">
                     {(docFile.size / 1024 / 1024).toFixed(2)} MB
                   </span>
                   <button
@@ -379,7 +379,7 @@ export default function VerificationPage() {
                   <div className="text-xs text-[#64748B]">
                     {docType} — front side clearly visible
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">
+                  <div className="text-xs text-[#64748B] mt-1">
                     JPG, PNG, WEBP or PDF · Max 8MB
                   </div>
                 </div>

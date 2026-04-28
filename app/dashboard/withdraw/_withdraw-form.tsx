@@ -266,7 +266,7 @@ export default function WithdrawForm({
           Back
         </Link>
         <h1 className="text-2xl font-bold text-[#0F172A]">Withdraw Funds</h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <p className="text-sm text-[#64748B] mt-1">
           Withdraw crypto to your external wallet.
         </p>
       </div>
@@ -303,7 +303,7 @@ export default function WithdrawForm({
                     <span className={`text-[13px] font-semibold ${isActive ? "text-[#0F172A]" : "text-[#0F172A]"}`}>
                       {asset}
                     </span>
-                    <span className="text-[9.5px] text-slate-500 tabular-nums">
+                    <span className="text-[9.5px] text-[#64748B] tabular-nums">
                       {r > 0 ? `$${r.toLocaleString("en-US", { maximumFractionDigits: 0 })}` : "—"}
                     </span>
                   </div>
@@ -314,9 +314,9 @@ export default function WithdrawForm({
         </div>
 
         {/* Available balance — primary USD + secondary crypto */}
-        <div className="rounded-xl border border-white/[0.07] bg-[#F6FAFF] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+        <div className="rounded-xl border border-[#BFD5FF] bg-[#F6FAFF] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
           <div>
-            <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">
+            <div className="text-[10px] font-semibold text-[#64748B] uppercase tracking-widest">
               Available Balance
             </div>
             <div className="text-[17px] font-bold text-[#0F172A] tabular-nums mt-0.5">
@@ -324,7 +324,7 @@ export default function WithdrawForm({
               <span className="text-[13px] font-medium text-[#64748B]">USD</span>
             </div>
             {currentRate > 0 && (
-              <div className="text-[11.5px] text-slate-500 tabular-nums mt-0.5">
+              <div className="text-[11.5px] text-[#64748B] tabular-nums mt-0.5">
                 ≈ {formatCrypto(cryptoBalance)} {selectedAsset}
               </div>
             )}
@@ -358,7 +358,7 @@ export default function WithdrawForm({
 
         {/* Fee breakdown — informational only; not deducted from payout */}
         {usdAmount > 0 && (feePercent > 0 || feeFixed > 0) && (
-          <div className="rounded-lg border border-white/[0.05] bg-[#F6FAFF] px-4 py-3 text-[12px]">
+          <div className="rounded-lg border border-[#BFD5FF] bg-[#F6FAFF] px-4 py-3 text-[12px]">
             <div className="flex items-center justify-between gap-3">
               <span className="text-[#64748B]">Withdrawal Amount</span>
               <span className="text-[#0F172A] font-semibold tabular-nums">${formatUsd(usdAmount)}</span>
@@ -373,7 +373,7 @@ export default function WithdrawForm({
                 ${formatUsd(netReceiveUsd)}
               </span>
             </div>
-            <p className="mt-2 text-[10.5px] text-slate-500 leading-relaxed">
+            <p className="mt-2 text-[10.5px] text-[#64748B] leading-relaxed">
               Withdrawal fee is charged separately and is not deducted from
               the requested withdrawal amount.
             </p>
@@ -391,7 +391,7 @@ export default function WithdrawForm({
               placeholder={`Paste your ${selectedAsset} address`}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="flex-1 bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-slate-600 h-11 font-mono text-[13px]"
+              className="flex-1 bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-[#64748B] h-11 font-mono text-[13px]"
             />
             <button
               type="button"
@@ -423,7 +423,7 @@ export default function WithdrawForm({
                 ))}
               </SelectContent>
             </Select>
-            <div className="text-[11px] text-slate-500">
+            <div className="text-[11px] text-[#64748B]">
               Make sure the receiving wallet supports{" "}
               <span className="text-[#0F172A] font-medium">{network}</span>.
             </div>
@@ -468,7 +468,7 @@ export default function WithdrawForm({
       )}
 
       {/* ── Footer note ─────────────────────────────────────────── */}
-      <p className="text-[12px] text-slate-500 leading-relaxed px-2">
+      <p className="text-[12px] text-[#64748B] leading-relaxed px-2">
         Withdrawals are processed manually and may take 1–3 business days after approval.
       </p>
 
@@ -508,7 +508,7 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
   const cryptoAmt = w.cryptoAmount;
 
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#F6FAFF] overflow-hidden">
+    <div className="rounded-2xl border border-[#BFD5FF] bg-[#F6FAFF] overflow-hidden">
 
       {/* Top row */}
       <div className="flex items-center gap-3 p-4">
@@ -523,11 +523,11 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
             )}
           </div>
           {w.destination && (
-            <div className="text-[11px] text-slate-500 font-mono truncate mt-0.5">
+            <div className="text-[11px] text-[#64748B] font-mono truncate mt-0.5">
               To {shortAddress(w.destination, 12, 6)}
             </div>
           )}
-          <div className="text-[10px] text-slate-600 mt-0.5">
+          <div className="text-[10px] text-[#64748B] mt-0.5">
             {timeShort(w.createdAt)}
           </div>
         </div>
@@ -536,7 +536,7 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
             −${w.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
           {cryptoAmt !== null && (
-            <div className="text-[10.5px] text-slate-500 tabular-nums mt-0.5">
+            <div className="text-[10.5px] text-[#64748B] tabular-nums mt-0.5">
               Withdrawn as {formatCrypto(cryptoAmt)} {asset}
             </div>
           )}
@@ -544,17 +544,17 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
       </div>
 
       {/* Status pill */}
-      <div className="border-t border-white/[0.05] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+      <div className="border-t border-[#BFD5FF] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
         <span className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-full border ${meta.bg} ${meta.border} ${meta.color}`}>
           <Icon size={11} />
           {meta.label}
         </span>
 
         {ui === "pending" && (
-          <span className="text-[11px] text-slate-500">Awaiting admin review</span>
+          <span className="text-[11px] text-[#64748B]">Awaiting admin review</span>
         )}
         {ui === "processing" && (
-          <span className="text-[11px] text-slate-500">Being sent on-chain</span>
+          <span className="text-[11px] text-[#64748B]">Being sent on-chain</span>
         )}
         {ui === "completed" && (
           <span className="text-[11px] text-emerald-300/80">
@@ -565,7 +565,7 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
 
       {/* Rejection reason */}
       {ui === "rejected" && w.adminNotes && (
-        <div className="border-t border-white/[0.05] px-4 py-3 bg-red-500/[0.04]">
+        <div className="border-t border-[#BFD5FF] px-4 py-3 bg-red-500/[0.04]">
           <div className="text-[10px] font-semibold text-red-400 uppercase tracking-widest mb-1">
             Reason
           </div>
@@ -606,14 +606,14 @@ function ConfirmModal({
     >
       <div
         className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        style={{ background: "#FFFFFF" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-5 pt-5 pb-4 border-b border-white/[0.05] flex items-start gap-3">
+        <div className="px-5 pt-5 pb-4 border-b border-[#BFD5FF] flex items-start gap-3">
           <AssetIcon asset={asset} size={36} />
           <div className="flex-1">
             <h3 className="text-base font-bold text-[#0F172A]">Confirm Withdrawal</h3>
-            <p className="text-[11px] text-slate-500 mt-0.5">
+            <p className="text-[11px] text-[#64748B] mt-0.5">
               Double-check these details before submitting.
             </p>
           </div>
@@ -629,13 +629,13 @@ function ConfirmModal({
         </div>
 
         <div className="p-5 space-y-3 text-[12.5px]">
-          <Row label="Asset"   value={<>{asset}{network ? <span className="text-slate-500"> · {network}</span> : null}</>} />
+          <Row label="Asset"   value={<>{asset}{network ? <span className="text-[#64748B]"> · {network}</span> : null}</>} />
           <Row
             label="Amount"
             value={
               <div className="text-right">
                 <div className="tabular-nums font-semibold">${usdAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                <div className="text-[11px] text-slate-500 tabular-nums">
+                <div className="text-[11px] text-[#64748B] tabular-nums">
                   ≈ {formatCrypto(cryptoAmount)} {asset}
                 </div>
               </div>
@@ -651,8 +651,8 @@ function ConfirmModal({
               value={<span className="tabular-nums text-emerald-300 font-semibold">${netReceiveUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
             />
           )}
-          <div className="pt-2 border-t border-white/[0.05]">
-            <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1">
+          <div className="pt-2 border-t border-[#BFD5FF]">
+            <div className="text-[10px] font-semibold text-[#64748B] uppercase tracking-widest mb-1">
               Destination Address
             </div>
             <code className="block text-[11.5px] text-[#0F172A] font-mono break-all leading-relaxed">
@@ -697,7 +697,7 @@ function ConfirmModal({
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">{label}</span>
+      <span className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">{label}</span>
       <span className="text-[#0F172A] text-right">{value}</span>
     </div>
   );

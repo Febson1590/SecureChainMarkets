@@ -53,7 +53,7 @@ function DeleteModal({
           </div>
           <div>
             <h3 className="text-base font-bold text-[#0F172A]">Delete User Account</h3>
-            <p className="text-xs text-slate-500 mt-0.5">This action is permanent and irreversible</p>
+            <p className="text-xs text-[#64748B] mt-0.5">This action is permanent and irreversible</p>
           </div>
         </div>
 
@@ -123,7 +123,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
     <>
       <div className="glass-card rounded-xl overflow-hidden">
         <div className="p-3 border-b border-white/5">
-          <span className="text-xs text-slate-500">{users.length} of {total} users shown</span>
+          <span className="text-xs text-[#64748B]">{users.length} of {total} users shown</span>
         </div>
 
         <div className="overflow-x-auto">
@@ -131,7 +131,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
             <thead>
               <tr className="border-b border-white/5">
                 {["User", "Email", "Status", "Joined", "KYC", "USD Balance", "Actions"].map(h => (
-                  <th key={h} className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest whitespace-nowrap">
+                  <th key={h} className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest whitespace-nowrap">
                     {h}
                   </th>
                 ))}
@@ -142,7 +142,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
                 const kyc = user.verifications[0];
                 const usdWallet = user.wallets.find(w => w.currency === "USD");
                 return (
-                  <tr key={user.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF] transition-colors">
+                  <tr key={user.id} className="border-b border-[#BFD5FF] hover:bg-[#F6FAFF] transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center text-xs font-bold text-[#2B6BFF] flex-shrink-0">
@@ -157,7 +157,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
                         {user.status}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">
+                    <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">
                       {formatDateTime(user.createdAt)}
                     </td>
                     <td className="px-4 py-3">
@@ -194,7 +194,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
               })}
               {users.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-4 py-12 text-center text-sm text-slate-500">
+                  <td colSpan={7} className="px-4 py-12 text-center text-sm text-[#64748B]">
                     No users found.
                   </td>
                 </tr>
@@ -205,7 +205,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
 
         {pages > 1 && (
           <div className="p-4 border-t border-white/5 flex items-center justify-between">
-            <span className="text-xs text-slate-500">Page {page} of {pages}</span>
+            <span className="text-xs text-[#64748B]">Page {page} of {pages}</span>
             <div className="flex gap-2">
               {page > 1 && (
                 <Link href={`/admin/users?page=${page - 1}&search=${search}`}>

@@ -217,9 +217,9 @@ export function DualAmountInput({
             placeholder="0.00"
             value={state.usd}
             onChange={(e) => state.setUsd(e.target.value)}
-            className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-slate-600 h-12 pr-16 text-base font-semibold tabular-nums"
+            className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-[#64748B] h-12 pr-16 text-base font-semibold tabular-nums"
           />
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[13px] text-slate-500 font-medium pointer-events-none">
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[13px] text-[#64748B] font-medium pointer-events-none">
             | USD
           </span>
         </div>
@@ -238,9 +238,9 @@ export function DualAmountInput({
             placeholder="0.00000000"
             value={state.crypto}
             onChange={(e) => state.setCrypto(e.target.value)}
-            className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-slate-600 h-12 pr-20 text-base font-semibold tabular-nums"
+            className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-[#64748B] h-12 pr-20 text-base font-semibold tabular-nums"
           />
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[13px] text-slate-500 font-medium pointer-events-none">
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[13px] text-[#64748B] font-medium pointer-events-none">
             | {asset}
           </span>
         </div>
@@ -248,7 +248,7 @@ export function DualAmountInput({
 
       {/* Live rate + helper + min/max */}
       <div className="flex items-start justify-between gap-3 flex-wrap pt-0.5">
-        <div className="text-[11px] text-slate-500 flex items-center gap-1.5">
+        <div className="text-[11px] text-[#64748B] flex items-center gap-1.5">
           <Clock size={10} className={rateStale ? "text-amber-400" : "text-emerald-400"} />
           <span>
             1 {asset} ={" "}
@@ -259,13 +259,13 @@ export function DualAmountInput({
             </span>
           </span>
         </div>
-        <div className="text-[11px] text-slate-500 text-right">
+        <div className="text-[11px] text-[#64748B] text-right">
           {minUsd !== undefined && <span>Min: ${minUsd}</span>}
           {maxUsd ? <span> · Max: ${maxUsd}</span> : null}
         </div>
       </div>
 
-      <p className="text-[11px] text-slate-500 leading-relaxed pt-0.5">
+      <p className="text-[11px] text-[#64748B] leading-relaxed pt-0.5">
         {helperText}
       </p>
     </div>

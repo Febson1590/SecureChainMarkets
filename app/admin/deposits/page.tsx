@@ -97,7 +97,7 @@ export default function AdminDepositsPage() {
     <div className="space-y-5">
       <div>
         <h1 className="text-2xl font-bold text-[#0F172A]">Deposit Requests</h1>
-        <p className="text-sm text-slate-500 mt-0.5">
+        <p className="text-sm text-[#64748B] mt-0.5">
           Review and approve user deposit requests
         </p>
       </div>
@@ -110,12 +110,12 @@ export default function AdminDepositsPage() {
           </span>
         </div>
         {loading ? (
-          <div className="p-12 text-center text-slate-500 text-sm">
+          <div className="p-12 text-center text-[#64748B] text-sm">
             <Loader2 size={14} className="inline animate-spin mr-2" />
             Loading…
           </div>
         ) : deposits.length === 0 ? (
-          <div className="p-12 text-center text-slate-500 text-sm">
+          <div className="p-12 text-center text-[#64748B] text-sm">
             No deposit requests yet.
           </div>
         ) : (
@@ -126,7 +126,7 @@ export default function AdminDepositsPage() {
                   {["User", "Amount", "Coin / Network", "Wallet Address", "Proof", "Date", "Status", "Actions"].map((h) => (
                     <th
                       key={h}
-                      className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest"
+                      className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest"
                     >
                       {h}
                     </th>
@@ -138,21 +138,21 @@ export default function AdminDepositsPage() {
                   <tr key={dep.id} className="border-b border-white/5 hover:bg-[#F6FAFF] align-top">
                     <td className="px-4 py-3">
                       <div className="text-sm text-[#0F172A]">{dep.user?.name || "—"}</div>
-                      <div className="text-xs text-slate-500">{dep.user?.email}</div>
+                      <div className="text-xs text-[#64748B]">{dep.user?.email}</div>
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap">
                       <div className="text-sm font-semibold text-[#0F172A] tabular-nums">
                         {formatCurrency(Number(dep.amount))}
                       </div>
                       {dep.cryptoAmount !== null && dep.cryptoSymbol && (
-                        <div className="text-[10.5px] text-slate-500 tabular-nums mt-0.5">
+                        <div className="text-[10.5px] text-[#64748B] tabular-nums mt-0.5">
                           {Number(dep.cryptoAmount).toLocaleString("en-US", { maximumFractionDigits: 8 })} {dep.cryptoSymbol}
                         </div>
                       )}
                     </td>
                     <td className="px-4 py-3">
                       <div className="text-sm text-[#0F172A] font-semibold">{dep.cryptoSymbol || dep.currency}</div>
-                      <div className="text-[11px] text-slate-500">
+                      <div className="text-[11px] text-[#64748B]">
                         {dep.cryptoNetwork || dep.wallet?.network || dep.method || "—"}
                       </div>
                     </td>
@@ -163,11 +163,11 @@ export default function AdminDepositsPage() {
                             {shortAddress(dep.wallet.address, 12, 5)}
                           </code>
                           {dep.wallet.label && (
-                            <div className="text-[10px] text-slate-500 mt-0.5">{dep.wallet.label}</div>
+                            <div className="text-[10px] text-[#64748B] mt-0.5">{dep.wallet.label}</div>
                           )}
                         </div>
                       ) : (
-                        <span className="text-[11px] text-slate-600">—</span>
+                        <span className="text-[11px] text-[#64748B]">—</span>
                       )}
                     </td>
                     <td className="px-4 py-3">
@@ -182,15 +182,15 @@ export default function AdminDepositsPage() {
                           View <ExternalLink size={10} />
                         </a>
                       ) : (
-                        <span className="text-[11px] text-slate-600">No proof</span>
+                        <span className="text-[11px] text-[#64748B]">No proof</span>
                       )}
                       {dep.txHash && (
-                        <div className="text-[10px] text-slate-500 font-mono mt-1 truncate max-w-[120px]" title={dep.txHash}>
+                        <div className="text-[10px] text-[#64748B] font-mono mt-1 truncate max-w-[120px]" title={dep.txHash}>
                           {dep.txHash}
                         </div>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">
+                    <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">
                       {formatDateTime(dep.createdAt)}
                     </td>
                     <td className="px-4 py-3">
@@ -239,11 +239,11 @@ export default function AdminDepositsPage() {
           onClick={() => processing ? null : setRejectTarget(null)}
         >
           <div
-            className="w-full max-w-md rounded-2xl border border-white/10 bg-[rgba(10,18,34,0.98)] p-5 shadow-2xl"
+            className="w-full max-w-md rounded-2xl border border-white/10 bg-[#FFFFFF] p-5 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-base font-bold text-[#0F172A]">Reject deposit</h2>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-[#64748B] mt-1">
               {rejectTarget.user?.email} · {formatCurrency(Number(rejectTarget.amount))}
             </p>
             <p className="text-[12.5px] text-[#64748B] mt-3">
@@ -255,7 +255,7 @@ export default function AdminDepositsPage() {
               onChange={(e) => setRejectReason(e.target.value)}
               placeholder="e.g. Could not verify the transaction on-chain."
               rows={4}
-              className="mt-2 w-full rounded-xl bg-[#F6FAFF] border border-[#BFD5FF] px-3 py-2.5 text-[13px] text-[#0F172A] placeholder:text-slate-600 focus:outline-none focus:border-[#2B6BFF]/40 resize-none"
+              className="mt-2 w-full rounded-xl bg-[#F6FAFF] border border-[#BFD5FF] px-3 py-2.5 text-[13px] text-[#0F172A] placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/40 resize-none"
             />
             <div className="flex gap-2 mt-4">
               <Button

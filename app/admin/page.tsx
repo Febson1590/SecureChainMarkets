@@ -33,7 +33,7 @@ export default async function AdminDashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[#0F172A]">Admin Dashboard</h1>
-        <p className="text-sm text-slate-500 mt-0.5">Platform overview and key metrics</p>
+        <p className="text-sm text-[#64748B] mt-0.5">Platform overview and key metrics</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
@@ -43,8 +43,8 @@ export default async function AdminDashboard() {
               <card.icon className={`h-4 w-4 ${card.color}`} />
             </div>
             <div className="text-2xl font-bold text-[#0F172A]">{card.value}</div>
-            <div className="text-xs text-slate-500 mt-0.5">{card.label}</div>
-            <div className="text-xs text-slate-600">{card.sub}</div>
+            <div className="text-xs text-[#64748B] mt-0.5">{card.label}</div>
+            <div className="text-xs text-[#64748B]">{card.sub}</div>
           </div>
         ))}
       </div>
@@ -64,14 +64,14 @@ export default async function AdminDashboard() {
                   </div>
                   <div>
                     <div className="text-sm font-medium text-[#0F172A]">{user.name}</div>
-                    <div className="text-xs text-slate-500">{user.email}</div>
+                    <div className="text-xs text-[#64748B]">{user.email}</div>
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${getStatusBg(user.status)}`}>
                     {user.status}
                   </span>
-                  <span className="text-[10px] text-slate-600">{formatDateTime(user.createdAt)}</span>
+                  <span className="text-[10px] text-[#64748B]">{formatDateTime(user.createdAt)}</span>
                 </div>
               </div>
             ))}
@@ -85,15 +85,15 @@ export default async function AdminDashboard() {
           </div>
           <div className="divide-y divide-white/5">
             {recentActions.length === 0 ? (
-              <div className="p-8 text-center text-xs text-slate-500">No actions yet</div>
+              <div className="p-8 text-center text-xs text-[#64748B]">No actions yet</div>
             ) : recentActions.map((action) => (
               <div key={action.id} className="px-4 py-3 hover:bg-white/2 transition-colors">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-mono text-[#2B6BFF]">{action.action}</span>
-                  <span className="text-[10px] text-slate-600">{formatDateTime(action.createdAt)}</span>
+                  <span className="text-[10px] text-[#64748B]">{formatDateTime(action.createdAt)}</span>
                 </div>
                 <div className="text-xs text-[#64748B] mt-0.5">{action.description || "—"}</div>
-                <div className="text-[10px] text-slate-600">by {action.admin.name}</div>
+                <div className="text-[10px] text-[#64748B]">by {action.admin.name}</div>
               </div>
             ))}
           </div>

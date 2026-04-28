@@ -169,8 +169,8 @@ export default function TraderDetailClient({
           <div
             className="w-20 h-20 rounded-full flex items-center justify-center text-lg font-bold text-[#0F172A] flex-shrink-0"
             style={{
-              background: `hsl(${hue} 55% 22%)`,
-              border: `1px solid hsl(${hue} 55% 32%)`,
+              background: `hsl( 80% 92%)`,
+              border: `1px solid hsl( 75% 70%)`,
             }}
           >
             {initials(trader.name)}
@@ -188,13 +188,13 @@ export default function TraderDetailClient({
             )}
           </div>
           {trader.specialty && (
-            <p className="text-[12.5px] text-slate-500 mt-0.5">{trader.specialty}</p>
+            <p className="text-[12.5px] text-[#64748B] mt-0.5">{trader.specialty}</p>
           )}
         </div>
       </div>
 
       {/* ── Quick stats row ──────────────────────────────────────── */}
-      <div className="flex items-center gap-0 divide-x divide-white/[0.06] border-y border-[#BFD5FF] py-3">
+      <div className="flex items-center gap-0 divide-x divide-[#BFD5FF] border-y border-[#BFD5FF] py-3">
         <QuickStat
           icon={<Users size={13} className="text-[#64748B]" />}
           label="Followers"
@@ -217,7 +217,7 @@ export default function TraderDetailClient({
       <div className="space-y-2">
         <div className="flex items-baseline justify-between">
           <h2 className="text-[13px] font-semibold text-[#0F172A]">Performance</h2>
-          <span className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">
+          <span className="text-[10px] uppercase tracking-widest text-[#64748B] font-semibold">
             Last 30 days
           </span>
         </div>
@@ -233,7 +233,7 @@ export default function TraderDetailClient({
               <div className="text-[13.5px] font-semibold text-[#0F172A]">You&apos;re copying this trader</div>
               <div className="text-[12px] text-[#64748B] mt-1">
                 Amount: <span className="text-[#0F172A] font-semibold tabular-nums">{formatCurrency(alreadyCopying.amount)}</span>
-                <span className="mx-1.5 text-slate-600">·</span>
+                <span className="mx-1.5 text-[#64748B]">·</span>
                 Earned: <span className="text-emerald-400 font-semibold tabular-nums">{formatCurrency(alreadyCopying.totalEarned)}</span>
               </div>
             </div>
@@ -255,7 +255,7 @@ export default function TraderDetailClient({
       )}
 
       {/* ── Friendly note ─────────────────────────────────────────── */}
-      <p className="text-[11.5px] text-slate-500 leading-relaxed text-center px-2">
+      <p className="text-[11.5px] text-[#64748B] leading-relaxed text-center px-2">
         Trader performance can vary over time. Review the history above and allocate an amount
         that fits your goals — you can pause or exit at any time.
       </p>
@@ -288,7 +288,7 @@ function QuickStat({
 }) {
   return (
     <div className="flex-1 px-3 first:pl-0 last:pr-0 min-w-0">
-      <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
+      <div className="flex items-center gap-1.5 text-[11px] text-[#64748B]">
         {icon}
         <span>{label}</span>
       </div>
@@ -315,8 +315,8 @@ function PerformanceChart({
 
   if (series.length < 2) {
     return (
-      <div className="h-[180px] rounded-xl bg-[#F6FAFF] border border-white/[0.05] flex items-center justify-center">
-        <span className="text-[11px] text-slate-600">Not enough data</span>
+      <div className="h-[180px] rounded-xl bg-[#F6FAFF] border border-[#BFD5FF] flex items-center justify-center">
+        <span className="text-[11px] text-[#64748B]">Not enough data</span>
       </div>
     );
   }
@@ -357,7 +357,7 @@ function PerformanceChart({
   const lastVal   = series[series.length - 1].value;
 
   return (
-    <div className="rounded-xl bg-[#F6FAFF] border border-white/[0.05] px-2 py-2">
+    <div className="rounded-xl bg-[#F6FAFF] border border-[#BFD5FF] px-2 py-2">
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto" preserveAspectRatio="none">
         <defs>
           <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
@@ -485,12 +485,12 @@ function CopyModal({
     >
       <div
         className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        style={{ background: "#FFFFFF" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-5 pt-5 pb-4 border-b border-white/[0.05]">
+        <div className="px-5 pt-5 pb-4 border-b border-[#BFD5FF]">
           <h3 className="text-base font-bold text-[#0F172A]">Copy {trader.name}</h3>
-          <p className="text-[11px] text-slate-500 mt-0.5">
+          <p className="text-[11px] text-[#64748B] mt-0.5">
             {trader.minProfit}% – {trader.maxProfit}% per cycle
           </p>
         </div>
@@ -498,11 +498,11 @@ function CopyModal({
         <div className="p-5 space-y-4">
           <div className="grid grid-cols-2 gap-2">
             <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-              <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Balance</div>
+              <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Balance</div>
               <div className="text-[13px] font-semibold text-[#0F172A] tabular-nums">{formatCurrency(usdBalance)}</div>
             </div>
             <div className="px-3 py-2 rounded-lg bg-[#F6FAFF] border border-[#BFD5FF]">
-              <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Min amount</div>
+              <div className="text-[9px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">Min amount</div>
               <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{formatCurrency(trader.minCopyAmount)}</div>
             </div>
           </div>
@@ -512,7 +512,7 @@ function CopyModal({
               Amount (USD)
             </label>
             <div className="relative mt-1.5">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] text-sm">$</span>
               <input
                 type="number"
                 autoFocus

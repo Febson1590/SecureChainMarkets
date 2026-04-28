@@ -242,7 +242,7 @@ export default function DepositForm({
           Back
         </Link>
         <h1 className="text-2xl font-bold text-[#0F172A]">Deposit Crypto</h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <p className="text-sm text-[#64748B] mt-1">
           Send crypto to the wallet address below and submit proof of payment.
         </p>
       </div>
@@ -281,7 +281,7 @@ export default function DepositForm({
                     {asset}
                   </span>
                   {!hasWallet && (
-                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-500 border border-white/10 rounded px-1 py-0.5 ml-0.5">
+                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-[#64748B] border border-white/10 rounded px-1 py-0.5 ml-0.5">
                       Soon
                     </span>
                   )}
@@ -316,7 +316,7 @@ export default function DepositForm({
               <Label className="text-[11px] font-semibold text-[#0F172A] uppercase tracking-wider">
                 {activeWallet.asset} Deposit Address
                 {activeWallet.network && (
-                  <span className="text-slate-500 ml-2 normal-case tracking-normal font-medium">
+                  <span className="text-[#64748B] ml-2 normal-case tracking-normal font-medium">
                     · {activeWallet.network}
                   </span>
                 )}
@@ -394,7 +394,7 @@ export default function DepositForm({
       )}
 
       {/* ── Footer note ──────────────────────────────────────────── */}
-      <p className="text-[12px] text-slate-500 leading-relaxed px-2">
+      <p className="text-[12px] text-[#64748B] leading-relaxed px-2">
         Please note that deposits require confirmations on the blockchain and are subject to manual review.
       </p>
     </div>
@@ -412,7 +412,7 @@ function NextStepsBlock() {
     "Upload your proof from \u201CPending Deposits\u201D below",
   ];
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#F6FAFF] px-4 py-3.5">
+    <div className="rounded-xl border border-[#BFD5FF] bg-[#F6FAFF] px-4 py-3.5">
       <div className="flex items-center gap-1.5 mb-2.5">
         <Info size={12} className="text-[#2B6BFF]" />
         <span className="text-[11px] font-bold text-[#0F172A] uppercase tracking-widest">
@@ -429,7 +429,7 @@ function NextStepsBlock() {
           </li>
         ))}
       </ol>
-      <p className="text-[11.5px] text-slate-500 mt-3 pt-2.5 border-t border-white/[0.05] leading-relaxed">
+      <p className="text-[11.5px] text-[#64748B] mt-3 pt-2.5 border-t border-[#BFD5FF] leading-relaxed">
         Your deposit will be reviewed once proof is submitted.
       </p>
     </div>
@@ -498,7 +498,7 @@ function DepositCard({
   }
 
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#F6FAFF] overflow-hidden">
+    <div className="rounded-2xl border border-[#BFD5FF] bg-[#F6FAFF] overflow-hidden">
 
       {/* Top row: asset + amount + status */}
       <div className="flex items-center gap-3 p-4">
@@ -513,11 +513,11 @@ function DepositCard({
             )}
           </div>
           {walletAddress && (
-            <div className="text-[11px] text-slate-500 font-mono truncate mt-0.5">
+            <div className="text-[11px] text-[#64748B] font-mono truncate mt-0.5">
               {shortAddress(walletAddress, 12, 3)}
             </div>
           )}
-          <div className="text-[10px] text-slate-600 mt-0.5">
+          <div className="text-[10px] text-[#64748B] mt-0.5">
             {timeShort(deposit.createdAt)}
           </div>
         </div>
@@ -526,7 +526,7 @@ function DepositCard({
             +${deposit.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
           {deposit.cryptoAmount !== null && deposit.cryptoSymbol && (
-            <div className="text-[10.5px] text-slate-500 tabular-nums mt-0.5">
+            <div className="text-[10.5px] text-[#64748B] tabular-nums mt-0.5">
               Paid with {formatCrypto(deposit.cryptoAmount)} {deposit.cryptoSymbol}
             </div>
           )}
@@ -534,7 +534,7 @@ function DepositCard({
       </div>
 
       {/* Status pill + per-state action row */}
-      <div className="border-t border-white/[0.05] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+      <div className="border-t border-[#BFD5FF] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
         <span className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-full border ${meta.bg} ${meta.border} ${meta.color}`}>
           <Icon size={11} />
           {meta.label}
@@ -546,7 +546,7 @@ function DepositCard({
               type="button"
               onClick={handleCancel}
               disabled={cancelling}
-              className="inline-flex items-center gap-1.5 text-[11.5px] text-slate-500 hover:text-red-400 transition-colors"
+              className="inline-flex items-center gap-1.5 text-[11.5px] text-[#64748B] hover:text-red-400 transition-colors"
             >
               {cancelling ? <Loader2 size={11} className="animate-spin" /> : <Trash2 size={11} />}
               Cancel
@@ -563,7 +563,7 @@ function DepositCard({
         )}
 
         {ui === "review" && (
-          <span className="text-[11px] text-slate-500">
+          <span className="text-[11px] text-[#64748B]">
             Your deposit is being reviewed
           </span>
         )}
@@ -577,7 +577,7 @@ function DepositCard({
 
       {/* Rejection reason */}
       {ui === "rejected" && deposit.adminNotes && (
-        <div className="border-t border-white/[0.05] px-4 py-3 bg-red-500/[0.04]">
+        <div className="border-t border-[#BFD5FF] px-4 py-3 bg-red-500/[0.04]">
           <div className="text-[10px] font-semibold text-red-400 uppercase tracking-widest mb-1">
             Reason
           </div>
@@ -672,12 +672,12 @@ function UploadProofModal({
     >
       <div
         className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        style={{ background: "#FFFFFF" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-5 pt-5 pb-4 border-b border-white/[0.05]">
+        <div className="px-5 pt-5 pb-4 border-b border-[#BFD5FF]">
           <h3 className="text-base font-bold text-[#0F172A]">Upload Proof of Payment</h3>
-          <p className="text-[11px] text-slate-500 mt-0.5">
+          <p className="text-[11px] text-[#64748B] mt-0.5">
             For your {currency} deposit of{" "}
             <span className="text-[#0F172A] font-semibold tabular-nums">
               {amount.toLocaleString("en-US", { minimumFractionDigits: 2 })} USD
@@ -705,7 +705,7 @@ function UploadProofModal({
             <div className="flex items-center gap-3 rounded-lg px-3 py-3 bg-[#2B6BFF]/[0.06] border border-[#2B6BFF]/25">
               <FileImage className="h-5 w-5 text-[#2B6BFF] flex-shrink-0" />
               <span className="text-[12.5px] text-[#0F172A] flex-1 truncate font-medium">{file.name}</span>
-              <span className="text-[10.5px] text-slate-500 flex-shrink-0">
+              <span className="text-[10.5px] text-[#64748B] flex-shrink-0">
                 {(file.size / 1024 / 1024).toFixed(2)} MB
               </span>
               <button
@@ -724,19 +724,19 @@ function UploadProofModal({
             >
               <Upload className="h-5 w-5 text-[#64748B] mx-auto mb-2" />
               <div className="text-[12px] text-[#0F172A] font-medium">Click to upload screenshot or receipt</div>
-              <div className="text-[10px] text-slate-500 mt-1">JPG, PNG, WEBP or PDF · Max 8 MB</div>
+              <div className="text-[10px] text-[#64748B] mt-1">JPG, PNG, WEBP or PDF · Max 8 MB</div>
             </button>
           )}
 
           <div className="space-y-1.5">
             <Label className="text-[11px] font-semibold text-[#0F172A] uppercase tracking-wider">
-              Transaction Hash <span className="text-slate-600">— optional</span>
+              Transaction Hash <span className="text-[#64748B]">— optional</span>
             </Label>
             <Input
               placeholder="Paste your tx hash or transfer reference"
               value={txHash}
               onChange={(e) => setTxHash(e.target.value)}
-              className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-slate-600 h-10 font-mono text-xs"
+              className="bg-[#F6FAFF] border-[#BFD5FF] text-[#0F172A] placeholder:text-[#64748B] h-10 font-mono text-xs"
             />
           </div>
         </div>

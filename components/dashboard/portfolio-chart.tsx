@@ -52,7 +52,7 @@ export function PortfolioChart({ data, isLoading = false }: PortfolioChartProps)
       {/* Loading overlay */}
       {isLoading && (
         <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg"
-          style={{ background: "rgba(7,15,30,0.55)" }}>
+          style={{ background: "#FFFFFF" }}>
           <Loader2 size={18} className="text-sky-400 animate-spin" />
         </div>
       )}
@@ -64,7 +64,7 @@ export function PortfolioChart({ data, isLoading = false }: PortfolioChartProps)
             style={{ background: "rgba(14,165,233,0.08)", border: "1px solid rgba(14,165,233,0.15)" }}>
             <TrendingUp size={16} className="text-sky-600" />
           </div>
-          <p className="text-xs text-slate-600 font-medium">
+          <p className="text-xs text-[#64748B] font-medium">
             No transaction history yet
           </p>
           <p className="text-[10px] text-slate-700">

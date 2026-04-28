@@ -14,7 +14,7 @@ import {
 /* ─── Styling shared with other admin forms ──────────────────────────── */
 
 const inputCls =
-  "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+  "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/60";
 const labelCls = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 /* ─── Form state ─────────────────────────────────────────────────────── */
@@ -115,13 +115,13 @@ export default function AdminLimitsPage() {
           <SlidersHorizontal size={18} className="text-[#2B6BFF]" />
           Deposit &amp; Withdrawal Limits
         </h1>
-        <p className="text-sm text-slate-500 mt-0.5">
+        <p className="text-sm text-[#64748B] mt-0.5">
           Set the minimum / maximum amounts (USD) and withdrawal fees for all users.
         </p>
       </div>
 
       {loading ? (
-        <div className="glass-card rounded-xl p-12 text-center text-slate-500 text-sm">
+        <div className="glass-card rounded-xl p-12 text-center text-[#64748B] text-sm">
           <Loader2 size={16} className="inline animate-spin mr-2" />
           Loading current limits…
         </div>
@@ -136,7 +136,7 @@ export default function AdminLimitsPage() {
               </div>
               <div>
                 <h2 className="text-[14px] font-bold text-[#0F172A]">Deposit Limits</h2>
-                <p className="text-[11.5px] text-slate-500">
+                <p className="text-[11.5px] text-[#64748B]">
                   Applied to every cryptocurrency deposit unless a wallet overrides the minimum.
                 </p>
               </div>
@@ -156,7 +156,7 @@ export default function AdminLimitsPage() {
               </div>
               <div>
                 <label className={labelCls}>
-                  Max Deposit (USD) <span className="text-slate-600">— optional</span>
+                  Max Deposit (USD) <span className="text-[#64748B]">— optional</span>
                 </label>
                 <input
                   type="number"
@@ -178,7 +178,7 @@ export default function AdminLimitsPage() {
               </div>
               <div>
                 <h2 className="text-[14px] font-bold text-[#0F172A]">Withdrawal Limits</h2>
-                <p className="text-[11.5px] text-slate-500">
+                <p className="text-[11.5px] text-[#64748B]">
                   Users can&apos;t submit a withdrawal below the minimum or above the maximum.
                 </p>
               </div>
@@ -198,7 +198,7 @@ export default function AdminLimitsPage() {
               </div>
               <div>
                 <label className={labelCls}>
-                  Max Withdrawal (USD) <span className="text-slate-600">— optional</span>
+                  Max Withdrawal (USD) <span className="text-[#64748B]">— optional</span>
                 </label>
                 <input
                   type="number"
@@ -245,7 +245,7 @@ export default function AdminLimitsPage() {
                 onChange={(e) => set("processingTimeText", e.target.value)}
                 placeholder="e.g. 1–3 business days"
               />
-              <p className="text-[11px] text-slate-500 mt-1">
+              <p className="text-[11px] text-[#64748B] mt-1">
                 Shown on user-facing pages and emails. Purely informational.
               </p>
             </div>

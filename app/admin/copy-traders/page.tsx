@@ -44,7 +44,7 @@ const STATUS_COLORS: Record<string, string> = {
   PAUSED:  "bg-yellow-500/10 border-yellow-500/25 text-yellow-400",
   STOPPED: "bg-red-500/10 border-red-500/25 text-red-400",
 };
-const inputCls = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const inputCls = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/60";
 const labelCls = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 // ── Image compression — resize to max 300×300, JPEG 75% (~30–80 KB) ──────────
@@ -265,7 +265,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
                   ? <Loader2 size={18} className="animate-spin text-[#2B6BFF]" />
                   : avatarUrl
                     ? <img src={avatarUrl} alt="Preview" className="w-full h-full object-cover" />
-                    : <span className="text-[10px] text-slate-500 text-center leading-tight px-1">No photo</span>
+                    : <span className="text-[10px] text-[#64748B] text-center leading-tight px-1">No photo</span>
                 }
               </div>
               <div className="flex-1">
@@ -284,7 +284,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
                     disabled={imgLoading}
                   />
                 </label>
-                <p className="text-[10px] text-slate-500 mt-1.5">JPG, PNG, WEBP · Max 5MB · Auto-compressed</p>
+                <p className="text-[10px] text-[#64748B] mt-1.5">JPG, PNG, WEBP · Max 5MB · Auto-compressed</p>
                 {avatarUrl && (
                   <button
                     type="button"
@@ -318,7 +318,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
                 <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
               </div>
               {form.country && (
-                <div className="mt-1 text-[11px] text-slate-500">
+                <div className="mt-1 text-[11px] text-[#64748B]">
                   <span className="mr-1">{flagEmoji(form.country)}</span>
                   Stored as <code className="text-[#0F172A]">{form.country}</code>
                 </div>
@@ -430,7 +430,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
               );
             })}
           </div>
-          <p className="text-[11px] text-slate-500 -mt-2">
+          <p className="text-[11px] text-[#64748B] -mt-2">
             Each tick fires after a random wait between min and max duration.
           </p>
 
@@ -474,7 +474,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
               </div>
             </div>
 
-            <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
+            <p className="text-[11px] text-[#64748B] mt-2 leading-relaxed">
               Each tick picks a loss-ratio in [<span className="text-amber-400 font-semibold">Min</span>,{" "}
               <span className="text-amber-400 font-semibold">Max</span>]% and rolls it as the probability of a loss.
               Loss magnitude is a random % between Min Loss and Max Loss, applied to the copied amount.
@@ -538,7 +538,7 @@ function DeleteTraderModal({
           </div>
           <div>
             <h3 className="text-base font-bold text-[#0F172A]">Delete Copy Trader</h3>
-            <p className="text-xs text-slate-500 mt-0.5">This action is permanent and irreversible</p>
+            <p className="text-xs text-[#64748B] mt-0.5">This action is permanent and irreversible</p>
           </div>
         </div>
 
@@ -547,13 +547,13 @@ function DeleteTraderModal({
             <img src={trader.avatarUrl} alt={trader.name} className="w-9 h-9 rounded-full object-cover flex-shrink-0 border border-white/10" />
           ) : (
             <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-[#0F172A] flex-shrink-0"
-              style={{ background: `hsl(${hue} 55% 22%)`, border: `1px solid hsl(${hue} 55% 32%)` }}>
+              style={{ background: `hsl( 80% 92%)`, border: `1px solid hsl( 75% 70%)` }}>
               {ini}
             </div>
           )}
           <div>
             <div className="text-sm font-semibold text-[#0F172A]">{trader.name}</div>
-            <div className="text-xs text-slate-500">{trader.userCopyTrades.length} active {trader.userCopyTrades.length === 1 ? "copy" : "copies"} will be stopped</div>
+            <div className="text-xs text-[#64748B]">{trader.userCopyTrades.length} active {trader.userCopyTrades.length === 1 ? "copy" : "copies"} will be stopped</div>
           </div>
         </div>
 
@@ -798,7 +798,7 @@ export default function AdminCopyTradersPage() {
           <h1 className="text-2xl font-bold text-[#0F172A] flex items-center gap-2">
             <Users size={20} className="text-[#2B6BFF]" /> Copy Traders
           </h1>
-          <p className="text-sm text-slate-500 mt-0.5">Manage traders and user copy assignments</p>
+          <p className="text-sm text-[#64748B] mt-0.5">Manage traders and user copy assignments</p>
         </div>
         <div className="flex gap-2 flex-wrap">
           {traders.some((t) => t.isSeeded) && (
@@ -840,7 +840,7 @@ export default function AdminCopyTradersPage() {
           { label: "Total Earned",   value: fmt(trades.reduce((s, t) => s + t.totalEarned, 0)), color: "text-emerald-400" },
         ].map(s => (
           <div key={s.label} className="glass-card rounded-xl p-4">
-            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">{s.label}</div>
+            <div className="text-xs text-[#64748B] uppercase tracking-wider mb-1">{s.label}</div>
             <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
           </div>
         ))}
@@ -853,7 +853,7 @@ export default function AdminCopyTradersPage() {
             key={t}
             onClick={() => setTab(t)}
             className={`px-4 py-2.5 text-sm font-medium transition-colors ${
-              tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-[#0F172A]"
+              tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-[#64748B] hover:text-[#0F172A]"
             }`}
           >
             {t === "traders" ? `Traders (${traders.length})` : `Assignments (${trades.length})`}
@@ -868,18 +868,18 @@ export default function AdminCopyTradersPage() {
             <span className="text-sm font-semibold text-[#0F172A]">{traders.length} Trader{traders.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
-            <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
+            <div className="p-12 text-center text-[#64748B] text-sm flex items-center justify-center gap-2">
               <Loader2 size={16} className="animate-spin" /> Loading…
             </div>
           ) : traders.length === 0 ? (
-            <div className="p-12 text-center text-slate-500 text-sm">No traders yet. Create one to get started.</div>
+            <div className="p-12 text-center text-[#64748B] text-sm">No traders yet. Create one to get started.</div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full premium-table">
                 <thead>
                   <tr className="border-b border-white/5">
                     {["Trader","Specialty","Win Rate","ROI","Followers","Profit Range","Interval","Copies","Actions"].map(h => (
-                      <th key={h} className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
+                      <th key={h} className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -888,7 +888,7 @@ export default function AdminCopyTradersPage() {
                     const hue      = [...tr.name].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
                     const initials = tr.name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
                     return (
-                      <tr key={tr.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
+                      <tr key={tr.id} className="border-b border-[#BFD5FF] hover:bg-[#F6FAFF]">
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2">
                             {tr.avatarUrl ? (
@@ -900,7 +900,7 @@ export default function AdminCopyTradersPage() {
                             ) : (
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-[#0F172A] flex-shrink-0"
-                                style={{ background: `hsl(${hue} 60% 25%)`, border: `1px solid hsl(${hue} 60% 35%)` }}
+                                style={{ background: `hsl( 80% 92%)`, border: `1px solid hsl( 75% 70%)` }}
                               >
                                 {initials}
                               </div>
@@ -944,7 +944,7 @@ export default function AdminCopyTradersPage() {
                             // Same shared resolver as the edit modal — a
                             // legit 1-minute trader renders "1–2m", not "—".
                             const { minSecs, maxSecs } = resolvePlanSecs(tr);
-                            if (minSecs <= 0 || maxSecs <= 0) return <span className="text-slate-600">—</span>;
+                            if (minSecs <= 0 || maxSecs <= 0) return <span className="text-[#64748B]">—</span>;
                             const md = secondsToDisplay(minSecs);
                             const xd = secondsToDisplay(maxSecs);
                             const unit = (md.unit === "hours" || xd.unit === "hours") ? "h" : "m";
@@ -988,27 +988,27 @@ export default function AdminCopyTradersPage() {
             <span className="text-sm font-semibold text-[#0F172A]">{trades.length} Assignment{trades.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
-            <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
+            <div className="p-12 text-center text-[#64748B] text-sm flex items-center justify-center gap-2">
               <Loader2 size={16} className="animate-spin" /> Loading…
             </div>
           ) : trades.length === 0 ? (
-            <div className="p-12 text-center text-slate-500 text-sm">No assignments yet.</div>
+            <div className="p-12 text-center text-[#64748B] text-sm">No assignments yet.</div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full premium-table">
                 <thead>
                   <tr className="border-b border-white/5">
                     {["User","Trader","Amount","Earned","Status","Started","Actions"].map(h => (
-                      <th key={h} className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
+                      <th key={h} className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {trades.map(trade => (
-                    <tr key={trade.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
+                    <tr key={trade.id} className="border-b border-[#BFD5FF] hover:bg-[#F6FAFF]">
                       <td className="px-4 py-3">
                         <div className="text-sm text-[#0F172A] font-medium">{trade.user.name || "—"}</div>
-                        <div className="text-xs text-slate-500">{trade.user.email}</div>
+                        <div className="text-xs text-[#64748B]">{trade.user.email}</div>
                       </td>
                       <td className="px-4 py-3 text-sm text-[#0F172A] font-medium">{trade.traderName}</td>
                       <td className="px-4 py-3 text-sm font-bold text-[#0F172A]">{fmt(trade.amount)}</td>
@@ -1018,7 +1018,7 @@ export default function AdminCopyTradersPage() {
                           {trade.status}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">
+                      <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">
                         {new Date(trade.startedAt).toLocaleDateString()}
                       </td>
                       <td className="px-4 py-3">

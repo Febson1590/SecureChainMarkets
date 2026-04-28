@@ -35,19 +35,19 @@ export default async function AdminUsersPage({
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[#0F172A]">User Management</h1>
-          <p className="text-sm text-slate-500 mt-0.5">{total} total users</p>
+          <p className="text-sm text-[#64748B] mt-0.5">{total} total users</p>
         </div>
       </div>
 
       {/* Search form (server-side navigation) */}
       <form className="flex items-center gap-3">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B]" />
           <Input
             name="search"
             defaultValue={search}
             placeholder="Search by name or email…"
-            className="pl-9 bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-9 text-sm"
+            className="pl-9 bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-9 text-sm"
           />
         </div>
         <Button type="submit" size="sm" className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white h-9 px-4 text-sm font-semibold">

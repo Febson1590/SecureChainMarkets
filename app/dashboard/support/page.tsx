@@ -61,7 +61,7 @@ export default function SupportPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[#0F172A]">Support Center</h1>
-          <p className="text-sm text-slate-500 mt-0.5">Get help from our team anytime</p>
+          <p className="text-sm text-[#64748B] mt-0.5">Get help from our team anytime</p>
         </div>
         <Button
           onClick={() => setView(view === "new" ? "list" : "new")}
@@ -90,7 +90,7 @@ export default function SupportPage() {
 
             <div className="space-y-1.5">
               <Label className="text-xs text-[#64748B] uppercase tracking-widest">Subject</Label>
-              <Input {...register("subject")} placeholder="Brief description of your issue" className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10" />
+              <Input {...register("subject")} placeholder="Brief description of your issue" className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10" />
               {errors.subject && <p className="text-xs text-red-400">{errors.subject.message}</p>}
             </div>
 
@@ -108,7 +108,7 @@ export default function SupportPage() {
 
             <div className="space-y-1.5">
               <Label className="text-xs text-[#64748B] uppercase tracking-widest">Message</Label>
-              <Textarea {...register("message")} rows={6} placeholder="Describe your issue in detail..." className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 resize-none" />
+              <Textarea {...register("message")} rows={6} placeholder="Describe your issue in detail..." className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] resize-none" />
               {errors.message && <p className="text-xs text-red-400">{errors.message.message}</p>}
             </div>
 
@@ -127,7 +127,7 @@ export default function SupportPage() {
               </div>
               <div>
                 <div className="text-sm font-semibold text-[#0F172A]">24/7 Support Available</div>
-                <div className="text-xs text-slate-500">Average response time: under 4 hours</div>
+                <div className="text-xs text-[#64748B]">Average response time: under 4 hours</div>
               </div>
             </div>
             <div className="flex gap-2">
@@ -156,7 +156,7 @@ export default function SupportPage() {
           </div>
 
           <div className="text-center">
-            <p className="text-sm text-slate-500 mb-3">Can't find what you're looking for?</p>
+            <p className="text-sm text-[#64748B] mb-3">Can't find what you're looking for?</p>
             <Button onClick={() => setView("new")} size="sm" className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white">
               <MessageSquare size={13} className="mr-1" /> Open a Support Ticket
             </Button>

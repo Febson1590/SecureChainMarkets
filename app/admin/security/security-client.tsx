@@ -99,7 +99,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[#0F172A]">Admin Security</h1>
-        <p className="text-sm text-slate-500 mt-0.5">
+        <p className="text-sm text-[#64748B] mt-0.5">
           Manage the sign-in credentials for this admin account.
         </p>
       </div>
@@ -112,10 +112,10 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
           </div>
           <div className="min-w-0 flex-1">
             <div className="text-[13px] font-semibold text-[#0F172A] truncate">{name}</div>
-            <div className="text-[12px] text-slate-500 truncate">{email}</div>
+            <div className="text-[12px] text-[#64748B] truncate">{email}</div>
           </div>
           <div className="text-right">
-            <div className="text-[9.5px] uppercase tracking-widest text-slate-600 font-semibold">Record updated</div>
+            <div className="text-[9.5px] uppercase tracking-widest text-[#64748B] font-semibold">Record updated</div>
             <div className="text-[11px] text-[#64748B] tabular-nums">{lastChangedLabel}</div>
           </div>
         </div>
@@ -129,7 +129,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
           </div>
           <div>
             <h2 className="text-base font-semibold text-[#0F172A]">Change Admin Password</h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#64748B]">
               You&rsquo;ll be signed out after a successful change and must sign in again.
             </p>
           </div>
@@ -152,12 +152,12 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
                 onChange={(e) => setCurrentPwd(e.target.value)}
                 placeholder="Enter your current password"
                 autoComplete="current-password"
-                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10 pr-10"
+                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10 pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowCurrent((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[#0F172A]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]"
                 aria-label={showCurrent ? "Hide current password" : "Show current password"}
               >
                 {showCurrent ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -175,18 +175,18 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
                 onChange={(e) => setNewPwd(e.target.value)}
                 placeholder="Min 8 characters, 1 uppercase, 1 number"
                 autoComplete="new-password"
-                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10 pr-10"
+                className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10 pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowNew((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-[#0F172A]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]"
                 aria-label={showNew ? "Hide new password" : "Show new password"}
               >
                 {showNew ? <EyeOff size={15} /> : <Eye size={15} />}
               </button>
             </div>
-            <ul className="text-[10.5px] text-slate-500 mt-1 space-y-0.5">
+            <ul className="text-[10.5px] text-[#64748B] mt-1 space-y-0.5">
               <li className={newPwd.length >= 8        ? "text-emerald-400" : ""}>• at least 8 characters</li>
               <li className={/[A-Z]/.test(newPwd)      ? "text-emerald-400" : ""}>• at least one uppercase letter</li>
               <li className={/[0-9]/.test(newPwd)      ? "text-emerald-400" : ""}>• at least one number</li>
@@ -202,7 +202,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
               onChange={(e) => setConfirmPwd(e.target.value)}
               placeholder="Re-enter the new password"
               autoComplete="new-password"
-              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10"
+              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
             />
             {confirmPwd && newPwd && confirmPwd === newPwd && (
               <p className="text-[11px] text-emerald-400 inline-flex items-center gap-1 mt-1">
@@ -236,7 +236,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
         </form>
       </Card>
 
-      <p className="text-[11px] text-slate-500 leading-relaxed max-w-xl">
+      <p className="text-[11px] text-[#64748B] leading-relaxed max-w-xl">
         After the password is updated, the old password stops working immediately.
         You&rsquo;ll be signed out of this session and need to sign in with the new
         password. Any other open admin sessions will also lose access on their next

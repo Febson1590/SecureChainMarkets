@@ -47,7 +47,7 @@ const STATUS_COLORS: Record<string, string> = {
   COMPLETED: "bg-[#2B6BFF]/12 border-[#2B6BFF]/25 text-[#2B6BFF]",
   CANCELLED: "bg-red-500/10 border-red-500/25 text-red-400",
 };
-const inputCls = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const inputCls = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/60";
 const labelCls = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 /**
@@ -249,7 +249,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
               {err("minAmount")}
             </div>
             <div>
-              <label className={labelCls}>Max Amount (USD) <span className="text-slate-600">— optional</span></label>
+              <label className={labelCls}>Max Amount (USD) <span className="text-[#64748B]">— optional</span></label>
               <input type="number" min={0} className={inputCls + " mt-1"}
                 value={form.maxAmount} onChange={e => set("maxAmount", e.target.value)}
                 placeholder="Leave empty for no cap" />
@@ -292,7 +292,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
               error={errors.maxDurationValue}
             />
           </div>
-          <p className="text-[11px] text-slate-500 -mt-2 inline-flex items-center gap-1.5">
+          <p className="text-[11px] text-[#64748B] -mt-2 inline-flex items-center gap-1.5">
             <Info size={11} className="text-[#2B6BFF]/70" />
             Each tick fires after a random wait between min and max duration. Stored internally as seconds.
           </p>
@@ -337,7 +337,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
               </div>
             </div>
 
-            <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
+            <p className="text-[11px] text-[#64748B] mt-2 leading-relaxed">
               Each tick the engine picks a random loss-ratio in [<span className="text-amber-400 font-semibold">Min</span>,{" "}
               <span className="text-amber-400 font-semibold">Max</span>]% and rolls it as the probability of a loss.
               Keep Max below 50 so profits outnumber losses. Loss magnitude is a random % between Min Loss and Max Loss,
@@ -355,7 +355,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
             />
             <span className="text-xs text-[#0F172A]">
               Mark as <strong className="text-[#2B6BFF]">Most Popular</strong>{" "}
-              <span className="text-slate-500">(only one plan can hold this badge)</span>
+              <span className="text-[#64748B]">(only one plan can hold this badge)</span>
             </span>
           </label>
         </div>
@@ -539,7 +539,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
         <h3 className="text-base font-bold text-[#0F172A] mb-1">
           {isEdit ? "Edit User Investment" : "Assign Investment"}
         </h3>
-        <p className="text-[11.5px] text-slate-500 mb-5">
+        <p className="text-[11.5px] text-[#64748B] mb-5">
           {isEdit
             ? "These are the live settings for this user's investment. Pick a plan to reset, or override values directly."
             : "Pick a plan to auto-fill defaults, then tweak any value before assigning."}
@@ -572,14 +572,14 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
               <label className={labelCls}>User</label>
               <div className="mt-1 px-3 py-2 rounded-lg bg-[#F6FAFF] border border-white/10 text-sm">
                 <span className="text-[#0F172A] font-medium">{investment.user.name || "—"}</span>
-                <span className="text-slate-500 ml-2">{investment.user.email}</span>
+                <span className="text-[#64748B] ml-2">{investment.user.email}</span>
               </div>
             </div>
           )}
 
           {/* Plan picker — prefills every field below */}
           <div>
-            <label className={labelCls}>Plan {isEdit && <span className="text-slate-600">— reset defaults</span>}</label>
+            <label className={labelCls}>Plan {isEdit && <span className="text-[#64748B]">— reset defaults</span>}</label>
             <div className="relative mt-1">
               <select
                 value={form.planId}
@@ -595,7 +595,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
               </select>
               <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none" />
             </div>
-            <p className="text-[10.5px] text-slate-500 mt-1">
+            <p className="text-[10.5px] text-[#64748B] mt-1">
               Picking a plan copies its profit, duration and loss settings below — you can still override any value.
             </p>
           </div>
@@ -645,7 +645,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
               error={errors.maxDurationValue}
             />
           </div>
-          <p className="text-[11px] text-slate-500 -mt-2 inline-flex items-center gap-1.5">
+          <p className="text-[11px] text-[#64748B] -mt-2 inline-flex items-center gap-1.5">
             <Info size={11} className="text-[#2B6BFF]/70" />
             Stored internally as seconds. Engine calculations are unchanged.
           </p>
@@ -710,10 +710,10 @@ function AddFundsModal({ investment, onClose, onSuccess }: { investment: UserInv
     <div className="fixed inset-0 z-50 flex justify-center items-start sm:items-center overflow-y-auto p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
       <div className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-6 w-full max-w-sm shadow-2xl" onClick={e => e.stopPropagation()}>
         <h3 className="text-base font-bold text-[#0F172A] mb-1">Add Funds</h3>
-        <p className="text-xs text-slate-500 mb-4">No wallet deduction — directly adds to investment balance.</p>
+        <p className="text-xs text-[#64748B] mb-4">No wallet deduction — directly adds to investment balance.</p>
         <div className="mb-4 px-3 py-2.5 rounded-lg bg-[#F6FAFF] border border-white/10">
           <div className="text-sm text-[#0F172A] font-medium">{investment.user.name || "—"}</div>
-          <div className="text-xs text-slate-500">{investment.user.email} · <span className="text-[#2B6BFF]">{investment.planName}</span></div>
+          <div className="text-xs text-[#64748B]">{investment.user.email} · <span className="text-[#2B6BFF]">{investment.planName}</span></div>
           <div className="text-xs text-[#64748B] mt-0.5">Current: <span className="text-[#0F172A] font-semibold">{fmt(investment.amount)}</span></div>
         </div>
         <div className="mb-5"><label className={labelCls}>Amount (USD)</label>
@@ -860,7 +860,7 @@ export default function AdminInvestmentsPage() {
           <h1 className="text-2xl font-bold text-[#0F172A] flex items-center gap-2">
             <TrendingUp size={20} className="text-[#2B6BFF]" /> Investments
           </h1>
-          <p className="text-sm text-slate-500 mt-0.5">Manage investment plans and user portfolios</p>
+          <p className="text-sm text-[#64748B] mt-0.5">Manage investment plans and user portfolios</p>
         </div>
         <div className="flex gap-2">
           {tab === "plans" && (
@@ -884,7 +884,7 @@ export default function AdminInvestmentsPage() {
           { label: "Total Earned",  value: fmt(investments.reduce((s, i) => s + i.totalEarned, 0)),       color: "text-emerald-400" },
         ].map(s => (
           <div key={s.label} className="glass-card rounded-xl p-4">
-            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">{s.label}</div>
+            <div className="text-xs text-[#64748B] uppercase tracking-wider mb-1">{s.label}</div>
             <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
           </div>
         ))}
@@ -893,7 +893,7 @@ export default function AdminInvestmentsPage() {
       <div className="flex gap-1 border-b border-white/5">
         {(["plans", "users"] as const).map(t => (
           <button key={t} onClick={() => setTab(t)}
-            className={`px-4 py-2.5 text-sm font-medium transition-colors capitalize ${tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-[#0F172A]"}`}>
+            className={`px-4 py-2.5 text-sm font-medium transition-colors capitalize ${tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-[#64748B] hover:text-[#0F172A]"}`}>
             {t === "plans" ? `Plans (${plans.length})` : `Users (${investments.length})`}
           </button>
         ))}
@@ -906,24 +906,24 @@ export default function AdminInvestmentsPage() {
             <span className="text-sm font-semibold text-[#0F172A]">{plans.length} Plan{plans.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
-            <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
+            <div className="p-12 text-center text-[#64748B] text-sm flex items-center justify-center gap-2">
               <Loader2 size={16} className="animate-spin" /> Loading…
             </div>
           ) : plans.length === 0 ? (
-            <div className="p-12 text-center text-slate-500 text-sm">No plans yet. Create one to get started.</div>
+            <div className="p-12 text-center text-[#64748B] text-sm">No plans yet. Create one to get started.</div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full premium-table">
                 <thead>
                   <tr className="border-b border-white/5">
                     {["Plan","Range","Profit Range","Duration","Users","Status","Actions"].map(h => (
-                      <th key={h} className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
+                      <th key={h} className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {plans.map(plan => (
-                    <tr key={plan.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
+                    <tr key={plan.id} className="border-b border-[#BFD5FF] hover:bg-[#F6FAFF]">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1.5">
                           <div className="text-sm font-bold text-[#0F172A]">{plan.name}</div>
@@ -933,11 +933,11 @@ export default function AdminInvestmentsPage() {
                             </span>
                           )}
                         </div>
-                        {plan.description && <div className="text-xs text-slate-500 mt-0.5 max-w-[180px] truncate">{plan.description}</div>}
+                        {plan.description && <div className="text-xs text-[#64748B] mt-0.5 max-w-[180px] truncate">{plan.description}</div>}
                       </td>
                       <td className="px-4 py-3 text-sm font-semibold text-[#0F172A] whitespace-nowrap">
                         {fmt(plan.minAmount)}
-                        {plan.maxAmount !== null && <span className="text-slate-500"> – {fmt(plan.maxAmount)}</span>}
+                        {plan.maxAmount !== null && <span className="text-[#64748B]"> – {fmt(plan.maxAmount)}</span>}
                       </td>
                       <td className="px-4 py-3 text-sm text-emerald-400 whitespace-nowrap">{plan.minProfit}%–{plan.maxProfit}%</td>
                       <td className="px-4 py-3 text-xs text-[#64748B] whitespace-nowrap">
@@ -985,27 +985,27 @@ export default function AdminInvestmentsPage() {
             <span className="text-sm font-semibold text-[#0F172A]">{investments.length} Investment{investments.length !== 1 ? "s" : ""}</span>
           </div>
           {loading ? (
-            <div className="p-12 text-center text-slate-500 text-sm flex items-center justify-center gap-2">
+            <div className="p-12 text-center text-[#64748B] text-sm flex items-center justify-center gap-2">
               <Loader2 size={16} className="animate-spin" /> Loading…
             </div>
           ) : investments.length === 0 ? (
-            <div className="p-12 text-center text-slate-500 text-sm">No investments yet.</div>
+            <div className="p-12 text-center text-[#64748B] text-sm">No investments yet.</div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full premium-table">
                 <thead>
                   <tr className="border-b border-white/5">
                     {["User","Plan","Amount","Earned","Rate","Interval","Status","Actions"].map(h => (
-                      <th key={h} className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
+                      <th key={h} className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {investments.map(inv => (
-                    <tr key={inv.id} className="border-b border-white/[0.04] hover:bg-[#F6FAFF]">
+                    <tr key={inv.id} className="border-b border-[#BFD5FF] hover:bg-[#F6FAFF]">
                       <td className="px-4 py-3">
                         <div className="text-sm text-[#0F172A] font-medium">{inv.user.name || "—"}</div>
-                        <div className="text-xs text-slate-500">{inv.user.email}</div>
+                        <div className="text-xs text-[#64748B]">{inv.user.email}</div>
                       </td>
                       <td className="px-4 py-3 text-sm text-[#0F172A] font-medium">{inv.planName}</td>
                       <td className="px-4 py-3 text-sm font-bold text-[#0F172A]">{fmt(inv.amount)}</td>
@@ -1022,7 +1022,7 @@ export default function AdminInvestmentsPage() {
                               historical records now. Show a muted dash so the
                               Actions column isn't empty-looking. */}
                           {(inv.status === "COMPLETED" || inv.status === "CANCELLED") && (
-                            <span className="text-[11px] text-slate-600">—</span>
+                            <span className="text-[11px] text-[#64748B]">—</span>
                           )}
                           {(inv.status === "ACTIVE" || inv.status === "PAUSED") && (
                             <Button size="sm" onClick={() => setEditInv(inv)}

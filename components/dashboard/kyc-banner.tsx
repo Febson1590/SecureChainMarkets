@@ -65,7 +65,7 @@ export function KycBanner({ kycStatus, className }: KycBannerProps) {
       </div>
       <div className="flex-1 min-w-0">
         <p className={`text-sm font-semibold ${cfg.color}`}>{cfg.title}</p>
-        <p className="text-xs text-slate-600 mt-0.5">{cfg.message}</p>
+        <p className="text-xs text-[#64748B] mt-0.5">{cfg.message}</p>
       </div>
       {cfg.ctaSolid ? (
         <Link

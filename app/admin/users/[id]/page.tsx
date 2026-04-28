@@ -13,8 +13,8 @@ import {
 import { adminUpdateWallet, updateUserStatus, adminSendNotification } from "@/lib/actions/admin";
 
 // ── Helpers ───────────────────────────────────────────────────
-const CARD = "glass-card rounded-2xl border border-white/[0.07] p-5";
-const INPUT = "w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const CARD = "glass-card rounded-2xl border border-[#BFD5FF] p-5";
+const INPUT = "w-full bg-[#F6FAFF] border border-[#BFD5FF] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/60";
 const LABEL = "text-[11px] font-semibold text-[#64748B] uppercase tracking-wider";
 
 const CURRENCIES = ["USD", "BTC", "ETH", "USDT"] as const;
@@ -214,12 +214,12 @@ export default function AdminUserDetailPage() {
             <h1 className="text-lg font-extrabold text-[#0F172A] leading-tight truncate">
               {user.name || "Unnamed User"}
             </h1>
-            <p className="text-xs text-slate-500 truncate">{user.email}</p>
+            <p className="text-xs text-[#64748B] truncate">{user.email}</p>
           </div>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <StatusChip s={user.status} />
-          <span className="text-xs text-slate-500 hidden sm:block">Joined {joined}</span>
+          <span className="text-xs text-[#64748B] hidden sm:block">Joined {joined}</span>
         </div>
       </div>
 
@@ -239,16 +239,16 @@ export default function AdminUserDetailPage() {
           {
             label: "KYC Status",
             value: kyc?.status ?? "None",
-            color: kyc?.status === "APPROVED" ? "text-emerald-400" : kyc?.status === "PENDING" ? "text-yellow-400" : "text-slate-500",
+            color: kyc?.status === "APPROVED" ? "text-emerald-400" : kyc?.status === "PENDING" ? "text-yellow-400" : "text-[#64748B]",
           },
           {
             label: "Active Copies",
             value: activeCopies.length,
-            color: activeCopies.length > 0 ? "text-purple-400" : "text-slate-500",
+            color: activeCopies.length > 0 ? "text-purple-400" : "text-[#64748B]",
           },
         ].map(s => (
           <div key={s.label} className="glass-card rounded-xl p-3.5 border border-[#BFD5FF]">
-            <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">{s.label}</div>
+            <div className="text-[10px] text-[#64748B] uppercase tracking-widest mb-1">{s.label}</div>
             <div className={`text-base font-extrabold truncate ${s.color}`}>{s.value}</div>
           </div>
         ))}
@@ -359,7 +359,7 @@ export default function AdminUserDetailPage() {
               className={`rounded-xl p-3.5 border text-left transition-all ${selCurrency === c ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/12 shadow-[0_0_0_1px_rgba(14,165,233,0.2)]" : "border-[#BFD5FF] bg-[#F6FAFF] hover:bg-[#F6FAFF]"}`}
             >
               <div className="flex items-center justify-between mb-1.5">
-                <span className={`text-[10px] font-extrabold uppercase tracking-widest ${selCurrency === c ? "text-[#2B6BFF]" : "text-slate-500"}`}>{c}</span>
+                <span className={`text-[10px] font-extrabold uppercase tracking-widest ${selCurrency === c ? "text-[#2B6BFF]" : "text-[#64748B]"}`}>{c}</span>
                 {selCurrency === c && <div className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF]" />}
               </div>
               <div className="text-sm font-extrabold text-[#0F172A] leading-tight">{fmtBalance(c, wallets[c] ?? 0)}</div>
@@ -447,7 +447,7 @@ export default function AdminUserDetailPage() {
             <h2 className="text-sm font-bold text-[#0F172A]">Active Investment Plan</h2>
           </div>
           {investment ? (
-            <div className="space-y-0 divide-y divide-white/[0.05]">
+            <div className="space-y-0 divide-y divide-[#BFD5FF]">
               {[
                 { label: "Plan",         value: investment.planName,                         cls: "text-[#0F172A] font-semibold" },
                 { label: "Invested",     value: `$${Number(investment.amount).toLocaleString("en-US", { minimumFractionDigits: 2 })}`, cls: "text-[#2B6BFF] font-bold" },
@@ -456,12 +456,12 @@ export default function AdminUserDetailPage() {
                 { label: "Interval",     value: `${investment.profitInterval}s – ${investment.maxInterval}s`, cls: "text-[#64748B]" },
               ].map(r => (
                 <div key={r.label} className="flex items-center justify-between py-2.5">
-                  <span className="text-xs text-slate-500">{r.label}</span>
+                  <span className="text-xs text-[#64748B]">{r.label}</span>
                   <span className={`text-xs ${r.cls}`}>{r.value}</span>
                 </div>
               ))}
               <div className="flex items-center justify-between py-2.5">
-                <span className="text-xs text-slate-500">Status</span>
+                <span className="text-xs text-[#64748B]">Status</span>
                 <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full border ${investment.status === "ACTIVE" ? "bg-emerald-500/10 border-emerald-500/25 text-emerald-400" : "bg-yellow-500/10 border-yellow-500/25 text-yellow-400"}`}>
                   {investment.status}
                 </span>
@@ -469,8 +469,8 @@ export default function AdminUserDetailPage() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <TrendingUp size={24} className="text-slate-600 mb-2" />
-              <p className="text-sm text-slate-500">No active investment plan</p>
+              <TrendingUp size={24} className="text-[#64748B] mb-2" />
+              <p className="text-sm text-[#64748B]">No active investment plan</p>
             </div>
           )}
         </div>
@@ -487,7 +487,7 @@ export default function AdminUserDetailPage() {
             )}
           </div>
           {activeCopies.length > 0 ? (
-            <div className="space-y-0 divide-y divide-white/[0.05]">
+            <div className="space-y-0 divide-y divide-[#BFD5FF]">
               {activeCopies.map((t: any) => {
                 const hue = [...t.traderName].reduce((a: number, c: string) => a + c.charCodeAt(0), 0) % 360;
                 const ini = t.traderName.split(" ").map((w: string) => w[0]).join("").slice(0, 2).toUpperCase();
@@ -497,16 +497,16 @@ export default function AdminUserDetailPage() {
                     <div className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-xs font-bold text-[#0F172A] overflow-hidden border border-white/10">
                       {t.trader?.avatarUrl
                         ? <img src={t.trader.avatarUrl} alt={t.traderName} className="w-full h-full object-cover" />
-                        : <span style={{ background: `hsl(${hue} 55% 22%)` }} className="w-full h-full flex items-center justify-center">{ini}</span>
+                        : <span style={{ background: `hsl( 80% 92%)` }} className="w-full h-full flex items-center justify-center">{ini}</span>
                       }
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-semibold text-[#0F172A] truncate">{t.traderName}</div>
-                      <div className="text-[10px] text-slate-500">${Number(t.amount).toLocaleString()} copied</div>
+                      <div className="text-[10px] text-[#64748B]">${Number(t.amount).toLocaleString()} copied</div>
                     </div>
                     <div className="text-right flex-shrink-0">
                       <div className="text-sm font-bold text-emerald-400">${Number(t.totalEarned).toLocaleString("en-US", { minimumFractionDigits: 2 })}</div>
-                      <div className="text-[10px] text-slate-500">+{roi}% ROI</div>
+                      <div className="text-[10px] text-[#64748B]">+{roi}% ROI</div>
                     </div>
                   </div>
                 );
@@ -514,8 +514,8 @@ export default function AdminUserDetailPage() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <Users size={24} className="text-slate-600 mb-2" />
-              <p className="text-sm text-slate-500">No active copy traders</p>
+              <Users size={24} className="text-[#64748B] mb-2" />
+              <p className="text-sm text-[#64748B]">No active copy traders</p>
             </div>
           )}
         </div>
@@ -531,7 +531,7 @@ export default function AdminUserDetailPage() {
             <h2 className="text-sm font-bold text-[#0F172A]">Recent Transactions</h2>
           </div>
           {transactions.length > 0 ? (
-            <div className="divide-y divide-white/[0.04]">
+            <div className="divide-y divide-[#BFD5FF]">
               {transactions.map((tx: any) => (
                 <div key={tx.id} className="flex items-center gap-3 py-2.5">
                   <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-extrabold flex-shrink-0 ${TX_CLR[tx.type] ?? "bg-slate-500/10 text-[#64748B]"}`}>
@@ -539,21 +539,21 @@ export default function AdminUserDetailPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-xs font-semibold text-[#0F172A]">{tx.type.replace(/_/g, " ")}</div>
-                    <div className="text-[10px] text-slate-500 truncate">{tx.description || "—"}</div>
+                    <div className="text-[10px] text-[#64748B] truncate">{tx.description || "—"}</div>
                   </div>
                   <div className="text-right flex-shrink-0">
                     <div className="text-xs font-bold text-[#0F172A]">
                       {Number(tx.amount).toFixed(tx.currency === "BTC" ? 8 : tx.currency === "ETH" ? 6 : 2)} {tx.currency}
                     </div>
-                    <div className="text-[10px] text-slate-500">{new Date(tx.createdAt).toLocaleDateString()}</div>
+                    <div className="text-[10px] text-[#64748B]">{new Date(tx.createdAt).toLocaleDateString()}</div>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <Receipt size={24} className="text-slate-600 mb-2" />
-              <p className="text-sm text-slate-500">No transactions yet</p>
+              <Receipt size={24} className="text-[#64748B] mb-2" />
+              <p className="text-sm text-[#64748B]">No transactions yet</p>
             </div>
           )}
         </div>
@@ -565,20 +565,20 @@ export default function AdminUserDetailPage() {
             <h2 className="text-sm font-bold text-[#0F172A]">Admin Action Log</h2>
           </div>
           {adminLog.length > 0 ? (
-            <div className="divide-y divide-white/[0.04]">
+            <div className="divide-y divide-[#BFD5FF]">
               {adminLog.map((a: any) => (
                 <div key={a.id} className="flex items-start gap-3 py-2.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF]/50 flex-shrink-0 mt-1.5" />
                   <div className="flex-1 min-w-0">
                     <div className="text-xs font-semibold text-[#0F172A]">{a.action.replace(/_/g, " ")}</div>
                     {a.description && (
-                      <div className="text-[10px] text-slate-500 truncate mt-0.5">{a.description}</div>
+                      <div className="text-[10px] text-[#64748B] truncate mt-0.5">{a.description}</div>
                     )}
                     {a.admin && (
-                      <div className="text-[10px] text-slate-600 mt-0.5">by {a.admin.name || a.admin.email}</div>
+                      <div className="text-[10px] text-[#64748B] mt-0.5">by {a.admin.name || a.admin.email}</div>
                     )}
                   </div>
-                  <div className="text-[10px] text-slate-500 flex-shrink-0 mt-0.5">
+                  <div className="text-[10px] text-[#64748B] flex-shrink-0 mt-0.5">
                     {new Date(a.createdAt).toLocaleDateString()}
                   </div>
                 </div>
@@ -586,8 +586,8 @@ export default function AdminUserDetailPage() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <ClipboardList size={24} className="text-slate-600 mb-2" />
-              <p className="text-sm text-slate-500">No admin actions on record</p>
+              <ClipboardList size={24} className="text-[#64748B] mb-2" />
+              <p className="text-sm text-[#64748B]">No admin actions on record</p>
             </div>
           )}
         </div>
@@ -601,7 +601,7 @@ export default function AdminUserDetailPage() {
               <AlertTriangle size={14} className="text-red-400" />
               <h2 className="text-sm font-bold text-red-400">Danger Zone</h2>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-[#64748B] leading-relaxed">
               Permanently delete this user account and all associated data including wallets,
               transactions, investments, copy trading history, and KYC records.
               This action <span className="text-red-400 font-medium">cannot be undone</span>.
@@ -632,7 +632,7 @@ export default function AdminUserDetailPage() {
               </div>
               <div>
                 <h3 className="text-base font-bold text-[#0F172A]">Delete User Account</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Permanent — cannot be undone</p>
+                <p className="text-xs text-[#64748B] mt-0.5">Permanent — cannot be undone</p>
               </div>
             </div>
 

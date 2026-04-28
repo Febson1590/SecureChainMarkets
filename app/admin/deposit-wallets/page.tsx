@@ -32,7 +32,7 @@ interface DepositWallet {
 
 /* ─── Styling helpers (matches other admin pages) ────────────────────── */
 
-const inputCls  = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const inputCls  = "w-full bg-[#F6FAFF] border border-white/[0.15] rounded-lg px-3 py-2 text-[#0F172A] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#2B6BFF]/60";
 const labelCls  = "text-xs font-medium text-[#64748B] uppercase tracking-wider";
 
 /* A short selection list so admins don't make typos. Free-form input is
@@ -119,7 +119,7 @@ function WalletModal({
             <h3 className="text-base font-bold text-[#0F172A]">
               {wallet ? "Edit Deposit Wallet" : "Add Deposit Wallet"}
             </h3>
-            <p className="text-[11px] text-slate-500 mt-0.5">
+            <p className="text-[11px] text-[#64748B] mt-0.5">
               Users deposit to this address when the coin is selected.
             </p>
           </div>
@@ -199,7 +199,7 @@ function WalletModal({
 
           <div>
             <label className={labelCls}>
-              Instructions <span className="text-slate-600">— optional</span>
+              Instructions <span className="text-[#64748B]">— optional</span>
             </label>
             <textarea
               rows={3}
@@ -218,7 +218,7 @@ function WalletModal({
               className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#2B6BFF] focus:ring-[#2B6BFF] focus:ring-offset-0"
             />
             <span className="text-xs text-[#0F172A]">
-              Active <span className="text-slate-500">(users can deposit to this wallet)</span>
+              Active <span className="text-[#64748B]">(users can deposit to this wallet)</span>
             </span>
           </label>
         </div>
@@ -372,7 +372,7 @@ export default function AdminDepositWalletsPage() {
       <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
           <h1 className="text-2xl font-bold text-[#0F172A]">Deposit Wallets</h1>
-          <p className="text-sm text-slate-500 mt-0.5">
+          <p className="text-sm text-[#64748B] mt-0.5">
             Manage the cryptocurrency wallets users deposit to.
           </p>
         </div>
@@ -396,15 +396,15 @@ export default function AdminDepositWalletsPage() {
       {/* Table */}
       <div className="glass-card rounded-xl overflow-hidden">
         {loading ? (
-          <div className="p-12 text-center text-slate-500 text-sm">
+          <div className="p-12 text-center text-[#64748B] text-sm">
             <Loader2 size={16} className="inline animate-spin mr-2" />
             Loading wallets…
           </div>
         ) : wallets.length === 0 ? (
           <div className="p-12 text-center">
-            <Wallet className="h-10 w-10 text-slate-600 mx-auto mb-3" />
+            <Wallet className="h-10 w-10 text-[#64748B] mx-auto mb-3" />
             <div className="text-sm text-[#0F172A] font-semibold mb-1">No deposit wallets yet</div>
-            <div className="text-xs text-slate-500 mb-4">
+            <div className="text-xs text-[#64748B] mb-4">
               Add a wallet so users can start depositing.
             </div>
             <Button
@@ -423,7 +423,7 @@ export default function AdminDepositWalletsPage() {
                   {["Coin", "Network", "Address", "Min Deposit", "Status", "Actions"].map((h) => (
                     <th
                       key={h}
-                      className="text-left text-xs font-medium text-slate-500 px-4 py-3 uppercase tracking-widest"
+                      className="text-left text-xs font-medium text-[#64748B] px-4 py-3 uppercase tracking-widest"
                     >
                       {h}
                     </th>
@@ -435,10 +435,10 @@ export default function AdminDepositWalletsPage() {
                   <tr key={w.id} className="border-b border-white/5 hover:bg-[#F6FAFF]">
                     <td className="px-4 py-3">
                       <div className="text-sm font-semibold text-[#0F172A]">{w.asset}</div>
-                      <div className="text-[11px] text-slate-500">{w.label}</div>
+                      <div className="text-[11px] text-[#64748B]">{w.label}</div>
                     </td>
                     <td className="px-4 py-3 text-xs text-[#0F172A]">
-                      {w.network || <span className="text-slate-600">—</span>}
+                      {w.network || <span className="text-[#64748B]">—</span>}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
@@ -448,7 +448,7 @@ export default function AdminDepositWalletsPage() {
                         <button
                           type="button"
                           onClick={() => copyAddress(w)}
-                          className="text-slate-500 hover:text-[#2B6BFF] transition-colors flex-shrink-0"
+                          className="text-[#64748B] hover:text-[#2B6BFF] transition-colors flex-shrink-0"
                           aria-label="Copy address"
                         >
                           {copiedId === w.id ? <Check size={12} /> : <Copy size={12} />}
@@ -458,7 +458,7 @@ export default function AdminDepositWalletsPage() {
                     <td className="px-4 py-3 text-xs text-[#0F172A] tabular-nums">
                       {w.minDeposit != null
                         ? `$${w.minDeposit.toLocaleString("en-US")}`
-                        : <span className="text-slate-600">—</span>}
+                        : <span className="text-[#64748B]">—</span>}
                     </td>
                     <td className="px-4 py-3">
                       <span
@@ -485,7 +485,7 @@ export default function AdminDepositWalletsPage() {
                           ) : w.isActive ? (
                             <ToggleRight size={14} className="text-emerald-400" />
                           ) : (
-                            <ToggleLeft size={14} className="text-slate-500" />
+                            <ToggleLeft size={14} className="text-[#64748B]" />
                           )}
                         </button>
                         <button

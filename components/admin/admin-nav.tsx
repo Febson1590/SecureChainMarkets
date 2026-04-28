@@ -72,7 +72,7 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
               {active && (
                 <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-[#2B6BFF]" />
               )}
-              <item.icon className={cn("h-[17px] w-[17px] flex-shrink-0 transition-colors", active ? "text-[#2B6BFF]" : "text-slate-500")} />
+              <item.icon className={cn("h-[17px] w-[17px] flex-shrink-0 transition-colors", active ? "text-[#2B6BFF]" : "text-[#64748B]")} />
               {item.label}
             </Link>
           );

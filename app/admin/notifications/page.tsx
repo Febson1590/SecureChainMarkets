@@ -75,7 +75,7 @@ export default function AdminNotificationsPage() {
     <div className="space-y-5">
       <div>
         <h1 className="text-2xl font-bold text-[#0F172A]">Notifications</h1>
-        <p className="text-sm text-slate-500 mt-0.5">Send platform-wide or user-specific notifications</p>
+        <p className="text-sm text-[#64748B] mt-0.5">Send platform-wide or user-specific notifications</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -128,7 +128,7 @@ export default function AdminNotificationsPage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Notification title"
-              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 h-10"
+              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] h-10"
             />
           </div>
 
@@ -138,7 +138,7 @@ export default function AdminNotificationsPage() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Notification message..."
-              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-slate-600 resize-none h-24 text-sm"
+              className="bg-white/5 border-white/10 text-[#0F172A] placeholder:text-[#64748B] resize-none h-24 text-sm"
             />
           </div>
 
@@ -154,9 +154,9 @@ export default function AdminNotificationsPage() {
             <h2 className="text-sm font-semibold text-[#0F172A]">Recent Notifications</h2>
           </div>
           {loadingSent ? (
-            <div className="p-8 text-center text-slate-500 text-sm">Loading...</div>
+            <div className="p-8 text-center text-[#64748B] text-sm">Loading...</div>
           ) : sent.length === 0 ? (
-            <div className="p-8 text-center text-slate-500 text-sm">No notifications sent yet</div>
+            <div className="p-8 text-center text-[#64748B] text-sm">No notifications sent yet</div>
           ) : (
             <div className="divide-y divide-white/5 max-h-[500px] overflow-y-auto">
               {sent.slice(0, 50).map((n: any) => {
@@ -169,10 +169,10 @@ export default function AdminNotificationsPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
                           <span className="text-sm font-medium text-[#0F172A] truncate">{n.title}</span>
-                          <span className="text-xs text-slate-600 whitespace-nowrap">{formatDateTime(n.createdAt)}</span>
+                          <span className="text-xs text-[#64748B] whitespace-nowrap">{formatDateTime(n.createdAt)}</span>
                         </div>
-                        <div className="text-xs text-slate-500 mt-0.5 line-clamp-2">{n.message}</div>
-                        <div className="text-xs text-slate-600 mt-1">→ {n.user?.name || n.userId}</div>
+                        <div className="text-xs text-[#64748B] mt-0.5 line-clamp-2">{n.message}</div>
+                        <div className="text-xs text-[#64748B] mt-1">→ {n.user?.name || n.userId}</div>
                       </div>
                     </div>
                   </div>

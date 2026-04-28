@@ -39,7 +39,7 @@ export default async function NotificationsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[#0F172A]">Notifications</h1>
-          <p className="text-sm text-slate-500 mt-0.5">{unread > 0 ? `${unread} unread` : "All caught up"}</p>
+          <p className="text-sm text-[#64748B] mt-0.5">{unread > 0 ? `${unread} unread` : "All caught up"}</p>
         </div>
         {unread > 0 && (
           <form action={markAllNotificationsRead}>
@@ -52,8 +52,8 @@ export default async function NotificationsPage() {
 
       {notifications.length === 0 ? (
         <div className="glass-card rounded-xl p-16 text-center">
-          <Bell className="h-10 w-10 text-slate-600 mx-auto mb-3" />
-          <p className="text-slate-500 text-sm">No notifications yet</p>
+          <Bell className="h-10 w-10 text-[#64748B] mx-auto mb-3" />
+          <p className="text-[#64748B] text-sm">No notifications yet</p>
         </div>
       ) : (
         <div className="glass-card rounded-xl overflow-hidden divide-y divide-white/5">
@@ -71,7 +71,7 @@ export default async function NotificationsPage() {
                     {!notif.isRead && <span className="w-1.5 h-1.5 rounded-full bg-[#2B6BFF] flex-shrink-0" />}
                   </div>
                   <div className="text-xs text-[#64748B] mt-0.5 leading-relaxed">{notif.message}</div>
-                  <div className="text-xs text-slate-600 mt-1">{formatDateTime(notif.createdAt)}</div>
+                  <div className="text-xs text-[#64748B] mt-1">{formatDateTime(notif.createdAt)}</div>
                 </div>
               </div>
             );
