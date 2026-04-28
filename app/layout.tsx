@@ -79,7 +79,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#08111F] text-slate-200">
+      <body className="min-h-full flex flex-col bg-white text-slate-900">
         {children}
         <GoogleTranslateHost />
         <Toaster

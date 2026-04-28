@@ -4,7 +4,18 @@ import { AuthHeader } from "./_header";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAFF] text-[#0A1A3A]">
+    <div
+      className="min-h-screen flex flex-col text-[#0A1A3A]"
+      style={{
+        backgroundImage:
+          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
+          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
+          "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "scroll",
+      }}
+    >
       <AuthHeader />
 
       {/* ── Main slot — pages render their own body. flex-1 pushes footer

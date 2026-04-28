@@ -130,7 +130,15 @@ export function PublicNavbar() {
 
       {/* ── Mobile drawer ───────────────────────────── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-slate-200">
+        <div
+          className="lg:hidden border-t border-slate-200"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
+              "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
+              "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
+          }}
+        >
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link

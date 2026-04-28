@@ -54,7 +54,7 @@ const socials = [
 export function PublicFooter() {
   return (
     <footer className="bg-[#0A1A3A] text-slate-300">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 sm:pt-14 lg:pt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr] gap-10">
           {/* Brand + description + socials */}
           <div>
@@ -116,7 +116,7 @@ export function PublicFooter() {
         </div>
 
         {/* Bottom strip */}
-        <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <div className="mt-10 sm:mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
           <p className="text-[12px] text-slate-500">
             &copy; {COMPANY.launchYear} {COMPANY.brand}. All rights reserved.
           </p>
