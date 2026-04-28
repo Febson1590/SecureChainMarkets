@@ -74,7 +74,7 @@ function buildVerificationEmail(opts: {
       .em-h1         { font-size: 22px !important; }
       .em-message    { font-size: 14px !important; }
       .em-otp-cell   { width: 38px !important; height: 50px !important; line-height: 50px !important; font-size: 26px !important; }
-      .em-logo       { height: 36px !important; }
+      .em-logo       { width: 180px !important; height: auto !important; }
     }
   </style>
 </head>
@@ -92,17 +92,20 @@ function buildVerificationEmail(opts: {
         <!-- Container — max 560px -->
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
 
-          <!-- ─── LOGO ────────────────────────────────────────────────── -->
+          <!-- ─── LOGO ──────────────────────────────────────────────────
+               Native aspect ratio is 1774 × 887 (~2 : 1). Forcing both
+               width and height was slanting the mark on most clients —
+               we now set width only and let height resolve from CSS so
+               every email client renders it sharp and proportional. -->
           <tr>
-            <td align="center" style="padding:8px 0 32px 0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#FFFFFF;letter-spacing:0.3px;">
-              <a href="${APP_URL}" target="_blank" style="text-decoration:none;color:#FFFFFF;">
+            <td align="center" style="padding:24px 0 32px 0;">
+              <a href="${APP_URL}" target="_blank" style="text-decoration:none;display:inline-block;">
                 <img
                   src="${LOGO_URL}"
                   alt="SecureChainMarkets"
-                  width="238"
-                  height="44"
+                  width="220"
                   class="em-logo"
-                  style="display:block;margin:0 auto;border:0;outline:none;text-decoration:none;width:238px;height:44px;max-width:60vw;color:#FFFFFF;"
+                  style="display:block;margin:0 auto;border:0;outline:none;text-decoration:none;width:220px;height:auto;max-width:80vw;object-fit:contain;"
                 />
               </a>
             </td>
