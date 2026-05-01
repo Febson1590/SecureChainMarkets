@@ -35,10 +35,10 @@ const footerColumns = [
   {
     title: "Legal & Compliance",
     links: [
-      { href: "/terms",   label: "License & Regulation" },
-      { href: "/risk",    label: "Risk Disclosure"      },
-      { href: "/privacy", label: "AML Policy"           },
-      { href: "/privacy", label: "KYC Policy"           },
+      { href: "/licensing", label: "License & Regulation" },
+      { href: "/risk",      label: "Risk Disclosure"      },
+      { href: "/aml",       label: "AML Policy"           },
+      { href: "/kyc",       label: "KYC Policy"           },
     ],
   },
 ];

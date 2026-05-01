@@ -690,6 +690,7 @@ enum CopyTradeStatus {
 enum OtpType {
   REGISTER
   LOGIN
+  PASSWORD_RESET
 }
 
 enum ActivityType {

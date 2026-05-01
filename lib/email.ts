@@ -319,3 +319,132 @@ export async function sendVerificationEmail(opts: {
 
   return messageId;
 }
+
+// ─── Password reset email ───────────────────────────────────────────────────
+export async function sendPasswordResetEmail(opts: {
+  to:    string;
+  name:  string;
+  token: string;
+}): Promise<string> {
+  const tag = "[sendPasswordResetEmail]";
+  const { to, name, token } = opts;
+
+  const from    = process.env.EMAIL_FROM || "SecureChainMarkets <no-reply@SecureChainMarkets.com>";
+  const subject = "Reset your SecureChainMarkets password";
+  const resetUrl = `${APP_URL}/reset-password?token=${encodeURIComponent(token)}`;
+
+  console.log(`${tag} to=${to} from=${from}`);
+
+  const html = buildPasswordResetEmail({ name, resetUrl });
+
+  const text = [
+    `Hi ${name},`,
+    "",
+    "We received a request to reset your SecureChainMarkets password.",
+    "",
+    "Click the link below to choose a new password. The link expires in 30 minutes:",
+    "",
+    resetUrl,
+    "",
+    "If you didn't request this, you can safely ignore this email — your password won't change.",
+    "",
+    "— SecureChainMarkets",
+  ].join("\n");
+
+  const result = await resend.emails.send({ from, to, subject, text, html });
+
+  if (result.error) {
+    console.error(`${tag} resend error:`, result.error);
+    throw new Error(`Email provider rejected the send. ${result.error.message}`);
+  }
+  return result.data?.id ?? "";
+}
+
+function buildPasswordResetEmail(opts: { name: string; resetUrl: string }): string {
+  const { name, resetUrl } = opts;
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset your password</title>
+  <style>
+    @media (max-width: 600px) {
+      .em-content-td { padding: 28px 22px !important; }
+      .em-logo       { width: 180px !important; height: 90px !important; }
+      .em-cta        { width: 100% !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#08111F;font-family:'Inter',Arial,Helvetica,sans-serif;color:#e2e8f0;">
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#08111F;opacity:0;">
+    Reset your SecureChainMarkets password — link expires in 30 minutes.
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#08111F;">
+    <tr>
+      <td align="center" style="padding:40px 16px;background-color:#08111F;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+          <tr>
+            <td align="center" style="padding:24px 0 32px 0;line-height:0;font-size:0;">
+              <a href="${APP_URL}" target="_blank" style="text-decoration:none;display:inline-block;line-height:0;font-size:0;">
+                <img src="${LOGO_URL}" alt="SecureChainMarkets" width="220" height="110" class="em-logo"
+                  style="display:block;margin:0 auto;border:0;outline:none;text-decoration:none;width:220px;height:110px;-ms-interpolation-mode:bicubic;" />
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#0E1A30;border:1px solid rgba(255,255,255,0.08);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.45);overflow:hidden;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="em-content-td" style="padding:44px 44px 40px 44px;">
+                    <p style="margin:0 0 8px 0;font-size:11px;font-weight:700;color:#2B6BFF;letter-spacing:0.18em;text-transform:uppercase;">
+                      Password Reset
+                    </p>
+                    <h1 style="margin:0 0 16px 0;font-size:24px;font-weight:700;color:#ffffff;line-height:1.25;">
+                      Reset your password
+                    </h1>
+                    <p style="margin:0 0 24px 0;font-size:14px;color:#cbd5e1;line-height:1.65;">
+                      Hi ${name}, we received a request to reset the password on your SecureChainMarkets
+                      account. Click the button below to choose a new one. The link expires in
+                      <strong style="color:#ffffff;">30 minutes</strong>.
+                    </p>
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px 0;">
+                      <tr>
+                        <td>
+                          <a href="${resetUrl}" target="_blank" class="em-cta"
+                            style="display:inline-block;background:#2B6BFF;color:#ffffff;font-weight:600;font-size:14px;text-decoration:none;padding:13px 28px;border-radius:10px;border:1px solid #2B6BFF;mso-padding-alt:0;">
+                            Reset password
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                    <p style="margin:0 0 12px 0;font-size:12px;color:#94a3b8;line-height:1.6;">
+                      Or paste this link into your browser:
+                    </p>
+                    <p style="margin:0 0 24px 0;font-size:12px;color:#cbd5e1;line-height:1.6;word-break:break-all;">
+                      <a href="${resetUrl}" style="color:#2B6BFF;text-decoration:underline;">${resetUrl}</a>
+                    </p>
+                    <div style="height:1px;background-color:rgba(255,255,255,0.08);margin:8px 0 24px 0;"></div>
+                    <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.6;">
+                      Didn't request this? You can safely ignore this email — your password won't change.
+                      For your security, the link will expire automatically.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:24px 0 0 0;text-align:center;">
+              <p style="margin:0;font-size:11px;color:#64748b;line-height:1.6;">
+                © ${new Date().getFullYear()} SecureChainMarkets · Trade with confidence
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`.trim();
+}

@@ -38,6 +38,13 @@ export async function sendOtp(
     return { error: "Email address format is invalid." };
   }
 
+  // PASSWORD_RESET uses its own flow (long token + reset link email),
+  // not the 6-digit OTP this function emits. See lib/actions/password-reset.ts.
+  if (type === "PASSWORD_RESET") {
+    console.error(`${tag} ❌ sendOtp() does not handle PASSWORD_RESET — use requestPasswordReset() instead.`);
+    return { error: "Wrong reset endpoint. Please contact support." };
+  }
+
   // ── 2. Rate-limit visibility — log last sent timestamp ────────────────────
   try {
     const lastCode = await db.otpCode.findFirst({
@@ -103,7 +110,7 @@ export async function sendOtp(
       to:   email,
       name: displayName,
       code,
-      type,
+      type: type as "REGISTER" | "LOGIN",
     });
 
     console.log(`${tag} ✅ Email sent successfully.`);
