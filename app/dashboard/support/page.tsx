@@ -66,7 +66,7 @@ export default function SupportPage() {
         <Button
           onClick={() => setView(view === "new" ? "list" : "new")}
           size="sm"
-          className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white text-xs"
+          className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white text-xs"
         >
           {view === "new" ? "← Back" : <><Plus size={13} className="mr-1" /> New Ticket</>}
         </Button>
@@ -80,9 +80,9 @@ export default function SupportPage() {
               <Label className="text-xs text-slate-400 uppercase tracking-widest">Category</Label>
               <Select defaultValue="General" onValueChange={(v) => v !== null && setValue("category", v)}>
                 <SelectTrigger className="bg-white/5 border-white/10 text-white h-10"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
+                <SelectContent className="bg-[#14141A] border-[#D4AF37]/20 text-white">
                   {categories.map((c) => (
-                    <SelectItem key={c} value={c} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">{c}</SelectItem>
+                    <SelectItem key={c} value={c} className="hover:bg-[#D4AF37]/12 focus:bg-[#D4AF37]/12">{c}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -98,9 +98,9 @@ export default function SupportPage() {
               <Label className="text-xs text-slate-400 uppercase tracking-widest">Priority</Label>
               <Select defaultValue="MEDIUM" onValueChange={(v) => v !== null && setValue("priority", v)}>
                 <SelectTrigger className="bg-white/5 border-white/10 text-white h-10"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
+                <SelectContent className="bg-[#14141A] border-[#D4AF37]/20 text-white">
                   {["LOW", "MEDIUM", "HIGH", "URGENT"].map((p) => (
-                    <SelectItem key={p} value={p} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">{p}</SelectItem>
+                    <SelectItem key={p} value={p} className="hover:bg-[#D4AF37]/12 focus:bg-[#D4AF37]/12">{p}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -112,7 +112,7 @@ export default function SupportPage() {
               {errors.message && <p className="text-xs text-red-400">{errors.message.message}</p>}
             </div>
 
-            <Button type="submit" disabled={loading} className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-11">
+            <Button type="submit" disabled={loading} className="w-full bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-11">
               {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Ticket"}
             </Button>
           </form>
@@ -122,8 +122,8 @@ export default function SupportPage() {
           {/* Quick help */}
           <div className="glass-card rounded-xl p-5">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center">
-                <HeadphonesIcon className="h-5 w-5 text-[#2B6BFF]" />
+              <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center">
+                <HeadphonesIcon className="h-5 w-5 text-[#D4AF37]" />
               </div>
               <div>
                 <div className="text-sm font-semibold text-white">24/7 Support Available</div>
@@ -157,7 +157,7 @@ export default function SupportPage() {
 
           <div className="text-center">
             <p className="text-sm text-slate-500 mb-3">Can't find what you're looking for?</p>
-            <Button onClick={() => setView("new")} size="sm" className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white">
+            <Button onClick={() => setView("new")} size="sm" className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white">
               <MessageSquare size={13} className="mr-1" /> Open a Support Ticket
             </Button>
           </div>

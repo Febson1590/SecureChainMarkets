@@ -14,7 +14,7 @@ import {
 /* ─── Styling shared with other admin forms ──────────────────────────── */
 
 const inputCls =
-  "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+  "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#D4AF37]/60";
 const labelCls = "text-xs font-medium text-slate-400 uppercase tracking-wider";
 
 /* ─── Form state ─────────────────────────────────────────────────────── */
@@ -112,7 +112,7 @@ export default function AdminLimitsPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-          <SlidersHorizontal size={18} className="text-[#2B6BFF]" />
+          <SlidersHorizontal size={18} className="text-[#D4AF37]" />
           Deposit &amp; Withdrawal Limits
         </h1>
         <p className="text-sm text-slate-500 mt-0.5">
@@ -173,8 +173,8 @@ export default function AdminLimitsPage() {
           {/* Withdrawal card */}
           <div className="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-md bg-[#2B6BFF]/12 border border-[#2B6BFF]/25 flex items-center justify-center">
-                <ArrowUpFromLine size={14} className="text-[#2B6BFF]" />
+              <div className="w-8 h-8 rounded-md bg-[#D4AF37]/12 border border-[#D4AF37]/25 flex items-center justify-center">
+                <ArrowUpFromLine size={14} className="text-[#D4AF37]" />
               </div>
               <div>
                 <h2 className="text-[14px] font-bold text-white">Withdrawal Limits</h2>
@@ -256,7 +256,7 @@ export default function AdminLimitsPage() {
             <Button
               onClick={save}
               disabled={saving}
-              className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-10 px-5"
+              className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-10 px-5"
             >
               {saving ? (
                 <><Loader2 size={14} className="mr-1.5 animate-spin" /> Saving…</>

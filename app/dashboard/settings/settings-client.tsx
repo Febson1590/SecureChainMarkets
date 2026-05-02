@@ -113,8 +113,8 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
       {/* Profile */}
       <Card className="glass-card border-0 rounded-xl p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center">
-            <User className="h-5 w-5 text-[#2B6BFF]" />
+          <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center">
+            <User className="h-5 w-5 text-[#D4AF37]" />
           </div>
           <div>
             <h2 className="text-base font-semibold text-white">Personal Information</h2>
@@ -246,7 +246,7 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
           <Button
             type="submit"
             disabled={loading || saved}
-            className={`w-full h-11 font-semibold transition-all ${saved ? "bg-emerald-500 text-white" : "bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white"}`}
+            className={`w-full h-11 font-semibold transition-all ${saved ? "bg-emerald-500 text-white" : "bg-[#D4AF37] hover:bg-[#D4AF37] text-white"}`}
           >
             {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...</>
               : saved ? <><CheckCircle2 className="mr-2 h-4 w-4" /> Saved!</>
@@ -344,7 +344,7 @@ export function SettingsClient({ initial }: { initial: SettingsInitialData }) {
                   />
                 </div>
 
-                <Button type="submit" disabled={pwdLoading} className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-10 text-sm">
+                <Button type="submit" disabled={pwdLoading} className="w-full bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-10 text-sm">
                   {pwdLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Changing...</> : "Change Password"}
                 </Button>
               </form>

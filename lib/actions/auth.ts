@@ -79,7 +79,7 @@ export async function registerUser(data: {
     await db.notification.create({
       data: {
         userId:  user.id,
-        title:   "Welcome to SecureChainMarkets",
+        title:   "Welcome to VorateTrade",
         message: "Your account has been created. Verify your email to unlock full trading features.",
         type:    "INFO",
       },

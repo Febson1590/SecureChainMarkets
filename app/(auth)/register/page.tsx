@@ -95,19 +95,19 @@ function Stepper({ step }: { step: number }) {
                 ${step > n
                   ? "bg-emerald-500 text-white shadow-[0_8px_18px_-6px_rgba(16,185,129,0.45)]"
                   : step === n
-                    ? "bg-[#2B6BFF] text-white shadow-[0_8px_22px_-6px_rgba(43,107,255,0.55)] ring-4 ring-[#2B6BFF]/15"
+                    ? "bg-[#D4AF37] text-white shadow-[0_8px_22px_-6px_rgba(212, 175, 55,0.55)] ring-4 ring-[#D4AF37]/15"
                     : "bg-white border border-slate-200 text-slate-500"}`}
             >
               {step > n ? <Check size={14} strokeWidth={3} /> : n}
             </div>
             <span className={`text-[10.5px] font-semibold tracking-wider whitespace-nowrap hidden sm:block
-              ${step === n ? "text-[#2B6BFF]" : step > n ? "text-emerald-600" : "text-slate-500"}`}>
+              ${step === n ? "text-[#D4AF37]" : step > n ? "text-emerald-600" : "text-slate-500"}`}>
               {label}
             </span>
           </div>
           {i < STEPS.length - 1 && (
             <div className={`flex-1 h-px mx-2 transition-all duration-500
-              ${step > n ? "bg-[#2B6BFF]/45" : "bg-slate-200"}`} />
+              ${step > n ? "bg-[#D4AF37]/45" : "bg-slate-200"}`} />
           )}
         </div>
       ))}
@@ -119,12 +119,12 @@ function StepHeader({ step }: { step: number }) {
   const s = STEPS[step - 1];
   const Icon = s.icon;
   return (
-    <div className="flex items-center gap-3 rounded-xl p-4 mb-5 bg-[#EAF2FF] border border-[#DCE6FA]">
-      <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/10 inline-flex items-center justify-center flex-shrink-0">
-        <Icon className="h-5 w-5 text-[#2B6BFF]" />
+    <div className="flex items-center gap-3 rounded-xl p-4 mb-5 bg-[#FBF4DC] border border-[#E6D9A6]">
+      <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/10 inline-flex items-center justify-center flex-shrink-0">
+        <Icon className="h-5 w-5 text-[#D4AF37]" />
       </div>
       <div>
-        <div className="text-[14px] font-semibold text-[#0A1A3A]">{s.heading}</div>
+        <div className="text-[14px] font-semibold text-[#1A1A22]">{s.heading}</div>
         <div className="text-[12px] text-slate-600">{s.sub}</div>
       </div>
     </div>
@@ -141,7 +141,7 @@ function Field({
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-[13px] font-semibold text-[#0A1A3A]">
+      <label className="text-[13px] font-semibold text-[#1A1A22]">
         {label}{required && <span className="text-rose-500 ml-0.5">*</span>}
       </label>
       {children}
@@ -236,7 +236,7 @@ export default function RegisterPage() {
       } else {
         try {
           sessionStorage.setItem(
-            `SECURECHAINMARKETS:postVerifyAuth:${formData.email.toLowerCase()}`,
+            `VorateTrade:postVerifyAuth:${formData.email.toLowerCase()}`,
             formData.password,
           );
         } catch { /* noop */ }
@@ -254,9 +254,9 @@ export default function RegisterPage() {
 
   /* ── Light input/select classes ──────────────────────────────────── */
   const inputCls =
-    "w-full h-12 pl-11 pr-4 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] placeholder:text-slate-400 focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all";
+    "w-full h-12 pl-11 pr-4 rounded-lg bg-white border border-slate-200 text-[14px] text-[#1A1A22] placeholder:text-slate-400 focus:outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all";
   const selectCls =
-    "w-full h-12 pl-11 pr-9 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all appearance-none cursor-pointer";
+    "w-full h-12 pl-11 pr-9 rounded-lg bg-white border border-slate-200 text-[14px] text-[#1A1A22] focus:outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all appearance-none cursor-pointer";
 
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-8 sm:py-12 lg:py-14 pb-12 sm:pb-16">
@@ -264,10 +264,10 @@ export default function RegisterPage() {
 
         {/* ════════════════════ LEFT — Branding panel (desktop only) ═════════════════ */}
         <div className="hidden lg:block lg:order-1">
-          <h1 className="text-[36px] sm:text-[44px] font-bold tracking-tight leading-[1.05] text-[#0A1A3A]">
+          <h1 className="text-[36px] sm:text-[44px] font-bold tracking-tight leading-[1.05] text-[#1A1A22]">
             Trade Smarter.
             <br />
-            Invest <span className="text-[#2B6BFF]">Confidently.</span>
+            Invest <span className="text-[#D4AF37]">Confidently.</span>
           </h1>
           <p className="mt-5 text-[14px] sm:text-[15px] text-slate-600 leading-[1.65] max-w-[460px]">
             A focused brokerage for major digital assets — clear pricing,
@@ -277,11 +277,11 @@ export default function RegisterPage() {
           <ul className="mt-9 space-y-5 max-w-[460px]">
             {valueProps.map((v) => (
               <li key={v.title} className="flex items-start gap-4">
-                <span className="mt-0.5 w-10 h-10 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
-                  <v.icon size={17} className="text-[#2B6BFF]" />
+                <span className="mt-0.5 w-10 h-10 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
+                  <v.icon size={17} className="text-[#D4AF37]" />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-[14px] font-semibold text-[#0A1A3A] leading-snug">{v.title}</div>
+                  <div className="text-[14px] font-semibold text-[#1A1A22] leading-snug">{v.title}</div>
                   <div className="text-[12.5px] text-slate-600 leading-relaxed mt-1">{v.desc}</div>
                 </div>
               </li>
@@ -293,9 +293,9 @@ export default function RegisterPage() {
         <div className="order-1 lg:order-2 w-full max-w-[560px] mx-auto lg:mx-0 lg:max-w-none">
           <div
             className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8 lg:p-9"
-            style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
+            style={{ boxShadow: "0 22px 60px -28px rgba(20, 20, 26,0.18)" }}
           >
-            <h2 className="text-[26px] sm:text-[28px] font-bold text-[#0A1A3A] tracking-tight">
+            <h2 className="text-[26px] sm:text-[28px] font-bold text-[#1A1A22] tracking-tight">
               Create Your Account
             </h2>
             <p className="mt-2 text-[13.5px] text-slate-500">
@@ -374,11 +374,11 @@ export default function RegisterPage() {
                   </div>
                 </Field>
 
-                <div className="rounded-xl p-4 bg-[#EAF2FF] border border-[#DCE6FA]">
+                <div className="rounded-xl p-4 bg-[#FBF4DC] border border-[#E6D9A6]">
                   <div className="flex items-start gap-3">
-                    <Globe className="h-4 w-4 text-[#2B6BFF] flex-shrink-0 mt-0.5" />
+                    <Globe className="h-4 w-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
                     <div>
-                      <div className="text-[12.5px] font-semibold text-[#0A1A3A] mb-1">Regional Trading Information</div>
+                      <div className="text-[12.5px] font-semibold text-[#1A1A22] mb-1">Regional Trading Information</div>
                       <p className="text-[12px] text-slate-600 leading-[1.6]">
                         Your location helps us apply region-specific compliance rules,
                         regulatory requirements, and optimal server routing for faster order execution.
@@ -435,7 +435,7 @@ export default function RegisterPage() {
 
                 {/* Human verification */}
                 <div className="space-y-2">
-                  <label className="text-[13px] font-semibold text-[#0A1A3A]">
+                  <label className="text-[13px] font-semibold text-[#1A1A22]">
                     Human Verification<span className="text-rose-500 ml-0.5">*</span>
                   </label>
                   <button
@@ -447,25 +447,25 @@ export default function RegisterPage() {
                         ? "bg-emerald-50 border-emerald-200"
                         : errors.verify
                           ? "bg-rose-50 border-rose-300"
-                          : "bg-[#EAF2FF] border-[#DCE6FA] hover:border-[#2B6BFF]/45"}`}
+                          : "bg-[#FBF4DC] border-[#E6D9A6] hover:border-[#D4AF37]/45"}`}
                   >
                     <div className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 transition-all duration-200
                       ${verifyState === "verified"
                         ? "bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.18)]"
                         : verifyState === "checking"
-                          ? "bg-[#2B6BFF]/15 border border-[#2B6BFF]/40"
+                          ? "bg-[#D4AF37]/15 border border-[#D4AF37]/40"
                           : "bg-white border border-slate-300"}`}>
                       {verifyState === "verified" && <Check   size={14} className="text-white" strokeWidth={3} />}
-                      {verifyState === "checking" && <Loader2 size={12} className="text-[#2B6BFF] animate-spin" />}
+                      {verifyState === "checking" && <Loader2 size={12} className="text-[#D4AF37] animate-spin" />}
                     </div>
                     <span className={`text-[14px] font-semibold transition-colors duration-200
-                      ${verifyState === "verified" ? "text-emerald-700" : "text-[#0A1A3A]"}`}>
+                      ${verifyState === "verified" ? "text-emerald-700" : "text-[#1A1A22]"}`}>
                       {verifyState === "idle"     && "I'm not a robot"}
                       {verifyState === "checking" && "Verifying…"}
                       {verifyState === "verified" && "Verified — Human confirmed"}
                     </span>
                     {verifyState === "idle" && (
-                      <span className="ml-auto text-[10px] font-bold text-[#2B6BFF] tracking-[0.18em] uppercase hidden sm:inline">Tap to verify</span>
+                      <span className="ml-auto text-[10px] font-bold text-[#D4AF37] tracking-[0.18em] uppercase hidden sm:inline">Tap to verify</span>
                     )}
                   </button>
                   {errors.verify && (
@@ -488,17 +488,17 @@ export default function RegisterPage() {
                   >
                     <div className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-200
                       ${termsOk
-                        ? "bg-[#2B6BFF] border border-[#2B6BFF]"
+                        ? "bg-[#D4AF37] border border-[#D4AF37]"
                         : errors.terms
                           ? "bg-rose-50 border border-rose-300"
                           : "bg-white border border-slate-300 group-hover:border-slate-400"}`}>
                       {termsOk && <Check size={12} className="text-white" strokeWidth={3} />}
                     </div>
                     <span className="text-[12.5px] text-slate-600 leading-relaxed mt-0.5">
-                      I agree to SecureChainMarkets&apos;s{" "}
-                      <Link href="/terms" target="_blank" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Terms of Service</Link>
+                      I agree to VorateTrade&apos;s{" "}
+                      <Link href="/terms" target="_blank" className="text-[#D4AF37] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Terms of Service</Link>
                       {" "}and{" "}
-                      <Link href="/privacy" target="_blank" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Privacy Policy</Link>.
+                      <Link href="/privacy" target="_blank" className="text-[#D4AF37] hover:underline underline-offset-2 font-semibold" onClick={e => e.stopPropagation()}>Privacy Policy</Link>.
                       {" "}I confirm I am at least 18 years old.
                     </span>
                   </label>
@@ -518,7 +518,7 @@ export default function RegisterPage() {
                   type="button"
                   onClick={back}
                   disabled={loading}
-                  className="inline-flex items-center gap-2 h-12 px-5 rounded-lg text-[14px] font-semibold text-[#0A1A3A] bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center gap-2 h-12 px-5 rounded-lg text-[14px] font-semibold text-[#1A1A22] bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-colors disabled:opacity-50"
                 >
                   <ChevronLeft size={16} /> Previous
                 </button>
@@ -530,8 +530,8 @@ export default function RegisterPage() {
                   onClick={next}
                   className="inline-flex items-center gap-2 h-12 px-7 rounded-lg text-[14px] font-semibold text-white transition-all hover:brightness-110 active:scale-[0.99] ml-auto"
                   style={{
-                    background: "#2B6BFF",
-                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
+                    background: "#D4AF37",
+                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(212, 175, 55,0.32)",
                   }}
                 >
                   Continue <ChevronRight size={16} />
@@ -543,8 +543,8 @@ export default function RegisterPage() {
                   disabled={loading}
                   className="inline-flex items-center gap-2 h-12 px-8 rounded-lg text-[14px] font-semibold text-white transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
-                    background: "#2B6BFF",
-                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
+                    background: "#D4AF37",
+                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(212, 175, 55,0.32)",
                   }}
                 >
                   {loading
@@ -561,7 +561,7 @@ export default function RegisterPage() {
               </p>
               <p className="text-[13.5px] text-slate-600 order-1 sm:order-2">
                 Already have an account?{" "}
-                <Link href="/login" className="font-semibold text-[#2B6BFF] hover:text-[#1A4FCC]">
+                <Link href="/login" className="font-semibold text-[#D4AF37] hover:text-[#B8941F]">
                   Sign in
                 </Link>
               </p>
@@ -584,9 +584,9 @@ export default function RegisterPage() {
 
           <p className="text-[11.5px] text-slate-500 text-center mt-6">
             By continuing you agree to our{" "}
-            <Link href="/terms" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold">Terms</Link>{" "}
+            <Link href="/terms" className="text-[#D4AF37] hover:underline underline-offset-2 font-semibold">Terms</Link>{" "}
             and{" "}
-            <Link href="/privacy" className="text-[#2B6BFF] hover:underline underline-offset-2 font-semibold">Privacy Policy</Link>.
+            <Link href="/privacy" className="text-[#D4AF37] hover:underline underline-offset-2 font-semibold">Privacy Policy</Link>.
           </p>
         </div>
       </div>

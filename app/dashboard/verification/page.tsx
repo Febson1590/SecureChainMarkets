@@ -26,8 +26,8 @@ const REDIRECT_REASON: Record<string, {
     message: "Complete identity verification to begin trading and investing.",
   },
   pending: {
-    icon: Clock, color: "text-[#2B6BFF]",
-    bg: "bg-[#2B6BFF]/[0.07]", border: "border-[#2B6BFF]/25",
+    icon: Clock, color: "text-[#D4AF37]",
+    bg: "bg-[#D4AF37]/[0.07]", border: "border-[#D4AF37]/25",
     title: "Verification Pending",
     message: "Your verification is pending approval. You'll be notified once it's reviewed.",
   },
@@ -207,7 +207,7 @@ export default function VerificationPage() {
   const currentStatus = status ? STATUS_CONFIG[status] : null;
 
   /* ── Shared input class ────────────────────────────────────────────────────────── */
-  const inputCls = "bg-white/[0.06] border-white/[0.18] text-white placeholder:text-slate-500 h-10 focus:border-[#2B6BFF]/70 focus:bg-white/[0.08] hover:border-white/30 transition-colors";
+  const inputCls = "bg-white/[0.06] border-white/[0.18] text-white placeholder:text-slate-500 h-10 focus:border-[#D4AF37]/70 focus:bg-white/[0.08] hover:border-white/30 transition-colors";
 
   /* ── Label class ──────────────────────────────────────────────────────────────────────── */
   const labelCls = "text-xs font-medium text-slate-300 uppercase tracking-widest";
@@ -304,12 +304,12 @@ export default function VerificationPage() {
             <div className="space-y-1.5">
               <Label className={labelCls}>Document Type <span className="text-red-400">*</span></Label>
               <Select defaultValue="Passport" onValueChange={v => v && setDocType(v)}>
-                <SelectTrigger className="bg-white/[0.06] border-white/[0.18] text-white h-10 focus:border-[#2B6BFF]/70 hover:border-white/30 transition-colors">
+                <SelectTrigger className="bg-white/[0.06] border-white/[0.18] text-white h-10 focus:border-[#D4AF37]/70 hover:border-white/30 transition-colors">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
+                <SelectContent className="bg-[#14141A] border-[#D4AF37]/20 text-white">
                   {["Passport", "Driver's License", "National ID"].map(d => (
-                    <SelectItem key={d} value={d} className="text-white hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">
+                    <SelectItem key={d} value={d} className="text-white hover:bg-[#D4AF37]/12 focus:bg-[#D4AF37]/12">
                       {d}
                     </SelectItem>
                   ))}
@@ -335,8 +335,8 @@ export default function VerificationPage() {
               {docFile ? (
                 /* ── File selected — show name + clear button ──────────── */
                 <div className="flex items-center gap-3 rounded-lg px-4 py-3
-                  bg-[#2B6BFF]/[0.07] border border-[#2B6BFF]/30 transition-all">
-                  <FileImage className="h-5 w-5 text-[#2B6BFF] flex-shrink-0" />
+                  bg-[#D4AF37]/[0.07] border border-[#D4AF37]/30 transition-all">
+                  <FileImage className="h-5 w-5 text-[#D4AF37] flex-shrink-0" />
                   <span className="text-sm text-white flex-1 truncate font-medium">
                     {docFile.name}
                   </span>
@@ -366,12 +366,12 @@ export default function VerificationPage() {
                     rounded-xl px-6 py-10 text-center cursor-pointer select-none
                     border border-dashed transition-all duration-200
                     ${isDragging
-                      ? "border-[#2B6BFF]/70 bg-[#2B6BFF]/[0.10] scale-[1.01]"
-                      : "border-white/[0.22] hover:border-[#2B6BFF]/50 hover:bg-white/[0.03]"}
+                      ? "border-[#D4AF37]/70 bg-[#D4AF37]/[0.10] scale-[1.01]"
+                      : "border-white/[0.22] hover:border-[#D4AF37]/50 hover:bg-white/[0.03]"}
                   `}
                 >
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 transition-colors ${isDragging ? "bg-[#2B6BFF]/20" : "bg-white/[0.06]"}`}>
-                    <Upload className={`h-5 w-5 transition-colors ${isDragging ? "text-[#2B6BFF]" : "text-slate-400"}`} />
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 transition-colors ${isDragging ? "bg-[#D4AF37]/20" : "bg-white/[0.06]"}`}>
+                    <Upload className={`h-5 w-5 transition-colors ${isDragging ? "text-[#D4AF37]" : "text-slate-400"}`} />
                   </div>
                   <div className="text-sm font-semibold text-white mb-1">
                     {isDragging ? "Drop your file here" : "Click to upload or drag & drop"}
@@ -390,8 +390,8 @@ export default function VerificationPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-11
-                shadow-lg shadow-[#2B6BFF]/30 hover:shadow-[#2B6BFF]/50 transition-all"
+              className="w-full bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-11
+                shadow-lg shadow-[#D4AF37]/30 hover:shadow-[#D4AF37]/50 transition-all"
             >
               {loading
                 ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting…</>

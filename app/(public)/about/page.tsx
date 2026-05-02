@@ -50,11 +50,11 @@ export default function AboutPage() {
 
         {/* ── Header ─────────────────────────────────────────────────── */}
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
-            About SecureChainMarkets
+          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
+            About VorateTrade
           </Badge>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5">A focused crypto brokerage.</h1>
-          <p className="text-[15px] text-slate-400 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-[15px] text-slate-500 leading-relaxed max-w-2xl mx-auto">
             {COMPANY.brand} is a digital-asset brokerage platform built for traders who want a clean
             interface, a monitored onboarding process, and transparent pricing. We focus on
             {" "}{PLATFORM.listedAssets} of the most-traded digital assets quoted against {PLATFORM.quoteCurrency}.
@@ -64,12 +64,12 @@ export default function AboutPage() {
         {/* ── What the platform is ─────────────────────────────────── */}
         <div className="glass-card rounded-2xl p-7 mb-6">
           <h2 className="text-lg font-bold text-white mb-3">What the platform is</h2>
-          <p className="text-sm text-slate-400 leading-relaxed mb-3">
-            SecureChainMarkets is an online brokerage for buying and selling major digital assets.
+          <p className="text-sm text-slate-500 leading-relaxed mb-3">
+            VorateTrade is an online brokerage for buying and selling major digital assets.
             The interface is built around the workflows a working trader actually uses: a market
             panel, a clean chart, an order book preview, and a consolidated buy/sell form.
           </p>
-          <p className="text-sm text-slate-400 leading-relaxed">
+          <p className="text-sm text-slate-500 leading-relaxed">
             Every funded account goes through a manual identity check, and every deposit and
             withdrawal is reviewed by a human before funds move. The platform trades off some
             speed for a more controlled experience.
@@ -79,7 +79,7 @@ export default function AboutPage() {
         {/* ── Who it is for ────────────────────────────────────────── */}
         <div className="glass-card rounded-2xl p-7 mb-8">
           <h2 className="text-lg font-bold text-white mb-3">Who it is for</h2>
-          <p className="text-sm text-slate-400 leading-relaxed">
+          <p className="text-sm text-slate-500 leading-relaxed">
             Traders who prefer a deliberate, reviewed process over the fastest-possible execution.
             Long-term holders who want a clean dashboard to track positions. Investors who value
             having a person on the other end of support requests rather than an opaque automated
@@ -96,64 +96,64 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {operatingModel.map((m) => (
               <div key={m.title} className="glass-card glass-card-hover rounded-xl p-5">
-                <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center mb-3">
-                  <m.icon className="h-5 w-5 text-[#2B6BFF]" />
+                <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center mb-3">
+                  <m.icon className="h-5 w-5 text-[#D4AF37]" />
                 </div>
                 <h3 className="text-sm font-semibold text-white mb-1">{m.title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{m.desc}</p>
+                <p className="text-xs text-slate-600 leading-relaxed">{m.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* ── Company information ──────────────────────────────────── */}
-        <div className="glass-card rounded-2xl p-7 mb-8 border border-[#2B6BFF]/15 bg-[#2B6BFF]/[0.03]">
+        <div className="glass-card rounded-2xl p-7 mb-8 border border-[#D4AF37]/15 bg-[#D4AF37]/[0.03]">
           <div className="mb-5">
             <div className="vx-eyebrow mb-2">Company Information</div>
             <h2 className="text-xl font-bold text-white">Entity &amp; operating details</h2>
           </div>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
             <div className="flex items-start gap-3">
-              <Building2 size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
+              <Building2 size={14} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Legal name</dt>
+                <dt className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">Legal name</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.legalName}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <MapPin size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
+              <MapPin size={14} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Jurisdiction</dt>
+                <dt className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">Jurisdiction</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.jurisdiction}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <MapPin size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
+              <MapPin size={14} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Registered address</dt>
+                <dt className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">Registered address</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.address}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Building2 size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
+              <Building2 size={14} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Registration</dt>
+                <dt className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">Registration</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{COMPANY.registration}</dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Mail size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
+              <Mail size={14} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Support</dt>
+                <dt className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">Support</dt>
                 <dd className="text-sm text-slate-200 mt-0.5 break-all">
-                  <a href={`mailto:${CONTACT.supportEmail}`} className="hover:text-[#2B6BFF]">{CONTACT.supportEmail}</a>
+                  <a href={`mailto:${CONTACT.supportEmail}`} className="hover:text-[#D4AF37]">{CONTACT.supportEmail}</a>
                 </dd>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Clock size={14} className="text-[#2B6BFF] mt-0.5 flex-shrink-0" />
+              <Clock size={14} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Business hours</dt>
+                <dt className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">Business hours</dt>
                 <dd className="text-sm text-slate-200 mt-0.5">{CONTACT.businessHours}</dd>
               </div>
             </div>
@@ -163,14 +163,14 @@ export default function AboutPage() {
         {/* ── Regulatory stance ────────────────────────────────────── */}
         <div className="glass-card rounded-2xl p-7">
           <h2 className="text-lg font-bold text-white mb-3">Terms &amp; operating policies</h2>
-          <p className="text-sm text-slate-400 leading-relaxed">
-            SecureChainMarkets does not provide investment, tax, or legal advice. Published fees,
+          <p className="text-sm text-slate-500 leading-relaxed">
+            VorateTrade does not provide investment, tax, or legal advice. Published fees,
             processing times, and supported assets may change — changes are reflected directly
             in the dashboard before you submit any order.
             Your responsibilities are detailed in our{" "}
-            <Link href="/terms" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Terms of Service</Link>{" "}
+            <Link href="/terms" className="text-[#D4AF37] hover:text-[#E6C158]">Terms of Service</Link>{" "}
             and{" "}
-            <Link href="/privacy" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Privacy Policy</Link>.
+            <Link href="/privacy" className="text-[#D4AF37] hover:text-[#E6C158]">Privacy Policy</Link>.
           </p>
         </div>
       </div>

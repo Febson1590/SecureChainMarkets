@@ -39,8 +39,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
       className="flex h-[100dvh] w-full text-slate-200 overflow-hidden"
       style={{
         background:
-          "radial-gradient(70% 55% at 90% 0%, rgba(43,107,255,0.22), transparent 65%)," +
-          "radial-gradient(55% 45% at 0% 100%, rgba(43,107,255,0.14), transparent 70%)," +
+          "radial-gradient(70% 55% at 90% 0%, rgba(212, 175, 55,0.22), transparent 65%)," +
+          "radial-gradient(55% 45% at 0% 100%, rgba(212, 175, 55,0.14), transparent 70%)," +
           "linear-gradient(135deg, #0A0F1F 0%, #16243F 50%, #0A0F1F 100%)",
       }}
     >

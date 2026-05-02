@@ -56,7 +56,7 @@ export function ContactForm() {
   return (
     <Card className="glass-card border-0 rounded-xl p-6">
       <h2 className="text-base font-bold text-white mb-1">Open a support ticket</h2>
-      <p className="text-[11px] text-slate-500 mb-5">
+      <p className="text-[11px] text-slate-600 mb-5">
         Routed automatically to the right team based on the category you choose below.
       </p>
 
@@ -64,32 +64,32 @@ export function ContactForm() {
 
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <Label className="text-[11px] text-slate-400 uppercase tracking-wider">First Name</Label>
+            <Label className="text-[11px] text-slate-500 uppercase tracking-wider">First Name</Label>
             <Input required value={form.firstName} onChange={set("firstName")}
               placeholder="First name"
-              className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10" />
+              className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-10" />
           </div>
           <div className="space-y-1.5">
-            <Label className="text-[11px] text-slate-400 uppercase tracking-wider">Last Name</Label>
+            <Label className="text-[11px] text-slate-500 uppercase tracking-wider">Last Name</Label>
             <Input required value={form.lastName} onChange={set("lastName")}
               placeholder="Last name"
-              className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10" />
+              className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-10" />
           </div>
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-[11px] text-slate-400 uppercase tracking-wider">Email</Label>
+          <Label className="text-[11px] text-slate-500 uppercase tracking-wider">Email</Label>
           <Input required type="email" value={form.email} onChange={set("email")}
             placeholder="you@example.com"
-            className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10" />
+            className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-10" />
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-[11px] text-slate-400 uppercase tracking-wider">Category</Label>
+          <Label className="text-[11px] text-slate-500 uppercase tracking-wider">Category</Label>
           <select
             value={form.category}
             onChange={set("category")}
-            className="w-full h-10 bg-white/5 border border-white/10 rounded-md px-3 text-sm text-white focus:outline-none focus:border-[#2B6BFF]/50 [&>option]:bg-[#0a1628]"
+            className="w-full h-10 bg-white/5 border border-white/10 rounded-md px-3 text-sm text-white focus:outline-none focus:border-[#D4AF37]/50 [&>option]:bg-[#14141A]"
           >
             {CATEGORIES.map((c) => (
               <option key={c.value} value={c.value}>{c.label}</option>
@@ -98,27 +98,27 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-[11px] text-slate-400 uppercase tracking-wider">Subject</Label>
+          <Label className="text-[11px] text-slate-500 uppercase tracking-wider">Subject</Label>
           <Input required value={form.subject} onChange={set("subject")}
             placeholder="Short one-line summary"
-            className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-10" />
+            className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-10" />
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-[11px] text-slate-400 uppercase tracking-wider">Message</Label>
+          <Label className="text-[11px] text-slate-500 uppercase tracking-wider">Message</Label>
           <Textarea required rows={5} value={form.message} onChange={set("message")}
             placeholder="Include any dates, amounts, transaction references, or error messages that will help our team investigate."
-            className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 resize-none" />
+            className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 resize-none" />
         </div>
 
         <Button type="submit"
-          className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-11 inline-flex items-center justify-center gap-2">
+          className="w-full bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-11 inline-flex items-center justify-center gap-2">
           <Send size={14} /> Send to Support
         </Button>
-        <p className="text-[11px] text-slate-500 text-center leading-relaxed">
+        <p className="text-[11px] text-slate-600 text-center leading-relaxed">
           This form opens your email client with the message pre-filled and addressed to the right
           team. You can also email us directly at{" "}
-          <a href={`mailto:${CONTACT.supportEmail}`} className="text-[#2B6BFF] hover:text-[#5C8BFF]">
+          <a href={`mailto:${CONTACT.supportEmail}`} className="text-[#D4AF37] hover:text-[#E6C158]">
             {CONTACT.supportEmail}
           </a>.
         </p>

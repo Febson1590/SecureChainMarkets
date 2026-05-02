@@ -83,7 +83,7 @@ const STATUS_META: Record<UiStatus, {
   Icon:  typeof Clock;
 }> = {
   awaiting: { label: "Awaiting Payment", color: "text-amber-300",   bg: "bg-amber-500/10",   border: "border-amber-500/25",   Icon: Clock      },
-  review:   { label: "Under Review",     color: "text-[#5C8BFF]",     bg: "bg-[#2B6BFF]/12",     border: "border-[#2B6BFF]/25",     Icon: Hourglass  },
+  review:   { label: "Under Review",     color: "text-[#E6C158]",     bg: "bg-[#D4AF37]/12",     border: "border-[#D4AF37]/25",     Icon: Hourglass  },
   approved: { label: "Approved",         color: "text-emerald-300", bg: "bg-emerald-500/10", border: "border-emerald-500/25", Icon: CheckCircle2 },
   rejected: { label: "Rejected",         color: "text-red-300",     bg: "bg-red-500/10",     border: "border-red-500/25",     Icon: XCircle    },
 };
@@ -272,7 +272,7 @@ export default function DepositForm({
                   className={`
                     flex-shrink-0 flex items-center gap-2 h-11 px-4 rounded-xl border transition-all
                     ${isActive
-                      ? "border-[#2B6BFF]/50 bg-[#2B6BFF]/[0.08] shadow-[0_0_0_1px_rgba(14,165,233,0.2)]"
+                      ? "border-[#D4AF37]/50 bg-[#D4AF37]/[0.08] shadow-[0_0_0_1px_rgba(14,165,233,0.2)]"
                       : "border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05]"}
                   `}
                 >
@@ -331,7 +331,7 @@ export default function DepositForm({
                   type="button"
                   onClick={copyAddress}
                   aria-label="Copy address"
-                  className="h-11 w-11 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/25 flex items-center justify-center text-[#2B6BFF] hover:bg-[#2B6BFF]/20 transition-colors"
+                  className="h-11 w-11 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/25 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-colors"
                 >
                   {copied ? <Check size={15} /> : <Copy size={15} />}
                 </button>
@@ -348,7 +348,7 @@ export default function DepositForm({
 
             {/* Optional admin instructions */}
             {activeWallet.instructions && (
-              <div className="rounded-lg border border-[#2B6BFF]/20 bg-[#2B6BFF]/[0.05] px-3 py-2.5 text-[12px] text-slate-300 leading-relaxed whitespace-pre-wrap">
+              <div className="rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/[0.05] px-3 py-2.5 text-[12px] text-slate-300 leading-relaxed whitespace-pre-wrap">
                 {activeWallet.instructions}
               </div>
             )}
@@ -357,7 +357,7 @@ export default function DepositForm({
             <Button
               onClick={handleCreateDeposit}
               disabled={creating || isRestricted}
-              className="w-full h-12 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-[14px]"
+              className="w-full h-12 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold text-[14px]"
             >
               {creating ? (
                 <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating…</>
@@ -414,7 +414,7 @@ function NextStepsBlock() {
   return (
     <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3.5">
       <div className="flex items-center gap-1.5 mb-2.5">
-        <Info size={12} className="text-[#2B6BFF]" />
+        <Info size={12} className="text-[#D4AF37]" />
         <span className="text-[11px] font-bold text-white uppercase tracking-widest">
           Next Steps
         </span>
@@ -422,7 +422,7 @@ function NextStepsBlock() {
       <ol className="space-y-2">
         {steps.map((step, i) => (
           <li key={i} className="flex items-start gap-2.5 text-[12.5px] text-slate-300 leading-relaxed">
-            <span className="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full bg-[#2B6BFF]/15 border border-[#2B6BFF]/30 text-[#5C8BFF] text-[10px] font-bold flex items-center justify-center">
+            <span className="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-[#E6C158] text-[10px] font-bold flex items-center justify-center">
               {i + 1}
             </span>
             <span>{step}</span>
@@ -522,7 +522,7 @@ function DepositCard({
           </div>
         </div>
         <div className="text-right flex-shrink-0">
-          <div className="text-[14px] font-bold text-[#5C8BFF] tabular-nums">
+          <div className="text-[14px] font-bold text-[#E6C158] tabular-nums">
             +${deposit.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
           {deposit.cryptoAmount !== null && deposit.cryptoSymbol && (
@@ -554,7 +554,7 @@ function DepositCard({
             <button
               type="button"
               onClick={() => setShowUpload(true)}
-              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white text-[12px] font-semibold"
+              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md bg-[#D4AF37] hover:bg-[#D4AF37] text-white text-[12px] font-semibold"
             >
               <Upload size={12} />
               Upload Proof
@@ -671,8 +671,8 @@ function UploadProofModal({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-sm rounded-2xl border border-[#2B6BFF]/20 shadow-2xl"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        className="w-full max-w-sm rounded-2xl border border-[#D4AF37]/20 shadow-2xl"
+        style={{ background: "rgba(20, 20, 26,0.98)" }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="px-5 pt-5 pb-4 border-b border-white/[0.05]">
@@ -702,8 +702,8 @@ function UploadProofModal({
           />
 
           {file ? (
-            <div className="flex items-center gap-3 rounded-lg px-3 py-3 bg-[#2B6BFF]/[0.06] border border-[#2B6BFF]/25">
-              <FileImage className="h-5 w-5 text-[#2B6BFF] flex-shrink-0" />
+            <div className="flex items-center gap-3 rounded-lg px-3 py-3 bg-[#D4AF37]/[0.06] border border-[#D4AF37]/25">
+              <FileImage className="h-5 w-5 text-[#D4AF37] flex-shrink-0" />
               <span className="text-[12.5px] text-white flex-1 truncate font-medium">{file.name}</span>
               <span className="text-[10.5px] text-slate-500 flex-shrink-0">
                 {(file.size / 1024 / 1024).toFixed(2)} MB
@@ -720,7 +720,7 @@ function UploadProofModal({
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="w-full rounded-lg px-4 py-6 text-center border border-dashed border-white/[0.15] hover:border-[#2B6BFF]/40 hover:bg-white/[0.02] transition-all"
+              className="w-full rounded-lg px-4 py-6 text-center border border-dashed border-white/[0.15] hover:border-[#D4AF37]/40 hover:bg-white/[0.02] transition-all"
             >
               <Upload className="h-5 w-5 text-slate-400 mx-auto mb-2" />
               <div className="text-[12px] text-white font-medium">Click to upload screenshot or receipt</div>
@@ -751,7 +751,7 @@ function UploadProofModal({
             Cancel
           </Button>
           <Button
-            className="flex-1 h-10 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
+            className="flex-1 h-10 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold"
             onClick={handleSubmit}
             disabled={loading || !file}
           >

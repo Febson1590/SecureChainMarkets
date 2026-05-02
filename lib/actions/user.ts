@@ -149,7 +149,7 @@ export async function changePassword(data: {
     email: {
       to: user.email,
       name: user.name || "Trader",
-      subject: "Your SecureChainMarkets password has been changed",
+      subject: "Your VorateTrade password has been changed",
       heading: "Password Changed",
       body: [
         "Your account password was changed successfully.",

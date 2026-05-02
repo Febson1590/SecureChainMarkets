@@ -250,8 +250,8 @@ export async function processDepositRequest(id: string, action: "APPROVE" | "REJ
           to: user.email,
           name: user.name || "Trader",
           subject: action === "APPROVE"
-            ? "Your SecureChainMarkets deposit has been approved"
-            : "Update on your SecureChainMarkets deposit request",
+            ? "Your VorateTrade deposit has been approved"
+            : "Update on your VorateTrade deposit request",
           heading: action === "APPROVE" ? "Deposit Approved" : "Deposit Update",
           body: action === "APPROVE"
             ? [
@@ -369,8 +369,8 @@ export async function processWithdrawalRequest(id: string, action: "APPROVE" | "
           to: user.email,
           name: user.name || "Trader",
           subject: action === "APPROVE"
-            ? "Your SecureChainMarkets withdrawal has been approved"
-            : "Update on your SecureChainMarkets withdrawal request",
+            ? "Your VorateTrade withdrawal has been approved"
+            : "Update on your VorateTrade withdrawal request",
           heading: action === "APPROVE" ? "Withdrawal Approved" : "Withdrawal Update",
           body: action === "APPROVE"
             ? [
@@ -435,13 +435,13 @@ export async function processVerification(id: string, action: "APPROVE" | "REJEC
           to: user.email,
           name: user.name || "Trader",
           subject: action === "APPROVE"
-            ? "Your SecureChainMarkets identity has been verified"
-            : "Update on your SecureChainMarkets verification",
+            ? "Your VorateTrade identity has been verified"
+            : "Update on your VorateTrade verification",
           heading: action === "APPROVE" ? "Identity Verified" : "Verification Update",
           body: action === "APPROVE"
             ? [
                 "Your identity has been verified successfully.",
-                "You now have full access to all trading and investment features on SecureChainMarkets.",
+                "You now have full access to all trading and investment features on VorateTrade.",
               ]
             : [
                 "Your verification was not approved.",

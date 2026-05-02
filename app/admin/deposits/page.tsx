@@ -176,7 +176,7 @@ export default function AdminDepositsPage() {
                           href={dep.proofUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs text-[#2B6BFF] hover:text-[#5C8BFF] transition-colors"
+                          className="inline-flex items-center gap-1 text-xs text-[#D4AF37] hover:text-[#E6C158] transition-colors"
                         >
                           <FileImage size={12} />
                           View <ExternalLink size={10} />
@@ -255,7 +255,7 @@ export default function AdminDepositsPage() {
               onChange={(e) => setRejectReason(e.target.value)}
               placeholder="e.g. Could not verify the transaction on-chain."
               rows={4}
-              className="mt-2 w-full rounded-xl bg-white/[0.03] border border-white/[0.08] px-3 py-2.5 text-[13px] text-white placeholder:text-slate-600 focus:outline-none focus:border-[#2B6BFF]/40 resize-none"
+              className="mt-2 w-full rounded-xl bg-white/[0.03] border border-white/[0.08] px-3 py-2.5 text-[13px] text-white placeholder:text-slate-600 focus:outline-none focus:border-[#D4AF37]/40 resize-none"
             />
             <div className="flex gap-2 mt-4">
               <Button

@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Help Center" };
 
 const faqs = [
   {
-    q: "How do I open a SecureChainMarkets account?",
+    q: "How do I open a VorateTrade account?",
     a: "Click “Open Free Account” on the homepage and complete the 3-step registration form. You’ll receive an email verification code to activate your account.",
   },
   {
@@ -34,7 +34,7 @@ const faqs = [
     a: (
       <>
         Contact our support team via the{" "}
-        <Link href="/contact" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Contact page</Link>{" "}
+        <Link href="/contact" className="text-[#D4AF37] hover:text-[#E6C158]">Contact page</Link>{" "}
         and we will help you securely reset your password.
       </>
     ),
@@ -44,16 +44,16 @@ const faqs = [
     a: (
       <>
         Verified users can submit a support ticket from inside the dashboard. You can also email{" "}
-        <a href="mailto:support@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
-          support@SecureChainMarkets.com
+        <a href="mailto:support@VorateTrade.com" className="text-[#D4AF37] hover:text-[#E6C158]">
+          support@VorateTrade.com
         </a>{" "}
         and we reply within one business day during published hours.
       </>
     ),
   },
   {
-    q: "Is SecureChainMarkets available in my country?",
-    a: "SecureChainMarkets is available in most jurisdictions worldwide. Some countries may be restricted due to local regulation. Your region is checked during onboarding.",
+    q: "Is VorateTrade available in my country?",
+    a: "VorateTrade is available in most jurisdictions worldwide. Some countries may be restricted due to local regulation. Your region is checked during onboarding.",
   },
   {
     q: "How is my account kept secure?",
@@ -66,11 +66,11 @@ export default function HelpPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
             Help Center
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">How can we help?</h1>
-          <p className="text-slate-400 max-w-xl mx-auto">
+          <p className="text-slate-500 max-w-xl mx-auto">
             Answers to the most common questions about accounts, deposits, trading, and security.
           </p>
         </div>
@@ -79,25 +79,25 @@ export default function HelpPage() {
           {faqs.map((faq, i) => (
             <div key={i} className="glass-card rounded-xl p-5">
               <div className="flex items-start gap-3 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
-                  <HelpCircle className="h-3.5 w-3.5 text-[#2B6BFF]" />
+                <div className="w-7 h-7 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
+                  <HelpCircle className="h-3.5 w-3.5 text-[#D4AF37]" />
                 </div>
                 <h3 className="text-sm font-semibold text-white leading-snug">{faq.q}</h3>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed pl-10">{faq.a}</p>
+              <p className="text-xs text-slate-500 leading-relaxed pl-10">{faq.a}</p>
             </div>
           ))}
         </div>
 
-        <div className="glass-card rounded-2xl p-6 border border-[#2B6BFF]/20 bg-[#2B6BFF]/5 text-center">
+        <div className="glass-card rounded-2xl p-6 border border-[#D4AF37]/20 bg-[#D4AF37]/5 text-center">
           <h2 className="text-lg font-bold text-white mb-1">Still need help?</h2>
-          <p className="text-sm text-slate-400 mb-5">
+          <p className="text-sm text-slate-500 mb-5">
             Our support team replies within one business day during published hours
             ({"Monday\u2013Friday, 09:00\u201318:00 UTC"}).
           </p>
           <Button
             render={<Link href="/contact" />}
-            className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold px-6 h-11"
+            className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold px-6 h-11"
           >
             Contact Support <ArrowRight className="ml-1 h-4 w-4" />
           </Button>

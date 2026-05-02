@@ -8,18 +8,18 @@ export default function KycPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
             Legal
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Know Your Customer (KYC) Policy</h1>
-          <p className="text-sm text-slate-500">Last updated: April 2026</p>
+          <p className="text-sm text-slate-600">Last updated: April 2026</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-400 leading-relaxed">
+        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-500 leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-white mb-2">1. Why We Verify</h2>
             <p>
-              SecureChainMarkets is required by anti-money-laundering and counter-terrorist-financing
+              VorateTrade is required by anti-money-laundering and counter-terrorist-financing
               laws — and by best practice for any regulated digital-asset platform — to know who
               its customers are. Verification protects every account holder on the platform from
               fraud, identity theft, and unauthorised access, and lets us meet our reporting
@@ -114,7 +114,7 @@ export default function KycPage() {
               correct inaccurate information, or — subject to our regulatory record-retention
               obligations — request that we delete your account. See our
               {" "}
-              <a href="/privacy" className="text-[#2B6BFF] hover:text-[#5C8BFF]">Privacy Policy</a>
+              <a href="/privacy" className="text-[#D4AF37] hover:text-[#E6C158]">Privacy Policy</a>
               {" "}for the full set of rights and the procedure for exercising them.
             </p>
           </section>
@@ -124,7 +124,7 @@ export default function KycPage() {
             <p>
               KYC questions and document requests can be sent to our compliance team via the
               {" "}
-              <a href="/contact" className="text-[#2B6BFF] hover:text-[#5C8BFF]">support page</a>.
+              <a href="/contact" className="text-[#D4AF37] hover:text-[#E6C158]">support page</a>.
             </p>
           </section>
         </div>

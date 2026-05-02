@@ -6,7 +6,7 @@ import { getKycStatusForUser } from "@/lib/kyc";
 import type { Metadata } from "next";
 import InvestmentsClient from "./investments-client";
 
-export const metadata: Metadata = { title: "Investment Plans — SECURECHAINMARKETS" };
+export const metadata: Metadata = { title: "Investment Plans — VorateTrade" };
 
 export default async function InvestmentsPage() {
   const session = await auth();

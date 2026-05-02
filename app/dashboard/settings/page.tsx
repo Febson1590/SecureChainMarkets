@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import type { Metadata } from "next";
 import { SettingsClient, type SettingsInitialData } from "./settings-client";
 
-export const metadata: Metadata = { title: "Account Settings — SECURECHAINMARKETS" };
+export const metadata: Metadata = { title: "Account Settings — VorateTrade" };
 
 export default async function SettingsPage() {
   const session = await auth();

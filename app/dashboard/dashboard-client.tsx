@@ -134,7 +134,7 @@ function CardHeader({
   return (
     <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.05]">
       <div className="flex items-center gap-2">
-        {Icon && <Icon size={14} className="text-[#2B6BFF]" />}
+        {Icon && <Icon size={14} className="text-[#D4AF37]" />}
         <span className="text-[13px] font-semibold text-white">{title}</span>
       </div>
       {action}
@@ -172,13 +172,13 @@ function AddFundsModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm" onClick={onClose}>
       <div
-        className="w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-[#2B6BFF]/20"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        className="w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-[#D4AF37]/20"
+        style={{ background: "rgba(20, 20, 26,0.98)" }}
         onClick={e => e.stopPropagation()}
       >
         <h3 className="text-base font-semibold text-white mb-1">Add Funds to Investment</h3>
         <p className="text-xs text-slate-400 mb-5">
-          From <span className="text-[#5C8BFF] font-semibold">Deposit Balance</span>:{" "}
+          From <span className="text-[#E6C158] font-semibold">Deposit Balance</span>:{" "}
           <span className="text-white font-semibold">{fmt(usdBalance)}</span>
         </p>
         <input
@@ -187,14 +187,14 @@ function AddFundsModal({
           value={amount}
           onChange={e => setAmount(e.target.value)}
           autoFocus
-          className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg px-4 py-3 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/50 mb-4"
+          className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg px-4 py-3 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#D4AF37]/50 mb-4"
         />
         <div className="flex gap-2">
           <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white h-10" onClick={onClose}>
             Cancel
           </Button>
           <Button
-            className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-10"
+            className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-10"
             onClick={submit}
             disabled={loading}
           >
@@ -301,8 +301,8 @@ function UpgradeModal({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-[#2B6BFF]/20 shadow-2xl my-4 sm:my-auto"
-        style={{ background: "rgba(7,15,30,0.98)" }}
+        className="w-full max-w-md rounded-2xl border border-[#D4AF37]/20 shadow-2xl my-4 sm:my-auto"
+        style={{ background: "rgba(20, 20, 26,0.98)" }}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -342,7 +342,7 @@ function UpgradeModal({
                       onClick={() => setSelected(p)}
                       className={`w-full text-left rounded-xl border px-4 py-3 transition ${
                         active
-                          ? "border-[#2B6BFF]/60 bg-[#2B6BFF]/[0.08]"
+                          ? "border-[#D4AF37]/60 bg-[#D4AF37]/[0.08]"
                           : "border-white/[0.08] bg-white/[0.02] hover:border-white/[0.16]"
                       }`}
                     >
@@ -388,7 +388,7 @@ function UpgradeModal({
                   <div className="grid grid-cols-2 gap-2">
                     <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
                       <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Target min</div>
-                      <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{fmt(selected.minAmount)}</div>
+                      <div className="text-[13px] font-semibold text-[#D4AF37] tabular-nums">{fmt(selected.minAmount)}</div>
                     </div>
                     <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
                       <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Projected</div>
@@ -411,7 +411,7 @@ function UpgradeModal({
                         placeholder={required > 0 ? String(required) : "0"}
                         value={topUp}
                         onChange={(e) => setTopUp(e.target.value)}
-                        className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg pl-7 pr-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#2B6BFF]/50"
+                        className="w-full bg-white/[0.05] border border-white/[0.12] rounded-lg pl-7 pr-3 py-2.5 text-white text-sm focus:outline-none focus:border-[#D4AF37]/50"
                       />
                     </div>
                     <div className="text-[11px] text-slate-500 mt-1.5">
@@ -455,7 +455,7 @@ function UpgradeModal({
             Cancel
           </Button>
           <Button
-            className="flex-1 h-10 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
+            className="flex-1 h-10 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold"
             onClick={submit}
             disabled={
               saving || loading || !selected ||
@@ -609,7 +609,7 @@ export default function DashboardClient({
           {/* Primary actions — Deposit, Withdraw */}
           <div className="flex items-center gap-2 mt-4">
             <Link href={isKycApproved ? "/dashboard/deposit" : kycHref} className="flex-1 sm:flex-none">
-              <Button className="w-full sm:w-auto h-10 px-5 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-[13px]">
+              <Button className="w-full sm:w-auto h-10 px-5 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold text-[13px]">
                 <ArrowDownToLine size={14} className="mr-1.5" />
                 Deposit
               </Button>
@@ -738,7 +738,7 @@ export default function DashboardClient({
           {investment!.status === "ACTIVE" && (
             <div className="px-5 pb-5 flex gap-2">
               <Button
-                className="flex-1 h-10 bg-[#2B6BFF]/[0.10] hover:bg-[#2B6BFF]/[0.18] text-[#5C8BFF] border border-[#2B6BFF]/25 font-semibold text-[13px]"
+                className="flex-1 h-10 bg-[#D4AF37]/[0.10] hover:bg-[#D4AF37]/[0.18] text-[#E6C158] border border-[#D4AF37]/25 font-semibold text-[13px]"
                 onClick={() => {
                   if (!isKycApproved) { router.push(kycHref); return; }
                   setShowAddFunds(true);
@@ -747,7 +747,7 @@ export default function DashboardClient({
                 <Plus size={13} className="mr-1.5" /> Add Funds
               </Button>
               <Button
-                className="flex-1 h-10 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-[13px]"
+                className="flex-1 h-10 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold text-[13px]"
                 onClick={() => {
                   if (!isKycApproved) { router.push(kycHref); return; }
                   setShowUpgrade(true);
@@ -827,7 +827,7 @@ export default function DashboardClient({
           action={
             <Link
               href="/dashboard/transactions"
-              className="text-[12px] text-[#2B6BFF] hover:text-[#5C8BFF] flex items-center gap-0.5 font-medium"
+              className="text-[12px] text-[#D4AF37] hover:text-[#E6C158] flex items-center gap-0.5 font-medium"
             >
               View All <ChevronRight size={12} />
             </Link>
@@ -911,9 +911,9 @@ function QuickAction({
   return (
     <Link
       href={href}
-      className="flex-shrink-0 flex items-center gap-2 h-10 px-4 rounded-full border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#2B6BFF]/25 transition-colors"
+      className="flex-shrink-0 flex items-center gap-2 h-10 px-4 rounded-full border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#D4AF37]/25 transition-colors"
     >
-      <Icon size={14} className="text-[#2B6BFF]" />
+      <Icon size={14} className="text-[#D4AF37]" />
       <span className="text-[12.5px] font-medium text-slate-200">{label}</span>
     </Link>
   );
@@ -985,18 +985,18 @@ function KycBanner({ kycStatus }: { kycStatus: "not_submitted" | "pending" | "ap
 
   if (kycStatus === "pending") {
     return (
-      <div className="rounded-xl px-4 py-3 flex items-center justify-between gap-4 border border-[#2B6BFF]/20"
+      <div className="rounded-xl px-4 py-3 flex items-center justify-between gap-4 border border-[#D4AF37]/20"
         style={{ background: "rgba(14,165,233,0.05)" }}
       >
         <div className="flex items-center gap-3">
-          <Clock className="h-5 w-5 text-[#2B6BFF] flex-shrink-0" />
+          <Clock className="h-5 w-5 text-[#D4AF37] flex-shrink-0" />
           <div>
-            <p className="text-[13px] font-semibold text-[#5C8BFF]">Verification Under Review</p>
+            <p className="text-[13px] font-semibold text-[#E6C158]">Verification Under Review</p>
             <p className="text-[11.5px] text-slate-400 mt-0.5">Your documents are being reviewed. We&apos;ll notify you once complete.</p>
           </div>
         </div>
         <Link href="/dashboard/verification" className="flex-shrink-0">
-          <Button size="sm" variant="outline" className="border-[#2B6BFF]/30 text-[#5C8BFF] hover:bg-[#2B6BFF]/12 font-semibold text-xs h-8 px-3">
+          <Button size="sm" variant="outline" className="border-[#D4AF37]/30 text-[#E6C158] hover:bg-[#D4AF37]/12 font-semibold text-xs h-8 px-3">
             View Status
           </Button>
         </Link>
@@ -1077,7 +1077,7 @@ function PortfolioChartWrapper({
             onClick={() => setRange(r)}
             className={`text-[9px] font-semibold px-2 py-0.5 rounded transition-all ${
               range === r
-                ? "bg-[#2B6BFF]/20 text-[#5C8BFF]"
+                ? "bg-[#D4AF37]/20 text-[#E6C158]"
                 : "text-slate-500 hover:text-slate-300"
             }`}
           >
@@ -1098,7 +1098,7 @@ const ACT_COLOR: Record<string, string> = {
   INVESTMENT_PROFIT:     "text-emerald-400",
   INVESTMENT_LOSS:       "text-red-400",
   INVESTMENT_ENDED:      "text-emerald-300",
-  COPY_TRADE_PROFIT:     "text-[#2B6BFF]",
+  COPY_TRADE_PROFIT:     "text-[#D4AF37]",
   COPY_TRADE_LOSS:       "text-red-400",
   COPY_TRADE_ENDED:      "text-emerald-300",
   INVESTMENT_STARTED:    "text-violet-400",
@@ -1113,7 +1113,7 @@ const ACT_DOT: Record<string, string> = {
   INVESTMENT_PROFIT:     "bg-emerald-400",
   INVESTMENT_LOSS:       "bg-red-400",
   INVESTMENT_ENDED:      "bg-emerald-300",
-  COPY_TRADE_PROFIT:     "bg-[#2B6BFF]",
+  COPY_TRADE_PROFIT:     "bg-[#D4AF37]",
   COPY_TRADE_LOSS:       "bg-red-400",
   COPY_TRADE_ENDED:      "bg-emerald-300",
   INVESTMENT_STARTED:    "bg-violet-400",

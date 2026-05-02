@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import type { Metadata } from "next";
 import { AdminSecurityClient } from "./security-client";
 
-export const metadata: Metadata = { title: "Security — SECURECHAINMARKETS Admin" };
+export const metadata: Metadata = { title: "Security — VorateTrade Admin" };
 
 export default async function AdminSecurityPage() {
   const session = await auth();

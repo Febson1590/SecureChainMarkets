@@ -9,7 +9,7 @@ interface AllocationChartProps {
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="glass-card rounded-lg px-3 py-2 text-sm border border-sky-500/20">
+      <div className="glass-card rounded-lg px-3 py-2 text-sm border border-amber-500/20">
         <p className="text-slate-400 text-xs">{payload[0].name}</p>
         <p className="text-white font-semibold">{payload[0].value.toFixed(2)}%</p>
       </div>

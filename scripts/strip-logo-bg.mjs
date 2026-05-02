@@ -11,8 +11,8 @@ const TOLERANCE = 18;
 const FEATHER   = 235;
 
 const files = [
-  "public/assets/logos/securechainmarkets-logo.png",
-  "public/assets/logos/securechainmarkets-icon.png",
+  "public/assets/logos/voratetrade-logo.png",
+  "public/assets/logos/voratetrade-icon.png",
 ];
 
 for (const rel of files) {

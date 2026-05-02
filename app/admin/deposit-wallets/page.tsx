@@ -32,7 +32,7 @@ interface DepositWallet {
 
 /* ─── Styling helpers (matches other admin pages) ────────────────────── */
 
-const inputCls  = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const inputCls  = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#D4AF37]/60";
 const labelCls  = "text-xs font-medium text-slate-400 uppercase tracking-wider";
 
 /* A short selection list so admins don't make typos. Free-form input is
@@ -111,7 +111,7 @@ function WalletModal({
       onClick={onClose}
     >
       <div
-        className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-6 w-full max-w-md shadow-2xl"
+        className="glass-card border border-[#D4AF37]/20 rounded-2xl p-6 w-full max-w-md shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-5">
@@ -215,7 +215,7 @@ function WalletModal({
               type="checkbox"
               checked={form.isActive}
               onChange={(e) => set("isActive", e.target.checked)}
-              className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#2B6BFF] focus:ring-[#2B6BFF] focus:ring-offset-0"
+              className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#D4AF37] focus:ring-[#D4AF37] focus:ring-offset-0"
             />
             <span className="text-xs text-slate-300">
               Active <span className="text-slate-500">(users can deposit to this wallet)</span>
@@ -233,7 +233,7 @@ function WalletModal({
             Cancel
           </Button>
           <Button
-            className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
+            className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold"
             onClick={submit}
             disabled={loading}
           >
@@ -378,7 +378,7 @@ export default function AdminDepositWalletsPage() {
         </div>
         <Button
           onClick={() => setCreating(true)}
-          className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
+          className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold"
         >
           <Plus size={14} className="mr-1.5" />
           Add Wallet
@@ -387,7 +387,7 @@ export default function AdminDepositWalletsPage() {
 
       {/* Summary bar */}
       <div className="glass-card rounded-xl p-4 flex items-center gap-2">
-        <Wallet className="h-4 w-4 text-[#2B6BFF]" />
+        <Wallet className="h-4 w-4 text-[#D4AF37]" />
         <span className="text-sm font-semibold text-white">
           {wallets.length} total · {activeCount} active
         </span>
@@ -409,7 +409,7 @@ export default function AdminDepositWalletsPage() {
             </div>
             <Button
               onClick={() => setCreating(true)}
-              className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
+              className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold"
             >
               <Plus size={14} className="mr-1.5" />
               Add Your First Wallet
@@ -448,7 +448,7 @@ export default function AdminDepositWalletsPage() {
                         <button
                           type="button"
                           onClick={() => copyAddress(w)}
-                          className="text-slate-500 hover:text-[#2B6BFF] transition-colors flex-shrink-0"
+                          className="text-slate-500 hover:text-[#D4AF37] transition-colors flex-shrink-0"
                           aria-label="Copy address"
                         >
                           {copiedId === w.id ? <Check size={12} /> : <Copy size={12} />}

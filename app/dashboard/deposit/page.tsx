@@ -8,7 +8,7 @@ import { getCryptoRates } from "@/lib/rates";
 import DepositForm from "./_deposit-form";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Deposit — SECURECHAINMARKETS" };
+export const metadata: Metadata = { title: "Deposit — VorateTrade" };
 
 export default async function DepositPage() {
   const session = await auth();

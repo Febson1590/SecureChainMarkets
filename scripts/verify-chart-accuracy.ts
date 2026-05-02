@@ -102,7 +102,7 @@ async function assertMatch(label: string, expected: number, actualWallet: number
 }
 
 async function main() {
-  const email = `verify-chart-${Date.now()}@SECURECHAINMARKETS-test.local`;
+  const email = `verify-chart-${Date.now()}@VorateTrade-test.local`;
   console.log(`\n[verify chart] test email: ${email}\n`);
 
   const user = await prisma.user.create({

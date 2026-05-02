@@ -44,7 +44,7 @@ const STATUS_COLORS: Record<string, string> = {
   PAUSED:  "bg-yellow-500/10 border-yellow-500/25 text-yellow-400",
   STOPPED: "bg-red-500/10 border-red-500/25 text-red-400",
 };
-const inputCls = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#2B6BFF]/60";
+const inputCls = "w-full bg-white/[0.06] border border-white/[0.15] rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#D4AF37]/60";
 const labelCls = "text-xs font-medium text-slate-400 uppercase tracking-wider";
 
 // ── Image compression — resize to max 300×300, JPEG 75% (~30–80 KB) ──────────
@@ -237,7 +237,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
       onClick={() => !loading && onClose()}
     >
       <div
-        className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
+        className="glass-card border border-[#D4AF37]/20 rounded-2xl p-5 sm:p-6 w-full max-w-md shadow-2xl my-4 sm:my-auto"
         onClick={e => e.stopPropagation()}
       >
         <h3 className="text-base font-bold text-white mb-5">
@@ -262,7 +262,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
             <div className="mt-2 flex items-center gap-4">
               <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/10 bg-white/[0.06] flex items-center justify-center">
                 {imgLoading
-                  ? <Loader2 size={18} className="animate-spin text-[#2B6BFF]" />
+                  ? <Loader2 size={18} className="animate-spin text-[#D4AF37]" />
                   : avatarUrl
                     ? <img src={avatarUrl} alt="Preview" className="w-full h-full object-cover" />
                     : <span className="text-[10px] text-slate-500 text-center leading-tight px-1">No photo</span>
@@ -308,9 +308,9 @@ function TraderModal({ trader, onClose, onSuccess }: {
                   onChange={e => set("country", e.target.value)}
                   className={inputCls + " appearance-none pr-8"}
                 >
-                  <option value="" className="bg-[#0E1A30]">— Select a country —</option>
+                  <option value="" className="bg-[#14141A]">— Select a country —</option>
                   {COUNTRIES_SORTED.map((c) => (
-                    <option key={c.code} value={c.code} className="bg-[#0E1A30]">
+                    <option key={c.code} value={c.code} className="bg-[#14141A]">
                       {flagEmoji(c.code)} {c.name}
                     </option>
                   ))}
@@ -360,9 +360,9 @@ function TraderModal({ trader, onClose, onSuccess }: {
               <label className={labelCls}>Risk</label>
               <select value={form.riskLevel} onChange={e => set("riskLevel", e.target.value)}
                 className={inputCls + " mt-1"}>
-                <option value="LOW" className="bg-[#0E1A30]">Low</option>
-                <option value="MEDIUM" className="bg-[#0E1A30]">Medium</option>
-                <option value="HIGH" className="bg-[#0E1A30]">High</option>
+                <option value="LOW" className="bg-[#14141A]">Low</option>
+                <option value="MEDIUM" className="bg-[#14141A]">Medium</option>
+                <option value="HIGH" className="bg-[#14141A]">High</option>
               </select>
             </div>
           </div>
@@ -419,8 +419,8 @@ function TraderModal({ trader, onClose, onSuccess }: {
                         onChange={(e) => set(uKey, e.target.value)}
                         className={inputCls + " appearance-none pr-8 w-[110px]"}
                       >
-                        <option value="minutes" className="bg-[#0E1A30]">{UNIT_LABELS.minutes}</option>
-                        <option value="hours"   className="bg-[#0E1A30]">{UNIT_LABELS.hours}</option>
+                        <option value="minutes" className="bg-[#14141A]">{UNIT_LABELS.minutes}</option>
+                        <option value="hours"   className="bg-[#14141A]">{UNIT_LABELS.hours}</option>
                       </select>
                       <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     </div>
@@ -493,7 +493,7 @@ function TraderModal({ trader, onClose, onSuccess }: {
             Cancel
           </Button>
           <Button
-            className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold"
+            className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold"
             onClick={submit}
             disabled={loading || imgLoading}
           >
@@ -620,15 +620,15 @@ function AssignTradeModal({ traders, users, onClose, onSuccess }: {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
-      <div className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-6 w-full max-w-md shadow-2xl" onClick={e => e.stopPropagation()}>
+      <div className="glass-card border border-[#D4AF37]/20 rounded-2xl p-6 w-full max-w-md shadow-2xl" onClick={e => e.stopPropagation()}>
         <h3 className="text-base font-bold text-white mb-5">Assign Copy Trade</h3>
         <div className="space-y-4">
           <div>
             <label className={labelCls}>User</label>
             <div className="relative mt-1">
               <select value={form.userId} onChange={e => set("userId", e.target.value)} className={inputCls + " appearance-none pr-8"}>
-                <option value="" className="bg-[#0E1A30]">Select user…</option>
-                {users.map(u => <option key={u.id} value={u.id} className="bg-[#0E1A30]">{u.name || "—"} ({u.email})</option>)}
+                <option value="" className="bg-[#14141A]">Select user…</option>
+                {users.map(u => <option key={u.id} value={u.id} className="bg-[#14141A]">{u.name || "—"} ({u.email})</option>)}
               </select>
               <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
             </div>
@@ -637,9 +637,9 @@ function AssignTradeModal({ traders, users, onClose, onSuccess }: {
             <label className={labelCls}>Trader</label>
             <div className="relative mt-1">
               <select value={form.traderId} onChange={e => set("traderId", e.target.value)} className={inputCls + " appearance-none pr-8"}>
-                <option value="" className="bg-[#0E1A30]">Select trader…</option>
+                <option value="" className="bg-[#14141A]">Select trader…</option>
                 {traders.filter(t => t.isActive).map(t => (
-                  <option key={t.id} value={t.id} className="bg-[#0E1A30]">{t.name} ({t.winRate}% win)</option>
+                  <option key={t.id} value={t.id} className="bg-[#14141A]">{t.name} ({t.winRate}% win)</option>
                 ))}
               </select>
               <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
@@ -652,7 +652,7 @@ function AssignTradeModal({ traders, users, onClose, onSuccess }: {
         </div>
         <div className="flex gap-2 mt-6">
           <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose} disabled={loading}>Cancel</Button>
-          <Button className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold" onClick={submit} disabled={loading}>
+          <Button className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold" onClick={submit} disabled={loading}>
             {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : null}Assign
           </Button>
         </div>
@@ -796,7 +796,7 @@ export default function AdminCopyTradersPage() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Users size={20} className="text-[#2B6BFF]" /> Copy Traders
+            <Users size={20} className="text-[#D4AF37]" /> Copy Traders
           </h1>
           <p className="text-sm text-slate-500 mt-0.5">Manage traders and user copy assignments</p>
         </div>
@@ -818,13 +818,13 @@ export default function AdminCopyTradersPage() {
           <Button
             onClick={() => setShowAssign(true)}
             variant="outline"
-            className="border-[#2B6BFF]/30 text-[#2B6BFF] hover:bg-[#2B6BFF]/12 text-sm h-9 px-4"
+            className="border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37]/12 text-sm h-9 px-4"
           >
             <UserPlus size={14} className="mr-1.5" /> Assign Trade
           </Button>
           <Button
             onClick={() => setShowCreate(true)}
-            className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold text-sm h-9 px-4"
+            className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold text-sm h-9 px-4"
           >
             <Plus size={14} className="mr-1.5" /> New Trader
           </Button>
@@ -836,7 +836,7 @@ export default function AdminCopyTradersPage() {
         {[
           { label: "Traders",        value: traders.length,                                    color: "text-white" },
           { label: "Active Traders", value: traders.filter(t => t.isActive).length,            color: "text-emerald-400" },
-          { label: "Active Copies",  value: trades.filter(t => t.status === "ACTIVE").length,  color: "text-[#2B6BFF]" },
+          { label: "Active Copies",  value: trades.filter(t => t.status === "ACTIVE").length,  color: "text-[#D4AF37]" },
           { label: "Total Earned",   value: fmt(trades.reduce((s, t) => s + t.totalEarned, 0)), color: "text-emerald-400" },
         ].map(s => (
           <div key={s.label} className="glass-card rounded-xl p-4">
@@ -853,7 +853,7 @@ export default function AdminCopyTradersPage() {
             key={t}
             onClick={() => setTab(t)}
             className={`px-4 py-2.5 text-sm font-medium transition-colors ${
-              tab === t ? "text-[#2B6BFF] border-b-2 border-[#2B6BFF]" : "text-slate-500 hover:text-white"
+              tab === t ? "text-[#D4AF37] border-b-2 border-[#D4AF37]" : "text-slate-500 hover:text-white"
             }`}
           >
             {t === "traders" ? `Traders (${traders.length})` : `Assignments (${trades.length})`}
@@ -936,7 +936,7 @@ export default function AdminCopyTradersPage() {
                         </td>
                         <td className="px-4 py-3 text-xs text-slate-400">{tr.specialty || "—"}</td>
                         <td className="px-4 py-3 text-sm font-semibold text-emerald-400">{tr.winRate}%</td>
-                        <td className="px-4 py-3 text-sm font-semibold text-[#2B6BFF]">+{tr.totalROI}%</td>
+                        <td className="px-4 py-3 text-sm font-semibold text-[#D4AF37]">+{tr.totalROI}%</td>
                         <td className="px-4 py-3 text-xs text-slate-400">{tr.followers.toLocaleString()}</td>
                         <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">{tr.minProfit}%–{tr.maxProfit}%</td>
                         <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">
@@ -958,7 +958,7 @@ export default function AdminCopyTradersPage() {
                             <Button
                               size="sm"
                               onClick={() => setEditTrader(tr)}
-                              className="h-7 px-2 text-xs bg-[#2B6BFF]/12 hover:bg-[#2B6BFF]/20 text-[#2B6BFF] border border-[#2B6BFF]/20"
+                              className="h-7 px-2 text-xs bg-[#D4AF37]/12 hover:bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/20"
                             >
                               <Edit2 size={11} className="mr-1" />Edit
                             </Button>
@@ -1028,7 +1028,7 @@ export default function AdminCopyTradersPage() {
                             disabled={processing === trade.id}
                             onClick={() => handleEndCopyTrade(trade)}
                             title="Close the copy trade and release principal + profit to the user's available balance"
-                            className="h-7 px-2 text-xs bg-[#2B6BFF]/12 hover:bg-[#2B6BFF]/20 text-[#5C8BFF] border border-[#2B6BFF]/25"
+                            className="h-7 px-2 text-xs bg-[#D4AF37]/12 hover:bg-[#D4AF37]/20 text-[#E6C158] border border-[#D4AF37]/25"
                           >
                             {processing === trade.id
                               ? <Loader2 size={11} className="animate-spin" />

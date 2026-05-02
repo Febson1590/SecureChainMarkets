@@ -58,7 +58,7 @@ export function ResetPasswordForm({ token, email }: { token: string; email: stri
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 mb-4">
             <CheckCircle2 className="h-7 w-7 text-emerald-600" />
           </div>
-          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#0A1A3A]">
+          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#1A1A22]">
             Password updated
           </h1>
           <p className="mt-2 text-[13.5px] text-slate-600">
@@ -73,21 +73,21 @@ export function ResetPasswordForm({ token, email }: { token: string; email: stri
     <div className="px-4 sm:px-6 lg:px-10 py-8 sm:py-12 lg:py-14 pb-12 sm:pb-16">
       <div className="w-full max-w-[480px] mx-auto">
         <div className="text-center mb-7">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 mb-4">
-            <Lock className="h-7 w-7 text-[#2B6BFF]" strokeWidth={2} />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4">
+            <Lock className="h-7 w-7 text-[#D4AF37]" strokeWidth={2} />
           </div>
-          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#0A1A3A]">
+          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#1A1A22]">
             Choose a new password
           </h1>
           <p className="mt-2 text-[13.5px] text-slate-600">
             For{" "}
-            <span className="text-[#2B6BFF] font-semibold break-all">{email}</span>
+            <span className="text-[#D4AF37] font-semibold break-all">{email}</span>
           </p>
         </div>
 
         <div
           className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8"
-          style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
+          style={{ boxShadow: "0 22px 60px -28px rgba(20, 20, 26,0.18)" }}
         >
           {error && (
             <div className="mb-5 flex items-center gap-2.5 text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-lg px-4 py-3">
@@ -111,7 +111,7 @@ export function ResetPasswordForm({ token, email }: { token: string; email: stri
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="Create a strong password"
-                  className="w-full h-12 pl-11 pr-11 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] placeholder:text-slate-400 focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all"
+                  className="w-full h-12 pl-11 pr-11 rounded-lg bg-white border border-slate-200 text-[14px] text-[#1A1A22] placeholder:text-slate-400 focus:outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all"
                 />
                 <button type="button" onClick={() => setShowPwd(v => !v)} tabIndex={-1}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
@@ -147,7 +147,7 @@ export function ResetPasswordForm({ token, email }: { token: string; email: stri
                   value={confirm}
                   onChange={e => setConfirm(e.target.value)}
                   placeholder="Type the password again"
-                  className="w-full h-12 pl-11 pr-11 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] placeholder:text-slate-400 focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all"
+                  className="w-full h-12 pl-11 pr-11 rounded-lg bg-white border border-slate-200 text-[14px] text-[#1A1A22] placeholder:text-slate-400 focus:outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all"
                 />
                 <button type="button" onClick={() => setShowConfirm(v => !v)} tabIndex={-1}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
@@ -161,8 +161,8 @@ export function ResetPasswordForm({ token, email }: { token: string; email: stri
               disabled={loading}
               className="w-full h-12 rounded-lg text-[15px] font-semibold text-white transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
               style={{
-                background: "#2B6BFF",
-                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
+                background: "#D4AF37",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(212, 175, 55,0.32)",
               }}
             >
               {loading ? (<><Loader2 className="h-4 w-4 animate-spin" /> Updating…</>) : ("Update password")}
@@ -172,7 +172,7 @@ export function ResetPasswordForm({ token, email }: { token: string; email: stri
           <div className="mt-6 pt-5 border-t border-slate-200 text-center">
             <Link
               href="/login"
-              className="inline-flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#0A1A3A]"
+              className="inline-flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#1A1A22]"
             >
               <ArrowLeft size={12} />
               Back to sign in

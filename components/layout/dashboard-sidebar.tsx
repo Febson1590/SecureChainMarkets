@@ -79,7 +79,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
           isCollapsed && "justify-center px-2"
         )}
         style={{
-          background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
+          background: "linear-gradient(180deg, #FFFFFF 0%, #FBF7E8 100%)",
         }}
       >
         {isCollapsed
@@ -112,7 +112,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
                     className={cn(
                       "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group",
                       active
-                        ? "bg-[#2B6BFF]/[0.14] text-white shadow-[inset_0_0_0_1px_rgba(43,107,255,0.22)]"
+                        ? "bg-[#D4AF37]/[0.14] text-white shadow-[inset_0_0_0_1px_rgba(212, 175, 55,0.22)]"
                         : "text-slate-300 hover:text-white hover:bg-white/[0.05]",
                       isCollapsed && "justify-center px-2"
                     )}
@@ -160,7 +160,7 @@ export function DashboardSidebar({ unreadCount = 0, isMobile = false, onNavClick
                   : "ml-auto w-5 h-5"
               )}
               style={{
-                background: "linear-gradient(180deg, #3B82F6 0%, #1A4FCC 100%)",
+                background: "linear-gradient(180deg, #3B82F6 0%, #B8941F 100%)",
                 boxShadow: "0 0 10px rgba(59,130,246,0.55)",
               }}
             >

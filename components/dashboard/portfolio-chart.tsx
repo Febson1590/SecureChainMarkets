@@ -17,7 +17,7 @@ interface PortfolioChartProps {
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-lg px-3 py-2 text-sm border border-sky-500/20 shadow-xl"
+      <div className="rounded-lg px-3 py-2 text-sm border border-amber-500/20 shadow-xl"
         style={{ background: "rgba(4,10,22,0.96)" }}>
         <p className="text-slate-400 text-[11px] mb-0.5">{label}</p>
         <p className="text-white font-extrabold text-sm">
@@ -52,8 +52,8 @@ export function PortfolioChart({ data, isLoading = false }: PortfolioChartProps)
       {/* Loading overlay */}
       {isLoading && (
         <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg"
-          style={{ background: "rgba(7,15,30,0.55)" }}>
-          <Loader2 size={18} className="text-sky-400 animate-spin" />
+          style={{ background: "rgba(20, 20, 26,0.55)" }}>
+          <Loader2 size={18} className="text-amber-400 animate-spin" />
         </div>
       )}
 
@@ -62,7 +62,7 @@ export function PortfolioChart({ data, isLoading = false }: PortfolioChartProps)
         <div className="w-full h-full flex flex-col items-center justify-center gap-2 pb-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center"
             style={{ background: "rgba(14,165,233,0.08)", border: "1px solid rgba(14,165,233,0.15)" }}>
-            <TrendingUp size={16} className="text-sky-600" />
+            <TrendingUp size={16} className="text-amber-600" />
           </div>
           <p className="text-xs text-slate-600 font-medium">
             No transaction history yet

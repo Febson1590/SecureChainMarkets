@@ -5,7 +5,7 @@ import { logoutUser } from "@/lib/actions/auth";
 import Link from "next/link";
 import { ShieldAlert, Lock, Pause, Ban } from "lucide-react";
 
-export const metadata = { title: "Account Status — SECURECHAINMARKETS" };
+export const metadata = { title: "Account Status — VorateTrade" };
 
 /**
  * Landing page for users whose account is not ACTIVE. The dashboard +
@@ -127,7 +127,7 @@ export default async function AccountStatusPage() {
         </div>
 
         <div className="rounded-xl border border-white/[0.05] bg-white/[0.02] px-4 py-3 mb-5 flex items-start gap-2.5">
-          <ShieldAlert className="h-4 w-4 text-sky-400 flex-shrink-0 mt-0.5" />
+          <ShieldAlert className="h-4 w-4 text-amber-400 flex-shrink-0 mt-0.5" />
           <p className="text-[12px] text-slate-400 leading-relaxed">
             If you believe this is a mistake, our support team can review your
             account and lift the restriction. Responses typically arrive within
@@ -139,7 +139,7 @@ export default async function AccountStatusPage() {
           {user.status !== "SUSPENDED" && (
             <Link
               href="/dashboard/support"
-              className="flex-1 h-11 inline-flex items-center justify-center rounded-lg bg-sky-500 hover:bg-sky-400 text-white font-semibold text-[13px] transition-colors"
+              className="flex-1 h-11 inline-flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-400 text-white font-semibold text-[13px] transition-colors"
             >
               Contact Support
             </Link>

@@ -21,12 +21,12 @@ export function AdminHeader() {
     <header
       className="h-20 backdrop-blur-md border-b border-slate-200 flex items-center px-4 sm:px-6 flex-shrink-0 sticky top-0 z-30"
       style={{
-        background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
+        background: "linear-gradient(180deg, #FFFFFF 0%, #FBF7E8 100%)",
       }}
     >
       {/* Mobile hamburger — visible on < lg */}
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger render={<button className="lg:hidden p-2 text-slate-600 hover:text-[#0A1A3A] mr-2 rounded-md transition-colors" />}>
+        <SheetTrigger render={<button className="lg:hidden p-2 text-slate-600 hover:text-[#1A1A22] mr-2 rounded-md transition-colors" />}>
           <Menu size={20} />
         </SheetTrigger>
         <SheetContent side="left" className="w-72 p-0 border-white/[0.06] overflow-hidden bg-[#0B1220] text-slate-200">
@@ -41,12 +41,12 @@ export function AdminHeader() {
 
       {/* Title — desktop */}
       <div className="hidden lg:flex items-center gap-2.5">
-        <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/25">
-          <ShieldCheck size={14} className="text-[#2B6BFF]" />
+        <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/25">
+          <ShieldCheck size={14} className="text-[#D4AF37]" />
         </span>
         <div className="leading-tight">
-          <div className="text-[10px] font-bold text-[#2B6BFF] uppercase tracking-[0.22em]">Admin Panel</div>
-          <div className="text-[12px] font-semibold text-[#0A1A3A]">Control Center</div>
+          <div className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-[0.22em]">Admin Panel</div>
+          <div className="text-[12px] font-semibold text-[#1A1A22]">Control Center</div>
         </div>
       </div>
 

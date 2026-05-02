@@ -21,12 +21,12 @@ export default async function AdminDashboard() {
   });
 
   const statCards = [
-    { label: "Total Users", value: stats.totalUsers, sub: `${stats.activeUsers} active`, icon: Users, color: "text-[#2B6BFF]" },
+    { label: "Total Users", value: stats.totalUsers, sub: `${stats.activeUsers} active`, icon: Users, color: "text-[#D4AF37]" },
     { label: "Pending Deposits", value: stats.pendingDeposits, sub: "awaiting review", icon: ArrowDownToLine, color: "text-emerald-400" },
     { label: "Pending Withdrawals", value: stats.pendingWithdrawals, sub: "awaiting review", icon: ArrowUpFromLine, color: "text-orange-400" },
     { label: "Open Tickets", value: stats.openTickets, sub: "support requests", icon: HeadphonesIcon, color: "text-violet-400" },
     { label: "Pending KYC", value: stats.pendingKyc, sub: "to review", icon: ShieldCheck, color: "text-yellow-400" },
-    { label: "Active Users", value: stats.activeUsers, sub: `of ${stats.totalUsers} total`, icon: Activity, color: "text-[#2B6BFF]" },
+    { label: "Active Users", value: stats.activeUsers, sub: `of ${stats.totalUsers} total`, icon: Activity, color: "text-[#D4AF37]" },
   ];
 
   return (
@@ -59,7 +59,7 @@ export default async function AdminDashboard() {
             {recentUsers.map((user) => (
               <div key={user.id} className="flex items-center justify-between px-4 py-3 hover:bg-white/2 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center text-xs font-bold text-[#2B6BFF]">
+                  <div className="w-8 h-8 rounded-full bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center text-xs font-bold text-[#D4AF37]">
                     {user.name?.slice(0, 2).toUpperCase() || "U"}
                   </div>
                   <div>
@@ -89,7 +89,7 @@ export default async function AdminDashboard() {
             ) : recentActions.map((action) => (
               <div key={action.id} className="px-4 py-3 hover:bg-white/2 transition-colors">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-[#2B6BFF]">{action.action}</span>
+                  <span className="text-xs font-mono text-[#D4AF37]">{action.action}</span>
                   <span className="text-[10px] text-slate-600">{formatDateTime(action.createdAt)}</span>
                 </div>
                 <div className="text-xs text-slate-400 mt-0.5">{action.description || "—"}</div>

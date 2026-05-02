@@ -21,22 +21,22 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "SecureChainMarkets — Trade Global Markets with Confidence",
-    template: "%s | SecureChainMarkets",
+    default: "VorateTrade — Trade Global Markets with Confidence",
+    template: "%s | VorateTrade",
   },
   description:
-    "SecureChainMarkets — one professional trading account for forex, indices, commodities, stocks and crypto. Built for speed, clarity and control.",
-  keywords: ["forex", "indices", "commodities", "stocks", "crypto", "trading", "broker", "brokerage", "SecureChainMarkets"],
+    "VorateTrade — one professional trading account for forex, indices, commodities, stocks and crypto. Built for speed, clarity and control.",
+  keywords: ["forex", "indices", "commodities", "stocks", "crypto", "trading", "broker", "brokerage", "VorateTrade"],
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
-  applicationName: "SecureChainMarkets",
-  authors: [{ name: "SecureChainMarkets" }],
-  creator: "SecureChainMarkets",
-  publisher: "SecureChainMarkets",
+  applicationName: "VorateTrade",
+  authors: [{ name: "VorateTrade" }],
+  creator: "VorateTrade",
+  publisher: "VorateTrade",
 
   /* Next auto-discovers app/icon.png, app/apple-icon.png and app/favicon.ico
      via file conventions. We also reference the resized public/icon-*.png
      variants for legacy bookmark and PWA manifest consumers. Every icon
-     is the SecureChainMarkets brand mark. */
+     is the VorateTrade brand mark. */
   icons: {
     icon: [
       { url: "/favicon.ico",  sizes: "any" },
@@ -51,20 +51,20 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "SecureChainMarkets — Trade Digital Assets with Confidence",
+    title: "VorateTrade — Trade Digital Assets with Confidence",
     description: "Buy, sell and hold major digital assets with clear pricing and tools designed for modern investors.",
-    siteName: "SecureChainMarkets",
+    siteName: "VorateTrade",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SecureChainMarkets — Trade Digital Assets with Confidence",
+    title: "VorateTrade — Trade Digital Assets with Confidence",
     description: "Buy, sell and hold major digital assets with clear pricing and tools designed for modern investors.",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08111F",
+  themeColor: "#1A1A22",
   colorScheme: "dark",
 };
 

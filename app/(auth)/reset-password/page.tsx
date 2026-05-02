@@ -20,7 +20,7 @@ export default async function ResetPasswordPage({
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-rose-50 border border-rose-200 mb-4">
             <ShieldAlert className="h-7 w-7 text-rose-600" />
           </div>
-          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#0A1A3A]">
+          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#1A1A22]">
             Reset link not valid
           </h1>
           <p className="mt-2 text-[13.5px] text-slate-600 leading-[1.6]">
@@ -29,7 +29,7 @@ export default async function ResetPasswordPage({
 
           <div
             className="mt-7 bg-white rounded-2xl border border-slate-200 p-5 sm:p-7"
-            style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
+            style={{ boxShadow: "0 22px 60px -28px rgba(20, 20, 26,0.18)" }}
           >
             <p className="text-[13px] text-slate-600 mb-5">
               Reset links expire after 30 minutes and can only be used once.
@@ -38,8 +38,8 @@ export default async function ResetPasswordPage({
               href="/forgot-password"
               className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-md text-[14px] font-semibold text-white"
               style={{
-                background: "#2B6BFF",
-                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
+                background: "#D4AF37",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(212, 175, 55,0.32)",
               }}
             >
               Request a new link
@@ -47,7 +47,7 @@ export default async function ResetPasswordPage({
             <div className="mt-5 pt-5 border-t border-slate-200">
               <Link
                 href="/login"
-                className="inline-flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#0A1A3A]"
+                className="inline-flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#1A1A22]"
               >
                 <ArrowLeft size={12} />
                 Back to sign in

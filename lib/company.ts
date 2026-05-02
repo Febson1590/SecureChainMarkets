@@ -11,9 +11,9 @@
 /* ── Legal / corporate identity ──────────────────────────────────────── */
 export const COMPANY = {
   /** The public product/brand name — never a placeholder. */
-  brand:        "SecureChainMarkets",
+  brand:        "VorateTrade",
   /** Legal entity name. */
-  legalName:    "SecureChainMarkets Ltd",
+  legalName:    "VorateTrade Ltd",
   /** Primary jurisdiction of operation. */
   jurisdiction: "England & Wales, United Kingdom",
   /** Registered business address. */
@@ -26,10 +26,10 @@ export const COMPANY = {
 
 /* ── Support & security contact points ───────────────────────────────── */
 export const CONTACT = {
-  supportEmail:    "support@securechainmarkets.com",
-  securityEmail:   "security@securechainmarkets.com",
-  complianceEmail: "compliance@securechainmarkets.com",
-  privacyEmail:    "privacy@securechainmarkets.com",
+  supportEmail:    "support@voratetrade.com",
+  securityEmail:   "security@voratetrade.com",
+  complianceEmail: "compliance@voratetrade.com",
+  privacyEmail:    "privacy@voratetrade.com",
 
   /** Human-readable business hours. Keep it simple and specific. */
   businessHours:   "Monday – Friday, 09:00 – 18:00 UTC",

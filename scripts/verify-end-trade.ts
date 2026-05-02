@@ -90,7 +90,7 @@ async function catchUp(userId: string, now: Date, cap = 50) {
 }
 
 async function main() {
-  const email = `verify-${Date.now()}@SECURECHAINMARKETS-test.local`;
+  const email = `verify-${Date.now()}@VorateTrade-test.local`;
   console.log(`\n[verify] test email: ${email}\n`);
 
   // 1. Test user + $1,000 USD wallet.

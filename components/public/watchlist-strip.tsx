@@ -42,7 +42,7 @@ export function WatchlistStrip({
           <Star size={11} className="text-amber-400" />
           Watchlist
         </div>
-        <div className="text-[10px] text-slate-600 uppercase tracking-widest hidden sm:block">
+        <div className="text-[10px] text-slate-700 uppercase tracking-widest hidden sm:block">
           Quick Access
         </div>
       </div>
@@ -68,7 +68,7 @@ export function WatchlistStrip({
                   <span className="text-[11.5px] sm:text-[12px] font-semibold text-white tracking-wide">
                     {a.symbol}
                   </span>
-                  <span className="text-[9px] text-slate-600 hidden sm:inline">/ USD</span>
+                  <span className="text-[9px] text-slate-700 hidden sm:inline">/ USD</span>
                 </div>
                 <div className="text-[11px] sm:text-[11.5px] font-semibold text-slate-200 tabular-nums truncate">
                   {formatCurrency(a.price)}
