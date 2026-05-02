@@ -7,8 +7,8 @@ import { db } from "@/lib/db";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ─── Hosted assets ───────────────────────────────────────────────────────────
-export const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://voratetrade.vercel.app";
-const LOGO_URL = `${APP_URL}/assets/logos/voratetrade-logo.png`;
+export const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://securechainmarkets.vercel.app";
+const LOGO_URL = `${APP_URL}/assets/logos/securechainmarkets-logo.png`;
 
 // ─── HTML template for notification emails ───────────────────────────────────
 // Reuses the exact same dark template styling (colors, fonts, logo, footer,
@@ -200,7 +200,7 @@ function buildNotificationEmail(opts: {
      because Gmail, Outlook, and iOS Mail all strip / override CSS
      differently. `bgcolor` is respected everywhere. */
   const BG_PAGE    = "#0B1220";   // deep navy page background
-  const BG_CARD    = "#14141A";   // card surface (slightly lighter)
+  const BG_CARD    = "#111827";   // card surface (slightly lighter)
   const BORDER     = "#1F2937";   // subtle borders + dividers
   const TEXT_WHITE = "#FFFFFF";
   const TEXT_MUTED = "#9CA3AF";
@@ -255,7 +255,7 @@ function buildNotificationEmail(opts: {
             <td align="center" bgcolor="${BG_PAGE}" style="padding:8px 0 28px 0;background-color:${BG_PAGE} !important;">
               <img
                 src="${LOGO_URL}"
-                alt="VorateTrade"
+                alt="SecureChainMarkets"
                 width="200"
                 height="100"
                 style="display:block;border:0;width:200px;height:100px;outline:none;max-width:60vw;-ms-interpolation-mode:bicubic;"
@@ -292,7 +292,7 @@ function buildNotificationEmail(opts: {
                         <td bgcolor="${BG_CARD}" align="center" style="background-color:${BG_CARD} !important;padding:4px;">
                           <img
                             src="${LOGO_URL}"
-                            alt="VorateTrade"
+                            alt="SecureChainMarkets"
                             width="260"
                             height="130"
                             style="display:block;border:0;width:260px;height:130px;outline:none;max-width:65vw;-ms-interpolation-mode:bicubic;"
@@ -367,7 +367,7 @@ function buildNotificationEmail(opts: {
                 color:${TEXT_MUTED} !important;
                 text-align:center;
               ">
-                &copy; ${new Date().getFullYear()} VorateTrade. All rights reserved.
+                &copy; ${new Date().getFullYear()} SecureChainMarkets. All rights reserved.
               </p>
 
             </td>
@@ -399,7 +399,7 @@ export async function sendNotificationEmail(opts: {
   const tag = "[sendNotificationEmail]";
   const { to, name, subject, heading, body, cta, summaryCard } = opts;
 
-  const from = process.env.EMAIL_FROM || "VorateTrade <no-reply@VorateTrade.com>";
+  const from = process.env.EMAIL_FROM || "SecureChainMarkets <no-reply@SecureChainMarkets.com>";
 
   console.log(`${tag} to: ${to} | subject: ${subject}`);
 
@@ -423,7 +423,7 @@ export async function sendNotificationEmail(opts: {
     ...cardText,
     "",
     ...(cta ? [`${cta.label}: ${cta.url}`, ""] : []),
-    "— VorateTrade",
+    "— SecureChainMarkets",
   ].join("\n");
 
   const result = await resend.emails.send({ from, to, subject, text, html });

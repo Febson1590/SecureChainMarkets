@@ -273,13 +273,13 @@ export function LanguageMenuDialog({
       onClick={() => onOpenChange(false)}
     >
       <div
-        className="w-full max-w-sm my-6 sm:my-auto rounded-xl border border-amber-500/25 shadow-2xl overflow-hidden flex flex-col"
-        style={{ background: "rgba(20, 20, 26,0.98)", maxHeight: "min(85vh, 560px)" }}
+        className="w-full max-w-sm my-6 sm:my-auto rounded-xl border border-sky-500/25 shadow-2xl overflow-hidden flex flex-col"
+        style={{ background: "rgba(8,14,28,0.98)", maxHeight: "min(85vh, 560px)" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/[0.06]">
-          <div className="flex items-center gap-2 text-amber-300">
+          <div className="flex items-center gap-2 text-sky-300">
             <Globe className="h-4 w-4" />
             <h3 className="text-sm font-semibold text-white">Language</h3>
           </div>
@@ -304,14 +304,14 @@ export function LanguageMenuDialog({
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search language…"
               aria-label="Search languages"
-              className="w-full rounded-md border border-white/[0.08] bg-[#1A1A22] py-1.5 pl-8 pr-8 text-sm text-white placeholder:text-slate-500 focus:border-amber-500/40 focus:outline-none focus:ring-1 focus:ring-amber-500/30"
+              className="w-full rounded-md border border-white/[0.08] bg-[#06101e] py-1.5 pl-8 pr-8 text-sm text-white placeholder:text-slate-500 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery("")}
                 aria-label="Clear search"
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-slate-500 transition-colors hover:bg-amber-500/10 hover:text-amber-400"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-slate-500 transition-colors hover:bg-sky-500/10 hover:text-sky-400"
               >
                 <X className="h-3 w-3" />
               </button>
@@ -336,7 +336,7 @@ export function LanguageMenuDialog({
                   onClick={() => handleSelect(lang.code)}
                   className={`flex w-full items-center gap-3 px-4 py-2 text-left text-sm transition-colors ${
                     active
-                      ? "bg-amber-500/10 text-amber-300"
+                      ? "bg-sky-500/10 text-sky-300"
                       : "text-slate-300 hover:bg-white/5 hover:text-white"
                   }`}
                 >
@@ -347,7 +347,7 @@ export function LanguageMenuDialog({
                     <div className="truncate font-medium">{lang.label}</div>
                     <div className="truncate text-[11px] text-slate-500">{lang.english}</div>
                   </div>
-                  {active && <Check className="h-3.5 w-3.5 text-amber-400" />}
+                  {active && <Check className="h-3.5 w-3.5 text-sky-400" />}
                 </button>
               );
             })

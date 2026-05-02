@@ -50,7 +50,7 @@ export default async function AdminUsersPage({
             className="pl-9 bg-white/5 border-white/10 text-white placeholder:text-slate-600 h-9 text-sm"
           />
         </div>
-        <Button type="submit" size="sm" className="bg-[#D4AF37] hover:bg-[#D4AF37] text-white h-9 px-4 text-sm font-semibold">
+        <Button type="submit" size="sm" className="bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white h-9 px-4 text-sm font-semibold">
           Search
         </Button>
       </form>

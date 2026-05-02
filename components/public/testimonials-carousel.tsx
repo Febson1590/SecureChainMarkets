@@ -149,7 +149,7 @@ export function TestimonialsCarousel({ items, perSlide = 3, autoplayMs = 6000 }:
 
         {/* Page counter + prev/next */}
         <div className="flex items-center gap-2">
-          <span className="text-[11px] tabular-nums font-semibold text-slate-600 uppercase tracking-widest">
+          <span className="text-[11px] tabular-nums font-semibold text-slate-500 uppercase tracking-widest">
             {String(safePage + 1).padStart(2, "0")}{" / "}{String(totalPages).padStart(2, "0")}
           </span>
           <button
@@ -200,7 +200,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
                 className={i < r ? "text-sky-400 fill-current" : "text-slate-700 fill-current"}
               />
             ))}
-            <span className="ml-1.5 text-[10px] font-bold tabular-nums text-slate-600">
+            <span className="ml-1.5 text-[10px] font-bold tabular-nums text-slate-500">
               {r.toFixed(1)}
             </span>
           </div>

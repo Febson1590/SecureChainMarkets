@@ -48,65 +48,60 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── VorateTrade Theme — charcoal surfaces, metallic gold accent ─── */
+/* ─── SECURECHAINMARKETS Dark Theme ─────────────────────────────── */
 :root {
-  --background: oklch(0.10 0.005 80);
-  --foreground: oklch(0.95 0.005 80);
-  --card: oklch(0.12 0.005 80);
-  --card-foreground: oklch(0.95 0.005 80);
-  --popover: oklch(0.12 0.005 80);
-  --popover-foreground: oklch(0.95 0.005 80);
-  --primary: oklch(0.78 0.13 85);          /* metallic gold */
-  --primary-foreground: oklch(0.12 0.01 80);
-  --secondary: oklch(0.16 0.005 80);
-  --secondary-foreground: oklch(0.95 0.005 80);
-  --muted: oklch(0.16 0.005 80);
-  --muted-foreground: oklch(0.65 0.01 80);
-  --accent: oklch(0.78 0.13 85);           /* gold */
-  --accent-foreground: oklch(0.12 0.01 80);
+  --background: oklch(0.08 0.02 240);
+  --foreground: oklch(0.95 0.01 220);
+  --card: oklch(0.10 0.02 240);
+  --card-foreground: oklch(0.95 0.01 220);
+  --popover: oklch(0.10 0.02 240);
+  --popover-foreground: oklch(0.95 0.01 220);
+  --primary: oklch(0.65 0.2 215);
+  --primary-foreground: oklch(0.08 0.02 240);
+  --secondary: oklch(0.14 0.02 240);
+  --secondary-foreground: oklch(0.95 0.01 220);
+  --muted: oklch(0.14 0.02 240);
+  --muted-foreground: oklch(0.65 0.02 220);
+  --accent: oklch(0.65 0.2 215);
+  --accent-foreground: oklch(0.08 0.02 240);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.26 0.01 80);
-  --input: oklch(0.16 0.005 80);
-  --ring: oklch(0.78 0.13 85);
-  --chart-1: oklch(0.78 0.13 85);          /* gold */
-  --chart-2: oklch(0.85 0.02 80);          /* silver */
-  --chart-3: oklch(0.72 0.16 70);
+  --border: oklch(0.27 0.03 240);
+  --input: oklch(0.14 0.02 240);
+  --ring: oklch(0.65 0.2 215);
+  --chart-1: oklch(0.65 0.2 215);
+  --chart-2: oklch(0.72 0.18 195);
+  --chart-3: oklch(0.60 0.22 280);
   --chart-4: oklch(0.55 0.20 150);
-  --chart-5: oklch(0.65 0.10 40);
+  --chart-5: oklch(0.70 0.20 60);
   --radius: 0.75rem;
-  --sidebar: oklch(0.11 0.005 80);
-  --sidebar-foreground: oklch(0.95 0.005 80);
-  --sidebar-primary: oklch(0.78 0.13 85);
-  --sidebar-primary-foreground: oklch(0.12 0.01 80);
-  --sidebar-accent: oklch(0.14 0.005 80);
-  --sidebar-accent-foreground: oklch(0.95 0.005 80);
-  --sidebar-border: oklch(0.20 0.01 80);
-  --sidebar-ring: oklch(0.78 0.13 85);
+  --sidebar: oklch(0.09 0.02 240);
+  --sidebar-foreground: oklch(0.95 0.01 220);
+  --sidebar-primary: oklch(0.65 0.2 215);
+  --sidebar-primary-foreground: oklch(0.08 0.02 240);
+  --sidebar-accent: oklch(0.12 0.02 240);
+  --sidebar-accent-foreground: oklch(0.95 0.01 220);
+  --sidebar-border: oklch(0.18 0.03 240);
+  --sidebar-ring: oklch(0.65 0.2 215);
 }
 
-/* ─── VorateTrade brand tokens ──────────────────────────────
+/* ─── SecureChainMarkets brand tokens ──────────────────────────────
    Single source of truth for the dashboard + landing palette. These
    variables are read by .glass-card / .vx-panel / .scm-* utilities
    below and can be referenced inline in components via
    `color: var(--scm-text)` etc. */
 :root {
-  /* Metallic gold accent + silver detail + charcoal text on white/
-     soft-warm-gray surfaces. Variable names kept as --scm-* for
-     backwards compatibility with existing utility classes. */
-  --scm-primary:        #D4AF37;  /* metallic gold */
-  --scm-primary-strong: #B8941F;  /* darker gold */
-  --scm-navy:           #1A1A22;  /* charcoal (replaces deep navy) */
-  --scm-card-navy:      #14141A;  /* darker charcoal for cards */
-  --scm-bg-soft:        #F8F6EF;  /* warm soft-gold tint */
-  --scm-bg-surface:     #FAFAF7;  /* near-white warm surface */
-  --scm-border-blue:    #E6D9A6;  /* faded gold border */
-  --scm-text:           #1A1A22;  /* dark charcoal */
-  --scm-text-muted:     #6B6B73;  /* warm muted gray */
+  --scm-primary:        #2F6BFF;
+  --scm-primary-strong: #1E50CC;
+  --scm-navy:           #07142F;
+  --scm-card-navy:      #111827;
+  --scm-bg-soft:        #EEF5FF;
+  --scm-bg-surface:     #F6FAFF;
+  --scm-border-blue:    #BFD5FF;
+  --scm-text:           #0F172A;
+  --scm-text-muted:     #64748B;
   --scm-success:        #16A34A;
-  --scm-warning:        #D4AF37;
+  --scm-warning:        #F59E0B;
   --scm-error:          #DC2626;
-  --scm-silver:         #C0C0C0;
-  --scm-silver-soft:    #D9D9DD;
 }
 
 @layer base {
@@ -222,10 +217,10 @@
 
 /* ─── Glass card — dark surface used by dashboard + secondary public pages */
 .glass-card {
-  background: rgba(20, 20, 26, 0.75);
+  background: rgba(7, 15, 30, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(43, 107, 255, 0.16);
 }
 
 .glass-card-hover {
@@ -234,22 +229,22 @@
               border-color 0.3s ease;
 }
 .glass-card-hover:hover {
-  border-color: rgba(212, 175, 55, 0.35);
+  border-color: rgba(43, 107, 255, 0.35);
   box-shadow:
-    0 0 0 1px rgba(212, 175, 55, 0.07),
-    0 8px 32px rgba(212, 175, 55, 0.08),
+    0 0 0 1px rgba(43, 107, 255, 0.07),
+    0 8px 32px rgba(43, 107, 255, 0.08),
     0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 /* ─── Mockup frame (dashboard) ───────────────────── */
 .mockup-frame {
-  background: rgba(10, 10, 15, 0.92);
+  background: rgba(3, 10, 22, 0.92);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(212, 175, 55, 0.22);
+  border: 1px solid rgba(43, 107, 255, 0.22);
   box-shadow:
     0 30px 90px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(212, 175, 55, 0.05),
+    0 0 0 1px rgba(43, 107, 255, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -257,10 +252,10 @@
 /* ─── Feature cards ──────────────────────────────── */
 .feature-card {
   position: relative;
-  background: rgba(20, 20, 26, 0.78);
+  background: rgba(7, 15, 30, 0.78);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(43, 107, 255, 0.1);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 0.35s ease,
               border-color 0.35s ease,
@@ -274,10 +269,10 @@
   border-radius: inherit;
   background: linear-gradient(
     135deg,
-    rgba(212, 175, 55, 0.35) 0%,
-    rgba(212, 175, 55, 0.15) 40%,
-    rgba(212, 175, 55, 0.0)  60%,
-    rgba(212, 175, 55, 0.25) 100%
+    rgba(43, 107, 255, 0.35) 0%,
+    rgba(34, 211, 238, 0.15) 40%,
+    rgba(43, 107, 255, 0.0)  60%,
+    rgba(43, 107, 255, 0.25) 100%
   );
   opacity: 0;
   transition: opacity 0.35s ease;
@@ -287,12 +282,12 @@
 .feature-card:hover {
   transform: translateY(-5px);
   border-color: transparent;
-  background: rgba(20, 20, 26, 0.85);
+  background: rgba(7, 15, 30, 0.85);
   box-shadow:
-    0 8px 32px rgba(212, 175, 55, 0.12),
+    0 8px 32px rgba(43, 107, 255, 0.12),
     0 24px 64px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    inset 0 0 40px rgba(212, 175, 55, 0.035);
+    inset 0 0 40px rgba(43, 107, 255, 0.035);
 }
 .feature-card:hover::before {
   opacity: 1;
@@ -303,12 +298,12 @@
 .ticker-down { color: #ef4444; text-shadow: 0 0 10px rgba(239, 68,  68,  0.45); }
 
 /* ─── Glow ─────────────────────────────────────── */
-.glow-blue { box-shadow: 0 0 40px rgba(212, 175, 55, 0.18); }
-.glow-text { text-shadow: 0 0 30px rgba(212, 175, 55, 0.45); }
+.glow-blue { box-shadow: 0 0 40px rgba(43, 107, 255, 0.18); }
+.glow-text { text-shadow: 0 0 30px rgba(43, 107, 255, 0.45); }
 
 /* ─── Gradient Text ──────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #D4AF37, #E6C158, #D4AF37);
+  background: linear-gradient(135deg, #2B6BFF, #5C8BFF, #2B6BFF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -317,10 +312,10 @@
 /* ─── Backgrounds ────────────────────────────────── */
 .hero-bg {
   background:
-    radial-gradient(ellipse 120% 70% at 50% -15%, rgba(212, 175, 55, 0.10), transparent 65%),
-    radial-gradient(ellipse 60% 40% at 12% 90%,  rgba(184, 148, 31, 0.06), transparent 70%),
+    radial-gradient(ellipse 120% 70% at 50% -15%, rgba(43, 107, 255, 0.10), transparent 65%),
+    radial-gradient(ellipse 60% 40% at 12% 90%,  rgba(26, 115, 232, 0.06), transparent 70%),
     radial-gradient(ellipse 55% 40% at 88% 75%,  rgba(11, 25, 50, 0.85), transparent 75%),
-    linear-gradient(180deg, #0F0F14 0%, #14141A 55%, #0F0F14 100%);
+    linear-gradient(180deg, #08111F 0%, #0A1530 55%, #08111F 100%);
 }
 
 /* ─── Grain / noise texture ──────────────────────── */
@@ -339,7 +334,7 @@
 
 /* ─── Table ──────────────────────────────────────── */
 .premium-table tbody tr:hover {
-  background: rgba(212, 175, 55, 0.03);
+  background: rgba(43, 107, 255, 0.03);
 }
 
 /* ─── Animations ─────────────────────────────────── */
@@ -349,8 +344,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.30); }
-  50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.55); }
+  0%, 100% { box-shadow: 0 0 10px rgba(43, 107, 255, 0.30); }
+  50% { box-shadow: 0 0 25px rgba(43, 107, 255, 0.55); }
 }
 
 @keyframes float {
@@ -372,15 +367,15 @@
 @keyframes btn-glow-pulse {
   0%, 100% {
     box-shadow:
-      0 0 20px rgba(212, 175, 55, 0.55),
-      0 4px 24px rgba(212, 175, 55, 0.35),
-      0 0 0 0 rgba(212, 175, 55, 0);
+      0 0 20px rgba(43, 107, 255, 0.55),
+      0 4px 24px rgba(43, 107, 255, 0.35),
+      0 0 0 0 rgba(43, 107, 255, 0);
   }
   50% {
     box-shadow:
-      0 0 44px rgba(212, 175, 55, 0.78),
-      0 4px 44px rgba(212, 175, 55, 0.55),
-      0 0 90px rgba(212, 175, 55, 0.16);
+      0 0 44px rgba(43, 107, 255, 0.78),
+      0 4px 44px rgba(43, 107, 255, 0.55),
+      0 0 90px rgba(43, 107, 255, 0.16);
   }
 }
 
@@ -432,7 +427,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
    that reserved space for the old chip are intentionally removed. */
 
 /* ════════════════════════════════════════════════════════════════════════
-   Sonner toast — premium VorateTrade dark-glass styling
+   Sonner toast — premium SECURECHAINMARKETS dark-glass styling
    Applies to every variant (success / error / info / warning / default /
    loading) via `[data-sonner-toast]`, with per-variant accent borders and
    icon colours layered on top via `[data-type=...]`.
@@ -445,7 +440,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 
 [data-sonner-toast] {
   /* Glass surface */
-  background: rgba(20, 20, 26, 0.78) !important;
+  background: rgba(8, 14, 28, 0.78) !important;
   border: 1px solid rgba(148, 163, 184, 0.14) !important;
   color: #e2e8f0 !important;
   border-radius: 14px !important;
@@ -453,7 +448,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   box-shadow:
     0 12px 40px -8px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(212, 175, 55, 0.06),
+    0 0 0 1px rgba(43, 107, 255, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
   padding: 14px 14px !important;
   font-family: var(--font-sans), system-ui, sans-serif;
@@ -487,7 +482,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 
 /* Close button — blends into dark surface */
 [data-sonner-toast] [data-close-button] {
-  background: rgba(20, 20, 26, 0.7) !important;
+  background: rgba(15, 23, 42, 0.7) !important;
   border: 1px solid rgba(148, 163, 184, 0.18) !important;
   color: rgba(203, 213, 225, 0.75) !important;
   transform: translate(-4px, -4px);
@@ -541,16 +536,16 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 /* Info + default — brand sky accent */
 [data-sonner-toast][data-type="info"],
 [data-sonner-toast][data-type="default"] {
-  border-color: rgba(212, 175, 55, 0.30) !important;
+  border-color: rgba(43, 107, 255, 0.30) !important;
   box-shadow:
     0 12px 40px -8px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(212, 175, 55, 0.10),
-    0 0 30px -12px rgba(212, 175, 55, 0.30),
+    0 0 0 1px rgba(43, 107, 255, 0.10),
+    0 0 30px -12px rgba(43, 107, 255, 0.30),
     inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
 }
 [data-sonner-toast][data-type="info"] [data-icon],
 [data-sonner-toast][data-type="default"] [data-icon] {
-  color: #D4AF37 !important;
+  color: #2B6BFF !important;
 }
 
 /* Loading — subtle, no accent flood */
@@ -561,7 +556,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 /* ─── Border divider ─────────────────────────────── */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(43, 107, 255, 0.2), transparent);
 }
 
 /* ─── Utility ────────────────────────────────────── */
@@ -569,16 +564,16 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 .text-loss { color: #ef4444; }
 .skeleton {
   background: linear-gradient(90deg,
-    rgba(212, 175, 55, 0.04) 25%,
-    rgba(212, 175, 55, 0.08) 50%,
-    rgba(212, 175, 55, 0.04) 75%
+    rgba(43, 107, 255, 0.04) 25%,
+    rgba(43, 107, 255, 0.08) 50%,
+    rgba(43, 107, 255, 0.04) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   VorateTrade Exchange Design System
+   SECURECHAINMARKETS Exchange Design System
    A unified set of primitives used by the public-facing UI so every
    surface (hero, market panel, trade terminal, feature grids, footer)
    reads from the same visual vocabulary.
@@ -587,12 +582,12 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 /* ── Panel — the core surface for exchange-grade modules ───────────── */
 .vx-panel {
   position: relative;
-  background: linear-gradient(180deg, rgba(20, 20, 26, 0.92) 0%, rgba(15, 15, 20, 0.95) 100%);
+  background: linear-gradient(180deg, rgba(8, 16, 32, 0.92) 0%, rgba(5, 12, 26, 0.95) 100%);
   border: 1px solid rgba(148, 163, 184, 0.08);
   border-radius: 14px;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 0 0 1px rgba(212, 175, 55, 0.02),
+    0 0 0 1px rgba(43, 107, 255, 0.02),
     0 24px 60px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   max-width: 100%;
@@ -602,12 +597,12 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 .vx-panel-hover:hover {
-  border-color: rgba(212, 175, 55, 0.18);
+  border-color: rgba(43, 107, 255, 0.18);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.05) inset,
-    0 0 0 1px rgba(212, 175, 55, 0.05),
+    0 0 0 1px rgba(43, 107, 255, 0.05),
     0 28px 70px rgba(0, 0, 0, 0.55),
-    0 0 36px rgba(212, 175, 55, 0.04);
+    0 0 36px rgba(43, 107, 255, 0.04);
 }
 
 /* Panel header — a consistent 44px strip used by every exchange module */
@@ -619,7 +614,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   padding: 0 14px;
   height: 44px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.08);
-  background: linear-gradient(180deg, rgba(20, 20, 26, 0.65) 0%, rgba(15, 15, 20, 0.2) 100%);
+  background: linear-gradient(180deg, rgba(10, 20, 38, 0.65) 0%, rgba(6, 14, 30, 0.2) 100%);
 }
 .vx-panel-title {
   font-size: 11px;
@@ -635,8 +630,8 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: #D4AF37;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+  background: #2B6BFF;
+  box-shadow: 0 0 10px rgba(43, 107, 255, 0.7);
 }
 
 /* ── Data row — "exchange table row" primitive ──────────────────────── */
@@ -651,7 +646,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 }
 .vx-row > * { min-width: 0; }
 .vx-row:last-child { border-bottom: 0; }
-.vx-row:hover      { background: rgba(212, 175, 55, 0.035); }
+.vx-row:hover      { background: rgba(43, 107, 255, 0.035); }
 
 /* ── Market table responsive grid template ──────────────────────────── */
 /* 3 columns on mobile, 5 on sm, 6 on md. Using classic media queries
@@ -694,7 +689,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   gap: 2px;
   padding: 3px;
   border-radius: 10px;
-  background: rgba(15, 15, 20, 0.75);
+  background: rgba(6, 14, 28, 0.75);
   border: 1px solid rgba(148, 163, 184, 0.08);
 }
 .vx-tab {
@@ -713,10 +708,10 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 .vx-tab:hover { color: #e2e8f0; }
 .vx-tab[data-active="true"] {
   color: #ffffff;
-  background: linear-gradient(180deg, rgba(212, 175, 55, 0.22), rgba(212, 175, 55, 0.08));
+  background: linear-gradient(180deg, rgba(43, 107, 255, 0.22), rgba(43, 107, 255, 0.08));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 0 1px rgba(212, 175, 55, 0.28);
+    0 0 0 1px rgba(43, 107, 255, 0.28);
 }
 
 /* ── Stat chip ──────────────────────────────────────────────────────── */
@@ -731,7 +726,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border: 1px solid rgba(148, 163, 184, 0.15);
-  background: rgba(15, 15, 20, 0.7);
+  background: rgba(6, 14, 30, 0.7);
   color: #cbd5e1;
 }
 .vx-chip-up   { color: #34d399; border-color: rgba(52, 211, 153, 0.22); background: rgba(16, 185, 129, 0.08); }
@@ -740,7 +735,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 /* ── Buy / Sell / primary / ghost buttons ───────────────────────────── */
 .vx-btn-buy {
   background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-  color: #0F0F0A;
+  color: #02160f;
   font-weight: 800;
   border: 1px solid rgba(16, 185, 129, 0.55);
   box-shadow:
@@ -765,16 +760,16 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 .vx-btn-sell:active { transform: translateY(1px); }
 
 .vx-btn-primary {
-  background: linear-gradient(180deg, #D4AF37 0%, #B8941F 100%);
-  color: #0F0F14;
+  background: linear-gradient(180deg, #2B6BFF 0%, #1A4FCC 100%);
+  color: #08111F;
   font-weight: 700;
-  border: 1px solid rgba(212, 175, 55, 0.45);
+  border: 1px solid rgba(43, 107, 255, 0.45);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.18) inset,
-    0 8px 24px rgba(184, 148, 31, 0.22);
+    0 8px 24px rgba(26, 79, 204, 0.22);
   transition: transform 140ms ease, box-shadow 200ms ease, filter 200ms ease;
 }
-.vx-btn-primary:hover  { filter: brightness(1.05); box-shadow: 0 1px 0 rgba(255,255,255,0.20) inset, 0 12px 32px rgba(184, 148, 31,0.30); }
+.vx-btn-primary:hover  { filter: brightness(1.05); box-shadow: 0 1px 0 rgba(255,255,255,0.20) inset, 0 12px 32px rgba(26,79,204,0.30); }
 .vx-btn-primary:active { transform: translateY(1px); }
 
 .vx-btn-ghost {
@@ -785,8 +780,8 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 .vx-btn-ghost:hover {
-  background: rgba(212, 175, 55, 0.08);
-  border-color: rgba(212, 175, 55, 0.35);
+  background: rgba(43, 107, 255, 0.08);
+  border-color: rgba(43, 107, 255, 0.35);
   color: #ffffff;
 }
 
@@ -805,14 +800,14 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #D4AF37;
+  color: #2B6BFF;
 }
 .vx-eyebrow::before {
   content: '';
   display: block;
   width: 22px;
   height: 1px;
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.65), transparent);
+  background: linear-gradient(90deg, rgba(43, 107, 255, 0.65), transparent);
 }
 
 /* ── Kbd (keyboard hint) ────────────────────────────────────────────── */
@@ -851,8 +846,8 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: #D4AF37;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+  background: #2B6BFF;
+  box-shadow: 0 0 10px rgba(43, 107, 255, 0.7);
   animation: vx-live-pulse 2.2s ease-in-out infinite;
 }
 
@@ -884,29 +879,29 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   color: #475569;
 }
 .ed-marker .num {
-  color: #1A1A22;
+  color: #0A1A3A;
 }
 
 /* Hairline rule */
 .ed-rule {
   height: 1px;
-  background: rgba(20, 20, 26, 0.12);
+  background: rgba(10, 26, 58, 0.12);
 }
 .ed-rule-strong {
   height: 1px;
-  background: rgba(20, 20, 26, 0.22);
+  background: rgba(10, 26, 58, 0.22);
 }
 
 /* Editorial card on cream canvas */
 .ed-card {
   background: #FFFFFF;
-  border: 1px solid rgba(20, 20, 26, 0.10);
+  border: 1px solid rgba(10, 26, 58, 0.10);
   border-radius: 14px;
   transition: border-color 200ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 .ed-card:hover {
-  border-color: rgba(20, 20, 26, 0.18);
-  box-shadow: 0 14px 40px -22px rgba(20, 20, 26, 0.18);
+  border-color: rgba(10, 26, 58, 0.18);
+  box-shadow: 0 14px 40px -22px rgba(10, 26, 58, 0.18);
 }
 
 /* Inline tabular numerals helper */
@@ -917,31 +912,31 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 
 /* CTA buttons on light canvas */
 .ed-btn-primary {
-  background: #1A1A22;
+  background: #0A1A3A;
   color: #FFFFFF;
   font-weight: 600;
   letter-spacing: -0.01em;
-  border: 1px solid #1A1A22;
+  border: 1px solid #0A1A3A;
   transition: background 180ms ease, transform 140ms ease, box-shadow 200ms ease;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.10) inset, 0 8px 22px -10px rgba(20, 20, 26,0.45);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.10) inset, 0 8px 22px -10px rgba(10,26,58,0.45);
 }
 .ed-btn-primary:hover {
-  background: #2A2A35;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 14px 32px -10px rgba(20, 20, 26,0.55);
+  background: #122550;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 14px 32px -10px rgba(10,26,58,0.55);
 }
 .ed-btn-primary:active { transform: translateY(1px); }
 
 .ed-btn-ghost {
   background: transparent;
-  color: #1A1A22;
+  color: #0A1A3A;
   font-weight: 600;
   letter-spacing: -0.01em;
-  border: 1px solid rgba(20, 20, 26, 0.18);
+  border: 1px solid rgba(10, 26, 58, 0.18);
   transition: background 180ms ease, border-color 180ms ease;
 }
 .ed-btn-ghost:hover {
-  background: rgba(20, 20, 26, 0.04);
-  border-color: rgba(20, 20, 26, 0.32);
+  background: rgba(10, 26, 58, 0.04);
+  border-color: rgba(10, 26, 58, 0.32);
 }
 
 /* Frame around dark "product screenshot" widgets on cream */
@@ -950,11 +945,11 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   border-radius: 16px;
   padding: 8px;
   background:
-    linear-gradient(180deg, rgba(20, 20, 26,0.04) 0%, rgba(20, 20, 26,0.01) 100%);
-  border: 1px solid rgba(20, 20, 26, 0.10);
+    linear-gradient(180deg, rgba(10,26,58,0.04) 0%, rgba(10,26,58,0.01) 100%);
+  border: 1px solid rgba(10, 26, 58, 0.10);
   box-shadow:
-    0 30px 80px -36px rgba(20, 20, 26, 0.30),
-    0 8px 24px -16px rgba(20, 20, 26, 0.18);
+    0 30px 80px -36px rgba(10, 26, 58, 0.30),
+    0 8px 24px -16px rgba(10, 26, 58, 0.18);
 }
 .ed-frame::before {
   content: "";
@@ -962,15 +957,15 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   inset: 0;
   border-radius: 16px;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212, 175, 55,0.06), transparent 60%);
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(43,107,255,0.06), transparent 60%);
   pointer-events: none;
 }
 
 /* Light marquee row (inline ticker) on cream */
 .ed-marquee {
   background: #FFFFFF;
-  border-top: 1px solid rgba(20, 20, 26, 0.10);
-  border-bottom: 1px solid rgba(20, 20, 26, 0.10);
+  border-top: 1px solid rgba(10, 26, 58, 0.10);
+  border-bottom: 1px solid rgba(10, 26, 58, 0.10);
   position: relative;
 }
 .ed-marquee::after {
@@ -983,7 +978,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 }
 
 /* Color tokens */
-.ed-ink     { color: #1A1A22; }
+.ed-ink     { color: #0A1A3A; }
 .ed-ink-dim { color: #475569; }
 .ed-ink-mute{ color: #64748B; }
 .ed-up      { color: #0F7A4D; }
@@ -997,14 +992,14 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
 /* ════════════════════════════════════════════════════════════════════════
    SCM dashboard utilities — branded button + surface tokens. Dashboard
    pages can drop these classes in instead of inline styles to stay on
-   the VorateTrade palette.
+   the SecureChainMarkets palette.
    ════════════════════════════════════════════════════════════════════════ */
 .scm-btn-primary {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   height: 44px; padding: 0 1.25rem; border-radius: 12px;
   background: var(--scm-primary); color: #FFFFFF;
   font-weight: 600; letter-spacing: -0.005em;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(212, 175, 55,0.30);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(47,107,255,0.30);
   transition: filter 180ms ease, transform 140ms ease;
 }
 .scm-btn-primary:hover { filter: brightness(1.08); }
@@ -1016,7 +1011,7 @@ font[style*="vertical-align: inherit"] { font: inherit !important; }
   height: 44px; padding: 0 1.25rem; border-radius: 12px;
   background: var(--scm-navy); color: #FFFFFF;
   font-weight: 600; letter-spacing: -0.005em;
-  box-shadow: 0 8px 22px rgba(26, 26, 34,0.25);
+  box-shadow: 0 8px 22px rgba(7,20,47,0.25);
   transition: filter 180ms ease, transform 140ms ease;
 }
 .scm-btn-navy:hover { filter: brightness(1.18); }

@@ -52,32 +52,26 @@ const socials = [
 
 export function PublicFooter() {
   return (
-    <footer
-      className="text-[#1A1A22] border-t border-[#E6D9A6]/60"
-      style={{
-        background:
-          "linear-gradient(180deg, #FFFFFF 0%, #FFFAF0 100%)",
-      }}
-    >
+    <footer className="bg-[#0A1A3A] text-slate-300">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 sm:pt-14 lg:pt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr] gap-10">
           {/* Brand + description + socials */}
           <div>
             <Link
               href="/"
-              aria-label="VorateTrade — home"
-              className="inline-block mb-6"
+              aria-label="SecureChainMarkets — home"
+              className="relative inline-flex items-center justify-center h-24 w-[210px] rounded-2xl bg-white shadow-[0_14px_32px_-14px_rgba(0,0,0,0.55)] mb-6"
             >
               <Image
-                src="/assets/logos/voratetrade-logo.png"
-                alt="VorateTrade"
+                src="/assets/logos/securechainmarkets-logo.png"
+                alt="SecureChainMarkets"
                 width={1774}
                 height={887}
                 className="h-[72px] w-auto max-w-none pointer-events-none select-none"
               />
             </Link>
-            <p className="text-[13px] leading-relaxed text-slate-700 max-w-xs mb-6">
-              VorateTrade is a regulated digital
+            <p className="text-[13px] leading-relaxed text-slate-400 max-w-xs mb-6">
+              SecureChainMarkets is a regulated digital
               asset trading platform offering secure,
               transparent, and innovative trading
               solutions worldwide.
@@ -90,7 +84,7 @@ export function PublicFooter() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white border border-[#E6D9A6] inline-flex items-center justify-center text-slate-700 hover:bg-[#D4AF37] hover:border-[#D4AF37] hover:text-white transition-colors"
+                  className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.12] inline-flex items-center justify-center text-slate-300 hover:bg-[#2B6BFF] hover:border-[#2B6BFF] hover:text-white transition-colors"
                 >
                   <Icon size={14} />
                 </a>
@@ -101,7 +95,7 @@ export function PublicFooter() {
           {/* Link columns */}
           {footerColumns.map((col) => (
             <div key={col.title}>
-              <h4 className="text-[13.5px] font-semibold text-[#D4AF37] mb-4 tracking-wide">
+              <h4 className="text-[13.5px] font-semibold text-white mb-4">
                 {col.title}
               </h4>
               <ul className="space-y-2.5">
@@ -109,7 +103,7 @@ export function PublicFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-[13px] text-slate-700 hover:text-[#D4AF37] transition-colors"
+                      className="text-[13px] text-slate-400 hover:text-[#5C8BFF] transition-colors"
                     >
                       {l.label}
                     </Link>
@@ -121,12 +115,12 @@ export function PublicFooter() {
         </div>
 
         {/* Bottom strip */}
-        <div className="mt-10 sm:mt-12 pt-6 border-t border-[#E6D9A6]/60 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-          <p className="text-[12px] text-slate-600">
+        <div className="mt-10 sm:mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <p className="text-[12px] text-slate-500">
             &copy; {COMPANY.launchYear} {COMPANY.brand}. All rights reserved.
           </p>
-          <div className="inline-flex items-center gap-2 text-[12px] text-slate-700">
-            <ShieldCheck size={14} className="text-[#D4AF37]" />
+          <div className="inline-flex items-center gap-2 text-[12px] text-slate-400">
+            <ShieldCheck size={14} className="text-[#5C8BFF]" />
             Regulated and Authorized Platform
           </div>
         </div>

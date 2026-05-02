@@ -11,7 +11,7 @@ interface StatCardProps {
   className?: string;
 }
 
-export function StatCard({ title, value, subtitle, change, icon: Icon, iconColor = "text-amber-400", className }: StatCardProps) {
+export function StatCard({ title, value, subtitle, change, icon: Icon, iconColor = "text-sky-400", className }: StatCardProps) {
   const isPositive = change !== undefined && change >= 0;
 
   return (
@@ -19,7 +19,7 @@ export function StatCard({ title, value, subtitle, change, icon: Icon, iconColor
       <div className="flex items-start justify-between mb-3">
         <span className="text-xs font-medium text-slate-500 uppercase tracking-widest">{title}</span>
         {Icon && (
-          <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center">
             <Icon className={cn("h-4 w-4", iconColor)} />
           </div>
         )}

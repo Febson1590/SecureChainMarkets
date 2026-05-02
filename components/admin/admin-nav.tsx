@@ -77,7 +77,7 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
       <div
         className="flex items-center h-20 px-4 border-b border-slate-200 flex-shrink-0"
         style={{
-          background: "linear-gradient(180deg, #FFFFFF 0%, #FBF7E8 100%)",
+          background: "linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%)",
         }}
       >
         <Logo size="xl" href="/admin" />
@@ -110,7 +110,7 @@ export default function AdminNav({ isMobile = false, onNavClick }: AdminNavProps
                     className={cn(
                       "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group",
                       active
-                        ? "bg-[#D4AF37]/[0.14] text-white shadow-[inset_0_0_0_1px_rgba(212, 175, 55,0.22)]"
+                        ? "bg-[#2B6BFF]/[0.14] text-white shadow-[inset_0_0_0_1px_rgba(43,107,255,0.22)]"
                         : "text-slate-300 hover:text-white hover:bg-white/[0.05]"
                     )}
                   >

@@ -7,20 +7,20 @@ import type { MetadataRoute } from "next";
  *
  * Icons point at the pre-baked PNGs under /public — stable URLs, not
  * hashed — so Android install flows, iOS "Add to Home Screen" and
- * desktop PWA installers all pick up real VorateTrade branding.
+ * desktop PWA installers all pick up real SECURECHAINMARKETS branding.
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name:             "VorateTrade",
-    short_name:       "VorateTrade",
+    name:             "SecureChainMarkets",
+    short_name:       "SecureChainMarkets",
     description:
       "Trade major digital assets with clear pricing and tools built for modern investors.",
     start_url:        "/",
     scope:            "/",
     display:          "standalone",
     orientation:      "portrait-primary",
-    background_color: "#0F0F14",
-    theme_color:      "#D4AF37",
+    background_color: "#08111F",
+    theme_color:      "#2B6BFF",
     categories:       ["finance", "business", "productivity"],
     icons: [
       { src: "/icon-192.png",      sizes: "192x192", type: "image/png", purpose: "any" },

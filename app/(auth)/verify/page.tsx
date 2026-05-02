@@ -96,7 +96,7 @@ function VerifyContent() {
     }
 
     if (type === OtpType.REGISTER) {
-      const storageKey = `VorateTrade:postVerifyAuth:${email.toLowerCase()}`;
+      const storageKey = `SECURECHAINMARKETS:postVerifyAuth:${email.toLowerCase()}`;
       let storedPassword = "";
       try { storedPassword = sessionStorage.getItem(storageKey) ?? ""; } catch { /* noop */ }
 
@@ -156,29 +156,29 @@ function VerifyContent() {
 
         {/* Header */}
         <div className="text-center mb-7">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4">
-            <ShieldCheck className="h-7 w-7 text-[#D4AF37]" strokeWidth={2} />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 mb-4">
+            <ShieldCheck className="h-7 w-7 text-[#2B6BFF]" strokeWidth={2} />
           </div>
-          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#1A1A22]">
+          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#0A1A3A]">
             {isRegister ? "Verify Your Email" : "Two-Factor Verification"}
           </h1>
           <p className="mt-2 text-[13.5px] text-slate-600">
             We sent a 6-digit code to{" "}
-            <span className="text-[#D4AF37] font-semibold break-all">{email || "your email"}</span>
+            <span className="text-[#2B6BFF] font-semibold break-all">{email || "your email"}</span>
           </p>
         </div>
 
         {/* Form card */}
         <div
           className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8"
-          style={{ boxShadow: "0 22px 60px -28px rgba(20, 20, 26,0.18)" }}
+          style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
         >
           {/* Email reminder */}
-          <div className="flex items-start gap-3 rounded-xl p-3.5 mb-6 bg-[#FBF4DC] border border-[#E6D9A6]">
-            <Mail className="h-4 w-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-3 rounded-xl p-3.5 mb-6 bg-[#EAF2FF] border border-[#DCE6FA]">
+            <Mail className="h-4 w-4 text-[#2B6BFF] flex-shrink-0 mt-0.5" />
             <p className="text-[12.5px] text-slate-600 leading-relaxed">
               Check your inbox and spam folder. The code expires in{" "}
-              <span className="text-[#1A1A22] font-semibold">10 minutes</span>.
+              <span className="text-[#0A1A3A] font-semibold">10 minutes</span>.
             </p>
           </div>
 
@@ -206,12 +206,12 @@ function VerifyContent() {
                       handleChange(0, pasted);
                     }}
                     disabled={loading}
-                    className={`flex-1 min-w-0 max-w-[52px] h-14 text-center text-[22px] font-bold rounded-xl bg-white text-[#1A1A22] tabular-nums caret-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-150 disabled:opacity-60
+                    className={`flex-1 min-w-0 max-w-[52px] h-14 text-center text-[22px] font-bold rounded-xl bg-white text-[#0A1A3A] tabular-nums caret-[#2B6BFF] focus:outline-none focus:ring-2 focus:ring-[#2B6BFF]/20 transition-all duration-150 disabled:opacity-60
                       ${error
                         ? "border-2 border-rose-400 bg-rose-50"
                         : d
-                          ? "border-2 border-[#D4AF37] bg-[#FBF4DC]"
-                          : "border border-slate-200 focus:border-[#D4AF37]"}`}
+                          ? "border-2 border-[#2B6BFF] bg-[#EAF2FF]"
+                          : "border border-slate-200 focus:border-[#2B6BFF]"}`}
                     aria-label={`Digit ${i + 1}`}
                   />
                 );
@@ -230,8 +230,8 @@ function VerifyContent() {
               disabled={loading || digits.join("").length < 6}
               className="w-full h-12 rounded-lg text-[15px] font-semibold text-white transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
               style={{
-                background: "#D4AF37",
-                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(212, 175, 55,0.32)",
+                background: "#2B6BFF",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
               }}
             >
               {loading
@@ -247,7 +247,7 @@ function VerifyContent() {
               type="button"
               onClick={handleResend}
               disabled={resending || resendCooldown > 0}
-              className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-[#D4AF37] hover:text-[#B8941F] transition-colors disabled:text-slate-400 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-[#2B6BFF] hover:text-[#1A4FCC] transition-colors disabled:text-slate-400 disabled:cursor-not-allowed"
             >
               {resending ? (
                 <><Loader2 size={14} className="animate-spin" /> Sending…</>
@@ -263,7 +263,7 @@ function VerifyContent() {
           <div className="mt-4 text-center">
             <Link
               href={isRegister ? "/register" : "/login"}
-              className="inline-flex items-center gap-1.5 text-[12.5px] text-slate-600 hover:text-[#1A1A22] transition-colors"
+              className="inline-flex items-center gap-1.5 text-[12.5px] text-slate-600 hover:text-[#0A1A3A] transition-colors"
             >
               <ArrowLeft size={12} />
               {isRegister ? "Back to registration" : "Back to login"}
@@ -273,8 +273,8 @@ function VerifyContent() {
 
         {/* Below-card security note */}
         <div className="mt-6 text-center">
-          <div className="inline-flex items-center gap-2 text-[12.5px] font-semibold text-[#1A1A22]">
-            <Lock size={13} className="text-[#D4AF37]" />
+          <div className="inline-flex items-center gap-2 text-[12.5px] font-semibold text-[#0A1A3A]">
+            <Lock size={13} className="text-[#2B6BFF]" />
             Your security is our priority
           </div>
           <p className="text-[11.5px] text-slate-500 mt-1">

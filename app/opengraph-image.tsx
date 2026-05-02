@@ -7,7 +7,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "VorateTrade — trade, invest, grow";
+export const alt = "SecureChainMarkets — trade global markets with confidence";
 
 export default async function OpenGraphImage() {
   return new ImageResponse(
@@ -21,21 +21,22 @@ export default async function OpenGraphImage() {
           justifyContent: "space-between",
           padding: "76px 88px",
           background:
-            "radial-gradient(ellipse 65% 50% at 25% 0%, rgba(212,175,55,0.18), transparent 60%), radial-gradient(ellipse 55% 50% at 90% 100%, rgba(192,192,192,0.10), transparent 65%), linear-gradient(180deg, #0B0B0F 0%, #14141A 55%, #0B0B0F 100%)",
+            "radial-gradient(ellipse 65% 50% at 25% 0%, rgba(43,107,255,0.22), transparent 60%), radial-gradient(ellipse 55% 50% at 90% 100%, rgba(26,115,232,0.20), transparent 65%), linear-gradient(180deg, #08111F 0%, #0A1530 55%, #08111F 100%)",
           color: "white",
           fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
         }}
       >
         {/* Brand mark + wordmark */}
         <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          {/* TC monogram tile */}
           <div
             style={{
               width: 96,
               height: 96,
               borderRadius: 20,
-              border: "1px solid rgba(212,175,55,0.22)",
+              border: "1px solid rgba(255,255,255,0.10)",
               background:
-                "linear-gradient(180deg, rgba(212,175,55,0.10), rgba(212,175,55,0.02))",
+                "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -44,20 +45,20 @@ export default async function OpenGraphImage() {
           >
             <div
               style={{
-                fontSize: 56,
+                fontSize: 48,
                 fontWeight: 800,
                 letterSpacing: -1,
-                color: "#D4AF37",
+                color: "#2B6BFF",
                 lineHeight: 1,
               }}
             >
-              V
+              TC
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-            <div style={{ display: "flex", fontSize: 56, fontWeight: 800, letterSpacing: -0.5 }}>
-              <span style={{ color: "#D4AF37" }}>Vorate</span>
-              <span style={{ color: "#C0C0C0" }}>Trade</span>
+            <div style={{ display: "flex", fontSize: 44, fontWeight: 800, letterSpacing: -0.5 }}>
+              <span style={{ color: "white" }}>SecureChain</span>
+              <span style={{ color: "#2B6BFF" }}>Markets</span>
             </div>
             <div
               style={{
@@ -91,7 +92,7 @@ export default async function OpenGraphImage() {
             style={{
               fontSize: 76,
               fontWeight: 700,
-              color: "#D4AF37",
+              color: "#2B6BFF",
               letterSpacing: -1,
             }}
           >
@@ -107,7 +108,7 @@ export default async function OpenGraphImage() {
               fontWeight: 500,
             }}
           >
-            One professional trading account for forex, indices, commodities, stocks and crypto.
+            Major digital assets with clear pricing and tools built for modern investors.
           </div>
         </div>
 
@@ -124,8 +125,8 @@ export default async function OpenGraphImage() {
             fontWeight: 600,
           }}
         >
-          <span style={{ color: "#D4AF37" }}>●</span>
-          <span>voratetrade.com</span>
+          <span style={{ color: "#2B6BFF" }}>●</span>
+          <span>securechainmarkets.com</span>
         </div>
       </div>
     ),

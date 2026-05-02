@@ -14,7 +14,7 @@ import {
 type Tone = "blue" | "indigo" | "green" | "red" | "amber" | "violet" | "teal";
 
 const TONE_STYLES: Record<Tone, { bg: string; fg: string; ring: string }> = {
-  blue:   { bg: "bg-[#D4AF37]/10",   fg: "text-[#D4AF37]",   ring: "ring-[#D4AF37]/20" },
+  blue:   { bg: "bg-[#2B6BFF]/10",   fg: "text-[#2B6BFF]",   ring: "ring-[#2B6BFF]/20" },
   indigo: { bg: "bg-indigo-500/10",  fg: "text-indigo-600",  ring: "ring-indigo-500/20" },
   green:  { bg: "bg-emerald-500/12", fg: "text-emerald-600", ring: "ring-emerald-500/20" },
   red:    { bg: "bg-rose-500/12",    fg: "text-rose-600",    ring: "ring-rose-500/20" },
@@ -80,7 +80,7 @@ const securityList = [
 /* ─── Section eyebrow label ─────────────────────────────────────────── */
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#D4AF37] mb-3">
+    <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#2B6BFF] mb-3">
       {children}
     </div>
   );
@@ -136,29 +136,17 @@ export default async function HomePage() {
 
   return (
     <div
-      className="text-[#1A1A22] overflow-x-hidden"
+      className="text-[#0A1A3A] overflow-x-hidden"
       style={{
-        /* Premium light backdrop: mostly pure white with very soft warm-gold
-           glows scattered across the page — never yellow, never flat.
-           Low-opacity cream washes (#FFFAF0 / #FFF4D6 / #F8E7B5) keep the
-           feel bright and clean while giving subtle depth as you scroll. */
+        /* Soft gradient backdrop matching the hero photo background:
+           pale-blue arc top-right, gentle pale-blue wash bottom-left,
+           white base with a subtle diagonal blue tint. */
         backgroundImage:
-          /* top-right warm halo */
-          "radial-gradient(ellipse 55% 35% at 92% 4%, rgba(248,231,181,0.30), rgba(248,231,181,0) 72%)," +
-          /* upper-left whisper */
-          "radial-gradient(ellipse 45% 30% at 6% 18%, rgba(255,244,214,0.28), rgba(255,244,214,0) 75%)," +
-          /* mid-page right gentle wave */
-          "radial-gradient(ellipse 60% 22% at 100% 48%, rgba(248,231,181,0.22), rgba(248,231,181,0) 75%)," +
-          /* mid-page left soft glow */
-          "radial-gradient(ellipse 50% 25% at 0% 62%, rgba(255,250,240,0.40), rgba(255,250,240,0) 78%)," +
-          /* bottom-left cream */
-          "radial-gradient(ellipse 50% 28% at 8% 96%, rgba(255,244,214,0.28), rgba(255,244,214,0) 75%)," +
-          /* bottom centre lift */
-          "radial-gradient(ellipse 70% 30% at 50% 108%, rgba(255,250,240,0.45), rgba(255,250,240,0) 75%)," +
-          /* white base with the faintest cream tail toward the footer */
-          "linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 70%, #FFFCF5 100%)",
+          "radial-gradient(ellipse 90% 70% at 100% 0%, rgba(151,187,255,0.55), rgba(151,187,255,0) 62%)," +
+          "radial-gradient(ellipse 80% 65% at 0% 100%, rgba(151,187,255,0.32), rgba(151,187,255,0) 65%)," +
+          "linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 45%, #E8F0FF 100%)",
         backgroundAttachment: "scroll",
-        backgroundSize: "100% 100%",
+        backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
@@ -174,8 +162,8 @@ export default async function HomePage() {
           className="absolute inset-0 pointer-events-none -z-10"
           style={{
             background:
-              "radial-gradient(60% 50% at 75% 30%, rgba(212, 175, 55,0.10) 0%, rgba(212, 175, 55,0) 70%)," +
-              "radial-gradient(50% 40% at 15% 80%, rgba(212, 175, 55,0.05) 0%, rgba(212, 175, 55,0) 70%)",
+              "radial-gradient(60% 50% at 75% 30%, rgba(43,107,255,0.10) 0%, rgba(43,107,255,0) 70%)," +
+              "radial-gradient(50% 40% at 15% 80%, rgba(43,107,255,0.05) 0%, rgba(43,107,255,0) 70%)",
           }}
         />
         {/* Subtle dot grid */}
@@ -184,7 +172,7 @@ export default async function HomePage() {
           className="absolute inset-0 pointer-events-none -z-10 opacity-[0.45]"
           style={{
             backgroundImage:
-              "radial-gradient(rgba(20, 20, 26,0.05) 1px, transparent 1px)",
+              "radial-gradient(rgba(10,26,58,0.05) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
             maskImage: "radial-gradient(60% 60% at 50% 40%, black, transparent 80%)",
             WebkitMaskImage: "radial-gradient(60% 60% at 50% 40%, black, transparent 80%)",
@@ -219,9 +207,9 @@ export default async function HomePage() {
 
             <Link
               href="/markets"
-              className="group inline-flex items-center gap-2 px-3 py-1.5 mb-5 rounded-full text-[11px] font-semibold tabular-nums text-[#1A1A22] border border-slate-200 bg-white hover:border-[#D4AF37]/40 transition-colors shadow-[0_4px_12px_-6px_rgba(20, 20, 26,0.10)]"
+              className="group inline-flex items-center gap-2 px-3 py-1.5 mb-5 rounded-full text-[11px] font-semibold tabular-nums text-[#0A1A3A] border border-slate-200 bg-white hover:border-[#2B6BFF]/40 transition-colors shadow-[0_4px_12px_-6px_rgba(15,23,42,0.10)]"
             >
-              <span className="inline-flex items-center gap-1 px-1.5 py-[1px] rounded-full bg-[#D4AF37] text-white text-[9px] font-black tracking-wider">
+              <span className="inline-flex items-center gap-1 px-1.5 py-[1px] rounded-full bg-[#2B6BFF] text-white text-[9px] font-black tracking-wider">
                 <Sparkles className="h-2.5 w-2.5" /> NEW
               </span>
               Copy Top Traders in One Click
@@ -231,9 +219,9 @@ export default async function HomePage() {
             <h1 className="text-[32px] sm:text-[44px] lg:text-[60px] leading-[1.05] font-bold tracking-tight">
               Trade Digital Assets
               <br />
-              <span className="text-[#D4AF37]">with Confidence.</span>
+              <span className="text-[#2B6BFF]">with Confidence.</span>
             </h1>
-            <p className="mt-4 sm:mt-5 text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.6] text-slate-700 max-w-[510px]">
+            <p className="mt-4 sm:mt-5 text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.6] text-slate-600 max-w-[510px]">
               Access crypto markets, investment tools, and copy-trading features
               from one secure platform built for modern investors.
             </p>
@@ -243,22 +231,22 @@ export default async function HomePage() {
                 href="/register"
                 className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md text-[14px] font-semibold text-white transition-all hover:brightness-110 hover:-translate-y-[1px]"
                 style={{
-                  background: "#D4AF37",
-                  boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 28px rgba(212, 175, 55,0.32)",
+                  background: "#2B6BFF",
+                  boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 28px rgba(43,107,255,0.32)",
                 }}
               >
                 Create Account <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md text-[14px] font-semibold text-[#1A1A22] bg-white border border-[#1A1A22]/15 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors"
+                className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md text-[14px] font-semibold text-[#0A1A3A] bg-white border border-[#0A1A3A]/15 hover:border-[#2B6BFF] hover:text-[#2B6BFF] transition-colors"
               >
                 Sign In <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
 
             {/* Trust badges */}
-            <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px] sm:text-[12px] text-slate-600">
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px] sm:text-[12px] text-slate-500">
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> Secure Account Access</span>
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> KYC Verification</span>
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> Real-Time Portfolio Tracking</span>
@@ -269,7 +257,7 @@ export default async function HomePage() {
           <div className="lg:hidden relative mt-8 sm:mt-12 -mx-4 sm:mx-0">
             <Image
               src="/landing/hero.png"
-              alt="VorateTrade dashboard shown on a laptop and phone"
+              alt="SecureChainMarkets dashboard shown on a laptop and phone"
               width={1536}
               height={1024}
               priority
@@ -282,29 +270,26 @@ export default async function HomePage() {
             />
           </div>
 
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════
-          STATS STRIP — full-width horizontal card under the hero
-      ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 -mt-2 sm:-mt-6 pb-8 sm:pb-10 relative z-10">
-        <div className="max-w-[1200px] mx-auto">
-          {/* Mobile: 2×2 grid inside one card */}
-          <div className="sm:hidden bg-white rounded-2xl border border-black/[0.06] shadow-[0_10px_30px_rgba(0,0,0,0.08)] p-4">
-            <div className="grid grid-cols-2 gap-3">
+          {/* Stat chips — under copy on desktop, after hero visual on mobile */}
+          <div className="mt-7 sm:mt-10 lg:mt-9 lg:max-w-[56%]">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 max-w-[480px]">
               {heroStats.map((s) => {
                 const tone = TONE_STYLES[s.tone];
                 return (
-                  <div key={s.label} className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl ${tone.bg} ring-1 ${tone.ring} inline-flex items-center justify-center flex-shrink-0`}>
-                      <s.Icon className={`h-[15px] w-[15px] ${tone.fg}`} strokeWidth={2.2} />
+                  <div
+                    key={s.label}
+                    className="group rounded-xl bg-white border border-slate-200 px-3 sm:px-4 py-2.5 sm:py-3 shadow-[0_4px_14px_-8px_rgba(15,23,42,0.10)] flex items-center gap-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-12px_rgba(15,23,42,0.18)]"
+                  >
+                    <div
+                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg ${tone.bg} ring-1 ${tone.ring} inline-flex items-center justify-center flex-shrink-0`}
+                    >
+                      <s.Icon className={`h-[15px] w-[15px] sm:h-4 sm:w-4 ${tone.fg}`} strokeWidth={2.2} />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[9.5px] uppercase tracking-widest text-slate-600 font-semibold truncate">
+                      <div className="text-[9.5px] sm:text-[10px] uppercase tracking-widest text-slate-500 font-semibold truncate">
                         {s.label}
                       </div>
-                      <div className={`mt-0.5 text-[15px] font-bold tabular-nums truncate ${tone.fg}`}>
+                      <div className={`mt-0.5 text-[14px] sm:text-[16px] font-bold tabular-nums truncate ${tone.fg}`}>
                         {s.value}
                       </div>
                     </div>
@@ -313,35 +298,13 @@ export default async function HomePage() {
               })}
             </div>
           </div>
-
-          {/* Tablet+: single horizontal strip with dividers */}
-          <div className="hidden sm:flex items-stretch bg-white rounded-2xl border border-black/[0.06] shadow-[0_10px_30px_rgba(0,0,0,0.08)] divide-x divide-slate-100 overflow-hidden">
-            {heroStats.map((s) => {
-              const tone = TONE_STYLES[s.tone];
-              return (
-                <div key={s.label} className="flex-1 min-w-0 flex items-center gap-3 px-5 lg:px-6 py-4">
-                  <div className={`w-11 h-11 rounded-xl ${tone.bg} ring-1 ${tone.ring} inline-flex items-center justify-center flex-shrink-0`}>
-                    <s.Icon className={`h-[17px] w-[17px] ${tone.fg}`} strokeWidth={2.2} />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold truncate">
-                      {s.label}
-                    </div>
-                    <div className={`mt-0.5 text-[17px] lg:text-[18px] font-bold tabular-nums truncate ${tone.fg}`}>
-                      {s.value}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
           TICKER CARD
       ════════════════════════════════════════════════════════════════ */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-10 sm:pb-12 relative z-10">
+      <section className="px-4 sm:px-6 lg:px-8 -mt-2 sm:-mt-8 pb-10 sm:pb-12 relative z-10">
         <div className="max-w-[1200px] mx-auto">
           {/* ── Mobile: horizontal-scroll chip cards + View All centered ── */}
           <div className="sm:hidden">
@@ -352,13 +315,13 @@ export default async function HomePage() {
                   return (
                     <div
                       key={a.symbol}
-                      className="flex-shrink-0 w-[150px] rounded-xl bg-white border border-slate-200 shadow-[0_8px_22px_-14px_rgba(20, 20, 26,0.18)] p-3"
+                      className="flex-shrink-0 w-[150px] rounded-xl bg-white border border-slate-200 shadow-[0_8px_22px_-14px_rgba(15,23,42,0.18)] p-3"
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <CryptoIcon symbol={a.symbol} size={22} className="flex-shrink-0" />
-                        <span className="font-bold text-[#1A1A22] text-[12px] truncate">{a.symbol}/USDT</span>
+                        <span className="font-bold text-[#0A1A3A] text-[12px] truncate">{a.symbol}/USDT</span>
                       </div>
-                      <div className="text-[14px] font-bold text-[#1A1A22] tabular-nums truncate">
+                      <div className="text-[14px] font-bold text-[#0A1A3A] tabular-nums truncate">
                         {formatCurrency(a.price)}
                       </div>
                       <div className={`mt-1 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10.5px] font-semibold tabular-nums ${up ? "text-emerald-700 bg-emerald-50" : "text-rose-700 bg-rose-50"}`}>
@@ -373,7 +336,7 @@ export default async function HomePage() {
             <div className="flex justify-center mt-4">
               <Link
                 href="/markets"
-                className="inline-flex items-center gap-1.5 px-5 h-10 rounded-md text-[12.5px] font-semibold text-[#D4AF37] border border-[#D4AF37]/30 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] transition-colors"
+                className="inline-flex items-center gap-1.5 px-5 h-10 rounded-md text-[12.5px] font-semibold text-[#2B6BFF] border border-[#2B6BFF]/30 hover:bg-[#2B6BFF] hover:text-white hover:border-[#2B6BFF] transition-colors"
               >
                 View All Markets
                 <ChevronRight size={14} />
@@ -382,7 +345,7 @@ export default async function HomePage() {
           </div>
 
           {/* ── Tablet+: single rounded card with row + side button ── */}
-          <div className="hidden sm:block bg-white rounded-2xl border border-slate-200 shadow-[0_24px_60px_-26px_rgba(20, 20, 26,0.20)] overflow-hidden">
+          <div className="hidden sm:block bg-white rounded-2xl border border-slate-200 shadow-[0_24px_60px_-26px_rgba(15,23,42,0.20)] overflow-hidden">
             <div className="flex items-stretch">
               <div className="flex-1 min-w-0 overflow-x-auto no-scrollbar">
                 <div className="flex items-stretch divide-x divide-slate-100 min-w-max">
@@ -391,14 +354,14 @@ export default async function HomePage() {
                     return (
                       <div
                         key={a.symbol}
-                        className="flex items-center gap-3 px-5 py-4 text-[12.5px] tabular-nums whitespace-nowrap hover:bg-[#FBF7E8] transition-colors"
+                        className="flex items-center gap-3 px-5 py-4 text-[12.5px] tabular-nums whitespace-nowrap hover:bg-[#F7FAFF] transition-colors"
                       >
                         <CryptoIcon symbol={a.symbol} size={26} className="flex-shrink-0" />
                         <div className="flex flex-col leading-tight">
-                          <span className="font-bold text-[#1A1A22] text-[12.5px]">{a.symbol}/USDT</span>
-                          <span className="text-slate-600 text-[10.5px]">{a.symbol === "BTC" ? "Bitcoin" : a.symbol === "ETH" ? "Ethereum" : a.symbol === "BNB" ? "BNB" : a.symbol === "SOL" ? "Solana" : "XRP"}</span>
+                          <span className="font-bold text-[#0A1A3A] text-[12.5px]">{a.symbol}/USDT</span>
+                          <span className="text-slate-500 text-[10.5px]">{a.symbol === "BTC" ? "Bitcoin" : a.symbol === "ETH" ? "Ethereum" : a.symbol === "BNB" ? "BNB" : a.symbol === "SOL" ? "Solana" : "XRP"}</span>
                         </div>
-                        <span className="text-[#1A1A22] font-semibold text-[13px]">{formatCurrency(a.price)}</span>
+                        <span className="text-[#0A1A3A] font-semibold text-[13px]">{formatCurrency(a.price)}</span>
                         <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md text-[11.5px] font-semibold ${up ? "text-emerald-700 bg-emerald-50" : "text-rose-700 bg-rose-50"}`}>
                           {up ? <ArrowUpRight size={11} /> : <ArrowDownRight size={11} />}
                           {Math.abs(a.change).toFixed(2)}%
@@ -411,7 +374,7 @@ export default async function HomePage() {
               <div className="flex items-center px-4 border-l border-slate-100 flex-shrink-0">
                 <Link
                   href="/markets"
-                  className="inline-flex items-center gap-1.5 px-4 h-10 rounded-md text-[12.5px] font-semibold text-[#D4AF37] border border-[#D4AF37]/30 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 h-10 rounded-md text-[12.5px] font-semibold text-[#2B6BFF] border border-[#2B6BFF]/30 hover:bg-[#2B6BFF] hover:text-white hover:border-[#2B6BFF] transition-colors"
                 >
                   View All Markets
                   <ChevronRight size={14} />
@@ -433,14 +396,14 @@ export default async function HomePage() {
               return (
                 <div
                   key={c.title}
-                  className="group bg-white rounded-2xl border border-black/[0.06] p-7 shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex items-start gap-4 transition-all duration-300 hover:border-[#D4AF37] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)]"
+                  className="group bg-white rounded-2xl border border-slate-200 p-6 flex items-start gap-4 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
                 >
-                  <div className={`w-12 h-12 rounded-xl ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
-                    <c.icon className={`h-5 w-5 ${t.fg}`} strokeWidth={2} />
+                  <div className={`w-11 h-11 rounded-lg ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
+                    <c.icon className={`h-[18px] w-[18px] ${t.fg}`} strokeWidth={2} />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-[14px] font-semibold text-[#1A1A22] mb-1">{c.title}</h3>
-                    <p className="text-[12.5px] text-slate-700 leading-relaxed">{c.desc}</p>
+                    <h3 className="text-[14px] font-semibold text-[#0A1A3A] mb-1">{c.title}</h3>
+                    <p className="text-[12.5px] text-slate-600 leading-relaxed">{c.desc}</p>
                   </div>
                 </div>
               );
@@ -456,11 +419,11 @@ export default async function HomePage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="max-w-2xl mb-12">
             <Eyebrow>Platform</Eyebrow>
-            <h2 className="text-[28px] sm:text-[36px] font-bold text-[#1A1A22] tracking-tight leading-[1.1]">
+            <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1]">
               Everything you need to{" "}
-              <span className="text-[#D4AF37]">trade with precision.</span>
+              <span className="text-[#2B6BFF]">trade with precision.</span>
             </h2>
-            <p className="text-[14px] text-slate-700 mt-4 leading-relaxed">
+            <p className="text-[14px] text-slate-600 mt-4 leading-relaxed">
               A focused set of tools and account controls — designed around how
               traders actually work.
             </p>
@@ -472,15 +435,15 @@ export default async function HomePage() {
               return (
                 <div
                   key={f.title}
-                  className="group bg-white rounded-2xl border border-black/[0.06] p-7 shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#D4AF37] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)]"
+                  className="group bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 rounded-xl ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
-                      <f.icon className={`h-5 w-5 ${t.fg}`} strokeWidth={2} />
+                    <div className={`w-11 h-11 rounded-lg ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
+                      <f.icon className={`h-[18px] w-[18px] ${t.fg}`} strokeWidth={2} />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-[15px] font-semibold text-[#1A1A22] mb-1.5">{f.title}</h3>
-                      <p className="text-[13px] text-slate-700 leading-relaxed">{f.desc}</p>
+                      <h3 className="text-[15px] font-semibold text-[#0A1A3A] mb-1.5">{f.title}</h3>
+                      <p className="text-[13px] text-slate-600 leading-relaxed">{f.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -498,11 +461,11 @@ export default async function HomePage() {
           <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
             <div>
               <Eyebrow>Onboarding</Eyebrow>
-              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#1A1A22] tracking-tight leading-[1.1]">
+              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1]">
                 How account opening works.
               </h2>
             </div>
-            <p className="text-[14px] text-slate-700 max-w-md leading-relaxed">
+            <p className="text-[14px] text-slate-600 max-w-md leading-relaxed">
               A monitored, multi-step process. Identity verification goes through
               a manual review and typically takes one business day.
             </p>
@@ -512,24 +475,24 @@ export default async function HomePage() {
             {/* Desktop dashed connector */}
             <div
               aria-hidden
-              className="hidden lg:block absolute top-[26px] left-[14%] right-[14%] h-[1.5px] border-t-[1.5px] border-dashed border-[#D4AF37]/30"
+              className="hidden lg:block absolute top-[26px] left-[14%] right-[14%] h-[1.5px] border-t-[1.5px] border-dashed border-[#2B6BFF]/30"
             />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
               {steps.map((s) => {
                 const t = TONE_STYLES[s.tone];
                 return (
                   <Fragment key={s.n}>
-                    <div className="bg-white rounded-2xl border border-black/[0.06] p-7 shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex flex-col">
+                    <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col">
                       <div className="flex items-center gap-3 mb-4">
                         <div className={`relative w-12 h-12 rounded-lg ${t.bg} ring-1 ${t.ring} inline-flex items-center justify-center flex-shrink-0`}>
-                          <s.icon className={`h-5 w-5 ${t.fg}`} strokeWidth={2.2} />
+                          <s.icon className={`h-[18px] w-[18px] ${t.fg}`} strokeWidth={2.2} />
                           <span className={`absolute -top-1.5 -right-1.5 h-5 min-w-5 px-1 rounded-full bg-white border border-slate-200 text-[10px] font-bold tabular-nums ${t.fg} inline-flex items-center justify-center`}>
                             {s.n}
                           </span>
                         </div>
-                        <h3 className="text-[15px] font-semibold text-[#1A1A22] leading-tight">{s.title}</h3>
+                        <h3 className="text-[15px] font-semibold text-[#0A1A3A] leading-tight">{s.title}</h3>
                       </div>
-                      <p className="text-[13px] text-slate-700 leading-relaxed">{s.desc}</p>
+                      <p className="text-[13px] text-slate-600 leading-relaxed">{s.desc}</p>
                     </div>
                   </Fragment>
                 );
@@ -547,11 +510,11 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-12 items-start">
             <div>
               <Eyebrow>Security</Eyebrow>
-              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#1A1A22] tracking-tight leading-[1.1] mb-5">
+              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1] mb-5">
                 Built around{" "}
-                <span className="text-[#D4AF37]">your account&rsquo;s safety.</span>
+                <span className="text-[#2B6BFF]">your account&rsquo;s safety.</span>
               </h2>
-              <p className="text-[14px] text-slate-700 leading-relaxed mb-6 max-w-lg">
+              <p className="text-[14px] text-slate-600 leading-relaxed mb-6 max-w-lg">
                 Every sign-in, deposit, trade, and withdrawal is recorded with timestamps in
                 your account history. Identity documents and outbound transfers go through a
                 manual review process, and you&rsquo;re notified of any meaningful activity on
@@ -560,9 +523,9 @@ export default async function HomePage() {
 
               <ul className="space-y-2.5 max-w-md">
                 {securityList.map((item) => (
-                  <li key={item.text} className="flex items-center gap-3 text-[13px] text-[#1A1A22]">
-                    <div className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="h-4 w-4 text-[#D4AF37]" strokeWidth={2} />
+                  <li key={item.text} className="flex items-center gap-3 text-[13px] text-[#0A1A3A]">
+                    <div className="w-8 h-8 rounded-lg bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="h-4 w-4 text-[#2B6BFF]" strokeWidth={2} />
                     </div>
                     <span className="leading-snug">{item.text}</span>
                   </li>
@@ -574,12 +537,12 @@ export default async function HomePage() {
               {trust.map((t) => {
                 const ts = TONE_STYLES[t.tone];
                 return (
-                  <div key={t.title} className="bg-white rounded-2xl border border-black/[0.06] p-7 shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#D4AF37] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)]">
-                    <div className={`w-12 h-12 rounded-xl ${ts.bg} ring-1 ${ts.ring} flex items-center justify-center mb-4`}>
-                      <t.icon className={`h-5 w-5 ${ts.fg}`} strokeWidth={2} />
+                  <div key={t.title} className="bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]">
+                    <div className={`w-10 h-10 rounded-lg ${ts.bg} ring-1 ${ts.ring} flex items-center justify-center mb-3`}>
+                      <t.icon className={`h-4 w-4 ${ts.fg}`} strokeWidth={2} />
                     </div>
-                    <h4 className="text-[14px] font-semibold text-[#1A1A22] mb-1.5">{t.title}</h4>
-                    <p className="text-[12.5px] text-slate-700 leading-relaxed">{t.desc}</p>
+                    <h4 className="text-[14px] font-semibold text-[#0A1A3A] mb-1.5">{t.title}</h4>
+                    <p className="text-[12.5px] text-slate-600 leading-relaxed">{t.desc}</p>
                   </div>
                 );
               })}
@@ -596,11 +559,11 @@ export default async function HomePage() {
           <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
             <div>
               <Eyebrow>Coverage</Eyebrow>
-              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#1A1A22] tracking-tight leading-[1.1]">
+              <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0A1A3A] tracking-tight leading-[1.1]">
                 Markets we cover.
               </h2>
             </div>
-            <p className="text-[14px] text-slate-700 max-w-md leading-relaxed">
+            <p className="text-[14px] text-slate-600 max-w-md leading-relaxed">
               Every asset you see on the landing is in the dashboard today —
               {" "}{PLATFORM.listedAssets} digital assets quoted against {PLATFORM.quoteCurrency},
               with the same fees, the same execution, and the same one-click buy/sell.
@@ -611,19 +574,19 @@ export default async function HomePage() {
             {coveredMarkets.map((m) => (
               <div
                 key={m.title}
-                className="relative overflow-hidden bg-white rounded-2xl border border-black/[0.06] p-7 shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#D4AF37] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)]"
+                className="relative overflow-hidden bg-white rounded-2xl border border-slate-200 p-6 transition-all duration-300 hover:border-[#2B6BFF] hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(43,107,255,0.30)]"
               >
                 {/* Sparkline */}
                 <svg viewBox="0 0 120 36" className="absolute right-3 top-3 w-[70px] h-[22px] opacity-70">
                   <defs>
                     <linearGradient id={`mk-${m.title}`} x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%"  stopColor="#D4AF37" stopOpacity="0.5" />
-                      <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
+                      <stop offset="0%"  stopColor="#2B6BFF" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="#2B6BFF" stopOpacity="0" />
                     </linearGradient>
                   </defs>
                   <path
                     d="M2,28 L16,22 L30,26 L44,18 L58,20 L72,12 L86,16 L100,8 L118,10"
-                    stroke="#D4AF37" strokeWidth="1.4" fill="none" strokeLinecap="round"
+                    stroke="#2B6BFF" strokeWidth="1.4" fill="none" strokeLinecap="round"
                   />
                   <path
                     d="M2,28 L16,22 L30,26 L44,18 L58,20 L72,12 L86,16 L100,8 L118,10 L118,36 L2,36 Z"
@@ -647,8 +610,8 @@ export default async function HomePage() {
                     </div>
                   ) : null}
                 </div>
-                <h3 className="text-[15px] font-semibold text-[#1A1A22] mb-1.5">{m.title}</h3>
-                <p className="text-[12.5px] text-slate-700 leading-relaxed">{m.desc}</p>
+                <h3 className="text-[15px] font-semibold text-[#0A1A3A] mb-1.5">{m.title}</h3>
+                <p className="text-[12.5px] text-slate-600 leading-relaxed">{m.desc}</p>
               </div>
             ))}
           </div>
@@ -662,10 +625,10 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 lg:px-8 pb-20">
         <div className="max-w-[1200px] mx-auto">
           <div
-            className="relative rounded-3xl px-7 sm:px-12 py-14 sm:py-20 overflow-hidden text-center border border-[#E6D9A6]"
+            className="relative rounded-3xl px-7 sm:px-12 py-14 sm:py-20 overflow-hidden text-center border border-[#DCE6FA]"
             style={{
-              background: "linear-gradient(135deg, #FBF4DC 0%, #FDF8E6 50%, #FFFFFF 100%)",
-              boxShadow: "0 30px 80px -36px rgba(212, 175, 55,0.30)",
+              background: "linear-gradient(135deg, #EAF2FF 0%, #F4F8FF 50%, #FFFFFF 100%)",
+              boxShadow: "0 30px 80px -36px rgba(43,107,255,0.30)",
             }}
           >
             {/* Subtle grid background */}
@@ -674,8 +637,8 @@ export default async function HomePage() {
               className="absolute inset-0 pointer-events-none opacity-60"
               style={{
                 backgroundImage:
-                  "linear-gradient(rgba(212, 175, 55,0.06) 1px, transparent 1px)," +
-                  "linear-gradient(90deg, rgba(212, 175, 55,0.06) 1px, transparent 1px)",
+                  "linear-gradient(rgba(43,107,255,0.06) 1px, transparent 1px)," +
+                  "linear-gradient(90deg, rgba(43,107,255,0.06) 1px, transparent 1px)",
                 backgroundSize: "32px 32px",
                 maskImage:
                   "radial-gradient(70% 70% at 50% 50%, black, transparent 100%)",
@@ -687,15 +650,15 @@ export default async function HomePage() {
             <div
               aria-hidden
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] pointer-events-none"
-              style={{ background: "radial-gradient(circle, rgba(212, 175, 55,0.12), transparent 60%)" }}
+              style={{ background: "radial-gradient(circle, rgba(43,107,255,0.12), transparent 60%)" }}
             />
 
             <div className="relative max-w-[680px] mx-auto">
               <div className="inline-flex"><Eyebrow>Open an Account</Eyebrow></div>
-              <h2 className="text-[30px] sm:text-[42px] lg:text-[48px] font-bold text-[#1A1A22] tracking-tight leading-[1.05]">
+              <h2 className="text-[30px] sm:text-[42px] lg:text-[48px] font-bold text-[#0A1A3A] tracking-tight leading-[1.05]">
                 Ready when you are.
               </h2>
-              <p className="mt-5 text-[14.5px] sm:text-[16px] text-slate-700 leading-[1.65]">
+              <p className="mt-5 text-[14.5px] sm:text-[16px] text-slate-600 leading-[1.65]">
                 Create an account with your email to review the full dashboard. Identity verification
                 is required before funding an account or placing an order.
               </p>
@@ -704,20 +667,20 @@ export default async function HomePage() {
                   href="/register"
                   className="inline-flex items-center justify-center gap-2 h-[52px] px-8 rounded-md text-[14px] font-semibold text-white transition-all hover:brightness-110 hover:-translate-y-[1px]"
                   style={{
-                    background: "#D4AF37",
-                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 28px rgba(212, 175, 55,0.32)",
+                    background: "#2B6BFF",
+                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 28px rgba(43,107,255,0.32)",
                   }}
                 >
                   Create Account <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/login"
-                  className="inline-flex items-center justify-center h-[52px] px-7 rounded-md text-[14px] font-semibold text-[#1A1A22] bg-white border border-[#1A1A22]/15 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors"
+                  className="inline-flex items-center justify-center h-[52px] px-7 rounded-md text-[14px] font-semibold text-[#0A1A3A] bg-white border border-[#0A1A3A]/15 hover:border-[#2B6BFF] hover:text-[#2B6BFF] transition-colors"
                 >
                   Sign In
                 </Link>
               </div>
-              <p className="text-[12px] text-slate-600 mt-6">
+              <p className="text-[12px] text-slate-500 mt-6">
                 No account fee · Manual KYC review · Supported digital assets only
               </p>
             </div>

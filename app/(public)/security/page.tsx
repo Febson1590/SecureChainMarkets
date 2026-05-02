@@ -86,12 +86,12 @@ export default function SecurityPage() {
 
         {/* ── Header ────────────────────────────────────────────────── */}
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Security Center
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">How we protect accounts</h1>
-          <p className="text-[14px] text-slate-500 max-w-2xl mx-auto">
-            An honest summary of the security controls implemented on VorateTrade today. We
+          <p className="text-[14px] text-slate-400 max-w-2xl mx-auto">
+            An honest summary of the security controls implemented on SecureChainMarkets today. We
             describe only what is actually in place — nothing aspirational.
           </p>
         </div>
@@ -132,18 +132,18 @@ export default function SecurityPage() {
             </div>
             <div>
               <h2 className="text-lg font-bold text-white mb-2">Incident reporting &amp; responsible disclosure</h2>
-              <p className="text-sm text-slate-500 leading-relaxed mb-3">
+              <p className="text-sm text-slate-400 leading-relaxed mb-3">
                 Found a security issue? Please report it privately and give us a reasonable window
                 to respond before any public disclosure. We do not initiate legal action against
                 good-faith researchers who follow responsible-disclosure practices.
               </p>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px]">
-                <span className="text-slate-600">Contact:</span>
-                <a href={`mailto:${CONTACT.securityEmail}`} className="text-[#D4AF37] hover:text-[#E6C158] font-mono">
+                <span className="text-slate-500">Contact:</span>
+                <a href={`mailto:${CONTACT.securityEmail}`} className="text-[#2B6BFF] hover:text-[#5C8BFF] font-mono">
                   {CONTACT.securityEmail}
                 </a>
-                <span className="text-slate-600">Response window: <span className="text-slate-300">{CONTACT.securityResponseWindow}</span></span>
-                <span className="text-slate-600">Business hours: <span className="text-slate-300">{CONTACT.businessHours}</span></span>
+                <span className="text-slate-500">Response window: <span className="text-slate-300">{CONTACT.securityResponseWindow}</span></span>
+                <span className="text-slate-500">Business hours: <span className="text-slate-300">{CONTACT.businessHours}</span></span>
               </div>
             </div>
           </div>
@@ -164,17 +164,17 @@ function SecuritySection({
   return (
     <section className="mb-8">
       <div className="flex items-baseline gap-3 mb-4">
-        <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-semibold">{eyebrow}</span>
+        <span className="text-[10px] uppercase tracking-widest text-[#2B6BFF] font-semibold">{eyebrow}</span>
         <h2 className="text-xl font-bold text-white" dangerouslySetInnerHTML={{ __html: title }} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {items.map((it) => (
           <div key={it.title} className="glass-card glass-card-hover rounded-xl p-5">
-            <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center mb-3">
-              <it.icon className="h-4 w-4 text-[#D4AF37]" />
+            <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center mb-3">
+              <it.icon className="h-4 w-4 text-[#2B6BFF]" />
             </div>
             <h3 className="text-[13.5px] font-semibold text-white mb-1.5">{it.title}</h3>
-            <p className="text-[12px] text-slate-500 leading-relaxed">{it.desc}</p>
+            <p className="text-[12px] text-slate-400 leading-relaxed">{it.desc}</p>
           </div>
         ))}
       </div>

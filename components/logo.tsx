@@ -26,8 +26,8 @@ export function Logo({ variant = "full", size = "md", href = "/", className }: L
     <div className={cn("flex items-center gap-3 select-none", className)}>
       {variant === "icon" && (
         <Image
-          src="/assets/logos/voratetrade-icon.png"
-          alt="VorateTrade"
+          src="/assets/logos/securechainmarkets-icon.png"
+          alt="SecureChainMarkets"
           width={s.icon}
           height={s.icon}
           priority
@@ -37,8 +37,8 @@ export function Logo({ variant = "full", size = "md", href = "/", className }: L
 
       {variant === "full" && (
         <Image
-          src="/assets/logos/voratetrade-logo.png"
-          alt="VorateTrade"
+          src="/assets/logos/securechainmarkets-logo.png"
+          alt="SecureChainMarkets"
           width={1774}
           height={887}
           priority
@@ -53,14 +53,14 @@ export function Logo({ variant = "full", size = "md", href = "/", className }: L
             className={cn("font-extrabold tracking-wider text-white", s.textClass)}
             style={{ letterSpacing: "0.08em" }}
           >
-            VorateTrade
+            SecureChainMarkets
           </span>
           {size !== "sm" && (
             <span
-              className={cn("font-medium uppercase", s.subClass)}
-              style={{ letterSpacing: "0.32em", marginTop: "2px", color: "#D4AF37" }}
+              className={cn("font-medium uppercase text-sky-400", s.subClass)}
+              style={{ letterSpacing: "0.32em", marginTop: "2px" }}
             >
-              Trade · Invest · Grow
+              Crypto Brokerage
             </span>
           )}
         </div>

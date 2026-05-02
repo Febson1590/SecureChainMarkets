@@ -83,7 +83,7 @@ async function runCopyTradeTick(tradeId: string, now: Date) {
 }
 
 async function main() {
-  const email = `verify-copy-${Date.now()}@VorateTrade-test.local`;
+  const email = `verify-copy-${Date.now()}@SECURECHAINMARKETS-test.local`;
   console.log(`\n[verify] test email: ${email}\n`);
 
   // Need a trader to copy.

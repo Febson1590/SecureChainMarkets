@@ -6,7 +6,7 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
 /**
- * VorateTrade — minimal reference seed.
+ * SecureChainMarkets — minimal reference seed.
  *
  * Seeds ONLY market-asset reference data so the public /markets page has
  * symbols to render against live CoinGecko prices. No users, sessions,
@@ -17,7 +17,7 @@ const prisma = new PrismaClient({ adapter });
  * Idempotent: re-running will not duplicate rows or wipe data.
  */
 async function main() {
-  console.log("🌱 Seeding VorateTrade reference data...");
+  console.log("🌱 Seeding SecureChainMarkets reference data...");
 
   const assetData = [
     { symbol: "BTC",  name: "Bitcoin",     currentPrice: 67482.50,    priceChange24h: 2.34,  marketCap: 1328000000000, volume24h: 28400000000, circulatingSupply: 19700000,    rank: 1,  description: "The first and most recognized cryptocurrency, often called digital gold." },

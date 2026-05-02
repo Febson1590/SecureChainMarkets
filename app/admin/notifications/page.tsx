@@ -25,7 +25,7 @@ const NOTIF_ICONS: Record<string, any> = {
 };
 
 const NOTIF_COLORS: Record<string, string> = {
-  INFO: "text-[#D4AF37]",
+  INFO: "text-[#2B6BFF]",
   SUCCESS: "text-emerald-400",
   WARNING: "text-yellow-400",
   ERROR: "text-red-400",
@@ -82,7 +82,7 @@ export default function AdminNotificationsPage() {
         {/* Compose */}
         <div className="glass-card rounded-xl p-5 space-y-4">
           <div className="flex items-center gap-2 mb-1">
-            <Bell className="h-4 w-4 text-[#D4AF37]" />
+            <Bell className="h-4 w-4 text-[#2B6BFF]" />
             <h2 className="text-sm font-semibold text-white">Compose Notification</h2>
           </div>
 
@@ -92,15 +92,15 @@ export default function AdminNotificationsPage() {
               <SelectTrigger className="bg-white/5 border-white/10 text-white h-10">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-[#14141A] border-[#D4AF37]/20 text-white max-h-60 overflow-y-auto">
-                <SelectItem value="all" className="hover:bg-[#D4AF37]/12 focus:bg-[#D4AF37]/12">
+              <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white max-h-60 overflow-y-auto">
+                <SelectItem value="all" className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">
                   <div className="flex items-center gap-2">
                     <Users size={12} />
                     <span>All Users ({users.length})</span>
                   </div>
                 </SelectItem>
                 {users.map((u: any) => (
-                  <SelectItem key={u.id} value={u.id} className="hover:bg-[#D4AF37]/12 focus:bg-[#D4AF37]/12">
+                  <SelectItem key={u.id} value={u.id} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">
                     {u.name} ({u.email})
                   </SelectItem>
                 ))}
@@ -114,9 +114,9 @@ export default function AdminNotificationsPage() {
               <SelectTrigger className="bg-white/5 border-white/10 text-white h-10">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-[#14141A] border-[#D4AF37]/20 text-white">
+              <SelectContent className="bg-[#0E1A30] border-[#2B6BFF]/20 text-white">
                 {["INFO", "SUCCESS", "WARNING", "ERROR"].map((t) => (
-                  <SelectItem key={t} value={t} className="hover:bg-[#D4AF37]/12 focus:bg-[#D4AF37]/12">{t}</SelectItem>
+                  <SelectItem key={t} value={t} className="hover:bg-[#2B6BFF]/12 focus:bg-[#2B6BFF]/12">{t}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -142,7 +142,7 @@ export default function AdminNotificationsPage() {
             />
           </div>
 
-          <Button onClick={handleSend} disabled={loading || !title || !message} className="w-full bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-10 text-sm">
+          <Button onClick={handleSend} disabled={loading || !title || !message} className="w-full bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-10 text-sm">
             {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />}
             {userId === "all" ? `Send to All Users` : "Send Notification"}
           </Button>

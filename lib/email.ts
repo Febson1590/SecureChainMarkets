@@ -5,8 +5,8 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ─── Hosted assets ────────────────────────────────────────────────────────────
-const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://voratetrade.vercel.app";
-const LOGO_URL = `${APP_URL}/assets/logos/voratetrade-logo.png`;
+const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://securechainmarkets.vercel.app";
+const LOGO_URL = `${APP_URL}/assets/logos/securechainmarkets-logo.png`;
 
 // ─── HTML template ────────────────────────────────────────────────────────────
 function buildVerificationEmail(opts: {
@@ -16,10 +16,10 @@ function buildVerificationEmail(opts: {
 }): string {
   const { name, code, type } = opts;
 
-  const title   = type === "REGISTER" ? "Verify your VorateTrade account" : "Your VorateTrade login code";
+  const title   = type === "REGISTER" ? "Verify your SecureChainMarkets account" : "Your SecureChainMarkets login code";
   const heading = type === "REGISTER" ? "Email Verification"                   : "Login Verification";
   const message = type === "REGISTER"
-    ? "Use the code below to verify your email and activate your VorateTrade account."
+    ? "Use the code below to verify your email and activate your SecureChainMarkets account."
     : "A sign-in was attempted on your account. Use the code below to complete your login.";
 
   // Render each digit as its own bordered cell for perfect spacing in mail clients
@@ -31,7 +31,7 @@ function buildVerificationEmail(opts: {
           <tr>
             <td align="center" style="
               width:44px;height:56px;
-              background-color:#14141A;
+              background-color:#0E1A30;
               border:1px solid rgba(255,255,255,0.10);
               border-radius:10px;
               font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -78,16 +78,16 @@ function buildVerificationEmail(opts: {
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:#0F0F14;color:#E2E8F0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+<body style="margin:0;padding:0;background-color:#08111F;color:#E2E8F0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;">
 
   <!-- Preheader (hidden) -->
-  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#0F0F14;opacity:0;">
-    Your VorateTrade verification code is ${code}. It expires in 10 minutes.
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#08111F;opacity:0;">
+    Your SecureChainMarkets verification code is ${code}. It expires in 10 minutes.
   </div>
 
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0F0F14;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#08111F;">
     <tr>
-      <td align="center" style="padding:40px 16px;background-color:#0F0F14;">
+      <td align="center" style="padding:40px 16px;background-color:#08111F;">
 
         <!-- Container — max 560px -->
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
@@ -103,7 +103,7 @@ function buildVerificationEmail(opts: {
               <a href="${APP_URL}" target="_blank" style="text-decoration:none;display:inline-block;line-height:0;font-size:0;">
                 <img
                   src="${LOGO_URL}"
-                  alt="VorateTrade"
+                  alt="SecureChainMarkets"
                   width="220"
                   height="110"
                   class="em-logo"
@@ -116,8 +116,8 @@ function buildVerificationEmail(opts: {
           <!-- ─── CARD ────────────────────────────────────────────────── -->
           <tr>
             <td style="
-              background-color:#14141A;
-              border:1px solid rgba(212, 175, 55,0.16);
+              background-color:#0E1A30;
+              border:1px solid rgba(255,255,255,0.08);
               border-radius:16px;
               box-shadow:0 12px 40px rgba(0,0,0,0.45);
               overflow:hidden;
@@ -132,7 +132,7 @@ function buildVerificationEmail(opts: {
                       margin:0 0 14px 0;
                       font-size:11px;
                       font-weight:700;
-                      color:#D4AF37;
+                      color:#2B6BFF;
                       text-align:center;
                       letter-spacing:0.22em;
                       text-transform:uppercase;
@@ -191,8 +191,8 @@ function buildVerificationEmail(opts: {
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                       <tr>
                         <td style="
-                          background-color:rgba(212, 175, 55,0.07);
-                          border:1px solid rgba(212, 175, 55,0.22);
+                          background-color:rgba(43,107,255,0.07);
+                          border:1px solid rgba(43,107,255,0.22);
                           border-radius:10px;
                           padding:14px 18px;
                         ">
@@ -203,7 +203,7 @@ function buildVerificationEmail(opts: {
                             color:#CBD5E1;
                             text-align:center;
                           ">
-                            <span style="color:#D4AF37;font-weight:700;">Security notice</span>
+                            <span style="color:#2B6BFF;font-weight:700;">Security notice</span>
                             &nbsp;·&nbsp; If you didn’t request this, you can safely ignore this email — your account remains secure.
                           </p>
                         </td>
@@ -235,7 +235,7 @@ function buildVerificationEmail(opts: {
                 color:#475569;
                 text-align:center;
               ">
-                &copy; ${new Date().getFullYear()} VorateTrade · All rights reserved
+                &copy; ${new Date().getFullYear()} SecureChainMarkets · All rights reserved
               </p>
             </td>
           </tr>
@@ -262,10 +262,10 @@ export async function sendVerificationEmail(opts: {
   const tag = "[sendVerificationEmail]";
   const { to, name, code, type } = opts;
 
-  const from    = process.env.EMAIL_FROM || "VorateTrade <no-reply@VorateTrade.com>";
+  const from    = process.env.EMAIL_FROM || "SecureChainMarkets <no-reply@SecureChainMarkets.com>";
   const subject = type === "REGISTER"
-    ? "Verify your VorateTrade account"
-    : "Your VorateTrade login code";
+    ? "Verify your SecureChainMarkets account"
+    : "Your SecureChainMarkets login code";
 
   console.log(`${tag} ── START ──────────────────────────────────────`);
   console.log(`${tag} to      : ${to}`);
@@ -290,7 +290,7 @@ export async function sendVerificationEmail(opts: {
     "",
     "If you did not request this, please ignore this email.",
     "",
-    "— VorateTrade",
+    "— SecureChainMarkets",
   ].join("\n");
 
   console.log(`${tag} Calling resend.emails.send() …`);
@@ -329,8 +329,8 @@ export async function sendPasswordResetEmail(opts: {
   const tag = "[sendPasswordResetEmail]";
   const { to, name, token } = opts;
 
-  const from    = process.env.EMAIL_FROM || "VorateTrade <no-reply@VorateTrade.com>";
-  const subject = "Reset your VorateTrade password";
+  const from    = process.env.EMAIL_FROM || "SecureChainMarkets <no-reply@SecureChainMarkets.com>";
+  const subject = "Reset your SecureChainMarkets password";
   const resetUrl = `${APP_URL}/reset-password?token=${encodeURIComponent(token)}`;
 
   console.log(`${tag} to=${to} from=${from}`);
@@ -340,7 +340,7 @@ export async function sendPasswordResetEmail(opts: {
   const text = [
     `Hi ${name},`,
     "",
-    "We received a request to reset your VorateTrade password.",
+    "We received a request to reset your SecureChainMarkets password.",
     "",
     "Click the link below to choose a new password. The link expires in 30 minutes:",
     "",
@@ -348,7 +348,7 @@ export async function sendPasswordResetEmail(opts: {
     "",
     "If you didn't request this, you can safely ignore this email — your password won't change.",
     "",
-    "— VorateTrade",
+    "— SecureChainMarkets",
   ].join("\n");
 
   const result = await resend.emails.send({ from, to, subject, text, html });
@@ -376,35 +376,35 @@ function buildPasswordResetEmail(opts: { name: string; resetUrl: string }): stri
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:#0F0F14;font-family:'Inter',Arial,Helvetica,sans-serif;color:#e2e8f0;">
-  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#0F0F14;opacity:0;">
-    Reset your VorateTrade password — link expires in 30 minutes.
+<body style="margin:0;padding:0;background-color:#08111F;font-family:'Inter',Arial,Helvetica,sans-serif;color:#e2e8f0;">
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#08111F;opacity:0;">
+    Reset your SecureChainMarkets password — link expires in 30 minutes.
   </div>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0F0F14;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#08111F;">
     <tr>
-      <td align="center" style="padding:40px 16px;background-color:#0F0F14;">
+      <td align="center" style="padding:40px 16px;background-color:#08111F;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
           <tr>
             <td align="center" style="padding:24px 0 32px 0;line-height:0;font-size:0;">
               <a href="${APP_URL}" target="_blank" style="text-decoration:none;display:inline-block;line-height:0;font-size:0;">
-                <img src="${LOGO_URL}" alt="VorateTrade" width="220" height="110" class="em-logo"
+                <img src="${LOGO_URL}" alt="SecureChainMarkets" width="220" height="110" class="em-logo"
                   style="display:block;margin:0 auto;border:0;outline:none;text-decoration:none;width:220px;height:110px;-ms-interpolation-mode:bicubic;" />
               </a>
             </td>
           </tr>
           <tr>
-            <td style="background-color:#14141A;border:1px solid rgba(255,255,255,0.08);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.45);overflow:hidden;">
+            <td style="background-color:#0E1A30;border:1px solid rgba(255,255,255,0.08);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.45);overflow:hidden;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td class="em-content-td" style="padding:44px 44px 40px 44px;">
-                    <p style="margin:0 0 8px 0;font-size:11px;font-weight:700;color:#D4AF37;letter-spacing:0.18em;text-transform:uppercase;">
+                    <p style="margin:0 0 8px 0;font-size:11px;font-weight:700;color:#2B6BFF;letter-spacing:0.18em;text-transform:uppercase;">
                       Password Reset
                     </p>
                     <h1 style="margin:0 0 16px 0;font-size:24px;font-weight:700;color:#ffffff;line-height:1.25;">
                       Reset your password
                     </h1>
                     <p style="margin:0 0 24px 0;font-size:14px;color:#cbd5e1;line-height:1.65;">
-                      Hi ${name}, we received a request to reset the password on your VorateTrade
+                      Hi ${name}, we received a request to reset the password on your SecureChainMarkets
                       account. Click the button below to choose a new one. The link expires in
                       <strong style="color:#ffffff;">30 minutes</strong>.
                     </p>
@@ -412,7 +412,7 @@ function buildPasswordResetEmail(opts: { name: string; resetUrl: string }): stri
                       <tr>
                         <td>
                           <a href="${resetUrl}" target="_blank" class="em-cta"
-                            style="display:inline-block;background:#D4AF37;color:#ffffff;font-weight:600;font-size:14px;text-decoration:none;padding:13px 28px;border-radius:10px;border:1px solid #D4AF37;mso-padding-alt:0;">
+                            style="display:inline-block;background:#2B6BFF;color:#ffffff;font-weight:600;font-size:14px;text-decoration:none;padding:13px 28px;border-radius:10px;border:1px solid #2B6BFF;mso-padding-alt:0;">
                             Reset password
                           </a>
                         </td>
@@ -422,7 +422,7 @@ function buildPasswordResetEmail(opts: { name: string; resetUrl: string }): stri
                       Or paste this link into your browser:
                     </p>
                     <p style="margin:0 0 24px 0;font-size:12px;color:#cbd5e1;line-height:1.6;word-break:break-all;">
-                      <a href="${resetUrl}" style="color:#D4AF37;text-decoration:underline;">${resetUrl}</a>
+                      <a href="${resetUrl}" style="color:#2B6BFF;text-decoration:underline;">${resetUrl}</a>
                     </p>
                     <div style="height:1px;background-color:rgba(255,255,255,0.08);margin:8px 0 24px 0;"></div>
                     <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.6;">
@@ -437,7 +437,7 @@ function buildPasswordResetEmail(opts: { name: string; resetUrl: string }): stri
           <tr>
             <td style="padding:24px 0 0 0;text-align:center;">
               <p style="margin:0;font-size:11px;color:#64748b;line-height:1.6;">
-                © ${new Date().getFullYear()} VorateTrade · Trade with confidence
+                © ${new Date().getFullYear()} SecureChainMarkets · Trade with confidence
               </p>
             </td>
           </tr>

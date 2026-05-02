@@ -20,7 +20,7 @@ const TX_ICONS: Record<string, any> = {
 const TX_COLORS: Record<string, string> = {
   DEPOSIT: "text-emerald-400",
   WITHDRAWAL: "text-red-400",
-  BUY: "text-[#D4AF37]",
+  BUY: "text-[#2B6BFF]",
   SELL: "text-orange-400",
   FEE: "text-slate-400",
   BONUS: "text-yellow-400",
@@ -58,10 +58,10 @@ export default async function AdminTransactionsPage({
 
       {/* Type filters */}
       <div className="flex flex-wrap gap-2">
-        <a href="/admin/transactions" className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${!typeFilter ? "bg-[#D4AF37]/20 border-[#D4AF37]/40 text-[#D4AF37]" : "border-white/10 text-slate-400 hover:border-white/20"}`}>All</a>
+        <a href="/admin/transactions" className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${!typeFilter ? "bg-[#2B6BFF]/20 border-[#2B6BFF]/40 text-[#2B6BFF]" : "border-white/10 text-slate-400 hover:border-white/20"}`}>All</a>
         {TX_TYPES.map((type) => (
           <a key={type} href={`/admin/transactions?type=${type}`}
-            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${typeFilter === type ? "bg-[#D4AF37]/20 border-[#D4AF37]/40 text-[#D4AF37]" : "border-white/10 text-slate-400 hover:border-white/20"}`}>
+            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${typeFilter === type ? "bg-[#2B6BFF]/20 border-[#2B6BFF]/40 text-[#2B6BFF]" : "border-white/10 text-slate-400 hover:border-white/20"}`}>
             {type}
           </a>
         ))}

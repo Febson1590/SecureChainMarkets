@@ -36,10 +36,10 @@ export default function ForgotPasswordPage() {
     <div className="px-4 sm:px-6 lg:px-10 py-8 sm:py-12 lg:py-14 pb-12 sm:pb-16">
       <div className="w-full max-w-[480px] mx-auto">
         <div className="text-center mb-7">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4">
-            <Lock className="h-7 w-7 text-[#D4AF37]" strokeWidth={2} />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#2B6BFF]/10 border border-[#2B6BFF]/20 mb-4">
+            <Lock className="h-7 w-7 text-[#2B6BFF]" strokeWidth={2} />
           </div>
-          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#1A1A22]">
+          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#0A1A3A]">
             Forgot your password?
           </h1>
           <p className="mt-2 text-[13.5px] text-slate-600 leading-[1.6]">
@@ -49,17 +49,17 @@ export default function ForgotPasswordPage() {
 
         <div
           className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8"
-          style={{ boxShadow: "0 22px 60px -28px rgba(20, 20, 26,0.18)" }}
+          style={{ boxShadow: "0 22px 60px -28px rgba(15,23,42,0.18)" }}
         >
           {submitted ? (
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 mb-3">
                 <CheckCircle2 className="h-6 w-6 text-emerald-600" />
               </div>
-              <h2 className="text-[18px] font-bold text-[#1A1A22] mb-2">Check your inbox</h2>
+              <h2 className="text-[18px] font-bold text-[#0A1A3A] mb-2">Check your inbox</h2>
               <p className="text-[13.5px] text-slate-600 leading-[1.6] mb-1">
                 If an account exists for{" "}
-                <span className="font-semibold text-[#D4AF37] break-all">{email}</span>,
+                <span className="font-semibold text-[#2B6BFF] break-all">{email}</span>,
                 we&rsquo;ve sent a password-reset link to it.
               </p>
               <p className="text-[12.5px] text-slate-500 leading-[1.6]">
@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
               <div className="mt-6 pt-5 border-t border-slate-200">
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#D4AF37] hover:text-[#B8941F]"
+                  className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#2B6BFF] hover:text-[#1A4FCC]"
                 >
                   <ArrowLeft size={14} />
                   Back to sign in
@@ -98,7 +98,7 @@ export default function ForgotPasswordPage() {
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full h-12 pl-11 pr-4 rounded-lg bg-white border border-slate-200 text-[14px] text-[#1A1A22] placeholder:text-slate-400 focus:outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all"
+                      className="w-full h-12 pl-11 pr-4 rounded-lg bg-white border border-slate-200 text-[14px] text-[#0A1A3A] placeholder:text-slate-400 focus:outline-none focus:border-[#2B6BFF] focus:ring-2 focus:ring-[#2B6BFF]/15 transition-all"
                     />
                   </div>
                 </div>
@@ -108,8 +108,8 @@ export default function ForgotPasswordPage() {
                   disabled={loading}
                   className="w-full h-12 rounded-lg text-[15px] font-semibold text-white transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
                   style={{
-                    background: "#D4AF37",
-                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(212, 175, 55,0.32)",
+                    background: "#2B6BFF",
+                    boxShadow: "0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 22px rgba(43,107,255,0.32)",
                   }}
                 >
                   {loading ? (<><Loader2 className="h-4 w-4 animate-spin" /> Sending…</>) : ("Send reset link")}
@@ -119,7 +119,7 @@ export default function ForgotPasswordPage() {
               <div className="mt-6 pt-5 border-t border-slate-200 text-center">
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#1A1A22]"
+                  className="inline-flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#0A1A3A]"
                 >
                   <ArrowLeft size={12} />
                   Back to sign in

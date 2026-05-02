@@ -107,8 +107,8 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
       {/* Account identity card */}
       <Card className="glass-card border-0 rounded-xl p-5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center">
-            <ShieldCheck className="h-5 w-5 text-[#D4AF37]" />
+          <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center">
+            <ShieldCheck className="h-5 w-5 text-[#2B6BFF]" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="text-[13px] font-semibold text-white truncate">{name}</div>
@@ -224,7 +224,7 @@ export function AdminSecurityClient({ email, name, passwordUpdatedAt }: Props) {
             <Button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37] text-white font-semibold h-10"
+              className="flex-1 bg-[#2B6BFF] hover:bg-[#2B6BFF] text-white font-semibold h-10"
             >
               {loading ? (
                 <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving…</>

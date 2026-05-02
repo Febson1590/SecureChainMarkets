@@ -70,7 +70,7 @@ export function MarketPanel({
         {viewAllHref && (
           <Link
             href={viewAllHref}
-            className="text-[11px] font-medium text-slate-500 hover:text-sky-400 inline-flex items-center gap-1 transition-colors"
+            className="text-[11px] font-medium text-slate-400 hover:text-sky-400 inline-flex items-center gap-1 transition-colors"
           >
             View all <ChevronRight size={12} />
           </Link>
@@ -92,13 +92,13 @@ export function MarketPanel({
             </button>
           ))}
         </div>
-        <div className="text-[10px] uppercase tracking-widest text-slate-700 font-semibold hidden sm:inline-flex items-center gap-1.5">
+        <div className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold hidden sm:inline-flex items-center gap-1.5">
           <span className="vx-live-dot" /> Market snapshot
         </div>
       </div>
 
       {/* ── Column headers ─────────────────────────────────────────── */}
-      <div className="vx-market-grid items-center px-3.5 pb-1.5 text-[9.5px] uppercase tracking-widest text-slate-600 font-semibold border-b border-white/[0.05]">
+      <div className="vx-market-grid items-center px-3.5 pb-1.5 text-[9.5px] uppercase tracking-widest text-slate-500 font-semibold border-b border-white/[0.05]">
         <div>Asset</div>
         <div className="text-right">Price</div>
         <div className="text-right">24h</div>
@@ -110,7 +110,7 @@ export function MarketPanel({
       {/* ── Rows ───────────────────────────────────────────────────── */}
       <div>
         {filtered.length === 0 ? (
-          <div className="p-8 text-center text-xs text-slate-600">
+          <div className="p-8 text-center text-xs text-slate-500">
             No assets in this view.
           </div>
         ) : (
@@ -134,9 +134,9 @@ export function MarketPanel({
                   <div className="min-w-0">
                     <div className="text-[12.5px] font-semibold text-white leading-tight truncate">
                       {a.symbol}
-                      <span className="text-[10px] font-normal text-slate-600 ml-1">/USD</span>
+                      <span className="text-[10px] font-normal text-slate-500 ml-1">/USD</span>
                     </div>
-                    <div className="text-[10px] text-slate-600 truncate">{a.name}</div>
+                    <div className="text-[10px] text-slate-500 truncate">{a.name}</div>
                   </div>
                 </div>
 
@@ -154,12 +154,12 @@ export function MarketPanel({
                 </div>
 
                 {/* Volume */}
-                <div className="hidden sm:block text-right text-[11.5px] text-slate-500 tabular-nums">
+                <div className="hidden sm:block text-right text-[11.5px] text-slate-400 tabular-nums">
                   ${formatCompact(a.volume24h)}
                 </div>
 
                 {/* Market cap */}
-                <div className="hidden md:block text-right text-[11.5px] text-slate-500 tabular-nums">
+                <div className="hidden md:block text-right text-[11.5px] text-slate-400 tabular-nums">
                   ${formatCompact(a.marketCap)}
                 </div>
 

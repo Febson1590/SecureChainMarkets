@@ -21,7 +21,7 @@ function genAddr(currency: string): string {
 }
 
 async function main() {
-  const email = process.env.ADMIN_EMAIL    || "admin@voratetrade.com";
+  const email = process.env.ADMIN_EMAIL    || "admin@securechainmarkets.com";
   const pwd   = process.env.ADMIN_PASSWORD || "Admin@123456";
 
   const passwordHash = await bcrypt.hash(pwd, 12);
@@ -40,13 +40,13 @@ async function main() {
   const admin = await prisma.user.create({
     data: {
       email,
-      name: "VorateTrade Admin",
+      name: "SecureChainMarkets Admin",
       password: passwordHash,
       role: "ADMIN",
       status: "ACTIVE",
       profile: {
         create: {
-          firstName: "VorateTrade",
+          firstName: "SecureChainMarkets",
           lastName:  "Admin",
           country:   "United States",
         },

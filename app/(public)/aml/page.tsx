@@ -8,18 +8,18 @@ export default function AmlPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Legal
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Anti-Money Laundering (AML) Policy</h1>
-          <p className="text-sm text-slate-600">Last updated: April 2026</p>
+          <p className="text-sm text-slate-500">Last updated: April 2026</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-500 leading-relaxed">
+        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-400 leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-white mb-2">1. Purpose</h2>
             <p>
-              VorateTrade is committed to preventing the use of its platform for money
+              SecureChainMarkets is committed to preventing the use of its platform for money
               laundering, terrorist financing, sanctions evasion, fraud, or any other financial
               crime. This policy summarises the controls we operate to detect and deter such
               activity, and the obligations placed on every account holder.
@@ -94,7 +94,7 @@ export default function AmlPage() {
           <section>
             <h2 className="text-lg font-semibold text-white mb-2">8. Account Holder Obligations</h2>
             <p>
-              By using VorateTrade you agree to provide accurate and current
+              By using SecureChainMarkets you agree to provide accurate and current
               identification information, to respond promptly to compliance requests, and to
               use the platform only for lawful purposes. Providing false information,
               attempting to circumvent our controls, or engaging in any prohibited activity
@@ -116,7 +116,7 @@ export default function AmlPage() {
             <p>
               For AML, sanctions, or compliance questions, contact our team via the
               {" "}
-              <a href="/contact" className="text-[#D4AF37] hover:text-[#E6C158]">support page</a>.
+              <a href="/contact" className="text-[#2B6BFF] hover:text-[#5C8BFF]">support page</a>.
             </p>
           </section>
         </div>

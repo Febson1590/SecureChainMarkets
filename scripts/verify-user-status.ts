@@ -54,7 +54,7 @@ async function main() {
 
   // Engine-tick gate on a real SUSPENDED user.
   console.log("\n[verify] engine tick gate — SUSPENDED user should NOT earn\n");
-  const email = `verify-status-${Date.now()}@VorateTrade-test.local`;
+  const email = `verify-status-${Date.now()}@SECURECHAINMARKETS-test.local`;
   const user = await prisma.user.create({
     data: {
       email, name: "Verify Status", role: "USER", status: "SUSPENDED",

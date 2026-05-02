@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * One-shot icon bake step. Produces the VorateTrade-branded raster icons
+ * One-shot icon bake step. Produces the SECURECHAINMARKETS-branded raster icons
  * the PWA manifest and legacy browsers need, rendered from the single
  * SVG source of truth (`app/icon.svg`) via sharp.
  *

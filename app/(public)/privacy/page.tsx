@@ -8,18 +8,18 @@ export default function PrivacyPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Legal
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Privacy Policy</h1>
-          <p className="text-sm text-slate-600">Last updated: April 2026</p>
+          <p className="text-sm text-slate-500">Last updated: April 2026</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-500 leading-relaxed">
+        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-400 leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-white mb-2">1. Information We Collect</h2>
             <p className="mb-2">
-              When you create a VorateTrade account and use the platform, we collect the following
+              When you create a SecureChainMarkets account and use the platform, we collect the following
               categories of information:
             </p>
             <ul className="list-disc pl-5 space-y-1">
@@ -95,8 +95,8 @@ export default function PrivacyPage() {
             <h2 className="text-lg font-semibold text-white mb-2">9. Contact</h2>
             <p>
               Privacy questions can be sent to{" "}
-              <a href="mailto:privacy@VorateTrade.com" className="text-[#D4AF37] hover:text-[#E6C158]">
-                privacy@VorateTrade.com
+              <a href="mailto:privacy@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
+                privacy@SecureChainMarkets.com
               </a>.
             </p>
           </section>

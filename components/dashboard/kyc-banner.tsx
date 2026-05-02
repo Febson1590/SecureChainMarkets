@@ -19,9 +19,9 @@ const CONFIG: Record<
   },
   pending: {
     icon: Clock,
-    color: "text-amber-400",
-    bg: "bg-amber-500/[0.07]",
-    border: "border-amber-500/25",
+    color: "text-sky-400",
+    bg: "bg-sky-500/[0.07]",
+    border: "border-sky-500/25",
     title: "Verification under review",
     message: "Our compliance team is reviewing your documents. This typically takes 1–3 business days.",
     cta: "View Status",

@@ -54,11 +54,11 @@ export default function ContactPage() {
 
         {/* ── Header ───────────────────────────────────────────────── */}
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Contact
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Support &amp; escalation channels</h1>
-          <p className="text-[14px] text-slate-500 max-w-xl mx-auto">
+          <p className="text-[14px] text-slate-400 max-w-xl mx-auto">
             Pick the channel that fits your request. Verified users should submit tickets from
             inside the dashboard so they are linked to the right account automatically.
           </p>
@@ -75,15 +75,15 @@ export default function ContactPage() {
                 className="block glass-card glass-card-hover rounded-xl p-5 group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
-                    <item.icon className="h-4 w-4 text-[#D4AF37]" />
+                  <div className="w-10 h-10 rounded-lg bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center flex-shrink-0">
+                    <item.icon className="h-4 w-4 text-[#2B6BFF]" />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-[11px] text-slate-600 uppercase tracking-wider mb-0.5">{item.title}</div>
-                    <div className="text-sm font-semibold text-white group-hover:text-[#D4AF37] transition-colors break-all">
+                    <div className="text-[11px] text-slate-500 uppercase tracking-wider mb-0.5">{item.title}</div>
+                    <div className="text-sm font-semibold text-white group-hover:text-[#2B6BFF] transition-colors break-all">
                       {item.value}
                     </div>
-                    <div className="text-xs text-slate-600 mt-1 leading-relaxed">{item.sub}</div>
+                    <div className="text-xs text-slate-500 mt-1 leading-relaxed">{item.sub}</div>
                   </div>
                 </div>
               </a>
@@ -93,8 +93,8 @@ export default function ContactPage() {
               {meta.map((item) => (
                 <div key={item.title} className="glass-card rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-1">
-                    <item.icon size={12} className="text-slate-600" />
-                    <span className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">
+                    <item.icon size={12} className="text-slate-500" />
+                    <span className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">
                       {item.title}
                     </span>
                   </div>
@@ -108,13 +108,13 @@ export default function ContactPage() {
           <div className="lg:col-span-3 space-y-4">
 
             {/* Intake guidance */}
-            <div className="glass-card rounded-xl p-5 border border-[#D4AF37]/15 bg-[#D4AF37]/[0.03] flex items-start gap-3">
-              <AlertOctagon size={16} className="text-[#D4AF37] flex-shrink-0 mt-0.5" />
+            <div className="glass-card rounded-xl p-5 border border-[#2B6BFF]/15 bg-[#2B6BFF]/[0.03] flex items-start gap-3">
+              <AlertOctagon size={16} className="text-[#2B6BFF] flex-shrink-0 mt-0.5" />
               <div>
                 <div className="text-[13px] font-semibold text-white mb-1">
                   Before you send
                 </div>
-                <p className="text-[12px] text-slate-500 leading-relaxed">
+                <p className="text-[12px] text-slate-400 leading-relaxed">
                   For account, deposit, withdrawal, or trade issues — please sign in and submit a
                   ticket from the dashboard. It attaches your account ID automatically, which lets
                   us respond faster and verify ownership.

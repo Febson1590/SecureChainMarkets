@@ -9,22 +9,22 @@ export default function RiskPage() {
     <div className="min-h-screen pt-28 pb-16 hero-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-[#D4AF37]/12 text-[#D4AF37] border-[#D4AF37]/20 text-xs tracking-widest uppercase">
+          <Badge className="mb-4 bg-[#2B6BFF]/12 text-[#2B6BFF] border-[#2B6BFF]/20 text-xs tracking-widest uppercase">
             Trade Informed
           </Badge>
           <h1 className="text-4xl font-bold text-white mb-3">Trading Considerations</h1>
-          <p className="text-sm text-slate-600">A quick overview of how digital-asset markets behave so you can plan with confidence.</p>
+          <p className="text-sm text-slate-500">A quick overview of how digital-asset markets behave so you can plan with confidence.</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-6 mb-6 border border-[#D4AF37]/20 bg-[#D4AF37]/[0.06] flex items-start gap-4">
-          <AlertTriangle className="h-5 w-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+        <div className="glass-card rounded-2xl p-6 mb-6 border border-[#2B6BFF]/20 bg-[#2B6BFF]/[0.06] flex items-start gap-4">
+          <AlertTriangle className="h-5 w-5 text-[#2B6BFF] flex-shrink-0 mt-0.5" />
           <p className="text-sm text-slate-300 leading-relaxed">
             Digital-asset markets are dynamic — prices move quickly and conditions change. Take a moment
             to understand the points below so you can size your positions in a way that fits your goals.
           </p>
         </div>
 
-        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-500 leading-relaxed">
+        <div className="glass-card rounded-2xl p-8 space-y-6 text-sm text-slate-400 leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-white mb-2">1. Market movement</h2>
             <p>
@@ -67,7 +67,7 @@ export default function RiskPage() {
             <p>
               We protect your account on our side with encryption, two-factor sign-in, and activity
               monitoring. On your side, the most important step is keeping your password and
-              one-time codes private — VorateTrade staff will never ask for either.
+              one-time codes private — SecureChainMarkets staff will never ask for either.
             </p>
           </section>
 
@@ -83,7 +83,7 @@ export default function RiskPage() {
           <section>
             <h2 className="text-lg font-semibold text-white mb-2">7. Trade with confidence</h2>
             <p>
-              By using VorateTrade, you confirm that you have reviewed these considerations and
+              By using SecureChainMarkets, you confirm that you have reviewed these considerations and
               are comfortable making your own trading decisions. We&rsquo;re here to support you with
               the tools and information to do that well.
             </p>

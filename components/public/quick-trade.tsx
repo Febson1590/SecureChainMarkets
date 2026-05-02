@@ -79,7 +79,7 @@ export function QuickTrade({ assets, defaultSymbol = "BTC", embedded = false, cl
           <span className="vx-panel-title-dot" />
           {embedded ? "Order Form" : "Quick Trade"}
         </div>
-        <div className="text-[10px] text-slate-700 uppercase tracking-widest">
+        <div className="text-[10px] text-slate-600 uppercase tracking-widest">
           Spot
         </div>
       </div>
@@ -136,7 +136,7 @@ export function QuickTrade({ assets, defaultSymbol = "BTC", embedded = false, cl
             </button>
           ))}
         </div>
-        <div className="ml-auto text-[10px] text-slate-600 tabular-nums truncate min-w-0">
+        <div className="ml-auto text-[10px] text-slate-500 tabular-nums truncate min-w-0">
           Mark: <span className="text-slate-300 font-semibold">{formatCurrency(asset?.price ?? 0)}</span>
         </div>
       </div>
@@ -152,7 +152,7 @@ export function QuickTrade({ assets, defaultSymbol = "BTC", embedded = false, cl
             placeholder={type === "market" ? "Market" : (asset?.price ?? 0).toFixed(2)}
             value={type === "market" ? "" : price}
             onChange={(e) => setPrice(e.target.value.replace(/[^0-9.]/g, ""))}
-            className="w-full bg-transparent text-[13px] text-white font-semibold tabular-nums focus:outline-none placeholder:text-slate-700 disabled:text-slate-600"
+            className="w-full bg-transparent text-[13px] text-white font-semibold tabular-nums focus:outline-none placeholder:text-slate-600 disabled:text-slate-500"
           />
         </Field>
 
@@ -164,7 +164,7 @@ export function QuickTrade({ assets, defaultSymbol = "BTC", embedded = false, cl
             placeholder="0.00000"
             value={amount}
             onChange={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ""))}
-            className="w-full bg-transparent text-[13px] text-white font-semibold tabular-nums focus:outline-none placeholder:text-slate-700"
+            className="w-full bg-transparent text-[13px] text-white font-semibold tabular-nums focus:outline-none placeholder:text-slate-600"
           />
         </Field>
 
@@ -175,7 +175,7 @@ export function QuickTrade({ assets, defaultSymbol = "BTC", embedded = false, cl
               key={pct}
               type="button"
               onClick={() => fillPct(pct)}
-              className="flex-1 h-7 rounded-md text-[10px] font-semibold text-slate-500 hover:text-white bg-white/[0.03] hover:bg-sky-500/[0.10] border border-white/[0.06] hover:border-sky-500/30 transition-all duration-150"
+              className="flex-1 h-7 rounded-md text-[10px] font-semibold text-slate-400 hover:text-white bg-white/[0.03] hover:bg-sky-500/[0.10] border border-white/[0.06] hover:border-sky-500/30 transition-all duration-150"
             >
               {pct}%
             </button>
@@ -184,14 +184,14 @@ export function QuickTrade({ assets, defaultSymbol = "BTC", embedded = false, cl
 
         {/* Total row */}
         <div className="flex items-center justify-between px-3 py-2.5 rounded-md bg-white/[0.02] border border-white/[0.06]">
-          <span className="text-[10px] text-slate-600 uppercase tracking-widest font-semibold">Total</span>
+          <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Total</span>
           <span className="text-[13px] text-white font-semibold tabular-nums">
             {formatCurrency(total)}
           </span>
         </div>
 
         {/* Available balance row */}
-        <div className="flex items-center justify-between text-[10px] text-slate-700">
+        <div className="flex items-center justify-between text-[10px] text-slate-600">
           <span>Available</span>
           <Link href="/login" className="text-sky-400 hover:text-sky-300 transition-colors">
             Sign in to view
@@ -209,7 +209,7 @@ export function QuickTrade({ assets, defaultSymbol = "BTC", embedded = false, cl
         >
           {side === "buy" ? "BUY" : "SELL"} {asset?.symbol}
         </Link>
-        <p className="text-[10px] text-slate-700 text-center mt-2">
+        <p className="text-[10px] text-slate-600 text-center mt-2">
           Sign in or create an account to place orders.
         </p>
       </div>
@@ -229,11 +229,11 @@ function Field({
 }) {
   return (
     <div className="flex items-center gap-3 px-3 h-11 rounded-md bg-[#06101e] border border-white/[0.08] focus-within:border-sky-500/50 transition-colors">
-      <span className="text-[10px] text-slate-600 uppercase tracking-widest font-semibold w-12 flex-shrink-0">
+      <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold w-12 flex-shrink-0">
         {label}
       </span>
       <div className="flex-1 min-w-0">{children}</div>
-      <span className="text-[10px] text-slate-600 font-semibold flex-shrink-0">{suffix}</span>
+      <span className="text-[10px] text-slate-500 font-semibold flex-shrink-0">{suffix}</span>
     </div>
   );
 }

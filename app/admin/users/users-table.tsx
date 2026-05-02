@@ -145,7 +145,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
                   <tr key={user.id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-[#D4AF37]/12 border border-[#D4AF37]/20 flex items-center justify-center text-xs font-bold text-[#D4AF37] flex-shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-[#2B6BFF]/12 border border-[#2B6BFF]/20 flex items-center justify-center text-xs font-bold text-[#2B6BFF] flex-shrink-0">
                           {user.name?.slice(0, 2).toUpperCase() || "U"}
                         </div>
                         <span className="text-sm font-medium text-white">{user.name || "—"}</span>
@@ -174,7 +174,7 @@ export default function UsersTable({ initialUsers, total, page, pages, search }:
                           <Button
                             size="sm"
                             variant="outline"
-                            className="border-[#D4AF37]/20 text-[#D4AF37] hover:bg-[#D4AF37]/12 h-7 text-xs px-2"
+                            className="border-[#2B6BFF]/20 text-[#2B6BFF] hover:bg-[#2B6BFF]/12 h-7 text-xs px-2"
                           >
                             <Eye size={11} className="mr-1" /> Manage
                           </Button>
