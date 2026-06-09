@@ -308,7 +308,7 @@ function EmptyState({ hasQuery }: { hasQuery: boolean }) {
       <p className="text-[12.5px] text-slate-500 max-w-sm mx-auto leading-relaxed">
         {hasQuery
           ? "Try a different search term or adjust the filter."
-          : "Copy traders haven't been configured by the platform admin yet."}
+          : "No copy traders are available at the moment. Please check back later."}
       </p>
       {!hasQuery && (
         <div className="mt-4 inline-flex items-center gap-1.5 text-[11px] text-slate-600">

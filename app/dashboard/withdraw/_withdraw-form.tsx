@@ -551,7 +551,7 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
         </span>
 
         {ui === "pending" && (
-          <span className="text-[11px] text-slate-500">Awaiting admin review</span>
+          <span className="text-[11px] text-slate-500">Awaiting review</span>
         )}
         {ui === "processing" && (
           <span className="text-[11px] text-slate-500">Being sent on-chain</span>

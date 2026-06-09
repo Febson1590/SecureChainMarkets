@@ -276,8 +276,8 @@ function EmptyState() {
       </div>
       <h2 className="text-base font-bold text-white mb-2">No plans available yet</h2>
       <p className="text-[13px] text-slate-500 max-w-sm mx-auto leading-relaxed">
-        Investment plans haven&apos;t been configured by the platform admin yet. Please check
-        back later or contact support for details.
+        No investment plans are available at the moment. Please check back later
+        or contact support for details.
       </p>
       <Link href="/dashboard/support" className="inline-block mt-5">
         <Button variant="outline" className="border-white/10 text-slate-300 hover:text-white h-10 px-5">
