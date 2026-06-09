@@ -27,7 +27,12 @@ export const metadata: Metadata = {
   description:
     "SecureChainMarkets — one professional trading account for forex, indices, commodities, stocks and crypto. Built for speed, clarity and control.",
   keywords: ["forex", "indices", "commodities", "stocks", "crypto", "trading", "broker", "brokerage", "SecureChainMarkets"],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ||
+      (process.env.NODE_ENV === "production"
+        ? "https://securechainmarkets.com"
+        : "http://localhost:3000"),
+  ),
   applicationName: "SecureChainMarkets",
   authors: [{ name: "SecureChainMarkets" }],
   creator: "SecureChainMarkets",
