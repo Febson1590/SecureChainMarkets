@@ -189,7 +189,10 @@ function TraderModal({ trader, onClose, onSuccess }: {
     try {
       const payload = {
         name:             form.name.trim(),
-        avatarUrl:        avatarUrl ?? undefined,
+        // null must reach Prisma as null — it clears the column ("Remove
+        // photo"). `?? undefined` here would make the update skip the field
+        // entirely and the old photo would survive every save.
+        avatarUrl:        avatarUrl,
         country:          form.country.trim().toUpperCase() || undefined,
         specialty:        form.specialty || undefined,
         description:      form.description || undefined,

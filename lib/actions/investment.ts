@@ -854,7 +854,7 @@ export async function adminEndInvestment(userId: string) {
 // ─── Admin: copy traders ───────────────────────────────────────────────────
 
 export async function adminCreateCopyTrader(data: {
-  name: string; avatarUrl?: string; country?: string;
+  name: string; avatarUrl?: string | null; country?: string;
   specialty?: string; description?: string;
   winRate: number; totalROI: number; performance30d?: number;
   riskLevel?: string; followers: number;
@@ -884,7 +884,7 @@ export async function adminCreateCopyTrader(data: {
 }
 
 export async function adminUpdateCopyTrader(traderId: string, data: Partial<{
-  name: string; avatarUrl: string; country: string;
+  name: string; avatarUrl: string | null; country: string;
   specialty: string; description: string;
   winRate: number; totalROI: number; performance30d: number;
   riskLevel: string; followers: number;
