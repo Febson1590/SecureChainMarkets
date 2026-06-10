@@ -12,7 +12,7 @@ import {
   adminAssignInvestment, adminEditInvestment, adminAddFundsToInvestment,
   adminToggleInvestment, adminCancelInvestment, adminEndInvestment, adminGetAllInvestments,
   adminGetAllUsers, adminGetInvestmentPlans, adminCreatePlan, adminUpdatePlan,
-  adminDeletePlan,
+  adminDeletePlan, adminAdjustInvestmentPnl,
 } from "@/lib/actions/investment";
 import {
   secondsToDisplay, displayToSeconds, type DurationUnit, UNIT_LABELS,
@@ -730,6 +730,78 @@ function AddFundsModal({ investment, onClose, onSuccess }: { investment: UserInv
   );
 }
 
+// ── Adjust P/L Modal ──────────────────────────────────────────────────────────
+// Books a manual profit or loss against the ongoing investment. Behaves
+// exactly like one engine tick: accrues on totalEarned (not the wallet) and
+// writes a green/red activity entry with the computed percentage.
+function AdjustPnlModal({ investment, onClose, onSuccess }: { investment: UserInvestment; onClose: () => void; onSuccess: () => void }) {
+  const [amount,  setAmount]  = useState("");
+  const [mode,    setMode]    = useState<"profit" | "loss">("profit");
+  const [loading, setLoading] = useState(false);
+
+  const val = parseFloat(amount) || 0;
+  const pct = investment.amount > 0 ? (val / investment.amount) * 100 : 0;
+
+  async function submit() {
+    if (!val || val <= 0) { toast.error("Enter a valid amount"); return; }
+    setLoading(true);
+    const signed = mode === "loss" ? -val : val;
+    const r = await adminAdjustInvestmentPnl(investment.userId, signed)
+      .catch(() => ({ error: "Something went wrong. Please try again." }));
+    setLoading(false);
+    if ("error" in r && r.error) { toast.error(r.error); return; }
+    toast.success(`${mode === "loss" ? "Loss" : "Profit"} of ${fmt(val)} booked (${pct.toFixed(2)}%)`);
+    onSuccess(); onClose();
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex justify-center items-start sm:items-center overflow-y-auto p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
+      <div className="glass-card border border-[#2B6BFF]/20 rounded-2xl p-6 w-full max-w-sm shadow-2xl" onClick={e => e.stopPropagation()}>
+        <h3 className="text-base font-bold text-white mb-1">Adjust P/L</h3>
+        <p className="text-xs text-slate-500 mb-4">Books a manual profit or loss on this trade — shows in the user&apos;s activity exactly like an automatic one.</p>
+        <div className="mb-4 px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/10">
+          <div className="text-sm text-white font-medium">{investment.user.name || "—"}</div>
+          <div className="text-xs text-slate-500">{investment.user.email} · <span className="text-[#2B6BFF]">{investment.planName}</span></div>
+          <div className="text-xs text-slate-400 mt-0.5">
+            Invested: <span className="text-white font-semibold">{fmt(investment.amount)}</span>
+            <span className="mx-1.5 text-slate-600">·</span>
+            Earned: <span className={`font-semibold ${investment.totalEarned >= 0 ? "text-emerald-400" : "text-red-400"}`}>{fmt(investment.totalEarned)}</span>
+          </div>
+        </div>
+        <div className="mb-3 grid grid-cols-2 gap-2">
+          <button type="button" onClick={() => setMode("profit")}
+            className={`h-9 rounded-lg text-xs font-semibold border transition-colors ${mode === "profit" ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400" : "bg-white/[0.04] border-white/10 text-slate-400 hover:text-white"}`}>
+            Profit
+          </button>
+          <button type="button" onClick={() => setMode("loss")}
+            className={`h-9 rounded-lg text-xs font-semibold border transition-colors ${mode === "loss" ? "bg-red-500/15 border-red-500/40 text-red-400" : "bg-white/[0.04] border-white/10 text-slate-400 hover:text-white"}`}>
+            Loss
+          </button>
+        </div>
+        <div className="mb-2"><label className={labelCls}>Amount (USD)</label>
+          <input type="number" min="0" className={inputCls + " mt-1"} value={amount} onChange={e => setAmount(e.target.value)} autoFocus />
+        </div>
+        <div className="mb-5 text-[11px] text-slate-500 h-4">
+          {val > 0 && (
+            <>Will appear as <span className={mode === "loss" ? "text-red-400 font-semibold" : "text-emerald-400 font-semibold"}>
+              {mode === "loss" ? "−" : "+"}{fmt(val)} ({pct.toFixed(2)}%)
+            </span> in the user&apos;s activity.</>
+          )}
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" className="flex-1 border-white/10 text-slate-300 hover:text-white" onClick={onClose} disabled={loading}>Cancel</Button>
+          <Button
+            className={`flex-1 font-semibold text-white ${mode === "loss" ? "bg-red-500 hover:bg-red-400" : "bg-emerald-500 hover:bg-emerald-400"}`}
+            onClick={submit} disabled={loading}>
+            {loading ? <Loader2 size={14} className="animate-spin mr-1" /> : <TrendingUp size={14} className={`mr-1 ${mode === "loss" ? "rotate-180" : ""}`} />}
+            Book {mode === "loss" ? "Loss" : "Profit"}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function AdminInvestmentsPage() {
   const [tab, setTab] = useState<"plans" | "users">("plans");
@@ -742,6 +814,7 @@ export default function AdminInvestmentsPage() {
   const [showAssign, setShowAssign] = useState(false);
   const [editInv, setEditInv] = useState<UserInvestment | null>(null);
   const [fundsTarget, setFundsTarget] = useState<UserInvestment | null>(null);
+  const [pnlTarget, setPnlTarget] = useState<UserInvestment | null>(null);
   const [processing, setProcessing] = useState<string | null>(null);
 
   async function load() {
@@ -1037,6 +1110,13 @@ export default function AdminInvestmentsPage() {
                             </Button>
                           )}
                           {(inv.status === "ACTIVE" || inv.status === "PAUSED") && (
+                            <Button size="sm" onClick={() => setPnlTarget(inv)}
+                              title="Book a manual profit or loss on this trade"
+                              className="h-7 px-2 text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20">
+                              <TrendingUp size={11} className="mr-1" />P/L
+                            </Button>
+                          )}
+                          {(inv.status === "ACTIVE" || inv.status === "PAUSED") && (
                             <Button size="sm" disabled={processing === inv.userId} onClick={() => handleToggleInv(inv.userId, inv.status)}
                               className={`h-7 px-2 text-xs border ${inv.status === "ACTIVE" ? "bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 border-yellow-500/20" : "bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/20"}`}>
                               {processing === inv.userId ? <Loader2 size={11} className="animate-spin" /> : inv.status === "ACTIVE" ? <><PauseCircle size={11} className="mr-1" />Pause</> : <><PlayCircle size={11} className="mr-1" />Resume</>}
@@ -1072,6 +1152,7 @@ export default function AdminInvestmentsPage() {
       {showAssign && <InvestmentModal users={users} plans={plans} isEdit={false} onClose={() => setShowAssign(false)} onSuccess={load} />}
       {editInv && <InvestmentModal users={users} plans={plans} investment={editInv} isEdit={true} onClose={() => setEditInv(null)} onSuccess={load} />}
       {fundsTarget && <AddFundsModal investment={fundsTarget} onClose={() => setFundsTarget(null)} onSuccess={load} />}
+      {pnlTarget && <AdjustPnlModal investment={pnlTarget} onClose={() => setPnlTarget(null)} onSuccess={load} />}
     </div>
   );
 }

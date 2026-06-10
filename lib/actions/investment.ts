@@ -935,6 +935,111 @@ export async function adminEndInvestment(userId: string) {
   return { success: true, payout, principal, profitReleased: profitPayout };
 }
 
+// ─── Admin: manual P/L adjustments ──────────────────────────────────────────
+// Mirrors exactly what one engine tick does (lib/engine/investment-tick.ts):
+// increment totalEarned + write the matching activity row. The admin picks
+// the dollar amount instead of the engine rolling a random percentage; the
+// percentage shown is computed from the invested principal so the entry is
+// indistinguishable from an automatic tick in the user's activity feed.
+// Does NOT touch the USD wallet (split-balance model) and does NOT alter
+// the automatic tick schedule (lastProfitAt / nextProfitAt stay untouched).
+
+async function requireAdminSession() {
+  const session = await auth();
+  if (!session?.user?.id) return null;
+  const admin = await db.user.findUnique({ where: { id: session.user.id } });
+  return admin?.role === "ADMIN" ? admin : null;
+}
+
+export async function adminAdjustInvestmentPnl(userId: string, amount: number) {
+  try {
+    if (!(await requireAdminSession())) return { error: "Unauthorized" };
+
+    const delta = Math.round(Number(amount) * 100) / 100;
+    if (!Number.isFinite(delta) || delta === 0) return { error: "Enter a non-zero amount" };
+
+    const investment = await db.userInvestment.findUnique({ where: { userId } });
+    if (!investment) return { error: "No investment found for this user" };
+    if (investment.status !== "ACTIVE" && investment.status !== "PAUSED") {
+      return { error: "Investment is not ongoing" };
+    }
+
+    const principal = Number(investment.amount);
+    const pct = principal > 0 ? Math.round((Math.abs(delta) / principal) * 1000000) / 10000 : 0;
+    const isLoss = delta < 0;
+
+    await db.$transaction([
+      db.userInvestment.update({
+        where: { userId },
+        data:  { totalEarned: { increment: delta } },
+      }),
+      db.activityLog.create({
+        data: {
+          userId,
+          type:     isLoss ? "INVESTMENT_LOSS" : "INVESTMENT_PROFIT",
+          title:    `${investment.planName} ${isLoss ? "loss" : "profit"} (${pct.toFixed(2)}%)`,
+          amount:   delta,
+          percent:  isLoss ? -pct : pct,
+          currency: "USD",
+        },
+      }),
+    ]);
+
+    revalidatePath("/dashboard");
+    revalidatePath("/admin/investments");
+    return { success: true, delta, percent: pct };
+  } catch (err: any) {
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminAdjustInvestmentPnl] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
+}
+
+export async function adminAdjustCopyTradePnl(copyTradeId: string, amount: number) {
+  try {
+    if (!(await requireAdminSession())) return { error: "Unauthorized" };
+
+    const delta = Math.round(Number(amount) * 100) / 100;
+    if (!Number.isFinite(delta) || delta === 0) return { error: "Enter a non-zero amount" };
+
+    const trade = await db.userCopyTrade.findUnique({ where: { id: copyTradeId } });
+    if (!trade) return { error: "Copy trade not found" };
+    if (trade.status !== "ACTIVE" && trade.status !== "PAUSED") {
+      return { error: "Copy trade is not ongoing" };
+    }
+
+    const principal = Number(trade.amount);
+    const pct = principal > 0 ? Math.round((Math.abs(delta) / principal) * 1000000) / 10000 : 0;
+    const isLoss = delta < 0;
+
+    await db.$transaction([
+      db.userCopyTrade.update({
+        where: { id: copyTradeId },
+        data:  { totalEarned: { increment: delta } },
+      }),
+      db.activityLog.create({
+        data: {
+          userId:   trade.userId,
+          type:     isLoss ? "COPY_TRADE_LOSS" : "COPY_TRADE_PROFIT",
+          title:    `${trade.traderName} copy ${isLoss ? "loss" : "profit"} (${pct.toFixed(2)}%)`,
+          amount:   delta,
+          percent:  isLoss ? -pct : pct,
+          currency: "USD",
+        },
+      }),
+    ]);
+
+    revalidatePath("/dashboard");
+    revalidatePath("/dashboard/copy-trading");
+    revalidatePath("/admin/copy-traders");
+    return { success: true, delta, percent: pct };
+  } catch (err: any) {
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminAdjustCopyTradePnl] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
+}
+
 // ─── Admin: copy traders ───────────────────────────────────────────────────
 
 export async function adminCreateCopyTrader(data: {
