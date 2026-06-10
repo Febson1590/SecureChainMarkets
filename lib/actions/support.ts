@@ -10,6 +10,7 @@ export async function createSupportTicket(data: {
   message: string;
   priority?: string;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -40,9 +41,16 @@ export async function createSupportTicket(data: {
 
   revalidatePath("/dashboard/support");
   return { success: true, ticketId: ticket.id };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[createSupportTicket] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function sendSupportMessage(ticketId: string, content: string) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -68,6 +76,12 @@ export async function sendSupportMessage(ticketId: string, content: string) {
 
   revalidatePath(`/dashboard/support/${ticketId}`);
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[sendSupportMessage] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function getUserTickets(userId: string) {

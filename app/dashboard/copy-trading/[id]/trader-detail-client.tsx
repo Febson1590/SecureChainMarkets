@@ -471,7 +471,7 @@ function CopyModal({
     if (exceedsMax)   { toast.error(`Maximum is ${formatCurrency(trader.maxCopyAmount!)}`); return; }
     if (!canAfford)   { toast.error("Insufficient USD balance"); return; }
     start(async () => {
-      const r = await userStartCopyTrade({ traderId: trader.id, amount: val });
+      const r = await userStartCopyTrade({ traderId: trader.id, amount: val }).catch(() => ({ error: "Something went wrong. Please try again." } as const));
       if ("error" in r) { toast.error(r.error); return; }
       toast.success(`Started copying ${trader.name}`);
       onSuccess();

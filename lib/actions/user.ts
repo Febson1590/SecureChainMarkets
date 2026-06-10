@@ -32,6 +32,7 @@ export async function updateProfile(data: {
   city?: string;
   zipCode?: string;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -43,6 +44,12 @@ export async function updateProfile(data: {
 
   revalidatePath("/dashboard/settings");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[updateProfile] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function getDashboardData(userId: string) {
@@ -68,6 +75,7 @@ export async function getDashboardData(userId: string) {
 }
 
 export async function markNotificationRead(id: string) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -78,9 +86,16 @@ export async function markNotificationRead(id: string) {
 
   revalidatePath("/dashboard");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[markNotificationRead] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function markAllNotificationsRead(): Promise<void> {
+  try {
   const session = await auth();
   if (!session?.user?.id) return;
 
@@ -90,6 +105,11 @@ export async function markAllNotificationsRead(): Promise<void> {
   });
 
   revalidatePath("/dashboard");
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[markAllNotificationsRead] unexpected error:", err);
+  }
 }
 
 export async function getTransactions(userId: string, limit = 20) {
@@ -115,6 +135,7 @@ export async function changePassword(data: {
   currentPassword: string;
   newPassword: string;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -159,4 +180,10 @@ export async function changePassword(data: {
   });
 
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[changePassword] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }

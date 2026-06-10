@@ -11,6 +11,7 @@ export async function placeTrade(data: {
   quantity: number;
   type?: "MARKET" | "LIMIT";
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -150,6 +151,12 @@ export async function placeTrade(data: {
   revalidatePath("/dashboard/transactions");
 
   return { success: true, orderId: order.id };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[placeTrade] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function getMarketAssets() {
@@ -167,6 +174,7 @@ export async function getWatchlist(userId: string) {
 }
 
 export async function toggleWatchlist(assetId: string) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -183,5 +191,11 @@ export async function toggleWatchlist(assetId: string) {
   } else {
     await db.watchlistItem.create({ data: { userId, assetId } });
     return { added: true };
+  }
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[toggleWatchlist] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
   }
 }

@@ -42,7 +42,7 @@ export default function AdminVerificationPage() {
       return;
     }
     setProcessing(id);
-    const result = await processVerification(id, action, notes[id]);
+    const result = await processVerification(id, action, notes[id]).catch(() => null);
     if (result?.success) { toast.success(`Verification ${action.toLowerCase()}d`); fetchData(); setExpanded(null); }
     else toast.error(result?.error || "Failed");
     setProcessing(null);

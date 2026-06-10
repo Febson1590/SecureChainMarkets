@@ -324,7 +324,7 @@ function InvestModal({
       return;
     }
     start(async () => {
-      const r = await userStartInvestment({ planId: plan.id, amount: val });
+      const r = await userStartInvestment({ planId: plan.id, amount: val }).catch(() => ({ error: "Something went wrong. Please try again." } as const));
       if ("error" in r) { toast.error(r.error); return; }
       toast.success("Investment activated");
       onSuccess();

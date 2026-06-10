@@ -46,7 +46,7 @@ export default function AdminLimitsPage() {
 
   async function load() {
     setLoading(true);
-    const r = await adminGetFinancialLimits();
+    const r = await adminGetFinancialLimits().catch(() => ({ error: "Something went wrong. Please try again." }));
     if ("error" in r && r.error) {
       toast.error(r.error);
     } else if ("limits" in r && r.limits) {
@@ -96,7 +96,7 @@ export default function AdminLimitsPage() {
       withdrawalFeePercent: feePercent,
       withdrawalFeeFixed:   feeFixed,
       processingTimeText:   form.processingTimeText || undefined,
-    });
+    }).catch(() => ({ error: "Something went wrong. Please try again." }));
     setSaving(false);
 
     if ("error" in r && r.error) {

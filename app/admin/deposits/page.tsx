@@ -66,7 +66,7 @@ export default function AdminDepositsPage() {
 
   const handle = async (id: string, action: "APPROVE" | "REJECT") => {
     setProcessing(id);
-    const result = await processDepositRequest(id, action);
+    const result = await processDepositRequest(id, action).catch(() => null);
     if (result?.success) {
       toast.success(`Deposit ${action.toLowerCase()}d`);
       fetchDeposits();
@@ -81,7 +81,7 @@ export default function AdminDepositsPage() {
     const reason = rejectReason.trim();
     if (!reason) { toast.error("Please enter a rejection reason"); return; }
     setProcessing(rejectTarget.id);
-    const result = await processDepositRequest(rejectTarget.id, "REJECT", reason);
+    const result = await processDepositRequest(rejectTarget.id, "REJECT", reason).catch(() => null);
     if (result?.success) {
       toast.success("Deposit rejected");
       setRejectTarget(null);

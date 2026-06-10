@@ -54,12 +54,12 @@ export default function AdminNotificationsPage() {
       // Send to all users
       let count = 0;
       for (const user of users) {
-        const result = await adminSendNotification(user.id, title, message, type);
+        const result = await adminSendNotification(user.id, title, message, type).catch(() => null);
         if (result?.success) count++;
       }
       toast.success(`Notification sent to ${count} users`);
     } else {
-      const result = await adminSendNotification(userId, title, message, type);
+      const result = await adminSendNotification(userId, title, message, type).catch(() => null);
       if (result?.success) toast.success("Notification sent");
       else toast.error("Failed to send");
     }

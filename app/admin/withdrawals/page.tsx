@@ -52,7 +52,7 @@ export default function AdminWithdrawalsPage() {
 
   const approve = async (id: string) => {
     setProcessing(id);
-    const result = await processWithdrawalRequest(id, "APPROVE");
+    const result = await processWithdrawalRequest(id, "APPROVE").catch(() => null);
     if (result?.success) { toast.success("Withdrawal approved"); fetchWithdrawals(); }
     else toast.error(result?.error || "Failed");
     setProcessing(null);
@@ -63,7 +63,7 @@ export default function AdminWithdrawalsPage() {
     const reason = rejectReason.trim();
     if (!reason) { toast.error("Please enter a rejection reason"); return; }
     setProcessing(rejectTarget.id);
-    const result = await processWithdrawalRequest(rejectTarget.id, "REJECT", reason);
+    const result = await processWithdrawalRequest(rejectTarget.id, "REJECT", reason).catch(() => null);
     if (result?.success) {
       toast.success("Withdrawal rejected");
       setRejectTarget(null);

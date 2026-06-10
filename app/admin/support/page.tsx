@@ -29,7 +29,7 @@ export default function AdminSupportPage() {
     const msg = replies[ticketId]?.trim();
     if (!msg) return toast.error("Enter a reply message");
     setSending(ticketId);
-    const result = await adminRespondToTicket(ticketId, msg, close);
+    const result = await adminRespondToTicket(ticketId, msg, close).catch(() => null);
     if (result?.success) {
       toast.success(close ? "Ticket resolved" : "Reply sent");
       setReplies((p) => ({ ...p, [ticketId]: "" }));

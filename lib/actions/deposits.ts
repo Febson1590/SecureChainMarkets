@@ -23,6 +23,7 @@ export async function createDepositRequest(data: {
   cryptoNetwork?: string | null;          // e.g. "TRC20"
   exchangeRate?: number;                  // USD per 1 unit of cryptoSymbol
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -64,6 +65,12 @@ export async function createDepositRequest(data: {
 
   revalidatePath("/dashboard/deposit");
   return { success: true, requestId: request.id };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[createDepositRequest] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 /**
@@ -78,6 +85,7 @@ export async function submitDepositProof(data: {
   proofUrl:  string;
   txHash?:   string;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -112,6 +120,12 @@ export async function submitDepositProof(data: {
 
   revalidatePath("/dashboard/deposit");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[submitDepositProof] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 /**
@@ -120,6 +134,7 @@ export async function submitDepositProof(data: {
  * cancel once proof is uploaded — that requires admin review.
  */
 export async function cancelDepositRequest(requestId: string) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -132,6 +147,12 @@ export async function cancelDepositRequest(requestId: string) {
   await db.depositRequest.delete({ where: { id: requestId } });
   revalidatePath("/dashboard/deposit");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[cancelDepositRequest] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 /**
@@ -149,6 +170,7 @@ export async function requestDeposit(data: {
   txHash?:   string;
   walletId?: string;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -181,6 +203,12 @@ export async function requestDeposit(data: {
 
   revalidatePath("/dashboard/deposit");
   return { success: true, requestId: request.id };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[requestDeposit] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 /** Return active deposit wallets for the user deposit page. */
@@ -231,28 +259,60 @@ export async function requestWithdrawal(data: {
     return { error: "Enter a valid wallet address" };
   }
 
-  // Balance check uses the USD wallet — that's our canonical source of
-  // truth. The crypto snapshot is purely informational.
-  const usdWallet = await db.wallet.findUnique({
-    where: { userId_currency: { userId, currency: "USD" } },
-  });
-  if (!usdWallet || Number(usdWallet.balance) < data.amount) {
-    return { error: "Insufficient USD balance" };
-  }
+  /* Funds go on hold the moment the request is submitted: the USD wallet
+     is debited atomically with the request creation, so the user cannot
+     spend the same money elsewhere while an admin reviews. The debit is
+     conditional on `balance >= amount`, which makes the balance check and
+     the debit one indivisible step — no race can drive the balance
+     negative. A PENDING ledger row (reference = request id) records the
+     hold; processWithdrawalRequest later completes it (approve) or
+     cancels it and refunds the wallet (reject). */
+  let request;
+  try {
+    request = await db.$transaction(async (tx) => {
+      const debited = await tx.wallet.updateMany({
+        where: { userId, currency: "USD", balance: { gte: data.amount } },
+        data:  { balance: { decrement: data.amount } },
+      });
+      if (debited.count === 0) throw new Error("INSUFFICIENT_BALANCE");
 
-  const request = await db.withdrawalRequest.create({
-    data: {
-      userId,
-      currency:      data.currency,
-      amount:        data.amount,                    // USD
-      method:        data.method,
-      destination:   data.destination.trim(),
-      cryptoAmount:  data.cryptoAmount  ?? null,
-      cryptoSymbol:  data.cryptoSymbol  ?? data.currency,
-      cryptoNetwork: data.cryptoNetwork ?? null,
-      exchangeRate:  data.exchangeRate  ?? null,
-    },
-  });
+      const req = await tx.withdrawalRequest.create({
+        data: {
+          userId,
+          currency:      data.currency,
+          amount:        data.amount,                    // USD
+          method:        data.method,
+          destination:   data.destination.trim(),
+          cryptoAmount:  data.cryptoAmount  ?? null,
+          cryptoSymbol:  data.cryptoSymbol  ?? data.currency,
+          cryptoNetwork: data.cryptoNetwork ?? null,
+          exchangeRate:  data.exchangeRate  ?? null,
+        },
+      });
+
+      await tx.transaction.create({
+        data: {
+          userId,
+          type:        "WITHDRAWAL",
+          currency:    "USD",
+          amount:      data.amount,
+          status:      "PENDING",
+          reference:   req.id,
+          description: data.cryptoAmount && data.cryptoSymbol
+            ? `Withdrawal via ${data.cryptoNetwork ?? data.method} · ${data.cryptoAmount} ${data.cryptoSymbol}`
+            : `Withdrawal via ${data.method}`,
+        },
+      });
+
+      return req;
+    });
+  } catch (e: any) {
+    if (e?.message === "INSUFFICIENT_BALANCE") {
+      return { error: "Insufficient USD balance" };
+    }
+    console.error("[requestWithdrawal]", e);
+    return { error: "Something went wrong submitting your withdrawal. Please try again." };
+  }
 
   const cryptoSuffix = data.cryptoAmount && data.cryptoSymbol
     ? ` (${data.cryptoAmount.toLocaleString("en-US", { maximumFractionDigits: 8 })} ${data.cryptoSymbol})`
@@ -262,7 +322,7 @@ export async function requestWithdrawal(data: {
     data: {
       userId,
       title:   "Withdrawal submitted",
-      message: `Your withdrawal of $${data.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD${cryptoSuffix} is pending review.`,
+      message: `Your withdrawal of $${data.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD${cryptoSuffix} is pending review. The amount has been reserved from your balance.`,
       type:    "WITHDRAWAL",
     },
   });

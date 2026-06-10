@@ -121,7 +121,7 @@ export default function AdminUserDetailPage() {
     if (!wAmount || isNaN(amt) || amt <= 0) { toast.error("Enter a valid amount"); return; }
     if (!wReason.trim()) { toast.error("Reason / Note is required"); return; }
     setWOp(op);
-    const r = await adminUpdateWallet(id, selCurrency, amt, op, wReason.trim());
+    const r = await adminUpdateWallet(id, selCurrency, amt, op, wReason.trim()).catch(() => null);
     setWOp(null);
     if (r?.success) {
       toast.success(`${selCurrency} balance ${op === "ADD" ? "increased" : op === "SUBTRACT" ? "decreased" : "set"} successfully`);
@@ -133,7 +133,7 @@ export default function AdminUserDetailPage() {
   async function handleNotif() {
     if (!nTitle.trim() || !nMsg.trim()) { toast.error("Fill in title and message"); return; }
     setNBusy(true);
-    const r = await adminSendNotification(id, nTitle.trim(), nMsg.trim(), nType);
+    const r = await adminSendNotification(id, nTitle.trim(), nMsg.trim(), nType).catch(() => null);
     setNBusy(false);
     if (r?.success) { toast.success("Notification sent"); setNTitle(""); setNMsg(""); }
     else toast.error("Failed to send");

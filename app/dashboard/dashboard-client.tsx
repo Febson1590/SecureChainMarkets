@@ -161,7 +161,7 @@ function AddFundsModal({
     if (!n || n <= 0) { toast.error("Enter a valid amount"); return; }
     if (n > usdBalance) { toast.error("Insufficient balance"); return; }
     setLoading(true);
-    const r = await addInvestmentFunds(n);
+    const r = await addInvestmentFunds(n).catch(() => ({ error: "Something went wrong. Please try again." } as const));
     setLoading(false);
     if ("error" in r) { toast.error(r.error); return; }
     toast.success(`$${n.toLocaleString()} added to your investment`);
@@ -287,7 +287,7 @@ function UpgradeModal({
       return;
     }
     setSaving(true);
-    const r = await userUpgradeInvestmentPlan({ planId: selected.id, topUp: topUpNum });
+    const r = await userUpgradeInvestmentPlan({ planId: selected.id, topUp: topUpNum }).catch(() => ({ error: "Something went wrong. Please try again." } as const));
     setSaving(false);
     if ("error" in r) { toast.error(r.error); return; }
     toast.success(`Upgraded to ${selected.name}`);

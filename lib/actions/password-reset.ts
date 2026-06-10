@@ -107,6 +107,7 @@ export async function completePasswordReset(args: {
   token: string;
   newPassword: string;
 }): Promise<{ success: true } | { error: string }> {
+  try {
   const { token, newPassword } = args;
 
   if (!token || token.length < 32) return { error: "Invalid reset link." };
@@ -163,4 +164,9 @@ export async function completePasswordReset(args: {
   ]);
 
   return { success: true };
+  } catch (err: any) {
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[completePasswordReset] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }

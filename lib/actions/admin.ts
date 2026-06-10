@@ -58,6 +58,7 @@ export async function getAdminUsers(page = 1, limit = 20, search?: string) {
 }
 
 export async function updateUserStatus(userId: string, status: "ACTIVE" | "FROZEN" | "RESTRICTED" | "SUSPENDED") {
+  try {
   const adminId = await requireAdmin();
 
   await db.user.update({ where: { id: userId }, data: { status } });
@@ -74,9 +75,16 @@ export async function updateUserStatus(userId: string, status: "ACTIVE" | "FROZE
 
   revalidatePath("/admin/users");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[updateUserStatus] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminUpdateWallet(userId: string, currency: string, amount: number, operation: "SET" | "ADD" | "SUBTRACT", reason = "") {
+  try {
   const adminId = await requireAdmin();
 
   const wallet = await db.wallet.findUnique({
@@ -145,9 +153,16 @@ export async function adminUpdateWallet(userId: string, currency: string, amount
   revalidatePath("/admin/users");
   revalidatePath("/dashboard");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminUpdateWallet] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminUpdateHolding(userId: string, assetId: string, quantity: number, avgBuyPrice: number) {
+  try {
   const adminId = await requireAdmin();
 
   await db.assetHolding.upsert({
@@ -159,6 +174,12 @@ export async function adminUpdateHolding(userId: string, assetId: string, quanti
   await logAction(adminId, "HOLDING_UPDATE", userId, `Updated holding for asset ${assetId}`);
   revalidatePath("/admin/users");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminUpdateHolding] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function processDepositRequest(id: string, action: "APPROVE" | "REJECT", notes?: string) {
@@ -170,41 +191,60 @@ export async function processDepositRequest(id: string, action: "APPROVE" | "REJ
 
   const deposit = await db.depositRequest.findUnique({ where: { id } });
   if (!deposit) return { error: "Deposit not found" };
-
-  await db.depositRequest.update({
-    where: { id },
-    data: {
-      status: action === "APPROVE" ? "APPROVED" : "REJECTED",
-      adminNotes: notes,
-      processedAt: new Date(),
-    },
-  });
+  if (deposit.status !== "PENDING") {
+    return { error: "This deposit has already been processed" };
+  }
 
   const usdAmount    = Number(deposit.amount);
   const cryptoAmount = deposit.cryptoAmount !== null ? Number(deposit.cryptoAmount) : null;
   const cryptoSymbol = deposit.cryptoSymbol ?? deposit.currency;
 
-  if (action === "APPROVE") {
-    // The canonical amount is always USD — credit the user's USD wallet.
-    // Upsert in case the user somehow doesn't yet have a USD wallet.
-    await db.wallet.upsert({
-      where:  { userId_currency: { userId: deposit.userId, currency: "USD" } },
-      update: { balance: { increment: usdAmount } },
-      create: { userId: deposit.userId, currency: "USD", balance: usdAmount },
-    });
+  /* Status flip + wallet credit + ledger row are one atomic transaction.
+     The conditional claim (`status: "PENDING"` in the where) is the
+     double-process guard: if two admins (or a double-click) race, only
+     one claim succeeds — the loser sees count 0 and bails before any
+     money moves. */
+  try {
+    await db.$transaction(async (tx) => {
+      const claimed = await tx.depositRequest.updateMany({
+        where: { id, status: "PENDING" },
+        data: {
+          status: action === "APPROVE" ? "APPROVED" : "REJECTED",
+          adminNotes: notes,
+          processedAt: new Date(),
+        },
+      });
+      if (claimed.count === 0) throw new Error("ALREADY_PROCESSED");
 
-    await db.transaction.create({
-      data: {
-        userId:      deposit.userId,
-        type:        "DEPOSIT",
-        currency:    "USD",
-        amount:      usdAmount,
-        status:      "COMPLETED",
-        description: cryptoAmount !== null
-          ? `Deposit via ${deposit.method} · ${cryptoAmount} ${cryptoSymbol}`
-          : `Deposit via ${deposit.method}`,
-      },
+      if (action === "APPROVE") {
+        // The canonical amount is always USD — credit the user's USD wallet.
+        // Upsert in case the user somehow doesn't yet have a USD wallet.
+        await tx.wallet.upsert({
+          where:  { userId_currency: { userId: deposit.userId, currency: "USD" } },
+          update: { balance: { increment: usdAmount } },
+          create: { userId: deposit.userId, currency: "USD", balance: usdAmount },
+        });
+
+        await tx.transaction.create({
+          data: {
+            userId:      deposit.userId,
+            type:        "DEPOSIT",
+            currency:    "USD",
+            amount:      usdAmount,
+            status:      "COMPLETED",
+            description: cryptoAmount !== null
+              ? `Deposit via ${deposit.method} · ${cryptoAmount} ${cryptoSymbol}`
+              : `Deposit via ${deposit.method}`,
+          },
+        });
+      }
     });
+  } catch (e: any) {
+    if (e?.message === "ALREADY_PROCESSED") {
+      return { error: "This deposit has already been processed" };
+    }
+    console.error("[processDepositRequest]", e);
+    return { error: "Something went wrong while processing. Please try again." };
   }
 
   // Look up user for email
@@ -268,9 +308,12 @@ export async function processDepositRequest(id: string, action: "APPROVE" | "REJ
             : {}),
         }
       : undefined,
-  });
+    // Money has already moved at this point — notification/email failures
+    // must not surface as a processing error to the admin.
+  }).catch((e) => console.error("[processDepositRequest] notify failed:", e));
 
-  await logAction(adminId, `${action}_DEPOSIT`, deposit.userId, `Deposit ${id} ${action.toLowerCase()}d`);
+  await logAction(adminId, `${action}_DEPOSIT`, deposit.userId, `Deposit ${id} ${action.toLowerCase()}d`)
+    .catch((e) => console.error("[processDepositRequest] logAction failed:", e));
   revalidatePath("/admin/deposits");
   return { success: true };
 }
@@ -284,40 +327,77 @@ export async function processWithdrawalRequest(id: string, action: "APPROVE" | "
 
   const withdrawal = await db.withdrawalRequest.findUnique({ where: { id } });
   if (!withdrawal) return { error: "Withdrawal not found" };
-
-  await db.withdrawalRequest.update({
-    where: { id },
-    data: {
-      status: action === "APPROVE" ? "APPROVED" : "REJECTED",
-      adminNotes: notes,
-      processedAt: new Date(),
-    },
-  });
+  if (withdrawal.status !== "PENDING") {
+    return { error: "This withdrawal has already been processed" };
+  }
 
   const usdAmount    = Number(withdrawal.amount);
   const cryptoAmount = withdrawal.cryptoAmount !== null ? Number(withdrawal.cryptoAmount) : null;
   const cryptoSymbol = withdrawal.cryptoSymbol ?? withdrawal.currency;
   const network      = withdrawal.cryptoNetwork ?? withdrawal.method;
 
-  if (action === "APPROVE") {
-    // Debit the USD wallet — that's our canonical ledger.
-    await db.wallet.update({
-      where: { userId_currency: { userId: withdrawal.userId, currency: "USD" } },
-      data:  { balance: { decrement: usdAmount } },
-    });
+  /* The USD was already debited (held) when the user submitted the
+     request — see requestWithdrawal. Approval finalises the held funds;
+     rejection refunds them. The conditional claim on status: "PENDING"
+     makes double-clicks and concurrent admins safe: only one process
+     can claim the request, so funds can never move twice. */
+  try {
+    await db.$transaction(async (tx) => {
+      const claimed = await tx.withdrawalRequest.updateMany({
+        where: { id, status: "PENDING" },
+        data: {
+          status: action === "APPROVE" ? "APPROVED" : "REJECTED",
+          adminNotes: notes,
+          processedAt: new Date(),
+        },
+      });
+      if (claimed.count === 0) throw new Error("ALREADY_PROCESSED");
 
-    await db.transaction.create({
-      data: {
-        userId:      withdrawal.userId,
-        type:        "WITHDRAWAL",
-        currency:    "USD",
-        amount:      usdAmount,
-        status:      "COMPLETED",
-        description: cryptoAmount !== null
-          ? `Withdrawal via ${network} · ${cryptoAmount} ${cryptoSymbol}`
-          : `Withdrawal via ${network}`,
-      },
+      // Finalise (or cancel) the PENDING ledger row written at request
+      // time; it carries reference = withdrawal request id.
+      const ledger = await tx.transaction.updateMany({
+        where: { reference: id, status: "PENDING" },
+        data:  { status: action === "APPROVE" ? "COMPLETED" : "CANCELLED" },
+      });
+
+      if (action === "APPROVE") {
+        if (ledger.count === 0) {
+          // Legacy request created before funds-on-hold semantics —
+          // debit now and write the ledger row, as the old flow did.
+          await tx.wallet.update({
+            where: { userId_currency: { userId: withdrawal.userId, currency: "USD" } },
+            data:  { balance: { decrement: usdAmount } },
+          });
+          await tx.transaction.create({
+            data: {
+              userId:      withdrawal.userId,
+              type:        "WITHDRAWAL",
+              currency:    "USD",
+              amount:      usdAmount,
+              status:      "COMPLETED",
+              description: cryptoAmount !== null
+                ? `Withdrawal via ${network} · ${cryptoAmount} ${cryptoSymbol}`
+                : `Withdrawal via ${network}`,
+            },
+          });
+        }
+      } else {
+        // REJECT — return the held funds (only if they were actually
+        // held; legacy requests never debited, so nothing to refund).
+        if (ledger.count > 0) {
+          await tx.wallet.update({
+            where: { userId_currency: { userId: withdrawal.userId, currency: "USD" } },
+            data:  { balance: { increment: usdAmount } },
+          });
+        }
+      }
     });
+  } catch (e: any) {
+    if (e?.message === "ALREADY_PROCESSED") {
+      return { error: "This withdrawal has already been processed" };
+    }
+    console.error("[processWithdrawalRequest]", e);
+    return { error: "Something went wrong while processing. Please try again." };
   }
 
   // Look up user for email
@@ -387,14 +467,17 @@ export async function processWithdrawalRequest(id: string, action: "APPROVE" | "
             : {}),
         }
       : undefined,
-  });
+    // Funds have already moved — notification failures are non-fatal.
+  }).catch((e) => console.error("[processWithdrawalRequest] notify failed:", e));
 
-  await logAction(adminId, `${action}_WITHDRAWAL`, withdrawal.userId, `Withdrawal ${id} ${action.toLowerCase()}d`);
+  await logAction(adminId, `${action}_WITHDRAWAL`, withdrawal.userId, `Withdrawal ${id} ${action.toLowerCase()}d`)
+    .catch((e) => console.error("[processWithdrawalRequest] logAction failed:", e));
   revalidatePath("/admin/withdrawals");
   return { success: true };
 }
 
 export async function processVerification(id: string, action: "APPROVE" | "REJECT", notes?: string) {
+  try {
   const adminId = await requireAdmin();
 
   if (action === "REJECT" && (!notes || notes.trim().length === 0)) {
@@ -458,9 +541,16 @@ export async function processVerification(id: string, action: "APPROVE" | "REJEC
   await logAction(adminId, `${action}_VERIFICATION`, verification.userId);
   revalidatePath("/admin/verification");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[processVerification] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminSendNotification(userId: string, title: string, message: string, type: string) {
+  try {
   const adminId = await requireAdmin();
 
   await db.notification.create({
@@ -469,6 +559,12 @@ export async function adminSendNotification(userId: string, title: string, messa
 
   await logAction(adminId, "SEND_NOTIFICATION", userId, title);
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminSendNotification] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminUpdateMarketAsset(id: string, data: {
@@ -476,6 +572,7 @@ export async function adminUpdateMarketAsset(id: string, data: {
   priceChange24h?: number;
   isActive?: boolean;
 }) {
+  try {
   const adminId = await requireAdmin();
 
   await db.marketAsset.update({
@@ -487,9 +584,16 @@ export async function adminUpdateMarketAsset(id: string, data: {
   revalidatePath("/admin/markets");
   revalidatePath("/dashboard");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminUpdateMarketAsset] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminRespondToTicket(ticketId: string, message: string, closeTicket?: boolean) {
+  try {
   const adminId = await requireAdmin();
 
   const ticket = await db.supportTicket.findUnique({ where: { id: ticketId } });
@@ -515,6 +619,12 @@ export async function adminRespondToTicket(ticketId: string, message: string, cl
 
   revalidatePath("/admin/support");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminRespondToTicket] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminGenerateTransaction(userId: string, data: {
@@ -523,6 +633,7 @@ export async function adminGenerateTransaction(userId: string, data: {
   amount: number;
   description?: string;
 }) {
+  try {
   const adminId = await requireAdmin();
 
   await db.transaction.create({
@@ -539,6 +650,12 @@ export async function adminGenerateTransaction(userId: string, data: {
   await logAction(adminId, "GENERATE_TRANSACTION", userId, `${data.type} ${data.amount} ${data.currency}`);
   revalidatePath("/admin/transactions");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminGenerateTransaction] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 // ─── Deposit Wallet Management ───────────────────────────────────────────────
@@ -556,18 +673,32 @@ export async function upsertDepositWallet(data: {
   label: string;
   isActive?: boolean;
 }) {
+  try {
   await requireAdmin();
   if (data.id) {
     return db.depositWallet.update({ where: { id: data.id }, data });
   }
   return db.depositWallet.create({ data: { ...data, isActive: data.isActive ?? true } });
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[upsertDepositWallet] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function toggleDepositWallet(id: string, isActive: boolean) {
+  try {
   await requireAdmin();
   await db.depositWallet.update({ where: { id }, data: { isActive } });
   revalidatePath("/admin/deposits");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[toggleDepositWallet] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 // ─── Financial limits (deposit/withdrawal minima + fees) ─────────────────────
@@ -587,6 +718,7 @@ export async function adminGetFinancialLimits() {
 }
 
 export async function adminUpdateFinancialLimits(limits: Partial<FinancialLimits>) {
+  try {
   const adminId = await requireAdmin();
 
   // Sanity-check numeric fields so the form can't persist junk.
@@ -622,5 +754,11 @@ export async function adminUpdateFinancialLimits(limits: Partial<FinancialLimits
   } catch (e) {
     console.error("[adminUpdateFinancialLimits]", e);
     return { error: e instanceof Error ? e.message : "Failed to update limits" };
+  }
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminUpdateFinancialLimits] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
   }
 }

@@ -199,7 +199,7 @@ function PlanModal({ plan, onClose, onSuccess }: { plan?: Plan; onClose: () => v
       maxLoss:          parseFloat(form.maxLoss)      || 0,
       isPopular:        form.isPopular,
     };
-    const r = plan ? await adminUpdatePlan(plan.id, payload) : await adminCreatePlan(payload);
+    const r = plan ? await adminUpdatePlan(plan.id, payload).catch(() => ({ error: "Something went wrong. Please try again." })) : await adminCreatePlan(payload).catch(() => ({ error: "Something went wrong. Please try again." }));
     setLoading(false);
     if (r.error) { toast.error(r.error); return; }
     toast.success(plan ? "Plan updated!" : "Plan created!");
@@ -508,7 +508,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
       const r = await adminEditInvestment(investment.userId, {
         ...common,
         planId: form.planId ? form.planId : null,
-      });
+      }).catch(() => ({ error: "Something went wrong. Please try again." }));
       setLoading(false);
       if (r.error) { toast.error(r.error); return; }
       toast.success("Investment updated!");
@@ -517,7 +517,7 @@ function InvestmentModal({ users, plans, investment, isEdit, onClose, onSuccess 
         userId: form.userId,
         planId: form.planId || undefined,
         ...common,
-      });
+      }).catch(() => ({ error: "Something went wrong. Please try again." }));
       setLoading(false);
       if (r.error) { toast.error(r.error); return; }
       toast.success("Investment assigned!");
@@ -701,7 +701,7 @@ function AddFundsModal({ investment, onClose, onSuccess }: { investment: UserInv
     const val = parseFloat(amount);
     if (!val || val <= 0) { toast.error("Enter a valid amount"); return; }
     setLoading(true);
-    const r = await adminAddFundsToInvestment(investment.userId, val);
+    const r = await adminAddFundsToInvestment(investment.userId, val).catch(() => ({ error: "Something went wrong. Please try again." }));
     setLoading(false);
     if (r.error) { toast.error(r.error); return; }
     toast.success(`${fmt(val)} added`); onSuccess(); onClose();
@@ -784,7 +784,7 @@ export default function AdminInvestmentsPage() {
 
   async function togglePlan(plan: Plan) {
     setProcessing(plan.id);
-    const r = await adminUpdatePlan(plan.id, { isActive: !plan.isActive });
+    const r = await adminUpdatePlan(plan.id, { isActive: !plan.isActive }).catch(() => ({ error: "Something went wrong. Please try again." }));
     if (r.error) toast.error(r.error);
     else { toast.success(plan.isActive ? "Plan deactivated" : "Plan activated"); load(); }
     setProcessing(null);
@@ -797,7 +797,7 @@ export default function AdminInvestmentsPage() {
       : `Delete "${plan.name}" permanently? This cannot be undone.`;
     if (!confirm(warning)) return;
     setProcessing(plan.id);
-    const r = await adminDeletePlan(plan.id);
+    const r = await adminDeletePlan(plan.id).catch(() => ({ error: "Something went wrong. Please try again." }));
     if (r.error) toast.error(r.error);
     else {
       const d = (r as { detached?: number }).detached ?? 0;
@@ -810,7 +810,7 @@ export default function AdminInvestmentsPage() {
   async function handleToggleInv(userId: string, current: string) {
     setProcessing(userId);
     const newStatus = current === "ACTIVE" ? "PAUSED" : "ACTIVE";
-    const r = await adminToggleInvestment(userId, newStatus as "ACTIVE" | "PAUSED");
+    const r = await adminToggleInvestment(userId, newStatus as "ACTIVE" | "PAUSED").catch(() => ({ error: "Something went wrong. Please try again." }));
     if (r.error) toast.error(r.error);
     else { toast.success(`Investment ${newStatus.toLowerCase()}`); load(); }
     setProcessing(null);
@@ -826,7 +826,7 @@ export default function AdminInvestmentsPage() {
       `This cannot be undone.`;
     if (!confirm(msg)) return;
     setProcessing(inv.userId);
-    const r = await adminEndInvestment(inv.userId);
+    const r = await adminEndInvestment(inv.userId).catch(() => ({ error: "Something went wrong. Please try again." }));
     if ("error" in r) toast.error(r.error);
     else {
       toast.success("Trade ended", {
@@ -845,7 +845,7 @@ export default function AdminInvestmentsPage() {
       "This is a hard cancel — usually you want 'End Trade' instead, which releases principal + profit."
     )) return;
     setProcessing(userId);
-    const r = await adminCancelInvestment(userId);
+    const r = await adminCancelInvestment(userId).catch(() => ({ error: "Something went wrong. Please try again." }));
     if (r.error) toast.error(r.error);
     else { toast.success("Trade cancelled"); load(); }
     setProcessing(null);

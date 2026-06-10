@@ -42,6 +42,7 @@ export async function userStartInvestment(data: {
   planId: string;
   amount: number;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const userId = session.user.id;
@@ -142,6 +143,12 @@ export async function userStartInvestment(data: {
   revalidatePath("/dashboard");
   revalidatePath("/dashboard/investments");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[userStartInvestment] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 // ─── User: start copying a trader ─────────────────────────────────────
 
@@ -149,6 +156,7 @@ export async function userStartCopyTrade(data: {
   traderId: string;
   amount: number;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const userId = session.user.id;
@@ -242,11 +250,18 @@ export async function userStartCopyTrade(data: {
   revalidatePath("/dashboard");
   revalidatePath("/dashboard/copy-trading");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[userStartCopyTrade] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 // ─── User: add funds to investment ───────────────────────────────────────
 
 export async function addInvestmentFunds(amount: number) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const userId = session.user.id;
@@ -305,6 +320,12 @@ export async function addInvestmentFunds(amount: number) {
 
   revalidatePath("/dashboard");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[addInvestmentFunds] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 // ─── User: list upgrade-eligible plans for the current investment ───────
@@ -352,6 +373,7 @@ export async function userUpgradeInvestmentPlan(data: {
   planId: string;
   topUp?: number;   // how much deposit balance to add to the investment
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const userId = session.user.id;
@@ -478,6 +500,12 @@ export async function userUpgradeInvestmentPlan(data: {
   revalidatePath("/dashboard");
   revalidatePath("/dashboard/investments");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[userUpgradeInvestmentPlan] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 // ─── User: stop copying a trader ──────────────────────────────────────
@@ -522,6 +550,7 @@ export async function adminCreatePlan(data: {
   isPopular?: boolean;
   isActive?: boolean;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -535,6 +564,12 @@ export async function adminCreatePlan(data: {
   revalidatePath("/admin/investments");
   revalidatePath("/dashboard/investments");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminCreatePlan] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminUpdatePlan(planId: string, data: Partial<{
@@ -545,6 +580,7 @@ export async function adminUpdatePlan(planId: string, data: Partial<{
   minLossRatio: number; maxLossRatio: number; minLoss: number; maxLoss: number;
   isActive: boolean; isPopular: boolean;
 }>) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -561,6 +597,12 @@ export async function adminUpdatePlan(planId: string, data: Partial<{
   revalidatePath("/admin/investments");
   revalidatePath("/dashboard/investments");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminUpdatePlan] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 /** Delete a plan — always allowed, including plans with active user
@@ -569,6 +611,7 @@ export async function adminUpdatePlan(planId: string, data: Partial<{
  *  `planId` foreign key nulled out so the delete doesn't violate the
  *  relation constraint. History is preserved; the plan definition is gone. */
 export async function adminDeletePlan(planId: string) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -584,6 +627,12 @@ export async function adminDeletePlan(planId: string) {
   revalidatePath("/admin/investments");
   revalidatePath("/dashboard/investments");
   return { success: true, detached: detached.count };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminDeletePlan] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 // ─── Admin: user investment management ───────────────────────────────────────
@@ -601,6 +650,7 @@ export async function adminEditInvestment(userId: string, data: {
   maxLoss?:       number;
   planId?:        string | null;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -647,9 +697,16 @@ export async function adminEditInvestment(userId: string, data: {
   revalidatePath("/dashboard/investments");
   revalidatePath(`/admin/users/${userId}`);
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminEditInvestment] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminAddFundsToInvestment(userId: string, amount: number) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -664,6 +721,12 @@ export async function adminAddFundsToInvestment(userId: string, amount: number) 
   ]);
   revalidatePath("/admin/investments");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminAddFundsToInvestment] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminAssignInvestment(data: {
@@ -680,6 +743,7 @@ export async function adminAssignInvestment(data: {
   minLoss?:       number;
   maxLoss?:       number;
 }) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -718,9 +782,16 @@ export async function adminAssignInvestment(data: {
   revalidatePath("/dashboard/investments");
   revalidatePath(`/admin/users/${data.userId}`);
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminAssignInvestment] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminToggleInvestment(userId: string, status: "ACTIVE" | "PAUSED") {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -728,9 +799,16 @@ export async function adminToggleInvestment(userId: string, status: "ACTIVE" | "
   await db.userInvestment.update({ where: { userId }, data: { status } });
   revalidatePath("/admin/investments");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminToggleInvestment] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 export async function adminCancelInvestment(userId: string) {
+  try {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };
   const admin = await db.user.findUnique({ where: { id: session.user.id } });
@@ -741,6 +819,12 @@ export async function adminCancelInvestment(userId: string) {
   });
   revalidatePath("/admin/investments");
   return { success: true };
+  } catch (err: any) {
+    // Re-throw Next.js control-flow "errors" (redirect/notFound) untouched.
+    if (typeof err?.digest === "string" && err.digest.startsWith("NEXT_")) throw err;
+    console.error("[adminCancelInvestment] unexpected error:", err);
+    return { error: "Something went wrong. Please try again." };
+  }
 }
 
 /**
