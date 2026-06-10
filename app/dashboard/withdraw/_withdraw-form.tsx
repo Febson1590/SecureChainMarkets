@@ -13,6 +13,7 @@ import { requestWithdrawal } from "@/lib/actions/deposits";
 import {
   Loader2, CheckCircle2, AlertTriangle, ArrowLeft,
   Clipboard, ArrowUpFromLine, Clock, Hourglass, XCircle, X,
+  Landmark, Bitcoin,
 } from "lucide-react";
 import { toast } from "sonner";
 import { KycBanner } from "@/components/dashboard/kyc-banner";
@@ -160,6 +161,18 @@ export default function WithdrawForm({
   const [submitting, setSubmitting] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  /* ── Withdrawal method — crypto wallet vs. bank account ─────────────
+     Bank withdrawals ride the exact same request pipeline as crypto:
+     same fund hold, same admin review, same limits and fees. The bank
+     details are packed into the existing `destination` field, so no
+     schema or server changes are needed. */
+  const [method, setMethod] = useState<"crypto" | "bank">("crypto");
+  const [bankAmount,    setBankAmount]    = useState("");
+  const [bankName,      setBankName]      = useState("");
+  const [accountName,   setAccountName]   = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [bankRef,       setBankRef]       = useState(""); // routing / SWIFT / IBAN — optional
+
   /* Current live rate for the selected asset (USD per 1 unit). */
   const currentRate = rates[selectedAsset] ?? 0;
   const dual        = useDualAmount(currentRate);
@@ -181,7 +194,7 @@ export default function WithdrawForm({
   /* Withdrawal fee is shown separately as an informational charge.
      It is NOT subtracted from the user's requested withdrawal amount —
      the amount the user types is the amount they receive. */
-  const usdAmount  = dual.usdNumber;
+  const usdAmount  = method === "bank" ? (parseFloat(bankAmount) || 0) : dual.usdNumber;
   const feeUsd     = (usdAmount * feePercent) / 100 + feeFixed;
   // "You will receive" equals the full requested amount. The fee is a
   // separate disclosure line — see comment above.
@@ -205,17 +218,42 @@ export default function WithdrawForm({
     }
   }
 
+  /* Bank details packed into the existing destination field — readable
+     by the admin in the withdrawals queue exactly like an address. */
+  const bankDestination = [
+    accountName.trim(),
+    bankName.trim(),
+    `Acct: ${accountNumber.trim()}`,
+    bankRef.trim() ? `Ref: ${bankRef.trim()}` : null,
+  ].filter(Boolean).join(" · ");
+
   /* Validate + open confirm modal. */
   function handleReview() {
     setError("");
     if (isRestricted) { setError("Complete identity verification first"); return; }
+
+    /* Shared amount checks (USD is canonical for both methods). */
+    const checkAmount = () => {
+      if (!usdAmount || usdAmount <= 0) { setError("Enter a valid amount"); return false; }
+      if (usdAmount < minWithdrawal) { setError(`Minimum withdrawal is $${minWithdrawal}`); return false; }
+      if (maxWithdrawal && usdAmount > maxWithdrawal) { setError(`Maximum withdrawal is $${maxWithdrawal}`); return false; }
+      if (usdAmount > usdBalance) { setError(`Insufficient balance — you have $${usdBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`); return false; }
+      return true;
+    };
+
+    if (method === "bank") {
+      if (!checkAmount()) return;
+      if (!accountName.trim())            { setError("Enter the account holder name"); return; }
+      if (!bankName.trim())               { setError("Enter the bank name"); return; }
+      if (accountNumber.trim().length < 6){ setError("Enter a valid account number"); return; }
+      setShowConfirm(true);
+      return;
+    }
+
     if (!SUPPORTED_ASSETS.includes(selectedAsset)) { setError("Select a cryptocurrency"); return; }
     if (availableNetworks.length > 0 && !network) { setError("Select a network"); return; }
     if (currentRate <= 0) { setError("Rates are unavailable — try again in a moment"); return; }
-    if (!usdAmount || usdAmount <= 0) { setError("Enter a valid amount"); return; }
-    if (usdAmount < minWithdrawal) { setError(`Minimum withdrawal is $${minWithdrawal}`); return; }
-    if (maxWithdrawal && usdAmount > maxWithdrawal) { setError(`Maximum withdrawal is $${maxWithdrawal}`); return; }
-    if (usdAmount > usdBalance) { setError(`Insufficient balance — you have $${usdBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`); return; }
+    if (!checkAmount()) return;
     if (!address || address.trim().length < 6) { setError("Enter a valid wallet address"); return; }
     setShowConfirm(true);
   }
@@ -224,16 +262,25 @@ export default function WithdrawForm({
   async function handleConfirm() {
     setSubmitting(true);
     try {
-      const res = await requestWithdrawal({
-        currency:      selectedAsset,
-        amount:        usdAmount,                  // USD
-        method:        network || selectedAsset,
-        destination:   address.trim(),
-        cryptoAmount:  dual.cryptoNumber,
-        cryptoSymbol:  selectedAsset,
-        cryptoNetwork: network || null,
-        exchangeRate:  currentRate,
-      });
+      const res = await requestWithdrawal(
+        method === "bank"
+          ? {
+              currency:    "USD",
+              amount:      usdAmount,              // USD
+              method:      "Bank Transfer",
+              destination: bankDestination,
+            }
+          : {
+              currency:      selectedAsset,
+              amount:        usdAmount,            // USD
+              method:        network || selectedAsset,
+              destination:   address.trim(),
+              cryptoAmount:  dual.cryptoNumber,
+              cryptoSymbol:  selectedAsset,
+              cryptoNetwork: network || null,
+              exchangeRate:  currentRate,
+            },
+      ).catch(() => ({ error: "Something went wrong. Please try again." }));
       if ("error" in res && res.error) {
         toast.error(res.error);
         setError(res.error);
@@ -243,6 +290,7 @@ export default function WithdrawForm({
         setShowConfirm(false);
         dual.clear();
         setAddress("");
+        setBankAmount("");
       }
     } catch {
       toast.error("Failed to submit. Please try again.");
@@ -267,7 +315,7 @@ export default function WithdrawForm({
         </Link>
         <h1 className="text-2xl font-bold text-white">Withdraw Funds</h1>
         <p className="text-sm text-slate-500 mt-1">
-          Withdraw crypto to your external wallet.
+          Withdraw to your crypto wallet or bank account.
         </p>
       </div>
 
@@ -277,7 +325,39 @@ export default function WithdrawForm({
       {/* ── Withdraw card ───────────────────────────────────────── */}
       <Card className="glass-card border-0 rounded-2xl p-5 sm:p-6 space-y-5">
 
+        {/* Withdrawal method — crypto wallet vs bank account */}
+        <div className="space-y-2">
+          <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+            Withdrawal Method
+          </Label>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => { setMethod("crypto"); setError(""); }}
+              className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-semibold transition-all
+                ${method === "crypto"
+                  ? "border-[#2B6BFF]/50 bg-[#2B6BFF]/[0.08] text-white shadow-[0_0_0_1px_rgba(14,165,233,0.2)]"
+                  : "border-white/[0.08] bg-white/[0.02] text-slate-400 hover:bg-white/[0.05] hover:text-white"}`}
+            >
+              <Bitcoin size={15} className={method === "crypto" ? "text-[#5C8BFF]" : ""} />
+              Crypto Wallet
+            </button>
+            <button
+              type="button"
+              onClick={() => { setMethod("bank"); setError(""); }}
+              className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-semibold transition-all
+                ${method === "bank"
+                  ? "border-[#2B6BFF]/50 bg-[#2B6BFF]/[0.08] text-white shadow-[0_0_0_1px_rgba(14,165,233,0.2)]"
+                  : "border-white/[0.08] bg-white/[0.02] text-slate-400 hover:bg-white/[0.05] hover:text-white"}`}
+            >
+              <Landmark size={15} className={method === "bank" ? "text-[#5C8BFF]" : ""} />
+              Bank Transfer
+            </button>
+          </div>
+        </div>
+
         {/* Select Crypto — chips */}
+        {method === "crypto" && (
         <div className="space-y-2">
           <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
             Select Cryptocurrency
@@ -312,6 +392,7 @@ export default function WithdrawForm({
             })}
           </div>
         </div>
+        )}
 
         {/* Available balance — primary USD + secondary crypto */}
         <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
@@ -323,7 +404,7 @@ export default function WithdrawForm({
               ${usdBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
               <span className="text-[13px] font-medium text-slate-400">USD</span>
             </div>
-            {currentRate > 0 && (
+            {method === "crypto" && currentRate > 0 && (
               <div className="text-[11.5px] text-slate-500 tabular-nums mt-0.5">
                 ≈ {formatCrypto(cryptoBalance)} {selectedAsset}
               </div>
@@ -331,8 +412,8 @@ export default function WithdrawForm({
           </div>
           <button
             type="button"
-            onClick={setMaxAmount}
-            disabled={usdBalance <= 0 || currentRate <= 0}
+            onClick={method === "bank" ? () => setBankAmount(String(usdBalance)) : setMaxAmount}
+            disabled={usdBalance <= 0 || (method === "crypto" && currentRate <= 0)}
             className="h-8 px-3 rounded-md text-[11px] font-bold uppercase tracking-wider bg-[#2B6BFF]/15 border border-[#2B6BFF]/30 text-[#5C8BFF] hover:bg-[#2B6BFF]/25 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Max
@@ -346,6 +427,7 @@ export default function WithdrawForm({
         )}
 
         {/* Dual amount — USD + crypto with live two-way sync */}
+        {method === "crypto" && (
         <DualAmountInput
           asset={selectedAsset}
           rate={currentRate}
@@ -355,6 +437,83 @@ export default function WithdrawForm({
           maxUsd={maxWithdrawal ?? undefined}
           rateStale={currentRate <= 0}
         />
+        )}
+
+        {/* Bank transfer — USD amount + account details */}
+        {method === "bank" && (
+          <>
+            <div className="space-y-1.5">
+              <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                Withdraw Amount (USD)
+              </Label>
+              <div className="relative">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-[14px]">$</span>
+                <Input
+                  type="number"
+                  min="0"
+                  placeholder="0.00"
+                  value={bankAmount}
+                  onChange={(e) => setBankAmount(e.target.value)}
+                  className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-12 pl-7 text-base font-semibold tabular-nums"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                Account Holder Name
+              </Label>
+              <Input
+                type="text"
+                placeholder="Full name on the account"
+                value={accountName}
+                onChange={(e) => setAccountName(e.target.value)}
+                className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-11"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                  Bank Name
+                </Label>
+                <Input
+                  type="text"
+                  placeholder="e.g. Chase Bank"
+                  value={bankName}
+                  onChange={(e) => setBankName(e.target.value)}
+                  className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-11"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                  Account Number
+                </Label>
+                <Input
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="Account number"
+                  value={accountNumber}
+                  onChange={(e) => setAccountNumber(e.target.value)}
+                  className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-11 font-mono text-[13px]"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                Routing / SWIFT / IBAN <span className="text-slate-500 normal-case font-normal">(optional)</span>
+              </Label>
+              <Input
+                type="text"
+                placeholder="For international or wire transfers"
+                value={bankRef}
+                onChange={(e) => setBankRef(e.target.value)}
+                className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-11 font-mono text-[13px]"
+              />
+            </div>
+          </>
+        )}
 
         {/* Fee breakdown — informational only; not deducted from payout */}
         {usdAmount > 0 && (feePercent > 0 || feeFixed > 0) && (
@@ -381,6 +540,7 @@ export default function WithdrawForm({
         )}
 
         {/* Wallet address */}
+        {method === "crypto" && (
         <div className="space-y-1.5">
           <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
             {selectedAsset} Wallet Address
@@ -404,9 +564,10 @@ export default function WithdrawForm({
             </button>
           </div>
         </div>
+        )}
 
         {/* Network */}
-        {availableNetworks.length > 0 && (
+        {method === "crypto" && availableNetworks.length > 0 && (
           <div className="space-y-1.5">
             <Label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
               Network
@@ -434,9 +595,19 @@ export default function WithdrawForm({
         <div className="rounded-lg border border-amber-500/25 bg-amber-500/[0.06] px-3.5 py-2.5 flex items-start gap-2.5">
           <AlertTriangle size={14} className="text-amber-400 flex-shrink-0 mt-0.5" />
           <div className="text-[11.5px] text-amber-200/90 leading-relaxed">
-            <strong className="text-amber-300">Withdrawals are irreversible.</strong>{" "}
-            Double-check your address and network. Funds sent to the wrong address or
-            network cannot be recovered.
+            {method === "bank" ? (
+              <>
+                <strong className="text-amber-300">Double-check your bank details.</strong>{" "}
+                The account holder name should match your verified identity.
+                Transfers to incorrect account details may be unrecoverable.
+              </>
+            ) : (
+              <>
+                <strong className="text-amber-300">Withdrawals are irreversible.</strong>{" "}
+                Double-check your address and network. Funds sent to the wrong address or
+                network cannot be recovered.
+              </>
+            )}
           </div>
         </div>
 
@@ -475,14 +646,15 @@ export default function WithdrawForm({
       {/* ── Confirm modal ───────────────────────────────────────── */}
       {showConfirm && (
         <ConfirmModal
-          asset={selectedAsset}
-          network={network}
+          asset={method === "bank" ? "USD" : selectedAsset}
+          network={method === "bank" ? "" : network}
           usdAmount={usdAmount}
           cryptoAmount={dual.cryptoNumber}
           exchangeRate={currentRate}
           feeUsd={feeUsd}
           netReceiveUsd={netReceiveUsd}
-          address={address.trim()}
+          address={method === "bank" ? bankDestination : address.trim()}
+          bank={method === "bank"}
           loading={submitting}
           onClose={() => !submitting && setShowConfirm(false)}
           onConfirm={handleConfirm}
@@ -554,7 +726,9 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
           <span className="text-[11px] text-slate-500">Awaiting review</span>
         )}
         {ui === "processing" && (
-          <span className="text-[11px] text-slate-500">Being sent on-chain</span>
+          <span className="text-[11px] text-slate-500">
+            {w.method === "Bank Transfer" ? "Being transferred to your bank" : "Being sent on-chain"}
+          </span>
         )}
         {ui === "completed" && (
           <span className="text-[11px] text-emerald-300/80">
@@ -584,7 +758,7 @@ function WithdrawalCard({ w }: { w: RecentWithdrawal }) {
 
 function ConfirmModal({
   asset, network, usdAmount, cryptoAmount, exchangeRate,
-  feeUsd, netReceiveUsd, address, loading, onClose, onConfirm,
+  feeUsd, netReceiveUsd, address, bank = false, loading, onClose, onConfirm,
 }: {
   asset:         string;
   network:       string;
@@ -594,6 +768,7 @@ function ConfirmModal({
   feeUsd:        number;
   netReceiveUsd: number;
   address:       string;
+  bank?:         boolean;
   loading:       boolean;
   onClose:       () => void;
   onConfirm:     () => void;
@@ -629,19 +804,23 @@ function ConfirmModal({
         </div>
 
         <div className="p-5 space-y-3 text-[12.5px]">
-          <Row label="Asset"   value={<>{asset}{network ? <span className="text-slate-500"> · {network}</span> : null}</>} />
+          <Row label="Method" value={bank ? "Bank Transfer" : <>{asset}{network ? <span className="text-slate-500"> · {network}</span> : null}</>} />
           <Row
             label="Amount"
             value={
               <div className="text-right">
                 <div className="tabular-nums font-semibold">${usdAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                <div className="text-[11px] text-slate-500 tabular-nums">
-                  ≈ {formatCrypto(cryptoAmount)} {asset}
-                </div>
+                {!bank && (
+                  <div className="text-[11px] text-slate-500 tabular-nums">
+                    ≈ {formatCrypto(cryptoAmount)} {asset}
+                  </div>
+                )}
               </div>
             }
           />
-          <Row label="Rate" value={<span className="tabular-nums text-slate-300">1 {asset} = ${exchangeRate.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span>} />
+          {!bank && (
+            <Row label="Rate" value={<span className="tabular-nums text-slate-300">1 {asset} = ${exchangeRate.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span>} />
+          )}
           {showFee && (
             <Row label="Fee" value={<span className="tabular-nums">${feeUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>} />
           )}
@@ -653,7 +832,7 @@ function ConfirmModal({
           )}
           <div className="pt-2 border-t border-white/[0.05]">
             <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1">
-              Destination Address
+              {bank ? "Bank Account" : "Destination Address"}
             </div>
             <code className="block text-[11.5px] text-white font-mono break-all leading-relaxed">
               {address}
