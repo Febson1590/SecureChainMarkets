@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
+import { notifyAdmin, APP_URL } from "@/lib/notifications";
 
 export async function GET() {
   const session = await auth();
@@ -102,6 +103,28 @@ export async function POST(request: Request) {
       type:    "VERIFICATION",
     },
   });
+
+  // Admin heads-up — fire-and-forget, never blocks the submission.
+  db.user.findUnique({ where: { id: userId }, select: { name: true, email: true } })
+    .then((u) =>
+      notifyAdmin({
+        subject: `New KYC submission — ${u?.email ?? userId}`,
+        heading: "New KYC Submission",
+        body: ["A user has submitted identity documents for verification and is waiting for review."],
+        summaryCard: {
+          title: "Submission Details",
+          status: "Pending Review",
+          statusColor: "warning",
+          primary: { label: "Applicant", value: [firstName, lastName].filter(Boolean).join(" ") || u?.name || "—" },
+          rows: [
+            { label: "Email",    value: u?.email ?? "—", mono: true },
+            { label: "Document", value: String(documentType) },
+          ],
+        },
+        cta: { label: "Review KYC", url: `${APP_URL}/admin/verification` },
+      }),
+    )
+    .catch((e) => console.error("[verification POST] admin alert failed:", e));
 
   return NextResponse.json({ success: true, status: verification.status });
 }

@@ -7,6 +7,7 @@ import { generateWalletAddress } from "@/lib/utils";
 import { z } from "zod";
 import { sendOtp, verifyOtp } from "@/lib/actions/otp";
 import { OtpType } from "@prisma/client";
+import { notifyAdmin, APP_URL } from "@/lib/notifications";
 
 const registerSchema = z.object({
   name:     z.string().min(2),
@@ -75,6 +76,24 @@ export async function registerUser(data: {
     });
 
     console.log(`${tag} ✅ User created: id=${user.id} email=${user.email}`);
+
+    // Admin heads-up — fire-and-forget, never blocks registration.
+    notifyAdmin({
+      subject: `New user registration — ${user.name ?? email}`,
+      heading: "New User Registration",
+      body: ["A new user just registered on the platform."],
+      summaryCard: {
+        title: "User Details",
+        status: "New",
+        statusColor: "neutral",
+        primary: { label: "Name", value: user.name ?? "—" },
+        rows: [
+          { label: "Email",   value: email, mono: true },
+          { label: "Country", value: data.country || "—" },
+        ],
+      },
+      cta: { label: "View Users", url: `${APP_URL}/admin/users` },
+    });
 
     await db.notification.create({
       data: {

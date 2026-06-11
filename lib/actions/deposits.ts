@@ -5,6 +5,16 @@ import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { requireApprovedKyc } from "@/lib/kyc";
 import { requireActiveStatus } from "@/lib/user-status";
+import { notifyAdmin, APP_URL } from "@/lib/notifications";
+
+/** Best-effort lookup of name/email for admin alert summaries. */
+async function userSummary(userId: string) {
+  const u = await db.user.findUnique({
+    where: { id: userId },
+    select: { name: true, email: true },
+  }).catch(() => null);
+  return { name: u?.name ?? "—", email: u?.email ?? userId };
+}
 
 /**
  * Step 1 of the deposit flow: user has clicked "I've Sent the Payment".
@@ -62,6 +72,29 @@ export async function createDepositRequest(data: {
       type:    "DEPOSIT",
     },
   });
+
+  // Admin heads-up — fire-and-forget.
+  userSummary(session.user.id).then((u) =>
+    notifyAdmin({
+      subject: `New deposit request — $${data.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })} from ${u.email}`,
+      heading: "New Deposit Request",
+      body: ["A user has initiated a deposit. They will upload payment proof next; the request then lands in the review queue."],
+      summaryCard: {
+        title: "Deposit Details",
+        status: "Awaiting Proof",
+        statusColor: "warning",
+        primary: { label: "Amount", value: `$${data.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD` },
+        secondary: data.cryptoAmount && data.cryptoSymbol
+          ? { label: "Crypto", value: `${data.cryptoAmount.toLocaleString("en-US", { maximumFractionDigits: 8 })} ${data.cryptoSymbol}` }
+          : undefined,
+        rows: [
+          { label: "User",   value: `${u.name} · ${u.email}` },
+          { label: "Method", value: data.method },
+        ],
+      },
+      cta: { label: "Review Deposits", url: `${APP_URL}/admin/deposits` },
+    }),
+  ).catch(() => {});
 
   revalidatePath("/dashboard/deposit");
   return { success: true, requestId: request.id };
@@ -313,6 +346,31 @@ export async function requestWithdrawal(data: {
     console.error("[requestWithdrawal]", e);
     return { error: "Something went wrong submitting your withdrawal. Please try again." };
   }
+
+  // Admin heads-up — fire-and-forget. Funds are already on hold, so the
+  // request is immediately actionable in the review queue.
+  userSummary(userId).then((u) =>
+    notifyAdmin({
+      subject: `New withdrawal request — $${data.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })} from ${u.email}`,
+      heading: "New Withdrawal Request",
+      body: ["A user has requested a withdrawal. The amount has been reserved from their balance and the request is awaiting review."],
+      summaryCard: {
+        title: "Withdrawal Details",
+        status: "Pending Review",
+        statusColor: "warning",
+        primary: { label: "Amount", value: `$${data.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD` },
+        secondary: data.cryptoAmount && data.cryptoSymbol
+          ? { label: "Crypto", value: `${data.cryptoAmount.toLocaleString("en-US", { maximumFractionDigits: 8 })} ${data.cryptoSymbol}` }
+          : undefined,
+        rows: [
+          { label: "User",        value: `${u.name} · ${u.email}` },
+          { label: "Method",      value: data.method },
+          { label: "Destination", value: data.destination.trim(), mono: true },
+        ],
+      },
+      cta: { label: "Review Withdrawals", url: `${APP_URL}/admin/withdrawals` },
+    }),
+  ).catch(() => {});
 
   const cryptoSuffix = data.cryptoAmount && data.cryptoSymbol
     ? ` (${data.cryptoAmount.toLocaleString("en-US", { maximumFractionDigits: 8 })} ${data.cryptoSymbol})`

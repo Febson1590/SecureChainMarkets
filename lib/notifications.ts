@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ─── Hosted assets ───────────────────────────────────────────────────────────
-export const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://securechainmarkets.vercel.app";
+export const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://securechainmarkets.com";
 const LOGO_URL = `${APP_URL}/assets/logos/securechainmarkets-logo.png`;
 
 // ─── HTML template for notification emails ───────────────────────────────────
@@ -438,6 +438,27 @@ export async function sendNotificationEmail(opts: {
   const messageId = result.data?.id ?? "(no id returned)";
   console.log(`${tag} Email queued. Resend id: ${messageId}`);
   return messageId;
+}
+
+// ─── Admin alerts ────────────────────────────────────────────────────────────
+// Operational heads-up emails to the staffed support inbox whenever an
+// event lands in an admin review queue (registration, deposit, withdrawal,
+// KYC). Fire-and-forget: an email failure must never affect the user flow,
+// so callers invoke this without awaiting and errors only hit the log.
+const ADMIN_ALERT_EMAIL = "support@securechainmarkets.com";
+
+export function notifyAdmin(opts: {
+  subject: string;
+  heading: string;
+  body: string[];
+  summaryCard?: EmailSummaryCard;
+  cta?: { label: string; url: string };
+}): void {
+  sendNotificationEmail({
+    to: ADMIN_ALERT_EMAIL,
+    name: "Admin",
+    ...opts,
+  }).catch((e) => console.error("[notifyAdmin] failed:", e));
 }
 
 // ─── Unified notifyUser: in-app + email ──────────────────────────────────────
