@@ -26,10 +26,14 @@ export const COMPANY = {
 
 /* ── Support & security contact points ───────────────────────────────── */
 export const CONTACT = {
+  /* support@ is the only provisioned mailbox (Zoho Mail). All public
+     contact points route to it — the separate keys are kept so pages
+     read semantically and can be split into real departmental inboxes
+     later without touching page code. */
   supportEmail:    "support@securechainmarkets.com",
-  securityEmail:   "security@securechainmarkets.com",
-  complianceEmail: "compliance@securechainmarkets.com",
-  privacyEmail:    "privacy@securechainmarkets.com",
+  securityEmail:   "support@securechainmarkets.com",
+  complianceEmail: "support@securechainmarkets.com",
+  privacyEmail:    "support@securechainmarkets.com",
 
   /** Human-readable business hours. Keep it simple and specific. */
   businessHours:   "Monday – Friday, 09:00 – 18:00 UTC",

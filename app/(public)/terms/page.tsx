@@ -105,8 +105,8 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-white mb-2">10. Contact</h2>
             <p>
               Questions about these terms can be sent to{" "}
-              <a href="mailto:support@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
-                support@SecureChainMarkets.com
+              <a href="mailto:support@securechainmarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
+                support@securechainmarkets.com
               </a>.
             </p>
           </section>

@@ -44,8 +44,8 @@ const faqs = [
     a: (
       <>
         Verified users can submit a support ticket from inside the dashboard. You can also email{" "}
-        <a href="mailto:support@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
-          support@SecureChainMarkets.com
+        <a href="mailto:support@securechainmarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
+          support@securechainmarkets.com
         </a>{" "}
         and we reply within one business day during published hours.
       </>

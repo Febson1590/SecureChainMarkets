@@ -399,7 +399,7 @@ export async function sendNotificationEmail(opts: {
   const tag = "[sendNotificationEmail]";
   const { to, name, subject, heading, body, cta, summaryCard } = opts;
 
-  const from = process.env.EMAIL_FROM || "SecureChainMarkets <no-reply@SecureChainMarkets.com>";
+  const from = process.env.EMAIL_FROM || "SecureChainMarkets <noreply@securechainmarkets.com>";
 
   console.log(`${tag} to: ${to} | subject: ${subject}`);
 

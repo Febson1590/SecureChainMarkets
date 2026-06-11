@@ -262,7 +262,7 @@ export async function sendVerificationEmail(opts: {
   const tag = "[sendVerificationEmail]";
   const { to, name, code, type } = opts;
 
-  const from    = process.env.EMAIL_FROM || "SecureChainMarkets <no-reply@SecureChainMarkets.com>";
+  const from    = process.env.EMAIL_FROM || "SecureChainMarkets <noreply@securechainmarkets.com>";
   const subject = type === "REGISTER"
     ? "Verify your SecureChainMarkets account"
     : "Your SecureChainMarkets login code";
@@ -297,7 +297,7 @@ export async function sendVerificationEmail(opts: {
 
   // The Resend SDK never throws — it returns { data, error }.
   // Not checking this return value is the silent-failure bug.
-  const result = await resend.emails.send({ from, to, subject, text, html });
+  const result = await resend.emails.send({ from, to, subject, text, html, replyTo: "support@securechainmarkets.com" });
 
   console.log(`${tag} Raw Resend response:`, JSON.stringify(result));
 
@@ -329,7 +329,7 @@ export async function sendPasswordResetEmail(opts: {
   const tag = "[sendPasswordResetEmail]";
   const { to, name, token } = opts;
 
-  const from    = process.env.EMAIL_FROM || "SecureChainMarkets <no-reply@SecureChainMarkets.com>";
+  const from    = process.env.EMAIL_FROM || "SecureChainMarkets <noreply@securechainmarkets.com>";
   const subject = "Reset your SecureChainMarkets password";
   const resetUrl = `${APP_URL}/reset-password?token=${encodeURIComponent(token)}`;
 
@@ -351,7 +351,7 @@ export async function sendPasswordResetEmail(opts: {
     "— SecureChainMarkets",
   ].join("\n");
 
-  const result = await resend.emails.send({ from, to, subject, text, html });
+  const result = await resend.emails.send({ from, to, subject, text, html, replyTo: "support@securechainmarkets.com" });
 
   if (result.error) {
     console.error(`${tag} resend error:`, result.error);

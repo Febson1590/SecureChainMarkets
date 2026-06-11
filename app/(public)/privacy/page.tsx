@@ -95,8 +95,8 @@ export default function PrivacyPage() {
             <h2 className="text-lg font-semibold text-white mb-2">9. Contact</h2>
             <p>
               Privacy questions can be sent to{" "}
-              <a href="mailto:privacy@SecureChainMarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
-                privacy@SecureChainMarkets.com
+              <a href="mailto:support@securechainmarkets.com" className="text-[#2B6BFF] hover:text-[#5C8BFF]">
+                support@securechainmarkets.com
               </a>.
             </p>
           </section>
