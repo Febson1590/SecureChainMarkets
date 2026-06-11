@@ -45,7 +45,12 @@ export async function sendOtp(
     return { error: "Wrong reset endpoint. Please contact support." };
   }
 
-  // ── 2. Rate-limit visibility — log last sent timestamp ────────────────────
+  // ── 2. Rate limit — at most one email per 60s per email+type ──────────────
+  // If a still-valid code was issued less than 60s ago, do NOT send another
+  // email. Return success so legitimate flows (login retry, double-click on
+  // resend) keep working — the code from the earlier email remains valid.
+  // This caps outbound email volume and removes the resend-spam vector.
+  const RESEND_COOLDOWN_MS = 60_000;
   try {
     const lastCode = await db.otpCode.findFirst({
       where:   { identifier: email, type },
@@ -53,16 +58,16 @@ export async function sendOtp(
     });
 
     if (lastCode) {
-      const ageMs      = Date.now() - lastCode.createdAt.getTime();
-      const ageSec     = Math.round(ageMs / 1000);
-      const expiresIn  = Math.round((lastCode.expires.getTime() - Date.now()) / 1000);
-      console.log(`${tag} Last OTP record  : id=${lastCode.id}`);
-      console.log(`${tag}   createdAt      : ${lastCode.createdAt.toISOString()} (${ageSec}s ago)`);
-      console.log(`${tag}   used           : ${lastCode.used}`);
-      console.log(`${tag}   expires        : ${lastCode.expires.toISOString()} (${expiresIn}s remaining)`);
+      const ageMs = Date.now() - lastCode.createdAt.getTime();
+      console.log(`${tag} Last OTP record  : id=${lastCode.id} age=${Math.round(ageMs / 1000)}s used=${lastCode.used}`);
 
-      if (ageSec < 30) {
-        console.warn(`${tag} ⚠️  OTP requested only ${ageSec}s after last one — potential rapid resend.`);
+      if (
+        !lastCode.used &&
+        lastCode.expires > new Date() &&
+        ageMs < RESEND_COOLDOWN_MS
+      ) {
+        console.warn(`${tag} ⏳ Cooldown active (${Math.round(ageMs / 1000)}s since last send) — skipping duplicate email; previous code is still valid.`);
+        return { success: true as const };
       }
     } else {
       console.log(`${tag} No previous OTP record found for this email+type.`);
@@ -141,11 +146,14 @@ export async function verifyOtp(
 
   console.log(`${tag} Verifying OTP for email="${email}" type=${type} code="${code}"`);
 
+  const MAX_ATTEMPTS = 5;
+
   try {
+    // Fetch the latest still-valid code for this email+type FIRST (regardless
+    // of what was submitted) so wrong guesses can be counted against it.
     const record = await db.otpCode.findFirst({
       where: {
         identifier: email,
-        code,
         type,
         used:    false,
         expires: { gt: new Date() },
@@ -154,22 +162,28 @@ export async function verifyOtp(
     });
 
     if (!record) {
-      // Help debug whether it's expired, already-used, or never existed
-      const anyRecord = await db.otpCode.findFirst({
-        where:   { identifier: email, type },
-        orderBy: { createdAt: "desc" },
+      console.warn(`${tag} ❌ No valid OTP record for email="${email}" type=${type} (expired, used, or never sent)`);
+      return { error: "Invalid or expired verification code." };
+    }
+
+    // Brute-force guard: after MAX_ATTEMPTS wrong guesses the code is burned
+    // and the user must request a fresh one (which is itself rate-limited).
+    if (record.attempts >= MAX_ATTEMPTS) {
+      console.warn(`${tag} ❌ Attempt limit reached (${record.attempts}) — burning code id=${record.id}`);
+      await db.otpCode.update({ where: { id: record.id }, data: { used: true } });
+      return { error: "Too many incorrect attempts. Please request a new code." };
+    }
+
+    if (record.code !== code) {
+      const updated = await db.otpCode.update({
+        where: { id: record.id },
+        data:  { attempts: { increment: 1 } },
       });
-
-      if (!anyRecord) {
-        console.warn(`${tag} ❌ No OTP record found at all for email="${email}" type=${type}`);
-      } else {
-        console.warn(`${tag} ❌ OTP mismatch or invalid. Latest record:`);
-        console.warn(`${tag}   id      : ${anyRecord.id}`);
-        console.warn(`${tag}   used    : ${anyRecord.used}`);
-        console.warn(`${tag}   expires : ${anyRecord.expires.toISOString()} (now: ${new Date().toISOString()})`);
-        console.warn(`${tag}   code    : ${anyRecord.code} (submitted: ${code})`);
+      console.warn(`${tag} ❌ Wrong code (attempt ${updated.attempts}/${MAX_ATTEMPTS}) for id=${record.id}`);
+      if (updated.attempts >= MAX_ATTEMPTS) {
+        await db.otpCode.update({ where: { id: record.id }, data: { used: true } });
+        return { error: "Too many incorrect attempts. Please request a new code." };
       }
-
       return { error: "Invalid or expired verification code." };
     }
 

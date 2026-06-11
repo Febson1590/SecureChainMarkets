@@ -556,6 +556,7 @@ model OtpCode {
   type       OtpType
   expires    DateTime
   used       Boolean  @default(false)
+  attempts   Int      @default(0) // failed verification attempts against this code
   createdAt  DateTime @default(now())
 
   @@index([identifier, type])
