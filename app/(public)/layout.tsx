@@ -1,5 +1,6 @@
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { PublicFooter } from "@/components/layout/public-footer";
+import { TawkWidget } from "@/components/tawk-widget";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,6 +8,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <PublicNavbar />
       <main className="flex-1">{children}</main>
       <PublicFooter />
+      <TawkWidget />
     </div>
   );
 }
