@@ -47,7 +47,7 @@ const accountsRows = [
   ...[
     ["Website Admin Panel", "securechainmarkets.com/login", "admin@securechainmarkets.com", ""],
     ["Support Mailbox (Zoho Mail)", "mail.zoho.eu", "support@securechainmarkets.com", ""],
-    ["Live Chat (tawk.to)", "dashboard.tawk.to", "securechainmarkets@proton.me", ""],
+    ["Live Chat (tawk.to)", "dashboard.tawk.to", "support@securechainmarkets.com", ""],
     ["Transactional Email (Resend)", "resend.com", "securechainmarkets@proton.me", ""],
     ["Hosting, Domain & DNS (Vercel)", "vercel.com", "GitHub login: Febson1590", ""],
     ["Source Code (GitHub)", "github.com/Febson1590/SecureChainMarkets", "Febson1590", ""],
@@ -110,18 +110,15 @@ const doc = new Document({
     },
     headers: {
       default: new Header({ children: [new Paragraph({
-        tabStops: [{ type: "right", position: 9360 }],
-        border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: BRAND, space: 4 } },
         children: [
-          new TextRun({ text: "SecureChainMarkets", bold: true, color: BRAND }),
-          new TextRun("\tOperations Manual — Confidential"),
+          new TextRun({ text: "SecureChainMarkets — Operations Manual (Confidential)", bold: true, color: BRAND, size: 18 }),
         ],
       })] }),
     },
     footers: {
       default: new Footer({ children: [new Paragraph({
         alignment: AlignmentType.CENTER,
-        children: [new TextRun("Page "), new TextRun({ children: [PageNumber.CURRENT] }), new TextRun(" of "), new TextRun({ children: [PageNumber.TOTAL_PAGES] })],
+        children: [new TextRun({ text: "SecureChainMarkets · June 2026", size: 18, color: "64748B" })],
       })] }),
     },
     children: [
@@ -196,6 +193,7 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then((buf) => {
-  fs.writeFileSync("SecureChainMarkets-Handover-Manual.docx", buf);
-  console.log("written");
+  const out = process.argv[2] || "SecureChainMarkets-Handover-Manual.docx";
+  fs.writeFileSync(out, buf);
+  console.log("written:", out, buf.length, "bytes");
 });
