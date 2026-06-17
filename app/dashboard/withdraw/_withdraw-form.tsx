@@ -597,9 +597,11 @@ export default function WithdrawForm({
           <div className="text-[11.5px] text-amber-200/90 leading-relaxed">
             {method === "bank" ? (
               <>
-                <strong className="text-amber-300">Double-check your bank details.</strong>{" "}
-                The account holder name should match your verified identity.
-                Transfers to incorrect account details may be unrecoverable.
+                <strong className="text-amber-300">Please review your bank details carefully.</strong>{" "}
+                Ensure the account holder name matches your verified identity and that the
+                account number and routing details are correct. Bank transfers are processed
+                manually and may take 1–3 business days to reach your account. Incorrect
+                details can delay or prevent the transfer.
               </>
             ) : (
               <>
@@ -842,7 +844,9 @@ function ConfirmModal({
           <div className="rounded-lg border border-amber-500/25 bg-amber-500/[0.06] px-3 py-2 flex items-start gap-2 mt-2">
             <AlertTriangle size={12} className="text-amber-400 flex-shrink-0 mt-0.5" />
             <div className="text-[11px] text-amber-200/90 leading-relaxed">
-              Withdrawals are irreversible. Make sure the address is correct.
+              {bank
+                ? "Please confirm your bank details are correct. Once submitted, this request will be reviewed and processed manually."
+                : "Withdrawals are irreversible. Make sure the address is correct."}
             </div>
           </div>
         </div>
