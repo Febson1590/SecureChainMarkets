@@ -23,6 +23,7 @@ import {
   DualAmountInput, useDualAmount, useLiveRates, formatCrypto,
   type Rates,
 } from "@/components/dashboard/dual-amount-input";
+import { useDisplayCurrency } from "@/components/currency-provider";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 
@@ -171,6 +172,7 @@ export default function DepositForm({
   /* Two-way dual-amount state wired to the current asset rate. */
   const currentRate = rates[selectedAsset] ?? 0;
   const dual        = useDualAmount(currentRate);
+  const { currency: displayCurrency, format: fmtDisplay } = useDisplayCurrency();
 
   /* Look up the active wallet for the currently selected asset.
      If an admin has configured multiple wallets for the same asset
@@ -310,6 +312,17 @@ export default function DepositForm({
               maxUsd={maxDeposit ?? undefined}
               rateStale={currentRate <= 0}
             />
+
+            {/* Live conversion hint for non-USD users. Deposits are
+               recorded as USD (the user pays crypto worth $X), but we
+               show the EUR / GBP equivalent at today's rate so the
+               user can see the value in their own currency. */}
+            {displayCurrency !== "USD" && dual.usdNumber > 0 && (
+              <div className="text-[11.5px] text-slate-500 -mt-2">
+                <span className="tabular-nums">≈ {fmtDisplay(dual.usdNumber)}</span>
+                {" "}at today&rsquo;s rate
+              </div>
+            )}
 
             {/* Wallet address */}
             <div className="space-y-1.5">
@@ -617,6 +630,7 @@ function UploadProofModal({
   onClose:   () => void;
   onSuccess: () => void;
 }) {
+  const { currency: displayCurrency, format: fmtDisplay } = useDisplayCurrency();
   const [file, setFile]       = useState<File | null>(null);
   const [txHash, setTxHash]   = useState("");
   const [loading, setLoading] = useState(false);
@@ -682,6 +696,15 @@ function UploadProofModal({
             <span className="text-white font-semibold tabular-nums">
               {amount.toLocaleString("en-US", { minimumFractionDigits: 2 })} USD
             </span>
+            {displayCurrency !== "USD" && (
+              <>
+                {" "}·{" "}
+                <span className="text-emerald-300/90">
+                  <span className="tabular-nums">≈ {fmtDisplay(amount)}</span>
+                  {" "}at today&rsquo;s rate
+                </span>
+              </>
+            )}
           </p>
         </div>
 
