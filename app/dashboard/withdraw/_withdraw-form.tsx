@@ -465,8 +465,9 @@ export default function WithdrawForm({
                 />
               </div>
               {displayCurrency !== "USD" && parseFloat(bankAmount) > 0 && (
-                <div className="text-[11px] text-slate-500 tabular-nums">
-                  ≈ {fmtDisplay(parseFloat(bankAmount) || 0)} at today&rsquo;s rate
+                <div className="text-[11px] text-slate-500">
+                  <span className="tabular-nums">≈ {fmtDisplay(parseFloat(bankAmount) || 0)}</span>
+                  {" "}at today&rsquo;s rate
                 </div>
               )}
             </div>
@@ -827,8 +828,9 @@ function ConfirmModal({
               <div className="text-right">
                 <div className="tabular-nums font-semibold">${usdAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                 {isForeign && (
-                  <div className="text-[11px] text-emerald-300 tabular-nums">
-                    ≈ {fmtDisplay(usdAmount)} at today&rsquo;s rate
+                  <div className="text-[11px] text-emerald-300">
+                    <span className="tabular-nums">≈ {fmtDisplay(usdAmount)}</span>
+                    {" "}at today&rsquo;s rate
                   </div>
                 )}
                 {!bank && (
