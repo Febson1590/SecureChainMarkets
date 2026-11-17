@@ -11,6 +11,9 @@ import {
 } from "lucide-react";
 import { userStartCopyTrade } from "@/lib/actions/investment";
 import { formatCurrency } from "@/lib/utils";
+import { useDisplayCurrency } from "@/components/currency-provider";
+
+function useFmt() { return useDisplayCurrency().format; }
 import { KycBanner } from "@/components/dashboard/kyc-banner";
 import type { KycStatus } from "@/lib/kyc";
 
@@ -112,6 +115,7 @@ const RISK_META: Record<string, { label: string; color: string; bg: string; bord
 export default function TraderDetailClient({
   trader, alreadyCopying, usdBalance, kycStatus,
 }: Props) {
+  const fmt = useFmt();
   const router = useRouter();
   const isRestricted = kycStatus !== "approved";
 
@@ -232,9 +236,9 @@ export default function TraderDetailClient({
             <div>
               <div className="text-[13.5px] font-semibold text-white">You&apos;re copying this trader</div>
               <div className="text-[12px] text-slate-400 mt-1">
-                Amount: <span className="text-white font-semibold tabular-nums">{formatCurrency(alreadyCopying.amount)}</span>
+                Amount: <span className="text-white font-semibold tabular-nums">{fmt(alreadyCopying.amount)}</span>
                 <span className="mx-1.5 text-slate-600">·</span>
-                Earned: <span className="text-emerald-400 font-semibold tabular-nums">{formatCurrency(alreadyCopying.totalEarned)}</span>
+                Earned: <span className="text-emerald-400 font-semibold tabular-nums">{fmt(alreadyCopying.totalEarned)}</span>
               </div>
             </div>
           </div>
@@ -457,6 +461,7 @@ function CopyModal({
   onClose:    () => void;
   onSuccess:  () => void;
 }) {
+  const fmt = useFmt();
   const [amount, setAmount] = useState(String(trader.minCopyAmount));
   const [isPending, start]  = useTransition();
 
@@ -467,8 +472,8 @@ function CopyModal({
   const needsDeposit = usdBalance < trader.minCopyAmount;
 
   function submit() {
-    if (!meetsMin)    { toast.error(`Minimum is ${formatCurrency(trader.minCopyAmount)}`); return; }
-    if (exceedsMax)   { toast.error(`Maximum is ${formatCurrency(trader.maxCopyAmount!)}`); return; }
+    if (!meetsMin)    { toast.error(`Minimum is ${fmt(trader.minCopyAmount)}`); return; }
+    if (exceedsMax)   { toast.error(`Maximum is ${fmt(trader.maxCopyAmount!)}`); return; }
     if (!canAfford)   { toast.error("Insufficient USD balance"); return; }
     start(async () => {
       const r = await userStartCopyTrade({ traderId: trader.id, amount: val }).catch(() => ({ error: "Something went wrong. Please try again." } as const));
@@ -499,11 +504,11 @@ function CopyModal({
           <div className="grid grid-cols-2 gap-2">
             <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
               <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Balance</div>
-              <div className="text-[13px] font-semibold text-white tabular-nums">{formatCurrency(usdBalance)}</div>
+              <div className="text-[13px] font-semibold text-white tabular-nums">{fmt(usdBalance)}</div>
             </div>
             <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
               <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Min amount</div>
-              <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{formatCurrency(trader.minCopyAmount)}</div>
+              <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{fmt(trader.minCopyAmount)}</div>
             </div>
           </div>
 
@@ -525,12 +530,12 @@ function CopyModal({
             </div>
             {val > 0 && !meetsMin && (
               <p className="text-[11px] text-yellow-400 mt-1.5">
-                Below minimum of {formatCurrency(trader.minCopyAmount)}
+                Below minimum of {fmt(trader.minCopyAmount)}
               </p>
             )}
             {val > 0 && exceedsMax && (
               <p className="text-[11px] text-yellow-400 mt-1.5">
-                Above maximum of {formatCurrency(trader.maxCopyAmount!)}
+                Above maximum of {fmt(trader.maxCopyAmount!)}
               </p>
             )}
             {val > 0 && !canAfford && !needsDeposit && (
@@ -542,7 +547,7 @@ function CopyModal({
             <div className="flex items-start gap-2 rounded-lg px-3 py-2.5 bg-yellow-500/[0.05] border border-yellow-500/20">
               <AlertTriangle size={13} className="text-yellow-400 flex-shrink-0 mt-0.5" />
               <div className="text-[11.5px] text-slate-300 leading-relaxed">
-                You need at least <span className="font-semibold text-white">{formatCurrency(trader.minCopyAmount)}</span>{" "}
+                You need at least <span className="font-semibold text-white">{fmt(trader.minCopyAmount)}</span>{" "}
                 in your USD wallet to copy this trader.{" "}
                 <Link href="/dashboard/deposit" className="text-[#2B6BFF] hover:text-[#5C8BFF] font-semibold">
                   Make a deposit

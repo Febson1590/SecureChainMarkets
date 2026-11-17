@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
 import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { TawkWidget } from "@/components/tawk-widget";
+import { CurrencyProvider } from "@/components/currency-provider";
+import { resolveDisplayCurrency } from "@/lib/currency-server";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
@@ -13,10 +15,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
     where: { id: session.user.id },
     include: {
       notifications: { where: { isRead: false } },
+      profile:       true,
     },
   });
 
   if (!user) redirect("/login");
+
+  const currency = await resolveDisplayCurrency(user.profile?.displayCurrency ?? null);
 
   // Admins always land on /admin, never the user dashboard. Catches the
   // case where an admin bookmarks /dashboard, opens a stale tab, or
@@ -36,26 +41,28 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const unreadCount = user.notifications.length;
 
   return (
-    <div
-      className="flex h-[100dvh] w-full text-slate-200 overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(70% 55% at 90% 0%, rgba(43,107,255,0.22), transparent 65%)," +
-          "radial-gradient(55% 45% at 0% 100%, rgba(43,107,255,0.14), transparent 70%)," +
-          "linear-gradient(135deg, #0A0F1F 0%, #16243F 50%, #0A0F1F 100%)",
-      }}
-    >
-      <DashboardSidebar unreadCount={unreadCount} />
-      <div className="flex flex-col flex-1 min-w-0">
-        <DashboardHeader
-          user={{ name: user.name, email: user.email, role: user.role, status: user.status }}
-          unreadCount={unreadCount}
-        />
-        <main className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 lg:p-8">
-          {children}
-        </main>
+    <CurrencyProvider initialCurrency={currency} persistToProfile>
+      <div
+        className="flex h-[100dvh] w-full text-slate-200 overflow-hidden"
+        style={{
+          background:
+            "radial-gradient(70% 55% at 90% 0%, rgba(43,107,255,0.22), transparent 65%)," +
+            "radial-gradient(55% 45% at 0% 100%, rgba(43,107,255,0.14), transparent 70%)," +
+            "linear-gradient(135deg, #0A0F1F 0%, #16243F 50%, #0A0F1F 100%)",
+        }}
+      >
+        <DashboardSidebar unreadCount={unreadCount} />
+        <div className="flex flex-col flex-1 min-w-0">
+          <DashboardHeader
+            user={{ name: user.name, email: user.email, role: user.role, status: user.status }}
+            unreadCount={unreadCount}
+          />
+          <main className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 lg:p-8">
+            {children}
+          </main>
+        </div>
+        <TawkWidget />
       </div>
-      <TawkWidget />
-    </div>
+    </CurrencyProvider>
   );
 }

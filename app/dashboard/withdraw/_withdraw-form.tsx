@@ -22,6 +22,7 @@ import {
   DualAmountInput, useDualAmount, useLiveRates, formatCrypto, formatUsd,
   type Rates,
 } from "@/components/dashboard/dual-amount-input";
+import { useDisplayCurrency } from "@/components/currency-provider";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 
@@ -149,6 +150,7 @@ export default function WithdrawForm({
   initialRates  = {},
 }: Props) {
   const isRestricted = kycStatus !== "approved";
+  const { currency: displayCurrency, format: fmtDisplay } = useDisplayCurrency();
 
   /* Live rates — refreshed every 45s via /api/rates. */
   const rates = useLiveRates(initialRates);
@@ -401,9 +403,14 @@ export default function WithdrawForm({
               Available Balance
             </div>
             <div className="text-[17px] font-bold text-white tabular-nums mt-0.5">
-              ${usdBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
-              <span className="text-[13px] font-medium text-slate-400">USD</span>
+              {fmtDisplay(usdBalance)}{" "}
+              <span className="text-[13px] font-medium text-slate-400">{displayCurrency}</span>
             </div>
+            {displayCurrency !== "USD" && (
+              <div className="text-[10.5px] text-slate-500 tabular-nums mt-0.5">
+                ≈ ${usdBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
+              </div>
+            )}
             {method === "crypto" && currentRate > 0 && (
               <div className="text-[11.5px] text-slate-500 tabular-nums mt-0.5">
                 ≈ {formatCrypto(cryptoBalance)} {selectedAsset}
@@ -457,6 +464,11 @@ export default function WithdrawForm({
                   className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 h-12 pl-7 text-base font-semibold tabular-nums"
                 />
               </div>
+              {displayCurrency !== "USD" && parseFloat(bankAmount) > 0 && (
+                <div className="text-[11px] text-slate-500 tabular-nums">
+                  ≈ {fmtDisplay(parseFloat(bankAmount) || 0)} at today&rsquo;s rate
+                </div>
+              )}
             </div>
 
             <div className="space-y-1.5">
@@ -776,6 +788,8 @@ function ConfirmModal({
   onConfirm:     () => void;
 }) {
   const showFee = feeUsd > 0;
+  const { currency: displayCurrency, format: fmtDisplay } = useDisplayCurrency();
+  const isForeign = displayCurrency !== "USD";
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
@@ -812,6 +826,11 @@ function ConfirmModal({
             value={
               <div className="text-right">
                 <div className="tabular-nums font-semibold">${usdAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                {isForeign && (
+                  <div className="text-[11px] text-emerald-300 tabular-nums">
+                    ≈ {fmtDisplay(usdAmount)} at today&rsquo;s rate
+                  </div>
+                )}
                 {!bank && (
                   <div className="text-[11px] text-slate-500 tabular-nums">
                     ≈ {formatCrypto(cryptoAmount)} {asset}

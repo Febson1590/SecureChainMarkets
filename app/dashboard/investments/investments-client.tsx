@@ -11,6 +11,9 @@ import {
 } from "lucide-react";
 import { userStartInvestment } from "@/lib/actions/investment";
 import { formatCurrency } from "@/lib/utils";
+import { useDisplayCurrency } from "@/components/currency-provider";
+
+function useFmt() { return useDisplayCurrency().format; }
 import { planCycleLabel } from "@/lib/duration";
 import { KycBanner } from "@/components/dashboard/kyc-banner";
 import type { KycStatus } from "@/lib/kyc";
@@ -143,6 +146,7 @@ function PlanCard({
   disabled: boolean;
   onSelect: () => void;
 }) {
+  const fmt = useFmt();
   const duration = fmtDuration(plan);
 
   return (
@@ -190,11 +194,11 @@ function PlanCard({
             <div className="text-[12.5px] sm:text-[13px] text-slate-400 mt-1">
               Starts at{" "}
               <span className="text-white font-semibold tabular-nums">
-                {formatCurrency(plan.minAmount)}
+                {fmt(plan.minAmount)}
               </span>
               {plan.maxAmount !== null && (
                 <span className="text-slate-500 hidden sm:inline">
-                  {" "}· up to {formatCurrency(plan.maxAmount)}
+                  {" "}· up to {fmt(plan.maxAmount)}
                 </span>
               )}
             </div>
@@ -215,7 +219,7 @@ function PlanCard({
         {/* Max amount shown on its own line on mobile */}
         {plan.maxAmount !== null && (
           <div className="sm:hidden text-[11.5px] text-slate-500 mt-1">
-            up to {formatCurrency(plan.maxAmount)}
+            up to {fmt(plan.maxAmount)}
           </div>
         )}
 
@@ -300,6 +304,7 @@ function InvestModal({
   onClose:     () => void;
   onSuccess:   () => void;
 }) {
+  const fmt = useFmt();
   const [amount, setAmount]   = useState(String(plan.minAmount));
   const [isPending, start]    = useTransition();
 
@@ -312,11 +317,11 @@ function InvestModal({
 
   function submit() {
     if (!meetsMin) {
-      toast.error(`Minimum is ${formatCurrency(plan.minAmount)}`);
+      toast.error(`Minimum is ${fmt(plan.minAmount)}`);
       return;
     }
     if (exceedsMax) {
-      toast.error(`Maximum is ${formatCurrency(plan.maxAmount!)}`);
+      toast.error(`Maximum is ${fmt(plan.maxAmount!)}`);
       return;
     }
     if (!canAfford) {
@@ -363,11 +368,11 @@ function InvestModal({
           <div className="grid grid-cols-2 gap-2">
             <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
               <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Balance</div>
-              <div className="text-[13px] font-semibold text-white tabular-nums">{formatCurrency(usdBalance)}</div>
+              <div className="text-[13px] font-semibold text-white tabular-nums">{fmt(usdBalance)}</div>
             </div>
             <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08]">
               <div className="text-[9px] uppercase tracking-widest text-slate-500 font-semibold mb-0.5">Min amount</div>
-              <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{formatCurrency(plan.minAmount)}</div>
+              <div className="text-[13px] font-semibold text-[#2B6BFF] tabular-nums">{fmt(plan.minAmount)}</div>
             </div>
           </div>
 
@@ -389,12 +394,12 @@ function InvestModal({
             </div>
             {val > 0 && !meetsMin && (
               <p className="text-[11px] text-yellow-400 mt-1.5">
-                Below minimum of {formatCurrency(plan.minAmount)}
+                Below minimum of {fmt(plan.minAmount)}
               </p>
             )}
             {val > 0 && exceedsMax && (
               <p className="text-[11px] text-yellow-400 mt-1.5">
-                Above maximum of {formatCurrency(plan.maxAmount!)}
+                Above maximum of {fmt(plan.maxAmount!)}
               </p>
             )}
             {val > 0 && !canAfford && !needsDeposit && (
@@ -411,7 +416,7 @@ function InvestModal({
             <div className="flex items-start gap-2 rounded-lg px-3 py-2.5 bg-yellow-500/[0.05] border border-yellow-500/20">
               <AlertTriangle size={13} className="text-yellow-400 flex-shrink-0 mt-0.5" />
               <div className="text-[11.5px] text-slate-300 leading-relaxed">
-                You need at least <span className="font-semibold text-white">{formatCurrency(plan.minAmount)}</span>{" "}
+                You need at least <span className="font-semibold text-white">{fmt(plan.minAmount)}</span>{" "}
                 in your USD wallet to start this plan.{" "}
                 <Link href="/dashboard/deposit" className="text-[#2B6BFF] hover:text-[#5C8BFF] font-semibold">
                   Make a deposit

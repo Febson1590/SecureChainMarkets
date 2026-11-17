@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useDisplayCurrency } from "@/components/currency-provider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -73,10 +74,13 @@ interface DashboardClientProps {
    Helpers
 ────────────────────────────────────────────────────────────────────── */
 
-function fmt(n: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD", maximumFractionDigits: 2,
-  }).format(n);
+/* Currency-aware formatter. Call `const fmt = useFmt()` at the top of
+   any component that renders money — the output tracks the user's
+   chosen display currency (USD / EUR / GBP) and live FX rates. All
+   AMOUNTS passed in are USD; only the OUTPUT is localised. */
+function useFmt() {
+  const { format } = useDisplayCurrency();
+  return format;
 }
 
 function fmtPct(n: number) {
@@ -153,6 +157,7 @@ function AddFundsModal({
   onClose:    () => void;
   onSuccess:  () => void;
 }) {
+  const fmt = useFmt();
   const [amount,  setAmount]  = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -234,6 +239,7 @@ function UpgradeModal({
   onClose:         () => void;
   onSuccess:       () => void;
 }) {
+  const fmt = useFmt();
   const [plans,     setPlans]     = useState<UpgradeCandidate[] | null>(null);
   const [loading,   setLoading]   = useState(true);
   const [selected,  setSelected]  = useState<UpgradeCandidate | null>(null);
@@ -488,6 +494,7 @@ export default function DashboardClient({
   chartData,
   wallets,
 }: DashboardClientProps) {
+  const fmt = useFmt();
   // Silence unused-var warning — totalEarned is recomputed below from
   // live investment/copyTrades state, but we keep the prop for type parity.
   void initEarned;

@@ -12,6 +12,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DashboardSidebar } from "./dashboard-sidebar";
 import { getStatusBg } from "@/lib/utils";
 import { LanguageMenuDialog } from "@/components/language-switcher";
+import { CurrencySwitcher } from "@/components/currency-switcher";
 
 interface DashboardHeaderProps {
   user: {
@@ -68,6 +69,8 @@ export function DashboardHeader({ user, unreadCount = 0 }: DashboardHeaderProps)
       <div className="flex-1" />
 
       <div className="flex items-center gap-2 sm:gap-3">
+        <CurrencySwitcher variant="dark" />
+
         {/* Language — opens the global LanguageMenuDialog.
             Sits between the logo and the notification bell as the
             dedicated, always-visible translator entry point. */}

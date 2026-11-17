@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Menu, X, Globe } from "lucide-react";
 import { LanguageMenuDialog } from "@/components/language-switcher";
+import { CurrencySwitcher } from "@/components/currency-switcher";
 
 const navLinks = [
   { href: "/",                label: "Home"          },
@@ -89,6 +90,8 @@ export function PublicNavbar() {
             </nav>
 
             <div className="w-px h-6 bg-slate-200" aria-hidden />
+
+            <CurrencySwitcher variant="light" />
 
             <button
               type="button"
